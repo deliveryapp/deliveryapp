@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+/.sass-cache
+/public_html/resources
+node_modules
+npm-debug.log*
+
+
+/.idea
+/LICENSE
+=======
 node_modules/**
 lib/**
 .idea/**
@@ -8,3 +18,4 @@ css/**
 minified/**
 js/views/previous/**
 recycle/**
+>>>>>>> environment_setup
