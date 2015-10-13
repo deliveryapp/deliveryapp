@@ -1,0 +1,10 @@
+node_modules/**
+lib/**
+.idea/**
+.sass-cache/**
+compiled/**
+js/*.min.js
+css/**
+minified/**
+js/views/previous/**
+recycle/**
