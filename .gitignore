@@ -1,0 +1,8 @@
+/.sass-cache
+/public_html/resources
+node_modules
+npm-debug.log*
+
+
+/.idea
+/LICENSE
