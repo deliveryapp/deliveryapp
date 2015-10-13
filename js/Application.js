@@ -4,7 +4,7 @@ define(function(require, exports, module){
     application = new Marionette.Application();
 
     application.on("before:start", function(){
-        
+        //
     });
 
     module.exports = application;
