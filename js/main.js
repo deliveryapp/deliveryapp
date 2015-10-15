@@ -7,6 +7,7 @@ require.config({
         hbs: '../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
         marionette_node: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
+        MainController: 'controllers/MainController',
         DayMenuModel: 'models/DayMenuModel',
         DishModel: 'models/DishModel',
         UserDayMenuModel: 'models/UserDayMenuModel',
