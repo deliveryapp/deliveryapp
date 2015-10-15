@@ -6,23 +6,25 @@ define(function(require, exports, module){
         DaysMenuCollection = require("DaysMenuCollection"),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
 
-    module.exports = Marionette.Object.extend({
+    return Marionette.Object.extend({
         initialize: function () {
 
         },
 
         start: function () {
             var dishesCollection = new DishesCollection();
-            var daysMenuCollection = new DaysMenuCollection();
-            var userDaysMenuCollection = new UserDaysMenuCollection();
+            //var daysMenuCollection = new DaysMenuCollection();
+            //var userDaysMenuCollection = new UserDaysMenuCollection();
             $.when(
-                dishesCollection.fetch({reset: true}),
-                daysMenuCollection.fetch({reset: true}),
-                userDaysMenuCollection.fetch({reset: true})
+                dishesCollection.fetch({reset: true})
+                //daysMenuCollection.fetch({reset: true}),
+                //userDaysMenuCollection.fetch({reset: true})
             ).done(function () {
 
-                    this.mergeItemsWithOrders(orders,booksCollection);
-
+                    //this.mergeDishesWithDays(dishesCollection,daysMenuCollection);
+                    console.log(dishesCollection);
+                    //console.log(daysMenuCollection);
+                    //console.log(userDaysMenuCollection);
                 }.bind(this));
         },
 
