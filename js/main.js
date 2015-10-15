@@ -7,7 +7,13 @@ require.config({
         hbs: '../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
         marionette_node: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
-        MainController: 'controllers/MainController'
+        MainController: 'controllers/MainController',
+        DayMenuModel: 'models/DayMenuModel',
+        DishModel: 'models/DishModel',
+        UserDayMenuModel: 'models/UserDayMenuModel',
+        DishesCollection: 'collections/DishesCollection',
+        DaysMenuCollection: 'collections/DaysMenuCollection',
+        UserDaysMenuCollection: 'collections/UserDaysMenuCollection'
         //radio: '../node_modules/backbone.radio/build/backbone.radio'
     },
     hbs: { 
@@ -19,5 +25,4 @@ require.config({
 
 require(["application"],function(application){
     application.start();
-
 });
