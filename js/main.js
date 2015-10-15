@@ -18,4 +18,5 @@ require.config({
 
 require(["application"],function(application){
     application.start();
+
 });
