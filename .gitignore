@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /.sass-cache
 /public_html/resources
 node_modules
@@ -18,4 +17,3 @@ css/**
 minified/**
 js/views/previous/**
 recycle/**
->>>>>>> environment_setup
