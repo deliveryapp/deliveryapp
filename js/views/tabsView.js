@@ -1,13 +1,15 @@
 define(function (require) {
     var Marionette = require('marionette'),
-        Tmpl = require('hbs!templates/tabs');
+        $ = require('jquery'),
+        Tab = require('view/tabView');
 
-    return Marionette.ItemView.extend({
-        tagName: 'div',
+    return Marionette.CollectionView.extend({
+        tagName: 'nav',
+        className: 'row',
+        childView: Tab,
 
-        template: Tmpl,
-        initialize: function() {
-              console.log(this.model);
-        }
+        initialize: function () {
+
+        },
     });
 });
