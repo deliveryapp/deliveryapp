@@ -6,7 +6,14 @@ define(function(require, exports, module){
         DaysMenuCollection = require("DaysMenuCollection"),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
 
-    return Marionette.Object.extend({
+    module.exports = Marionette.Object.extend({
+
+        regions: new Marionette.RegionManager({
+            regions: {
+                "main": "#application",
+                "aRegion": ".orders"
+            }
+        }),
         initialize: function () {
 
         },
@@ -25,6 +32,16 @@ define(function(require, exports, module){
                     console.log(dishesCollection);
                     //console.log(daysMenuCollection);
                     //console.log(userDaysMenuCollection);
+                    this.view = new Main({
+                        collection: ordersColl,
+                        model: new Backbone.Model()
+                    });
+
+
+                    this.mergeItemsWithOrders(orders,booksCollection);
+
+                    this.regions.get("aRegion").show(this.view);
+
                 }.bind(this));
         },
 
