@@ -4,7 +4,9 @@
   "description": "Task 1",
   "main": "index.html",
   "dependencies": {
-    "grunt-cli": "^0.1.13"
+    "grunt-cli": "^0.1.13",
+    "material-design": "0.0.4",
+    "material-design-lite": "^1.0.5"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

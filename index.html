@@ -3,18 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-<<<<<<< HEAD
-</head>
-<body>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
+    <link rel="stylesheet" href="lib/vendor/Materialize/dist/css/materialize.css">
 
-=======
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+    <script src="lib/vendor/Materialize/dist/js/materialize.js"></script>
+
     <link rel="stylesheet" href="css/style.min.css">
     <script data-main="js/main" type="text/javascript" src="lib/vendor/requirejs/require.js"></script>
 </head>
 <body>
+<div class="row">
+    <div class="input-field col s6 orange-text">
+        <input value="Alvin" id="first_name2" type="text" class="validate">
+        <label class="active" for="first_name2">First Name</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s3"><a class="active" href="#date1">Date 1</a></li>
+            <li class="tab col s3"><a href="#date2">Date 2</a></li>
+            <li class="tab col s3 disabled"><a href="#date3">Date 3</a></li>
+            <li class="tab col s3"><a href="#date4">Date 4</a></li>
+            <li class="tab col s3"><a href="#date5">Date 5</a></li>
+        </ul>
+    </div>
+</div>
+
+    <div class="col s12" id="date1" style="text-align: center;">
+        <div class="selected-dish">Оладушки с яблоками и карамелью<br />
+            <img src="images/oladi.jpg" width="240"><br /> Weight: 100 g<br>Price: 500$</div>
+        <div class="selected-dish">Колбаски домашние с картофельным пюре<br />
+            <img src="images/oladi.jpg" width="240"><br /> Weight: 100 g<br>Price: 500$</div>
+        <div class="selected-dish">Картофель запеченный по-французски с грибами и сыром<br />
+            <img src="images/oladi.jpg" width="240"><br /> Weight: 100 g<br>Price: 500$</div>
+        <div class="selected-dish">Курица в лимонном маринаде с картофельным пюре
+            <img src="images/oladi.jpg" width="240"><br /> Weight: 100 g<br>Price: 500$</div>
+        <div class="selected-dish">
+            <a class="btn-floating btn-large waves-effect waves-light orange" style="margin-top:110px;"><i class="material-icons">add</i></a><!--padding-top: 110px;padding-right: 110px;-->
+            <!--<button  class="mdl-button mdl-js-button mdl-button&#45;&#45;fab">
+                <i class="material-icons">add</i>
+            </button>-->
+        </div>
+    </div>
+    <div class="col s12" id="date2">
+ewq
+    </div>
+    <div class="col s12" id="date3">
+ewq
+    </div>
+    <div class="col s12" id="date4">
+weq
+    </div>
+    <div class="col s12" id="date5">
+qeeew
+    </div>
+</div>
 <div id="application">
 
 </div>
->>>>>>> environment_setup
+<script type="text/javascript">
+   /* $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });*/
+    /*$(".mdl-textfield").click = function (e) {
+        $(".week-picker")[0].toggle();
+    }
+    $(function() {
+        var startDate;
+        var endDate;
+
+        var selectCurrentWeek = function() {
+            window.setTimeout(function () {
+                $('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+            }, 1);
+        };
+
+        $('.week-picker').datepicker( {
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            onSelect: function(dateText, inst) {
+                var date = $(this).datepicker('getDate');
+                startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+                endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+                var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+                $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
+                $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+
+                selectCurrentWeek();
+            },
+            beforeShowDay: function(date) {
+                var cssClass = '';
+                if(date >= startDate && date <= endDate)
+                    cssClass = 'ui-datepicker-current-day';
+                return [true, cssClass];
+            },
+            onChangeMonthYear: function(year, month, inst) {
+                selectCurrentWeek();
+            }
+        });
+
+        $('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
+        $('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
+    });*/
+</script>
 </body>
 </html>
