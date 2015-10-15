@@ -3,7 +3,7 @@ define(function(require, exports, module){
         $ = require("jquery"),
         _ = require("underscore"),
         DishesCollection = require("DishesCollection"),
-        Tabs = require("view/tabsView"),
+        Tabs = require("views/tabsView"),
         DaysMenuCollection = require("DaysMenuCollection"),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
 
@@ -28,16 +28,18 @@ define(function(require, exports, module){
 
         start: function () {
             var dishesCollection = new DishesCollection();
-            //var daysMenuCollection = new DaysMenuCollection();
-            //var userDaysMenuCollection = new UserDaysMenuCollection();
+            var daysMenuCollection = new DaysMenuCollection();
+            var userDaysMenuCollection = new UserDaysMenuCollection();
             $.when(
-                dishesCollection.fetch({reset: true})
-                //daysMenuCollection.fetch({reset: true}),
-                //userDaysMenuCollection.fetch({reset: true})
+                dishesCollection.fetch({reset: true}),
+                daysMenuCollection.fetch({reset: true}),
+                userDaysMenuCollection.fetch({reset: true})
             ).done(function () {
 
                     //this.mergeDishesWithDays(dishesCollection,daysMenuCollection);
                     console.log(dishesCollection);
+                    console.log(daysMenuCollection);
+                    console.log(userDaysMenuCollection);
                     //console.log(daysMenuCollection);
 
                     this.view = new Tabs({
