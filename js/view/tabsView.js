@@ -4,12 +4,10 @@ define(function (require) {
 
     return Marionette.ItemView.extend({
         tagName: 'div',
-        className: function () {
-            return this.model.get('className');
-        },
-        id: function () {
-            return this.model.get('status')
-        },
-        template: Tmpl
+
+        template: Tmpl,
+        initialize: function() {
+              console.log(this.model);
+        }
     });
 });

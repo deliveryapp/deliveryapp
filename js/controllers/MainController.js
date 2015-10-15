@@ -3,6 +3,7 @@ define(function(require, exports, module){
         $ = require("jquery"),
         _ = require("underscore"),
         DishesCollection = require("DishesCollection"),
+        Tabs = require("view/tabsView"),
         DaysMenuCollection = require("DaysMenuCollection"),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
 
@@ -11,9 +12,16 @@ define(function(require, exports, module){
         regions: new Marionette.RegionManager({
             regions: {
                 "main": "#application",
-                "aRegion": ".orders"
+                "aRegion": ".tabs"
             }
         }),
+        tabsDays: new Backbone.Collection([
+            { name: "Monday"},
+            { name: "Tuesday"},
+            { name: "Wednesday"},
+            { name: "Thursday"},
+            { name: "Friday"}
+        ]),
         initialize: function () {
 
         },
@@ -31,14 +39,14 @@ define(function(require, exports, module){
                     //this.mergeDishesWithDays(dishesCollection,daysMenuCollection);
                     console.log(dishesCollection);
                     //console.log(daysMenuCollection);
-                    //console.log(userDaysMenuCollection);
-                    this.view = new Main({
-                        collection: ordersColl,
+
+                    this.view = new Tabs({
+                        collection: this.tabsDays,
                         model: new Backbone.Model()
                     });
 
 
-                    this.mergeItemsWithOrders(orders,booksCollection);
+                    //this.mergeItemsWithOrders(orders,booksCollection);
 
                     this.regions.get("aRegion").show(this.view);
 
