@@ -6,7 +6,7 @@ define(function(require, module, exports){
 
 
     module.exports = Backbone.Collection.extend({
-        model: Order,
+        model: DishModel,
         url: 'http://localhost:63342/db/dishes.json'
     });
 
