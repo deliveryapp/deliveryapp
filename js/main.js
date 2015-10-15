@@ -6,7 +6,8 @@ require.config({
         handlebars: '../lib/vendor/require-handlebars-plugin/hbs/handlebars.runtime',
         hbs: '../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
-        marionette_node: '../lib/vendor/backbone.marionette/lib/backbone.marionette'
+        marionette_node: '../lib/vendor/backbone.marionette/lib/backbone.marionette',
+        MainController: 'controllers/MainController'
         //radio: '../node_modules/backbone.radio/build/backbone.radio'
     },
     hbs: { 
