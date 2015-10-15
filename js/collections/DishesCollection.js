@@ -1,4 +1,4 @@
-define(function(require, module, exports){
+define(function(require, exports, module){
     var $ = require('jquery'),
         _ = require('underscore'),
         Backbone = require('backbone'),
@@ -7,7 +7,7 @@ define(function(require, module, exports){
 
     module.exports = Backbone.Collection.extend({
         model: DishModel,
-        url: 'http://localhost:63342/db/dishes.json'
+        url: '../deliveryapp/db/dishes.json'
     });
 
 });
