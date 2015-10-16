@@ -3,8 +3,8 @@ define(function(require, exports, module){
         $ = require("jquery"),
         _ = require("underscore"),
         DishesCollection = require("DishesCollection"),
-        Tabs = require("views/tabsView"),
         DaysMenuCollection = require("DaysMenuCollection"),
+        headerView = require('headerView'),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
 
     module.exports = Marionette.Object.extend({
@@ -12,18 +12,15 @@ define(function(require, exports, module){
         regions: new Marionette.RegionManager({
             regions: {
                 "main": "#application",
-                "aRegion": ".tabs"
+                "content": "#content"
+
             }
         }),
-        tabsDays: new Backbone.Collection([
-            { name: "Monday"},
-            { name: "Tuesday"},
-            { name: "Wednesday"},
-            { name: "Thursday"},
-            { name: "Friday"}
-        ]),
-        initialize: function () {
 
+        initialize: function () {
+            this.header = new headerView();
+            this.regions.get("main").show(this.header);
+            this.start();
         },
 
         start: function () {
@@ -35,31 +32,25 @@ define(function(require, exports, module){
                 daysMenuCollection.fetch({reset: true}),
                 userDaysMenuCollection.fetch({reset: true})
             ).done(function () {
-
-                    //this.mergeDishesWithDays(dishesCollection,daysMenuCollection);
                     console.log(dishesCollection);
                     console.log(daysMenuCollection);
                     console.log(userDaysMenuCollection);
-                    //console.log(daysMenuCollection);
-
-                    this.view = new Tabs({
-                        collection: this.tabsDays,
-                        model: new Backbone.Model()
-                    });
-
-
-                    //this.mergeItemsWithOrders(orders,booksCollection);
-
-                    this.regions.get("aRegion").show(this.view);
-
                 }.bind(this));
         },
 
-        mergeDishesWithDays: function (daysMenuCollection, dishesCollection) {
+        menu: function(){
+            console.log("menu");
+        },
+
+        dashboard: function(){
+            console.log("dashboard");
 
         },
-        mergeDishesWithUser: function (userDaysMenuCollection, dishesCollection) {
 
+        index: function(){
+            console.log("index route");
         }
+
+
     });
 });
