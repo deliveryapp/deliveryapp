@@ -1,2 +1,13 @@
 //@import "../lib/vendor/Materialize/sass/materialize";
 @import "_tabs";
+=======
+.selected-dish {
+  display:inline-block;
+  border: solid 1px #000;
+  width:250px;
+  height:300px;
+  margin-top: 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+
+}
