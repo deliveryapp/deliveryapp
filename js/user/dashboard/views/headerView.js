@@ -4,7 +4,7 @@ define(function(require, exports, module) {
         Backbone = require('backbone'),
         Marionette = require('marionette'),
         handlebars = require('handlebars'),
-        headerTemplateHBS = require('hbs!templates/header');
+        headerTemplateHBS = require('hbs!dashboard/templates/header');
 
 
 
