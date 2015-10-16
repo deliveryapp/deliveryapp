@@ -1,26 +1,25 @@
 define(function(require, exports, module){
+    //require("materialize");
     var Marionette = require("marionette"),
         $ = require("jquery"),
         _ = require("underscore"),
         DishesCollection = require("DishesCollection"),
         Tabs = require("views/tabsView"),
         DaysMenuCollection = require("DaysMenuCollection"),
+        //materialize = require("materialize"),
         UserDaysMenuCollection = require("UserDaysMenuCollection");
+
 
     module.exports = Marionette.Object.extend({
 
         regions: new Marionette.RegionManager({
             regions: {
                 "main": "#application",
-                "aRegion": ".tabs"
+                "aRegion": ".tabsContainer"
             }
         }),
         tabsDays: new Backbone.Collection([
-            { name: "Monday"},
-            { name: "Tuesday"},
-            { name: "Wednesday"},
-            { name: "Thursday"},
-            { name: "Friday"}
+            { name: "Monday"}
         ]),
         initialize: function () {
 
@@ -43,15 +42,21 @@ define(function(require, exports, module){
                     //console.log(daysMenuCollection);
 
                     this.view = new Tabs({
-                        collection: this.tabsDays,
-                        model: new Backbone.Model()
+                        collection: this.tabsDays
                     });
 
 
                     //this.mergeItemsWithOrders(orders,booksCollection);
 
                     this.regions.get("aRegion").show(this.view);
+                    var temp = $('ul.tabs');
+                    //debugger;
+                    //$('ul.tabs').tabs();
+                    //setTimeout(function () {
+                    debugger;
+                        $('ul.tabs').tabs();
 
+                    //},1000)
                 }.bind(this));
         },
 

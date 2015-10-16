@@ -4,12 +4,17 @@ define(function (require) {
         Tab = require('view/tabView');
 
     return Marionette.CollectionView.extend({
-        tagName: 'nav',
+        tagName: 'div',
         className: 'row',
         childView: Tab,
 
         initialize: function () {
 
         },
+        onRender: function(){
+
+                //$el.children('ul.tabs').tabs();
+
+        }
     });
 });

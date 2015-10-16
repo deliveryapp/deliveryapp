@@ -13,6 +13,11 @@ define(function (require) {
         template: Tmpl,
         initialize: function() {
               console.log(this.model);
+        },
+        onRender: function(){
+
+            //$('ul.tabs').tabs();
+
         }
     });
 });
