@@ -5,14 +5,14 @@ module.exports = function(grunt) {
 
     watch: {
       css: {
-        files: 'scss/*.scss',
+        files: 'app/public/scss/*.scss',
         tasks: ['sass'],
         options: {
           debounceDelay: 250
         }
       },
       cssmin: {
-        files: 'css/style.css',
+        files: 'app/public/css/style.css',
         tasks: ['cssmin'],
         options: {
           debounceDelay: 250
@@ -23,9 +23,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'scss',
+          cwd: 'app/public/scss',
           src: ['*.scss'],
-          dest: './css',
+          dest: './app/public/css',
           ext: '.css'
         }]
       }
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       },
       target: {
         files: {
-          'css/style.min.css': ['css/style.css']
+          'app/public/css/style.min.css': ['app/public/css/style.css']
         }
       }
     },
@@ -73,9 +73,9 @@ module.exports = function(grunt) {
       my_target: {
         files: [{
           expand: true,
-          cwd: 'js',
+          cwd: 'app/public/js',
           src: '**/*.js',
-          dest: 'minified/js'
+          dest: 'app/public/minified/js'
         }]
       }
     }

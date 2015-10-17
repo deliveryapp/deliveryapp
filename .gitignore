@@ -7,13 +7,10 @@ npm-debug.log*
 /.idea
 /LICENSE
 =======
-node_modules/**
-lib/**
-.idea/**
-.sass-cache/**
-compiled/**
+/app/public/minified
+/app/public/css
+/app/public/lib
 js/*.min.js
-css/**
-minified/**
 js/views/previous/**
+compiled/**
 recycle/**
