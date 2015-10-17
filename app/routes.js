@@ -9,6 +9,9 @@ module.exports = function (app) {
     app.get('/user', function (req, res) {
         res.render('user', {layout: false});
     });
+    app.get('/dishes-page', function (req, res) {
+        res.render('dishes-page');
+    });
 
     //rest:
     app.get('/dishes', dishes.get);
