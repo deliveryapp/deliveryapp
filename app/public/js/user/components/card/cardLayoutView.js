@@ -6,13 +6,16 @@ define(function (require, exports, module) {
 
         regions: {
             menu: '#menu',
-            content: '#content'
+            tabs: '#tabs',
+            content: '#dishes-list'
         },
         template: Tmpl,
 
         initialize: function() {
-            console.log(this.model);
-        }
 
+        },
+        onRender: function () {
+
+        }
     });
 });

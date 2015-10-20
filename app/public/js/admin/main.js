@@ -6,7 +6,7 @@ require.config({
         handlebars: '../../lib/vendor/require-handlebars-plugin/hbs/handlebars.runtime',
         hbs: '../../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
-        //marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
+        marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         Router: 'Router',
         MainController: 'controllers/MainController',
         DayMenuModel: 'models/DayMenuModel',
@@ -15,14 +15,9 @@ require.config({
         DishesCollection: 'collections/DishesCollection',
         DaysMenuCollection: 'collections/DaysMenuCollection',
         UserDaysMenuCollection: 'collections/UserDaysMenuCollection',
-        MainLayoutView: 'view/MainLayoutView',
-        NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
-        MainDashboardView: 'dashboard/view/MainDashboardView',
-        DishCardView: 'menu/views/DishCardView',
-        DayMenuView: 'menu/views/DayMenuView'
-        //radio: '../../node_modules/backbone.radio/build/backbone.radio'
+        headerView: 'dashboard/views/headerView',
 
-        /*materialize : '../../lib/vendor/Materialize/bin/materialize',
+        materialize : '../../lib/vendor/Materialize/bin/materialize',
 
         tabs : '../../lib/vendor/Materialize/js/tabs',
         hammer : '../../lib/vendor/Materialize/js/jquery.hammer',
@@ -52,10 +47,12 @@ require.config({
         'toasts': '../../lib/vendor/Materialize/js/toasts',
         'tooltip': '../../lib/vendor/Materialize/js/tooltip',
         'transitions': '../../lib/vendor/Materialize/js/transitions',
-        'waves': '../../lib/vendor/Materialize/js/waves'*/
+        'waves': '../../lib/vendor/Materialize/js/waves'
+
+        //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
     },
-    /*'shim' : {
+    'shim' : {
         'jquery': { exports: "$" },
 
         'animation': ['jquery'],
@@ -92,7 +89,7 @@ require.config({
                 'scrollspy', 'sideNav', 'slider', 'tabs', 'toasts', 'tooltip',
                 'transitions', 'velocity', 'waves']
         }
-    },*/
+    },
 
     hbs: { 
         helpers: true,            
@@ -101,6 +98,6 @@ require.config({
     }
 });
 
-require(['application'],function(application){
+require(["application"],function(application){
     application.start();
 });

@@ -11,6 +11,7 @@ npm-debug.log*
 /app/public/minified
 /app/public/css
 /app/public/lib
+/lib
 js/*.min.js
 js/views/previous/**
 compiled/**
