@@ -4,7 +4,7 @@ define(function (require, exports, module) {
         DishesCollection = require('DishesCollection'),
         DaysMenuCollection = require('DaysMenuCollection'),
         MainLayoutView = require('MainLayoutView'),
-        TabsView = require('components/tabs/tabCompositeView'),
+        TabsView = require('components/tabs/tabCollectionView'),
         CardView = require('components/card/cardLayoutView'),
         UserDaysMenuCollection = require('UserDaysMenuCollection');
 
