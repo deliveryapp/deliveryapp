@@ -7,6 +7,14 @@ define(function(require, exports, module){
         tagName: 'div',
         className: 'selected-dish',
         template: template,
+        events: {
+            'click':'dishClicked'
+        },
+
+        dishClicked: function () {
+            //console.log(this.model);
+            this.trigger('dishClicked', this.model);
+        },
 
         initialize: function () {
 

@@ -10,11 +10,16 @@ define(function(require, exports, module){
         childView: DishCardView,
         template: template,
 
-        initialize: function () {
-            //var temp = this.collection;
+        childEvents:{
+            'dishClicked': 'dishClickedM'
         },
-        onRender: function () {
-            var temp = this.collection;
+        dishClickedM: function (evt,model) {
+            //console.log(model);
+            var ingridients = model.get('ingridients');
+            console.log(ingridients);
+        },
+        initialize: function () {
+
         }
     });
 });
