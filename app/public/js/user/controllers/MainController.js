@@ -1,9 +1,11 @@
-define(function(require, exports, module){
+define(function (require, exports, module) {
     var Marionette = require('marionette'),
         $ = require('jquery'),
         DishesCollection = require('DishesCollection'),
         DaysMenuCollection = require('DaysMenuCollection'),
         MainLayoutView = require('MainLayoutView'),
+        TabsView = require('components/tabs/tabCompositeView'),
+        CardView = require('components/card/cardLayoutView'),
         UserDaysMenuCollection = require('UserDaysMenuCollection');
 
     module.exports = Marionette.Object.extend({
@@ -11,6 +13,7 @@ define(function(require, exports, module){
         regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
+                'tabs': '#tabs',
                 'content': '#content'
 
             }
@@ -18,7 +21,26 @@ define(function(require, exports, module){
 
         initialize: function () {
             this.header = new MainLayoutView();
+
+            this.tabs = new TabsView({
+                collection: new Backbone.Collection([
+                    {name: 'Monday'},
+                    {name: 'Tuesday'},
+                    {name: 'Wednesday'},
+                    {name: 'Thursday'},
+                    {name: 'Friday'}
+                ]),
+                model: new Backbone.Model()
+            });
+
+            this.men = new CardView({
+                model: new Backbone.Model()
+            });
+
             this.regions.get('main').show(this.header);
+            this.regions.get('tabs').show(this.men);
+            this.men.showChildView('content', this.tabs);
+
             this.start();
         },
 
@@ -37,16 +59,16 @@ define(function(require, exports, module){
                 }.bind(this));
         },
 
-        menu: function(){
+        menu: function () {
             console.log('menu');
         },
 
-        dashboard: function(){
+        dashboard: function () {
             console.log('dashboard');
 
         },
 
-        index: function(){
+        index: function () {
             console.log('index route');
         }
 
