@@ -16,6 +16,8 @@ require.config({
         DaysMenuCollection: 'collections/DaysMenuCollection',
         UserDaysMenuCollection: 'collections/UserDaysMenuCollection',
         MainLayoutView: 'view/MainLayoutView',
+        NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
+        MainDashboardView: 'dashboard/view/MainDashboardView'
         //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
         /*materialize : '../../lib/vendor/Materialize/bin/materialize',

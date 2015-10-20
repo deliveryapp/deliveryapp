@@ -6,6 +6,8 @@ define(function (require, exports, module) {
         MainLayoutView = require('MainLayoutView'),
         TabsView = require('components/tabs/tabCollectionView'),
         CardView = require('components/card/cardLayoutView'),
+        MainDashboardView = require('MainDashboardView'),
+        NavigationMenuLayoutView = require('NavigationMenuLayoutView'),
         UserDaysMenuCollection = require('UserDaysMenuCollection');
 
     module.exports = Marionette.Object.extend({
@@ -39,6 +41,8 @@ define(function (require, exports, module) {
             this.regions.get('main').show(this.header);
             this.regions.get('content').show(this.men);
             this.men.showChildView('content', this.tabs);
+            this.navigation = new NavigationMenuLayoutView();
+            this.regions.get('content').show(this.navigation);
 
             this.start();
         },
@@ -62,8 +66,9 @@ define(function (require, exports, module) {
             console.log('menu');
         },
 
-        dashboard: function () {
-            console.log('dashboard');
+        dashboard: function(){
+            this.dashboard = new MainDashboardView();
+            this.regions.get('content').show(this.dashboard);
 
         },
 

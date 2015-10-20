@@ -6,7 +6,7 @@ define(function(require, exports, module){
         controller: new MainController(),
 
         appRoutes: {
-             '':'index',
+            '':'index',
             'dashboard': 'dashboard',
             'menu': 'menu'
         }
