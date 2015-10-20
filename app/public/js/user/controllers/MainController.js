@@ -13,7 +13,6 @@ define(function (require, exports, module) {
         regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
-                'tabs': '#tabs',
                 'content': '#content'
 
             }
@@ -38,7 +37,7 @@ define(function (require, exports, module) {
             });
 
             this.regions.get('main').show(this.header);
-            this.regions.get('tabs').show(this.men);
+            this.regions.get('content').show(this.men);
             this.men.showChildView('content', this.tabs);
 
             this.start();
