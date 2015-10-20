@@ -19,7 +19,7 @@ exports.post = function (req, res) {
         Dishes.findById(dish, function (err, dish) {
             if (err) return res.send(err);
             res.send(dish);
-        })
+        });
     });
 };
 

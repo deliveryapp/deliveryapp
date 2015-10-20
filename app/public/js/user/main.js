@@ -15,9 +15,10 @@ require.config({
         DishesCollection: 'collections/DishesCollection',
         DaysMenuCollection: 'collections/DaysMenuCollection',
         UserDaysMenuCollection: 'collections/UserDaysMenuCollection',
-        headerView: 'dashboard/views/headerView',
+        MainLayoutView: 'view/MainLayoutView',
+        //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
-        materialize : '../../lib/vendor/Materialize/bin/materialize',
+        /*materialize : '../../lib/vendor/Materialize/bin/materialize',
 
         tabs : '../../lib/vendor/Materialize/js/tabs',
         hammer : '../../lib/vendor/Materialize/js/jquery.hammer',
@@ -47,12 +48,10 @@ require.config({
         'toasts': '../../lib/vendor/Materialize/js/toasts',
         'tooltip': '../../lib/vendor/Materialize/js/tooltip',
         'transitions': '../../lib/vendor/Materialize/js/transitions',
-        'waves': '../../lib/vendor/Materialize/js/waves'
-
-        //radio: '../../node_modules/backbone.radio/build/backbone.radio'
+        'waves': '../../lib/vendor/Materialize/js/waves'*/
 
     },
-    'shim' : {
+    /*'shim' : {
         'jquery': { exports: "$" },
 
         'animation': ['jquery'],
@@ -89,7 +88,7 @@ require.config({
                 'scrollspy', 'sideNav', 'slider', 'tabs', 'toasts', 'tooltip',
                 'transitions', 'velocity', 'waves']
         }
-    },
+    },*/
 
     hbs: { 
         helpers: true,            
@@ -98,6 +97,6 @@ require.config({
     }
 });
 
-require(["application"],function(application){
+require(['application'],function(application){
     application.start();
 });

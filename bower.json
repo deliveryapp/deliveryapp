@@ -13,13 +13,6 @@
     "node"
   ],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "backbone.marionette": "marionette#~2.4.3",
     "chai": "~3.3.0",

@@ -25,7 +25,8 @@
     "preinstall": "bower install",
     "postinstall": "grunt sass & grunt uglify & grunt cssmin",
     "start": "node app/index.js",
-    "staging": "PORT=3000 node app/index.js"
+    "staging": "PORT=3000 node app/index.js",
+    "staging-win": "set PORT=3000 && node app/index.js"
   },
   "repository": {
     "type": "git",

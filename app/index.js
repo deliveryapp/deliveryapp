@@ -16,7 +16,7 @@ var connect = function () {
 
 var port = process.env.PORT || config.PORT;
 
-connect();
+//connect();
 
 // Bootstrap models
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {

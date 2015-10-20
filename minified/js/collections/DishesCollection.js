@@ -1,0 +1,1 @@
+define(function(a,b,c){var d=(a("jquery"),a("underscore"),a("backbone"));a("DishModel");b.exports=d.Collection.extend({model:Order,url:"http://localhost:63342/db/dishes.json"})});
