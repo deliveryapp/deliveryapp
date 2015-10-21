@@ -8,8 +8,11 @@ define(function(require, exports, module) {
         WeekUserMenuView: [],
         childView: WeekUserMenuView,
         childViewContainer: '#week-orders',
-        childViewOptions: function (/*model*/) {
-            //return { collection: model.get("items") };
+
+
+
+        initialize: function(){
+            console.log(this.collection);
         }
     });
 

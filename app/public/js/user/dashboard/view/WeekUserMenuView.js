@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
         DayUserMenuView = require ('DayUserMenuView'),
+        DishesCollection = require('DishesCollection'),
         WeekUserMenuView = require('hbs!dashboard/view/templates/WeekUserMenuView');
 
 
@@ -8,8 +9,20 @@ define(function(require, exports, module) {
         template:WeekUserMenuView,
         tagName: 'li',
         className: 'orders',
-        childView: DayUserMenuView
+        childViewContainer: '#dish-list',
+        childView: DayUserMenuView,
+        childViewOptions: function () {
+            return { collection: new DishesCollection(this.model.get('dishes')) };
+        },
+
+        initialize: function(){
+            this.collection = new DishesCollection(this.model.get('dishes'));
+            console.log(this.collection);
+
+        }
     });
+
+
 
 
 });

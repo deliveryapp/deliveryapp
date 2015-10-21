@@ -5,8 +5,16 @@ define(function(require, exports, module) {
 
     module.exports = Marionette.ItemView.extend({
         tagName: 'li',
-        class: 'ordersList',
-        template: DayUserMenuView
+        className: 'ordersList',
+        template: DayUserMenuView,
+
+        initialize: function (options) {
+            console.log(options);
+            console.log(this.model);
+            console.log(this.collection);
+
+
+        }
     });
 
 });
