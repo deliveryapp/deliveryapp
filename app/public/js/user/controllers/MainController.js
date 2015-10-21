@@ -10,7 +10,9 @@ define(function (require, exports, module) {
         MainDashboardView = require('MainDashboardView'),
         NavigationMenuLayoutView = require('NavigationMenuLayoutView'),
         DayMenuView = require('DayMenuView'),
-        UserDaysMenuCollection = require('UserDaysMenuCollection');
+        UserDaysMenuCollection = require('UserDaysMenuCollection'),
+        MenuPreselectionView = require('MenuPreselectionView'),
+        DayMenuSelectionView = require('DayMenuSelectionView');
 
     module.exports = Marionette.Object.extend({
 
@@ -46,6 +48,8 @@ define(function (require, exports, module) {
         },
 
         menu: function () {
+
+
             this.tabsView = new TabsView({
                 collection: new Backbone.Collection([
                     {name: 'Monday'},
@@ -61,13 +65,21 @@ define(function (require, exports, module) {
                 model: new Backbone.Model()
             });
 
+            this.menuPreselectionView = new MenuPreselectionView();
+
             this.regions.get('main').show(this.header);
-            this.regions.get('content').show(this.cardView);
-            //this.dayMenuView.showChildView('content', this.tabs);
+            this.regions.get('content').show(this.menuPreselectionView);
+
             this.dayMenuView = new DayMenuView({collection: this.dishesCollection});
+            //this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dishesCollection});
+
+            this.menuPreselectionView.showChildView('dayMenu', this.cardView);
+            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
             this.cardView.showChildView('tabs', this.tabsView);
             this.cardView.showChildView('content', this.dayMenuView);
+
+
         },
 
         dashboard: function(){

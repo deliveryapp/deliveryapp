@@ -24,10 +24,9 @@ require.config({
         TabCollectionView: '../components/tabs/tabCollectionView',
         CardLayoutView: '../components/card/cardLayoutView',
         WeekUserMenuView: 'dashboard/view/WeekUserMenuView',
-        DayUserMenuView: 'dashboard/view/DayUserMenuView'
-
-
-
+        DayUserMenuView: 'dashboard/view/DayUserMenuView',
+        MenuPreselectionView: 'menu/views/MenuPreselectionView',
+        DayMenuSelectionView: 'menu/views/DayMenuSelectionView'
         //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
         /*materialize : '../../lib/vendor/Materialize/bin/materialize',
