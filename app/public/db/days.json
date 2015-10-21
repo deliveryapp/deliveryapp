@@ -171,8 +171,9 @@
         "price": "18"
       }
     ],
-    "image_path": "stri       "description": "",
-        "category": ""
+    "image_path": "",
+    "description": "",
+    "category": ""
   },
   {
     "day": "13.10.2015",
@@ -317,7 +318,7 @@
         "title": "Виктория (отварная курица, морковь, яблоки, лук, яйца, майонез)",
         "weight": "150 г",
         "price": "14"
-        ,
+      ,
         "image_path": "",
         "description": "",
         "category": ""
@@ -339,7 +340,7 @@
       }
     ],
     "image_path": "stri       "description": "",
-        "category": ""
+    "category": ""
   },
   {
     "day": "14.10.2015",
@@ -595,7 +596,7 @@
       }
     ],
     "image_path": "stri       "description": "",
-        "category": ""
+    "category": ""
   },
   {
     "day": "15.10.2015",
@@ -833,7 +834,7 @@
       }
     ],
     "image_path": "stri       "description": "",
-        "category": ""
+    "category": ""
   },
   {
     "day": "16.10.2015",
