@@ -16,7 +16,9 @@ define(function(require, exports, module){
         dishClickedM: function (evt,model) {
             //console.log(model);
             var ingridients = model.get('ingridients');
-            console.log(ingridients);
+            this.model = model;
+            this.render();
+            //console.log(ingridients);
         },
         initialize: function () {
 
