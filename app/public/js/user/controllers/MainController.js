@@ -37,9 +37,10 @@ define(function (require, exports, module) {
                 this.dishesCollection.fetch({reset: true}),
                 this.daysMenuCollection.fetch({reset: true}),
                 this.userDaysMenuCollection.fetch({reset: true})
-
             ).done(function () {
 
+                    var serializedCollection = this.userDaysMenuCollection.toJSON();
+                    this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
 
                 }.bind(this));
         },
@@ -70,7 +71,7 @@ define(function (require, exports, module) {
         },
 
         dashboard: function(){
-            this.dashboard = new MainDashboardView();
+            this.dashboard = new MainDashboardView({collection: this.userDaysMenu});
             this.regions.get('content').show(this.dashboard);
 
         },
