@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     var Marionette = require('marionette'),
-        Tmpl = require('hbs!./templates/tab');
+        Tmpl = require('hbs!../components/tabs/templates/tab');
 
     module.exports =  Marionette.ItemView.extend({
         tagName: 'a',

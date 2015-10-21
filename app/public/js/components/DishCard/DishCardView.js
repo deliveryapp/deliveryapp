@@ -1,7 +1,7 @@
 define(function(require, exports, module){
 
     var Marionette = require('marionette'),
-        template = require('hbs!menu/views/templates/DishCardView');
+        template = require('hbs!../components/DishCard/templates/DishCardView');
 
     module.exports = Marionette.ItemView.extend({
         tagName: 'div',
@@ -12,7 +12,6 @@ define(function(require, exports, module){
         },
 
         dishClicked: function () {
-            //console.log(this.model);
             this.trigger('dishClicked', this.model);
         },
 

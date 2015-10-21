@@ -3,6 +3,8 @@
 /public_html/resources
 node_modules
 npm-debug.log*
+/minified
+/build
 
 
 /.idea

@@ -18,8 +18,11 @@ require.config({
         MainLayoutView: 'view/MainLayoutView',
         NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
         MainDashboardView: 'dashboard/view/MainDashboardView',
-        DishCardView: 'menu/views/DishCardView',
-        DayMenuView: 'menu/views/DayMenuView'
+        DishCardView: '../components/DishCard/DishCardView',
+        DayMenuView: '../components/DayMenu/DayMenuView',
+        TabItemView: '../components/tabs/tabItemView',
+        TabCollectionView: '../components/tabs/tabCollectionView',
+        CardLayoutView: '../components/card/cardLayoutView'
         //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
         /*materialize : '../../lib/vendor/Materialize/bin/materialize',

@@ -168,12 +168,12 @@
         "id": "20",
         "title": "Торт вафельный с сгущенным молоком",
         "weight": "3 шт",
-        "price": "18"
+        "price": "18",
+        "image_path": "",
+        "description": "",
+        "category": ""
       }
-    ],
-    "image_path": "",
-    "description": "",
-    "category": ""
+    ]
   },
   {
     "day": "13.10.2015",
@@ -336,12 +336,12 @@
         "id": "48",
         "title": "Пикантный (капуста, болгарский перец, маслины, кукуруза, заправка)",
         "weight": "150 г",
-        "price": "13"
+        "price": "13",
+        "image_path": "",
+        "description": "",
+        "category": ""
       }
-    ],
-    "image_path": "",
-    "description": "",
-    "category": ""
+    ]
   },
   {
     "day": "14.10.2015",
@@ -593,12 +593,12 @@
         "id": "85",
         "title": "Блинчики с яблочной карамелью",
         "weight": "3 шт",
-        "price": "16"
+        "price": "16",
+        "image_path": "",
+        "description": "",
+        "category": ""
       }
-    ],
-    "image_path": "",
-    "description": "",
-    "category": ""
+    ]
   },
   {
     "day": "15.10.2015",
@@ -832,12 +832,12 @@
         "id": "128",
         "title": "Биток рыбный + Каша ячневая Рубин",
         "weight": "",
-        "price": "27"
+        "price": "27",
+        "image_path": "",
+        "description": "",
+        "category": ""
       }
-    ],
-    "image_path": "",
-    "description": "",
-    "category": ""
+    ]
   },
   {
     "day": "16.10.2015",
@@ -1044,7 +1044,10 @@
         "id": "160",
         "title": "Рыба с ананасами + Каша пшеничная Крабовый",
         "weight": "",
-        "price": "27"
+        "price": "27",
+        "image_path": "",
+        "description": "",
+        "category": ""
       }
     ]
   }
