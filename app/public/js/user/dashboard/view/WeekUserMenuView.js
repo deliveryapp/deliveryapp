@@ -22,7 +22,7 @@ define(function(require, exports, module) {
             this.collection = new DishesCollection(this.model.get('dishes'));
             if (this.collection.length == 0){
             console.log(this.collection);
-                this.collection = new DishesCollection([{title: '<EMPTY>'}]);
+                this.collection = new DishesCollection([{name: '<EMPTY>'}]);
             }
         }
     });

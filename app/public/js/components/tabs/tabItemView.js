@@ -4,7 +4,7 @@ define(function (require, exports, module) {
 
     module.exports =  Marionette.ItemView.extend({
         tagName: 'a',
-        className : 'btn-small btn col s2 lime darken-2',
+        className : 'btn-small btn col s2 orange darken-1',
         id: function () {
             return this.model.get('name');
         },

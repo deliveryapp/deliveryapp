@@ -10,12 +10,19 @@ define(function(require, exports, module){
         childView: DishCardView,
         template: template,
 
+        events: {
+            'click #add-dish': 'dishAdded'
+        },
+
         childEvents:{
             'dishClicked': 'dishClickedM'
         },
         dishClickedM: function (evt,model) {
             this.model = model;
             this.render();
+        },
+        dishAdded: function () {
+            this.trigger('dishAdded', this.model);
         },
         initialize: function () {
 

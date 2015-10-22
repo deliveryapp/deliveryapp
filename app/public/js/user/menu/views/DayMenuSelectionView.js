@@ -1,16 +1,19 @@
 define(function(require, exports, module){
 
     var Marionette = require('marionette'),
-        DishCardView = require('DishCardView'),
+        UserDishCardView = require('UserDishCardView'),
         template = require('hbs!menu/views/templates/DayMenuSelectionView');
 
-    module.exports = Marionette.CollectionView.extend({
+    module.exports = Marionette.CompositeView.extend({
 
         template: template,
-        childView: DishCardView,
-
-        initialize: function () {
-
+        childView: UserDishCardView,
+        childViewContainer: '#user-day-menu',
+        childEvents:{
+            'dishRemoved': 'dishClickedM'
+        },
+        dishClickedM: function (evt, model) {
+            this.collection.remove(model);
         }
     });
 });

@@ -27,8 +27,8 @@ require.config({
         DayUserMenuView: 'dashboard/view/DayUserMenuView',
         MenuPreselectionView: 'menu/views/MenuPreselectionView',
         DayMenuSelectionView: 'menu/views/DayMenuSelectionView',
-        isUndefined: 'dashboard/templates/helpers/isUndefined'
-
+        isUndefined: 'dashboard/templates/helpers/isUndefined',
+        UserDishCardView: '../components/UserDishCard/UserDishCardView'
         //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
         /*materialize : '../../lib/vendor/Materialize/bin/materialize',
