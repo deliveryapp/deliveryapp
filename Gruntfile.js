@@ -89,5 +89,5 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-pngmin');
   //grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-  grunt.registerTask('build', ['concat']);
+  grunt.registerTask('build', ['sass','concat','watch']);
 };

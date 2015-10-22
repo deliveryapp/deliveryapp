@@ -8,9 +8,9 @@ define(function(require, exports, module){
         appRoutes: {
             '':'index',
             'dashboard': 'dashboard',
+            'dashboard/NextWeek': 'nextWeek',
             'menu': 'menu'
         }
-
 
     });
 });

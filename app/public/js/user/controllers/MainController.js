@@ -35,14 +35,21 @@ define(function (require, exports, module) {
             this.dishesCollection = new DishesCollection();
             this.daysMenuCollection = new DaysMenuCollection();
             this.userDaysMenuCollection = new UserDaysMenuCollection();
+            this.userNextWeekMenuCollection = new UserDaysMenuCollection();
             $.when(
                 this.dishesCollection.fetch({reset: true}),
                 this.daysMenuCollection.fetch({reset: true}),
-                this.userDaysMenuCollection.fetch({reset: true})
+                this.userDaysMenuCollection.fetch({reset: true}),
+
+            $.getJSON("../db/userNextWeek.json",'', function(result) {
+                this.userNextWeekMenuCollection = result;
+            }.bind(this))
+
             ).done(function () {
 
                     var serializedCollection = this.userDaysMenuCollection.toJSON();
                     this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
+                    this.userNextWeekMenuCollection = new UserDaysMenuCollection(this.userNextWeekMenuCollection[0].days);
 
                 }.bind(this));
         },
@@ -85,7 +92,12 @@ define(function (require, exports, module) {
         dashboard: function(){
             this.dashboard = new MainDashboardView({collection: this.userDaysMenu});
             this.regions.get('content').show(this.dashboard);
-
+            console.log("currentWeek");
+        },
+        nextWeek: function(){
+            this.dashboard = new MainDashboardView({collection: this.userNextWeekMenuCollection});
+            this.regions.get('content').show(this.dashboard);
+            console.log("nextWeek");
         },
 
         index: function () {

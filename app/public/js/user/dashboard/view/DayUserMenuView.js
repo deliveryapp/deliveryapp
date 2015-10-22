@@ -8,13 +8,10 @@ define(function(require, exports, module) {
         className: 'ordersList',
         template: DayUserMenuView,
 
-        initialize: function (options) {
-            console.log(options);
-            console.log(this.model);
-            console.log(this.collection);
 
 
-        }
     });
+
+
 
 });

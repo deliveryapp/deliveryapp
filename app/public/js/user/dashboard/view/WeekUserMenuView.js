@@ -12,13 +12,18 @@ define(function(require, exports, module) {
         childViewContainer: '#dish-list',
         childView: DayUserMenuView,
         childViewOptions: function () {
-            return { collection: new DishesCollection(this.model.get('dishes')) };
+            if (this.collection.first().get('name') === "<EMPTY>"){
+                return { collection: this.collection, tagName: 'div', className: 'empty'};
+            }
+            else{return { collection: this.collection };}
         },
 
         initialize: function(){
             this.collection = new DishesCollection(this.model.get('dishes'));
+            if (this.collection.length == 0){
             console.log(this.collection);
-
+                this.collection = new DishesCollection([{title: '<EMPTY>'}]);
+            }
         }
     });
 

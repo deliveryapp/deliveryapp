@@ -7,13 +7,8 @@ define(function(require, exports, module) {
         template: MainDashboardView,
         WeekUserMenuView: [],
         childView: WeekUserMenuView,
-        childViewContainer: '#week-orders',
+        childViewContainer: '#week-orders'
 
-
-
-        initialize: function(){
-            console.log(this.collection);
-        }
     });
 
 
