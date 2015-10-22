@@ -85,25 +85,25 @@ define(function (require, exports, module) {
 
             this.cardView.showChildView('tabs', this.tabsView);
             this.cardView.showChildView('content', this.dayMenuView);
-
-
         },
 
         dashboard: function(){
             this.dashboard = new MainDashboardView({collection: this.userDaysMenu});
             this.regions.get('content').show(this.dashboard);
-            console.log("currentWeek");
+            $(".edit").addClass('disabled').removeAttr('href');
+            $(".current-week").addClass('disabled').removeAttr('href');
+
         },
         nextWeek: function(){
             this.dashboard = new MainDashboardView({collection: this.userNextWeekMenuCollection});
             this.regions.get('content').show(this.dashboard);
-            console.log("nextWeek");
+            $(".next-week").addClass('disabled').removeAttr('href');
+
         },
 
         index: function () {
             console.log('index route');
         }
-
 
     });
 });
