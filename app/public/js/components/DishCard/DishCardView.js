@@ -8,11 +8,16 @@ define(function(require, exports, module){
         className: 'selected-dish',
         template: template,
         events: {
-            'click':'dishClicked'
+            'click':'dishClicked',
+            'click .btn':'dishAdded'
         },
 
         dishClicked: function () {
             this.trigger('dishClicked', this.model);
+        },
+
+        dishAdded: function () {
+            this.trigger('dishAdded', this.model);
         },
 
         initialize: function () {

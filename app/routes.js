@@ -9,6 +9,10 @@ module.exports = function (app) {
     app.get('/user', function (req, res) {
         res.render('user', {layout: false});
     });
+
+    app.get('/admin', function (req, res) {
+        res.render('admin', {layout: false});
+    });
     app.get('/dishes-page', function (req, res) {
         res.render('dishes-page');
     });

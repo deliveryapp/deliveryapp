@@ -36,14 +36,20 @@ define(function (require, exports, module) {
                     days: this.dayMenuView
                 }
             });
-            this.listenTo(this.cardView, "days:swap", this.tabsStatus);
+            this.listenTo(this.cardView, 'days:swap', this.tabsStatus);
+            this.listenTo(this.dayMenuView, 'dishAdded', this.dishAdded);
             return this.cardView;
 
+        },
+
+        dishAdded: function (model) {
+            this.trigger('dishAdded', model);
         },
 
         tabsStatus: function (e) {
             this.dayMenuView.collection =  new Backbone.Collection(e.model.attributes.dishes);
             this.dayMenuView.render();
+            this.trigger('tabChanged', e.model.attributes.day);
         }
 
     });

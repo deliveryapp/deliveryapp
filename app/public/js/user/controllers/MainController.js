@@ -84,7 +84,8 @@ define(function (require, exports, module) {
                 var menu = this.menuCard.getItem();
 
                 this.menuPreselectionView.showChildView('dayMenu', menu);
-
+                this.listenTo(this.menuCard, 'dishAdded', this.dishAdded);
+                this.listenTo(this.menuCard, 'tabChanged', this.tabChanged);
             }.bind(this));
         },
 
@@ -115,10 +116,26 @@ define(function (require, exports, module) {
         },
 
         dishAdded: function (model) {
-            //todo:add dishes
-            //dayDishesCollection.get('dishes').add()
-            //console.log(model);
             this.dayDishesCollection.add(model);
+        },
+
+        tabChanged: function (date) {
+            console.log(date);
+            this.selectDay(date);
+        },
+
+        selectDay: function (date) {
+            var serializedCollection = this.userDaysMenuCollection.toJSON();
+            this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
+
+            var filtered = this.userDaysMenu.filter(function (userDayMenu) {
+                return userDayMenu.get('day') === date;
+            });
+            this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
+
+            this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+
+            this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
         },
 
         index: function () {

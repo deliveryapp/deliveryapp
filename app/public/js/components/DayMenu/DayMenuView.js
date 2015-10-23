@@ -15,11 +15,15 @@ define(function(require, exports, module){
         },
 
         childEvents:{
-            'dishClicked': 'dishClickedM'
+            'dishClicked': 'dishClickedM',
+            'dishAdded': 'dishAddedM'
         },
         dishClickedM: function (evt,model) {
             this.model = model;
             this.render();
+        },
+        dishAddedM: function (evt, model) {
+            this.trigger('dishAdded', model);
         },
         dishAdded: function () {
             this.trigger('dishAdded', this.model);
