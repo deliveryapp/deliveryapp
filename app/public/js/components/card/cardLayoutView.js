@@ -7,6 +7,18 @@ define(function (require, exports, module) {
             tabs: '#tabs',
             content: '#dishes-list'
         },
-        template: template
+        template: template,
+
+        onShow: function () {
+            var views = this.getOption('childViews');
+
+            this.tabs.show(views.tabs);
+            this.content.show(views.days);
+
+            this.listenTo(views.tabs, 'all', function (eventName, attr) {
+
+                this.trigger(eventName, attr);
+            }.bind(this));
+        }
     });
 });

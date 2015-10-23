@@ -7,7 +7,7 @@ define(function(require, exports, module){
 
     module.exports = Backbone.Collection.extend({
         model: DayMenuModel,
-        url: '../db/days.json'
+        url: '../db/days.json',
     });
 
 });

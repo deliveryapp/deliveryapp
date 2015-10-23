@@ -6,14 +6,18 @@ define(function (require, exports, module) {
         tagName: 'a',
         className : 'btn-small btn col s2 orange darken-1',
         id: function () {
-            return this.model.get('name');
+            return this.model.get('day');
         },
-        attributes: {
-            'href' : '#'
-        },
+
         template: Tmpl,
-        initialize: function() {
-            console.log(this.model);
+
+        events: {
+            "click": "pressDay"
+        },
+
+        pressDay: function () {
+            this.model.set("className", "active");
+            this.trigger("choosing", this.model.get('status'));
         }
     });
 });
