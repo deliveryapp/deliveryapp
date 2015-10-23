@@ -2,19 +2,18 @@ define(function(require, exports, module){
     var Marionette = require("marionette"),
         $ = require("jquery"),
         _ = require("underscore"),
-        DishesCollection = require("DishesCollection"),
-        DaysMenuCollection = require("DaysMenuCollection"),
-        headerView = require('headerView'),
-        MainController = require('MainController'),
-        UserDaysMenuCollection = require("UserDaysMenuCollection");
+        MainController = require('MainController');
 
     module.exports = Marionette.AppRouter.extend({
         controller: new MainController(),
 
         appRoutes: {
-             '':'index',
-            'user/dashboard': 'dashboard',
-            'user/menu': 'menu'
+            '':'index',
+            'dashboard': 'dashboard',
+            'statistic': 'statistic',
+            'menu': 'menu',
+            'dish/add': 'addDish',
+            'dish/edit': 'editDish'
         }
 
 

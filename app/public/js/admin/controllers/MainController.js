@@ -2,10 +2,9 @@ define(function(require, exports, module){
     var Marionette = require("marionette"),
         $ = require("jquery"),
         _ = require("underscore"),
-        DishesCollection = require("DishesCollection"),
-        DaysMenuCollection = require("DaysMenuCollection"),
-        headerView = require('headerView'),
-        UserDaysMenuCollection = require("UserDaysMenuCollection");
+        MainLayoutView = require('MainLayoutView'),
+        NavigationMenuLayoutView = require('NavigationMenuLayoutView');
+
 
     module.exports = Marionette.Object.extend({
 
@@ -18,24 +17,16 @@ define(function(require, exports, module){
         }),
 
         initialize: function () {
-            this.header = new headerView();
+            this.header = new MainLayoutView();
             this.regions.get("main").show(this.header);
+            this.navigation = new NavigationMenuLayoutView();
+            this.regions.get("content").show(this.navigation);
+
             this.start();
         },
 
         start: function () {
-            var dishesCollection = new DishesCollection();
-            var daysMenuCollection = new DaysMenuCollection();
-            var userDaysMenuCollection = new UserDaysMenuCollection();
-            $.when(
-                dishesCollection.fetch({reset: true}),
-                daysMenuCollection.fetch({reset: true}),
-                userDaysMenuCollection.fetch({reset: true})
-            ).done(function () {
-                    console.log(dishesCollection);
-                    console.log(daysMenuCollection);
-                    console.log(userDaysMenuCollection);
-                }.bind(this));
+
         },
 
         menu: function(){
@@ -44,11 +35,22 @@ define(function(require, exports, module){
 
         dashboard: function(){
             console.log("dashboard");
+        },
 
+        statistic: function(){
+            console.log("statistic");
+        },
+
+        addDish: function(){
+            console.log("addDish");
+        },
+
+        editDish: function(){
+            console.log("editDish");
         },
 
         index: function(){
-            console.log("index route");
+            console.log("index");
         }
 
 

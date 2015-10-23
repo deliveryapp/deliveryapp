@@ -1,6 +1,5 @@
 define(function(require, exports, module){
     var Marionette = require("marionette"),
-        materialize = require("materialize"),
         Router = require('Router'),
         MainController = require("MainController");
 

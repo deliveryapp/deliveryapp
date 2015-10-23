@@ -9,15 +9,10 @@ require.config({
         marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         Router: 'Router',
         MainController: 'controllers/MainController',
-        DayMenuModel: 'models/DayMenuModel',
-        DishModel: 'models/DishModel',
-        UserDayMenuModel: 'models/UserDayMenuModel',
-        DishesCollection: 'collections/DishesCollection',
-        DaysMenuCollection: 'collections/DaysMenuCollection',
-        UserDaysMenuCollection: 'collections/UserDaysMenuCollection',
-        headerView: 'dashboard/views/headerView',
+        MainLayoutView: 'view/MainLayoutView',
+        NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
 
-        materialize : '../../lib/vendor/Materialize/bin/materialize',
+       /* materialize : '../../lib/vendor/Materialize/bin/materialize',
 
         tabs : '../../lib/vendor/Materialize/js/tabs',
         hammer : '../../lib/vendor/Materialize/js/jquery.hammer',
@@ -47,15 +42,15 @@ require.config({
         'toasts': '../../lib/vendor/Materialize/js/toasts',
         'tooltip': '../../lib/vendor/Materialize/js/tooltip',
         'transitions': '../../lib/vendor/Materialize/js/transitions',
-        'waves': '../../lib/vendor/Materialize/js/waves'
+        'waves': '../../lib/vendor/Materialize/js/waves'*/
 
         //radio: '../../node_modules/backbone.radio/build/backbone.radio'
 
     },
     'shim' : {
-        'jquery': { exports: "$" },
+        'jquery': { exports: "$" }
 
-        'animation': ['jquery'],
+        /*'animation': ['jquery'],
         'buttons': ['jquery'],
         'cards': ['jquery'],
         'character_counter': ['jquery'],
@@ -88,7 +83,7 @@ require.config({
                 'parallax', 'picker', 'picker.date', 'pushpin', 'scrollFire',
                 'scrollspy', 'sideNav', 'slider', 'tabs', 'toasts', 'tooltip',
                 'transitions', 'velocity', 'waves']
-        }
+        }*/
     },
 
     hbs: { 
