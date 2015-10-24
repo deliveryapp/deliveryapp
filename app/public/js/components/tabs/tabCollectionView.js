@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     var Marionette = require('marionette'),
-        Tab = require('TabItemView');
+        Tab = require('tabItemView');
 
     module.exports =  Marionette.CollectionView.extend({
         tagName: 'ul',

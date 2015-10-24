@@ -1,8 +1,8 @@
 define(function(require, exports, module){
 
     var Marionette = require('marionette'),
-        DishCardView = require('DishCardView'),
-        template = require('hbs!../components/UserDishCard/templates/UserDishCardView');
+        DishCardView = require('dishCardView'),
+        template = require('hbs!../components/userDishCard/templates/userDishCardView');
 
     module.exports = DishCardView.extend({
         template: template,

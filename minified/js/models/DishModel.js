@@ -1,1 +1,0 @@
-define(function(a,b,c){var d=(a("jquery"),a("underscore"),a("backbone"));b.exports=d.Model.extend({defaults:{}})});

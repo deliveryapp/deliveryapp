@@ -1,8 +1,8 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
-        DayUserMenuView = require ('DayUserMenuView'),
-        DishesCollection = require('DishesCollection'),
-        WeekUserMenuView = require('hbs!dashboard/view/templates/WeekUserMenuView');
+        DayUserMenuView = require ('dayUserMenuView'),
+        DishesCollection = require('dishesCollection'),
+        WeekUserMenuView = require('hbs!dashboard/view/templates/weekUserMenuView');
 
 
     module.exports = Marionette.CompositeView.extend({

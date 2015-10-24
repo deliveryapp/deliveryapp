@@ -1,11 +1,11 @@
 define(function (require, exports, module) {
     var Marionette = require('marionette'),
         $ = require('jquery'),
-        DaysMenuCollection = require('DaysMenuCollection'),
-        TabsView = require('TabCollectionView'),
+        DaysMenuCollection = require('daysMenuCollection'),
+        TabsView = require('tabCollectionView'),
 
-        CardView = require('CardLayoutView'),
-        DayMenuView = require('DayMenuView');
+        CardView = require('cardLayoutView'),
+        DayMenuView = require('dayMenuView');
 
     module.exports = Marionette.Object.extend({
 

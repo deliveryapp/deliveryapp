@@ -1,18 +1,17 @@
-/node_modules
-/.sass-cache
+/.sass-cache/**
 /public_html/resources
-node_modules
+node_modules/**
 npm-debug.log*
 /minified
 /build
 
 
-/.idea
+/.idea/**
 /LICENSE
 =======
-/app/public/minified
-/app/public/css
-/app/public/lib
+/app/public/minified/**
+/app/public/css/**
+/app/public/lib/**
 /lib
 js/*.min.js
 js/views/previous/**

@@ -1,19 +1,19 @@
 define(function (require, exports, module) {
     var Marionette = require('marionette'),
 
-        DishesCollection = require('DishesCollection'),
-        DaysMenuCollection = require('DaysMenuCollection'),
-        MainLayoutView = require('MainLayoutView'),
+        DishesCollection = require('dishesCollection'),
+        DaysMenuCollection = require('daysMenuCollection'),
+        MainLayoutView = require('mainLayoutView'),
 
-        MainDashboardView = require('MainDashboardView'),
-        NavigationMenuLayoutView = require('NavigationMenuLayoutView'),
-        DayMenuView = require('DayMenuView'),
-        MenuDaysController = require('MenuDaysController'),
+        MainDashboardView = require('mainDashboardView'),
+        NavigationMenuLayoutView = require('navigationMenuLayoutView'),
+        DayMenuView = require('dayMenuView'),
+        MenuDaysController = require('menuDaysController'),
 
-        UserDaysMenuCollection = require('UserDaysMenuCollection'),
-        MenuPreselectionView = require('MenuPreselectionView'),
+        UserDaysMenuCollection = require('userDaysMenuCollection'),
+        MenuPreselectionView = require('menuPreselectionView'),
 
-        DayMenuSelectionView = require('DayMenuSelectionView');
+        DayMenuSelectionView = require('dayMenuSelectionView');
 
     module.exports = Marionette.Object.extend({
 
