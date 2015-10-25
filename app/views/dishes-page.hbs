@@ -38,3 +38,51 @@
     <br/>
     <input type="submit" id="submit-remove"/>
 </div>
+
+<script>
+    /**
+     * Stub for REST API testing
+     */
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            var model = {
+                name: $('#name').val(),
+                description: $('#description').val()
+            };
+            $.ajax({
+                method: 'POST',
+                url: '/dishes',
+                data: model
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+
+        $('#submit-edit').on('click', function () {
+            var model = {
+                id: $('#id-edit').val(),
+                name: $('#name-edit').val(),
+                description: $('#description-edit').val()
+            };
+            $.ajax({
+                method: 'PUT',
+                url: '/dishes/' + model.id,
+                data: model
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+
+        $('#submit-remove').on('click', function () {
+            var model = {
+                id: $('#id-remove').val()
+            };
+            $.ajax({
+                method: 'DELETE',
+                url: '/dishes/' + model.id
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+    });
+</script>

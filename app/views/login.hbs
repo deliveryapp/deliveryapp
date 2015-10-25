@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<div style="border: 1px solid red; padding: 20px;">
+    <h1>Login with existing account</h1>
+    <label for="login-username">Username</label>
+    <br/>
+    <input type="text" id="login-username"/>
+    <br/>
+    <label for="login-password">Password</label>
+    <br/>
+    <input type="password" id="login-password"/>
+    <br/>
+    <input type="submit" id="login-submit"/>
+</div>
+
+<div style="border: 1px solid greenyellow; padding: 20px;">
+    <h1>Register account</h1>
+    <label for="register-username">Username</label>
+    <br/>
+    <input type="text" id="register-username"/>
+    <br/>
+    <label for="register-password">Password</label>
+    <br/>
+    <input type="password" id="register-password"/>
+    <br/>
+    <input type="submit" id="register-submit"/>
+</div>
+
+<div style="border: 1px solid #6a1b9a; padding: 20px;">
+    <h1>Add dishes to user</h1>
+    <label for="user-id">User Id</label>
+    <br/>
+    <input type="text" id="user-id"/>
+    <br/>
+    <label for="day">Day</label>
+    <br/>
+    <input type="text" id="day"/>
+    <br/>
+    <label for="dishes">Dish</label>
+    <br/>
+    <textarea id="dishes"></textarea>
+    <br/>
+    <input type="submit" id="add-dishes"/>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#login-submit').on('click', function () {
+            var user = {};
+            user.username = $('#login-username').val();
+            user.password = $('#login-password').val();
+            $.ajax({
+                method: 'POST',
+                url: '/login',
+                data: user
+            }).done(function (response) {
+                //redirect
+                console.log(response);
+            });
+        });
+        $('#register-submit').on('click', function () {
+            var user = {};
+            user.username = $('#register-username').val();
+            user.password = $('#register-password').val();
+
+            $.ajax({
+                method: 'POST',
+                url: '/register',
+                data: user
+            }).done(function (response) {
+                //redirect
+                console.log(response);
+            });
+        });
+
+        $('#add-dishes').on('click', function () {
+            var userId = $('#user-id').val();
+            var model = {
+                day: $('#day').val(),
+                dishes: $('#dishes').val().split(';')
+            };
+
+            $.ajax({
+                method: 'PUT',
+                url: '/users/' + encodeURIComponent(userId),
+                data: model
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+    });
+</script>
+</body>
+</html>

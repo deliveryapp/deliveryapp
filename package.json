@@ -6,10 +6,17 @@
   "dependencies": {
     "grunt-cli": "^0.1.13",
     "express": "4.13.3",
-    "mongoose": "4.1.9",
+    "express-session": "1.10.1",
+    "mongoose": "4.1.12",
     "express-handlebars": "2.0.1",
     "jquery": "1.11.3",
-    "body-parser": "1.14.1"
+    "body-parser": "1.14.1",
+    "moment": "2.10.6",
+    "passport": "0.2.2",
+    "passport-local": "1.0.0",
+    "passport-local-mongoose": "1.0.0",
+    "async": "1.4.2",
+    "lodash": "3.10.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -26,7 +33,8 @@
     "postinstall": "grunt sass & grunt uglify & grunt cssmin",
     "start": "node app/index.js",
     "staging": "PORT=3000 node app/index.js",
-    "staging-win": "set PORT=3000 && node app/index.js"
+    "staging-win": "set PORT=3000 && node app/index.js",
+    "debug": "PORT=3000 node-debug app/index.js"
   },
   "repository": {
     "type": "git",

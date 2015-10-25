@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Dishes = mongoose.model('Dishes');
+var mongoose = require('mongoose'),
+    Dishes = mongoose.model('Dishes');
 
 exports.get = function (req, res){
     Dishes.find({}, function (err, dishes) {

@@ -1,0 +1,41 @@
+<h1>Weeks</h1>
+<h2>Add new week:</h2>
+<div>
+    <label for="week">Date:</label>
+    <br/>
+    <input type="text" id="week"/>
+    <br/>
+    <input type="submit" id="submit-week"/>
+</div>
+<script>
+    /**
+     * Stub for REST API testing
+     */
+    $(document).ready(function () {
+        $('#submit-week').on('click', function () {
+            var model = {
+                startDate: $('#week').val()
+            };
+            $.ajax({
+                method: 'POST',
+                url: '/weeks/' + encodeURIComponent(model.startDate)
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+
+        $.ajax({
+            method: 'GET',
+            url: '/weeks/'
+        }).done(function (response) {
+            console.log(response);
+        });
+
+        $.ajax({
+            method: 'GET',
+            url: '/weeks/' + encodeURIComponent('19/10/2015')
+        }).done(function (response) {
+            console.log(response);
+        });
+    });
+</script>

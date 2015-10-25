@@ -1,11 +1,13 @@
-var fs = require('fs');
-var join = require('path').join;
-var express = require('express');
-var exphbs  = require('express-handlebars');
-var mongoose = require('mongoose');
-var config = require('./config');
-var app = express();
-var bodyParser = require('body-parser');
+var fs = require('fs'),
+    join = require('path').join,
+    express = require('express'),
+    exphbs = require('express-handlebars'),
+    mongoose = require('mongoose'),
+    config = require('./config'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: 'app/views/layouts/'}));
 app.set('view engine', '.hbs');
@@ -16,14 +18,28 @@ var connect = function () {
 
 var port = process.env.PORT || config.PORT;
 
-//connect();
+connect();
+
+app.use(require('express-session')({
+    secret: 'ep enroll ui',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Bootstrap models
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
     if (~file.indexOf('.js')) require(join(__dirname, 'models', file));
 });
+var Users = mongoose.model('Users');
+
+passport.use(new LocalStrategy(Users.authenticate()));
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
+
 app.set('views', __dirname + '/views/');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 // Bootstrap routes
