@@ -21,6 +21,9 @@ module.exports = function(grunt) {
     },
     sass: {
       dist: {
+        options: {
+          bundleExec: true
+        },
         files: [{
           expand: true,
           cwd: 'app/public/scss',
