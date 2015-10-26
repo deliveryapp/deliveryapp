@@ -21,9 +21,6 @@ module.exports = function(grunt) {
     },
     sass: {
       dist: {
-        options: {
-          bundleExec: true
-        },
         files: [{
           expand: true,
           cwd: 'app/public/scss',
@@ -58,14 +55,14 @@ module.exports = function(grunt) {
     //    ]
     //  }
     //},
-    //imagemin: {                          
+    //imagemin: {
     //
-    //  dynamic: {                         
+    //  dynamic: {
     //    files: [{
-    //      expand: true,                  
-    //      cwd: 'images/',                
-    //      src: ['**/*.{png,jpg,gif}'],   
-    //      dest: 'imagemin/'              
+    //      expand: true,
+    //      cwd: 'images/',
+    //      src: ['**/*.{png,jpg,gif}'],
+    //      dest: 'imagemin/'
     //    }]
     //  }
     //},
@@ -82,7 +79,7 @@ module.exports = function(grunt) {
         }]
       }
     }
-  }); 
+  });
 
   grunt.registerTask('default', ['sass', 'uglify', 'cssmin']);
   grunt.loadNpmTasks('grunt-contrib-sass');
