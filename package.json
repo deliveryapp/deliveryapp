@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "bower": "1.4.1",
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-sass": "^0.9.2",
     "grunt-contrib-uglify": "^0.9.2",
@@ -29,8 +30,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "bower install",
-    "postinstall": "grunt sass & grunt uglify & grunt cssmin",
+    "postinstall": "bower install && grunt sass && grunt uglify && grunt cssmin",
     "start": "node app/index.js",
     "staging": "PORT=3000 node app/index.js",
     "staging-win": "set PORT=3000 && node app/index.js",

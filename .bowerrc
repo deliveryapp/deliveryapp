@@ -4,6 +4,7 @@
     "https-proxy": "",
     "registry": {
         "search": [
+            "http://192.168.35.117:5678",
             "http://bower.herokuapp.com"
         ]
     }
