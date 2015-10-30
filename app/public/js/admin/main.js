@@ -11,6 +11,7 @@ require.config({
         MainController: 'controllers/MainController',
         MainLayoutView: 'view/MainLayoutView',
         NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
+        MainAddDishView: 'addDish/view/MainAddDishView'
 
        /* materialize : '../../lib/vendor/Materialize/bin/materialize',
 
