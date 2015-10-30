@@ -3,24 +3,25 @@ define(function(require, exports, module){
         $ = require("jquery"),
         _ = require("underscore"),
         MainLayoutView = require('MainLayoutView'),
-        NavigationMenuLayoutView = require('NavigationMenuLayoutView');
+        NavigationMenuLayoutView = require('NavigationMenuLayoutView'),
+        MainAddDishView = require('MainAddDishView');
 
 
     module.exports = Marionette.Object.extend({
 
         regions: new Marionette.RegionManager({
             regions: {
-                "main": "#application",
-                "content": "#content"
+                'main': '#application',
+                'content': '#content'
 
             }
         }),
 
         initialize: function () {
             this.header = new MainLayoutView();
-            this.regions.get("main").show(this.header);
+            this.regions.get('main').show(this.header);
             this.navigation = new NavigationMenuLayoutView();
-            this.regions.get("content").show(this.navigation);
+            this.regions.get('content').show(this.navigation);
 
             this.start();
         },
@@ -30,27 +31,28 @@ define(function(require, exports, module){
         },
 
         menu: function(){
-            console.log("menu");
+            console.log('menu');
         },
 
         dashboard: function(){
-            console.log("dashboard");
+            console.log('dashboard');
         },
 
         statistic: function(){
-            console.log("statistic");
+            console.log('statistic');
         },
 
         addDish: function(){
-            console.log("addDish");
+            this.addDishpage = new MainAddDishView();
+            this.regions.get('content').show(this.addDishpage);
         },
 
         editDish: function(){
-            console.log("editDish");
+            console.log('editDish');
         },
 
         index: function(){
-            console.log("index");
+            console.log('index');
         }
 
 
