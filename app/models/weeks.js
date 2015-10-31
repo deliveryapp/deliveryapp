@@ -14,4 +14,9 @@ var WeeksSchema = new Schema({
     id: false
 });
 
+WeeksSchema.path('startDate').validate(function (startDate) {
+    return startDate.length;
+}, 'StartDate cannot be blank');
+
+
 mongoose.model('Weeks', WeeksSchema);
