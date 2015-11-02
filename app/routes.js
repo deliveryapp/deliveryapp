@@ -17,15 +17,15 @@ module.exports = function (app) {
         res.redirect('/');
     });
     app.get('/user', function (req, res) {
-        if (!req || !req.user) {
+        /*if (!req || !req.user) {
             return res.redirect('/login');
-        }
+        }*/
         res.render('user', {layout: false});
     });
     app.get('/admin', function (req, res) {
-        if (!req || !req.user) {
+        /*if (!req || !req.user) {
             return res.redirect('/login');
-        }
+        }*/
         res.render('admin', {layout: false});
 
     });

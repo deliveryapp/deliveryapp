@@ -84,8 +84,8 @@ define(function (require, exports, module) {
                 var menu = this.menuCard.getItem();
 
                 this.menuPreselectionView.showChildView('dayMenu', menu);
-                this.listenTo(this.menuCard, 'dishAdded', this.dishAdded);
-                this.listenTo(this.menuCard, 'tabChanged', this.tabChanged);
+                this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
+                this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
             }.bind(this));
         },
 

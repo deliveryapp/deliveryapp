@@ -9,7 +9,7 @@
         "price": "14",
         "image_path": "",
         "description": "мясные фрикадельки, картофель, лук, морковь",
-        "category": ""
+        "category": "1"
       },
       {
         "id": "3",
@@ -18,7 +18,7 @@
         "price": "21",
         "image_path": "",
         "description": "измельченные говядина и свинина, ветчина, помидоры, сыр",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "4",
@@ -27,7 +27,7 @@
         "price": "23",
         "image_path": "",
         "description": "маринованные в соевом соусе кусочки курицы, жареные с луком, морковью и болгарским перцем",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "5",
@@ -36,7 +36,7 @@
         "price": "20",
         "image_path": "",
         "description": "филе, помидоры, лук, зелень, майонез, запеченные под сыром",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "6",
@@ -45,7 +45,7 @@
         "price": "36",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "7",
@@ -54,7 +54,7 @@
         "price": "36",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "8",
@@ -63,7 +63,7 @@
         "price": "12",
         "image_path": "",
         "description": "картофель тушеный с луком и морковью",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "9",
@@ -72,7 +72,7 @@
         "price": "9",
         "image_path": "",
         "description": "горох, жареный лук, морковь, грибы",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "10",
@@ -81,7 +81,7 @@
         "price": "10",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "11",
@@ -90,7 +90,7 @@
         "price": "17",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "12",
@@ -99,7 +99,7 @@
         "price": "18",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
         "id": "13",
@@ -108,7 +108,7 @@
         "price": "16",
         "image_path": "",
         "description": "помидоры, перец, ветчина, грибы мар., сыр, майонез",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "14",
@@ -117,7 +117,7 @@
         "price": "14",
         "image_path": "",
         "description": "шпроты, яйца, отварной картофель, морковь, огурцы, майонез",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "15",
@@ -126,7 +126,7 @@
         "price": "15",
         "image_path": "",
         "description": " ветчина, отварная морковь, огурцы, яйца, майонез ",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "16",
@@ -135,7 +135,7 @@
         "price": "11",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "17",
@@ -144,7 +144,7 @@
         "price": "25",
         "image_path": "",
         "description": "курица, огурец, яйцо, зелень, горчица, соевый соус, чеснок чуточку, перец черный молотый, масло р",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "18",
@@ -153,7 +153,7 @@
         "price": "25",
         "image_path": "",
         "description": "форель, помидор, перец, сметана, майонез, зелень, оливки, сыр, перец молотый",
-        "category": ""
+        "category": "3"
       },
       {
         "id": "19",
@@ -162,16 +162,16 @@
         "price": "17",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "2"
       },
       {
-        "id": "20",
+        "_id": "20",
         "name": "Торт вафельный с сгущенным молоком",
         "weight": "3 шт",
         "price": "18",
         "image_path": "",
         "description": "",
-        "category": ""
+        "category": "4"
       }
     ]
   },

@@ -13,7 +13,7 @@ app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: '
 app.set('view engine', '.hbs');
 
 var connect = function () {
-    mongoose.connect(config.db);
+    //mongoose.connect(config.db);
 };
 
 var port = process.env.PORT || config.PORT;

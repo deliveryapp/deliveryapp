@@ -4,23 +4,17 @@ define(function(require, exports, module){
         template = require('hbs!../components/dishCard/templates/dishCardView');
 
     module.exports = Marionette.ItemView.extend({
-        tagName: 'div',
-        className: 'selected-dish',
         template: template,
         events: {
-            'click':'dishClicked',
-            'click .btn':'dishAdded'
+            'change input': 'changed'
         },
 
-        dishClicked: function () {
-            this.trigger('dish:clicked', this.model);
+        changed:function(evt) {
+            console.log(evt.currentTarget.value);
+            this.trigger('input:changed', evt.currentTarget.value);
         },
-
-        dishAdded: function () {
-            this.trigger('dish:added', this.model);
-        },
-
         initialize: function () {
+
         }
     });
 });
