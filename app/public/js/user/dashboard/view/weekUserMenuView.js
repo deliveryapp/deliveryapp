@@ -12,7 +12,7 @@ define(function(require, exports, module) {
         childViewContainer: '#dish-list',
         childView: DayUserMenuView,
         childViewOptions: function () {
-            if (this.collection.first().get('name') === "<EMPTY>"){
+            if (this.collection.first().get('name') === '<EMPTY>'){
                 return { collection: this.collection, tagName: 'div', className: 'empty'};
             }
             else{return { collection: this.collection };}

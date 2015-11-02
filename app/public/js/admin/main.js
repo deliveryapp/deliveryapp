@@ -9,9 +9,13 @@ require.config({
         marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         Router: 'Router',
         MainController: 'controllers/MainController',
+        UserModel:'models/UserModel',
+        UsersCollection:'collections/UsersCollection',
         MainLayoutView: 'view/MainLayoutView',
         NavigationMenuLayoutView: 'view/NavigationMenuLayoutView',
-        MainAddDishView: 'addDish/view/MainAddDishView'
+        MainAddDishView: 'addDish/view/MainAddDishView',
+        MainUserListView:'userList/view/MainUserListView',
+        UserView: 'userList/view/UserView'
 
        /* materialize : '../../lib/vendor/Materialize/bin/materialize',
 
@@ -49,7 +53,7 @@ require.config({
 
     },
     'shim' : {
-        'jquery': { exports: "$" }
+        'jquery': { exports: '$' }
 
         /*'animation': ['jquery'],
         'buttons': ['jquery'],
@@ -94,6 +98,6 @@ require.config({
     }
 });
 
-require(["application"],function(application){
+require(['application'],function(application){
     application.start();
 });
