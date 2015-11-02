@@ -1,0 +1,306 @@
+---
+swagger: "2.0"
+info:
+  version: "1.4"
+  title: "fd"
+  description: "food delivery rest api"
+paths:
+  /dishes:
+    get:
+      summary: "dishes"
+      description: "Get all dishes in the system"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Dish id"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Dish"
+          schema:
+            $ref: "#/definitions/Dish"
+    put:
+      description: "Update dish"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Dish id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Dish"
+          schema:
+            $ref: "#/definitions/Dish"
+    post:
+      description: "Add new dish"
+      responses:
+        200:
+          description: "Dish"
+          schema:
+            $ref: "#/definitions/Dish"
+    delete:
+      description: "Remove dish"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Dish id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ok"
+  /weeks:
+    get:
+      summary: "weeks"
+      description: "Get list of all saved weeks in the system"
+      parameters:
+      - name: "startDate"
+        in: "query"
+        description: "week id"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Week"
+          schema:
+            $ref: "#/definitions/Week"
+    post:
+      parameters:
+      - name: "startDate"
+        in: "query"
+        description: "week start date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Week"
+          schema:
+            $ref: "#/definitions/Week"
+  /weeks/current:
+    get:
+      summary: "weeks"
+      description: "Get current week"
+      responses:
+        200:
+          description: "Week"
+          schema:
+            $ref: "#/definitions/Week"
+  /weeks/next:
+    get:
+      summary: "weeks"
+      description: "Get next week"
+      responses:
+        200:
+          description: "Week"
+          schema:
+            $ref: "#/definitions/Week"
+  /orders:
+    get:
+      summary: "orders"
+      description: "Get order for selected date and user"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: "user id"
+        required: true
+        type: "string"
+      - name: "date"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Order"
+          schema:
+            $ref: "#/definitions/Order"
+    put:
+      description: "Update order for selected user and date"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: "user id"
+        required: true
+        type: "string"
+      - name: "day"
+        in: "query"
+        description: "day date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User"
+          schema:
+            $ref: "#/definitions/Order"
+    post:
+      description: "Add new order for selected user and date"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: "user id"
+        required: true
+        type: "string"
+      - name: "day"
+        in: "query"
+        description: "day date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User"
+          schema:
+            $ref: "#/definitions/Order"
+  /users:
+    get:
+      description: "Get all users in the system"
+      summary: "users"
+      parameters:
+      - name: "id"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "User"
+          schema:
+            $ref: "#/definitions/User"
+    put:
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "User id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User"
+          schema:
+            $ref: "#/definitions/User"
+    post:
+      responses:
+        200:
+          description: "User"
+          schema:
+            $ref: "#/definitions/User"
+    delete:
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "User id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ok"
+  /days:
+    get:
+      summary: "days"
+      parameters:
+      - name: "day"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Day"
+          schema:
+            $ref: "#/definitions/Day"
+    put:
+      parameters:
+      - name: "day"
+        in: "query"
+        description: "day date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Day"
+          schema:
+            $ref: "#/definitions/Day"
+    post:
+      responses:
+        200:
+          description: "Day"
+          schema:
+            $ref: "#/definitions/Day"
+    delete:
+      parameters:
+      - name: "day"
+        in: "query"
+        description: "day date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ok"
+definitions:
+  Dish:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      image_path:
+        type: "string"
+      weight:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "string"
+      category:
+        type: "string"
+  Week:
+    type: "object"
+    properties:
+      startDate:
+        type: "string"
+      days:
+        type: "array"
+        description: "array of days"
+        items:
+          type: "string"
+  Day:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+      dishes:
+        type: "array"
+        description: "array of dish-ids (available to order for this day)"
+        items:
+          $ref: "#/definitions/Dish"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      image_path:
+        type: "string"
+      mail:
+        type: "string"
+      role:
+        type: "string"
+  Order:
+    type: "object"
+    properties:
+      day:
+        type: "string"
+        description: "hash of orders in format key = day, value = array of ordered\
+          \ dishes"
+      dishes:
+        type: "array"
+        items:
+          type: "object"
+          description: "array of orders for the days"
+          properties:
+            dish:
+              $ref: "#/definitions/Dish"
+            quantity:
+              type: "number"
