@@ -6,7 +6,7 @@ require.config({
         handlebars: '../../lib/vendor/require-handlebars-plugin/hbs/handlebars.runtime',
         hbs: '../../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
-        backboneVirtualCollection: '../../lib/vendor/backbone-virtual-collection/backbone.virtual-collection',
+        backboneVirtualCollection: '../../lib/vendor/node_modules/backbone-virtual-collection/backbone.virtual-collection',
         //marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         router: 'router',
         mainController: 'controllers/mainController',

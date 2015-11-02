@@ -78,6 +78,13 @@ module.exports = function(grunt) {
           dest: 'app/public/minified/js'
         }]
       }
+    },
+    copy: {
+      main: {
+        files: [
+          {expand: true, src: ['node_modules/backbone-virtual-collection/backbone.virtual-collection.js'], dest: 'app/public/lib/vendor/', filter: 'isFile'}
+        ]
+      }
     }
   });
 
@@ -86,6 +93,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-pngmin');
   //grunt.loadNpmTasks('grunt-contrib-imagemin');
 
