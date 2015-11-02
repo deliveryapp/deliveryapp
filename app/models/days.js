@@ -1,10 +1,11 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    DishesSchema = require('./dishes');
+    Schema = mongoose.Schema;
 
 var DaysSchema = new Schema({
     day: Date,
-    dishes: [DishesSchema]
+    dishes: [{
+        id: String
+    }]
 }, {
     collection: 'days'
 });

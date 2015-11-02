@@ -5,14 +5,25 @@ var mongoose = require('mongoose'),
 var UsersSchema = new Schema({
     firstName: String,
     lastName: String,
-    username: String,
-    mail: String,
-    days: Object,
-    password: String
+    mail: {
+        type: String,
+        index: {
+            unique: true
+        }
+    },
+    role: String
 }, {
     collection: 'users'
 });
 
 UsersSchema.plugin(passportLocalMongoose);
+
+UsersSchema.path('mail').validate(function (mail) {
+    return mail.length;
+}, 'Mail cannot be blank');
+
+UsersSchema.path('role').validate(function (role) {
+    return role.length;
+}, 'Role cannot be blank');
 
 mongoose.model('Users', UsersSchema);
