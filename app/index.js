@@ -18,7 +18,7 @@ var connect = function () {
 
 var port = process.env.PORT || config.PORT;
 
-connect();
+/*connect();*/
 
 app.use(require('express-session')({
     secret: 'ep enroll ui',

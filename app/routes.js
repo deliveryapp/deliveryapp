@@ -6,6 +6,9 @@ var dishes = require('./controllers/dishes'),
 
 module.exports = function (app) {
     //layouts:
+    app.get('/lll', function (req, res) {
+        res.render('new_login', {layout: false});
+    });
     app.get('/', function (req, res) {
         res.send('Home');
     });
