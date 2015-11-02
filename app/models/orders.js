@@ -20,9 +20,9 @@ var OrdersSchema = new Schema({
     collection: 'orders'
 });
 
-OrdersSchema.path('startDate').validate(function (day) {
+/*OrdersSchema.path('startDate').validate(function (day) {
     return day.length;
-}, 'Day cannot be blank');
+}, 'Day cannot be blank');*/
 
 
 mongoose.model('Orders', OrdersSchema);
