@@ -43,7 +43,6 @@ define(function (require, exports, module) {
             this.listenTo(this.cardView, 'days:swap', this.tabsStatus);
             this.listenTo(this.dayMenuView, 'dish:added', this.dishAdded);
             this.listenTo(this.dayMenuView, 'filter:by:name:applied', this.nameFilterApplied);
-            //filter:by:category:applied
             this.listenTo(this.dayMenuView, 'filter:by:category:applied', this.categoryFilterApplied);
             return this.cardView;
 
@@ -53,14 +52,12 @@ define(function (require, exports, module) {
             this.dishesCollection.updateFilter(function (model) {
                 return model.get('name').toLowerCase().indexOf(phrase) > -1;
             });
-            this.dayMenuView.render();
         },
 
         categoryFilterApplied: function (phrase) {
             this.dishesCollection.updateFilter(function (model) {
                 return model.get('category').toLowerCase().indexOf(phrase) > -1;
             });
-            this.dayMenuView.render();
         },
 
         dishAdded: function (model) {
@@ -68,9 +65,11 @@ define(function (require, exports, module) {
         },
 
         tabsStatus: function (e) {
-            this.dishesCollection = new VirtualCollection(new Backbone.Collection(e.model.get('dishes')));
-            this.dayMenuView.collection =  this.dishesCollection;
-            this.dayMenuView.render();
+            this.dishesCollection.reset();
+            var dayDishes = new Backbone.Collection(e.model.get('dishes'));
+            dayDishes.map(function (model) {
+                this.dishesCollection.add(model);
+            }.bind(this));
             this.trigger('tab:changed', e.model.get('day'));
         }
 
