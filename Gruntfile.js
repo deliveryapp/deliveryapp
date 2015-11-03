@@ -93,11 +93,7 @@ module.exports = function(grunt) {
       },
       options: {
         processors: [
-          require('precss')(),
-          require('autoprefixer')(),
-          require('cssnext')()
-
-
+            require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})
         ]
       }
     }
