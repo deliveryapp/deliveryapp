@@ -294,6 +294,9 @@ definitions:
         type: "string"
         description: "hash of orders in format key = day, value = array of ordered\
           \ dishes"
+      paymentStatus:
+        type: "boolean"
+        description: "User payment status for day/week"
       dishes:
         type: "array"
         items:
