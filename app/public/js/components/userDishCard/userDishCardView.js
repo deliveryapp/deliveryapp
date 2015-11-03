@@ -6,12 +6,13 @@ define(function(require, exports, module){
 
     module.exports = DishCardView.extend({
         template: template,
+        className: 'selected-dish-user',
         events: {
             'click .remove-user-dish': 'dishRemoved'
         },
 
         dishRemoved: function () {
-            this.trigger('dishRemoved', this.model);
+            this.trigger('dish:removed', this.model);
         }
     });
 });

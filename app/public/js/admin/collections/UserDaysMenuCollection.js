@@ -2,7 +2,7 @@ define(function(require, exports, module){
     var $ = require('jquery'),
         _ = require('underscore'),
         Backbone = require('backbone'),
-        UserDayMenuModel = require('UserDayMenuModel');
+        UserDayMenuModel = require('userDayMenuModel');
 
 
     module.exports = Backbone.Collection.extend({

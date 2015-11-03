@@ -8,8 +8,7 @@ define(function (require, exports, module) {
         DayMenuView = require('dayMenuView');
 
     module.exports = Marionette.Object.extend({
-
-        getItem: function () {
+        getUserItem: function () {
             this.collection = this.getOption('collection');
 
             this.weekDays = this.collection.filter(function (item) {
@@ -20,13 +19,30 @@ define(function (require, exports, module) {
                 return item.get('dishes');
             });
 
-
-            this.tabsView = new TabsView({
-                collection: new Backbone.Collection(this.weekDays)
-            });
-
             this.dishesCollection = new VirtualCollection(new Backbone.Collection(this.dayMenuDishes[0].get('dishes')), {
 
+            });
+            var cardView = this.getItem();
+            this.listenTo(this.cardView, 'days:swap', this.tabsStatus);
+            return cardView;
+        },
+
+        getAdminItem: function (daysMenuCollection) {
+            this.collection = this.getOption('collection');
+
+            this.weekDays = daysMenuCollection.filter(function (item) {
+                return item.get('day');
+            });
+
+            this.dishesCollection = new VirtualCollection(this.collection, {});
+            var cardView = this.getItem();
+            this.listenTo(this.cardView, 'days:swap', this.tabsStatusAdmin);
+            return cardView;
+        },
+
+        getItem: function () {
+            this.tabsView = new TabsView({
+                collection: new Backbone.Collection(this.weekDays)
             });
 
             this.dayMenuView = new DayMenuView({
@@ -40,7 +56,6 @@ define(function (require, exports, module) {
                     days: this.dayMenuView
                 }
             });
-            this.listenTo(this.cardView, 'days:swap', this.tabsStatus);
             this.listenTo(this.dayMenuView, 'dish:added', this.dishAdded);
             this.listenTo(this.dayMenuView, 'filter:by:name:applied', this.nameFilterApplied);
             this.listenTo(this.dayMenuView, 'filter:by:category:applied', this.categoryFilterApplied);
@@ -62,6 +77,10 @@ define(function (require, exports, module) {
 
         dishAdded: function (model) {
             this.trigger('dish:added', model);
+        },
+
+        tabsStatusAdmin: function (e) {
+            this.trigger('tab:changed', e.model.get('day'));
         },
 
         tabsStatus: function (e) {

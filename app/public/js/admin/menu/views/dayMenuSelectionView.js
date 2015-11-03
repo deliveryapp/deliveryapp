@@ -10,7 +10,7 @@ define(function(require, exports, module){
         childView: UserDishCardView,
         childViewContainer: '#user-day-menu',
         childEvents:{
-            'dishRemoved': 'dishClickedM'
+            'dish:removed': 'dishClickedM'
         },
         dishClickedM: function (evt, model) {
             this.collection.remove(model);

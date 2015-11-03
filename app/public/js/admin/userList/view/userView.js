@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
-        UserView = require('hbs!userList/view/templates/UserView');
+        UserView = require('hbs!userList/view/templates/userView');
     
     module.exports = Marionette.ItemView.extend({
         tagName: 'li',

@@ -1,7 +1,7 @@
 define(function(require, exports, module){
     var Marionette = require("marionette"),
         Router = require('Router'),
-        MainController = require("MainController");
+        MainController = require("mainController");
 
 
     application = new Marionette.Application();

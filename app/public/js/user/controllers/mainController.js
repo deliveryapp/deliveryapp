@@ -81,7 +81,8 @@ define(function (require, exports, module) {
 
 
                 this.menuCard = new MenuDaysController({collection: this.daysMenuCollection});
-                var menu = this.menuCard.getItem();
+
+                var menu = this.menuCard.getUserItem();
 
                 this.menuPreselectionView.showChildView('dayMenu', menu);
                 this.listenTo(this.menuCard, 'dish:added', this.dishAdded);

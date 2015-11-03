@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
-        UserView = require('UserView'),
-        MainUserListView = require('hbs!userList/view/templates/MainUserListView');
+        UserView = require('userView'),
+        MainUserListView = require('hbs!userList/view/templates/mainUserListView');
 
 
     module.exports = Marionette.CompositeView.extend({
