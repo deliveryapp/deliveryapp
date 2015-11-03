@@ -1,84 +1,97 @@
-
 <div class="b-addDish-wrapper">
 
-    <div class="card indigo card-padding">
-        <span class="input-title">Add new dish</span>
-        <div class="forms">
-            <form action="">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="" id="name" type="text" class="validate">
-                        <label class="active" for="name">Name:</label>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col offset-m2 m8 s12">
+            <div class="row s10 card indigo ">
 
-                <div class="row">
-                    <form class="col s12">
+                <span class="input-title">Add new dish</span>
+                <div class="forms">
+                    <form action="">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="description" class="materialize-textarea"></textarea>
-                                <label for="description" class="label-textarea">Description:</label>
+                            <div class="input-field col s6">
+                                <input placeholder="" id="name" type="text" class="validate">
+                                <label class="active" for="name">Name:</label>
                             </div>
                         </div>
-                    </form>
-                </div>
 
-                <input type="submit" class="btn" id="submit"/>
-            </form>
-
-        </div>
-        </div>
-
-    <div class="card indigo card-padding">
-        <span class="input-title">Edit Dish</span>
-        <div class="forms">
-            <form action="">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="" id="id-edit" type="text" class="validate">
-                        <label class="active" for="id-edit">ID:</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="" id="name-edit" type="text" class="validate">
-                        <label class="active" for="name-edit">Name:</label>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <form class="col s12">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="description-edit" class="materialize-textarea"></textarea>
-                                <label for="description-edit" class="label-textarea">Description:</label>
-                            </div>
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="description" class="materialize-textarea"></textarea>
+                                        <label for="description" class="label-textarea">Description:</label>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+
+                        <input type="submit" class="btn" id="submit"/>
                     </form>
+
                 </div>
-
-                <input type="submit" class="btn" id="submit-edit"/>
-            </form>
-
+            </div>
         </div>
     </div>
 
-    <div class="card indigo card-padding">
-        <span class="input-title">Delete Dish</span>
+    <div class="row">
+        <div class="col offset-m2 m8 s12">
+            <div class="row s10 card indigo ">
 
-        <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="" id="id-remove" type="text" class="validate">
-                <label class="active" for="id-remove">ID:</label>
+                <span class="input-title">Edit Dish</span>
+                <div class="forms">
+                    <form action="">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="" id="id-edit" type="text" class="validate">
+                                <label class="active" for="id-edit">ID:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="" id="name-edit" type="text" class="validate">
+                                <label class="active" for="name-edit">Name:</label>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="description-edit" class="materialize-textarea"></textarea>
+                                        <label for="description-edit" class="label-textarea">Description:</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <input type="submit" class="btn" id="submit-edit"/>
+                    </form>
+
+                </div>
+
             </div>
         </div>
+    </div>
 
-        <input type="submit" class="btn red" value="Delete" id="submit-remove"/>
+    <div class="row">
+        <div class="col offset-m2 m8 s12">
+            <div class="row s10 card indigo ">
 
+                <span class="input-title">Delete Dish</span>
 
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="id-remove" type="text" class="validate">
+                        <label class="active" for="id-remove">ID:</label>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn red" value="Delete" id="submit-remove"/>
+
+            </div>
+        </div>
     </div>
 
 </div>
-

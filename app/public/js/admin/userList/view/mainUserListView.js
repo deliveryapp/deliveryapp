@@ -11,7 +11,7 @@ define(function(require, exports, module) {
         childEvents:{
             'user:removed': 'userClickedM'
         },
-        userClickedM: function (evt, model) {
+        userClickedM: function (view, model) {
             this.collection.remove(model);
         }
     });

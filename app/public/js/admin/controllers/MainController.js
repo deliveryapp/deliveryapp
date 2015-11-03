@@ -130,7 +130,6 @@ define(function(require, exports, module){
             this.getData().done(function () {
                 this.userList = new MainUserListView({collection: this.usersCollection});
                 this.regions.get('content').show(this.userList);
-                console.log(this.usersCollection);
             }.bind(this));
         }
 

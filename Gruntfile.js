@@ -30,6 +30,23 @@ module.exports = function(grunt) {
         }]
       }
     },
+
+    postcss: {
+
+      options: {
+        processors: [
+          require('precss')(),
+          require('autoprefixer')(),
+          require('cssnext')()
+        ]
+      },
+      dist: {
+        src: 'css/styletest.css',
+        dest: 'css/styletest2.css'
+      }
+
+    },
+
     cssmin: {
       options: {
         shorthandCompacting: false,
@@ -111,5 +128,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-postcss');
 
-  grunt.registerTask('build', ['copy','sass','concat','watch']);
+  grunt.registerTask('build', ['copy','sass','concat','watch','postcss']);
 };
