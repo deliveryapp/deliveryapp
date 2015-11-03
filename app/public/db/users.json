@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "561d5b0726ce61110081d4bd",
+    "password": "ThomasSimon",
+    "firstName": "Thomas",
+    "lastName": "Simon",
+    "image_path": "images/male.jpg",
+    "mail": "Thomas.Simon@gmail.com",
+    "Role":"admin"
+  },
+  {
+  "_id": "561d5b0726ce61110081d4bd",
+  "password": "RosalineGarrett",
+  "firstName": "Rosaline",
+  "lastName": "Garrett",
+  "image_path": "images/female.jpg",
+  "mail": "Rosaline.Garrett@gmail.com",
+  "Role":"user"
+},
+  {
+    "_id": "561d5b0726ce61110081d4bd",
+    "password": "ChristopherLynch",
+    "firstName": "Christopher",
+    "lastName": "Lynch",
+    "image_path": "images/male.jpg",
+    "mail": "Christopher.Lynch@gmail.com",
+    "Role":"user"
+  },
+  {
+    "_id": "561d5b0726ce61110081d4bd",
+    "password": "BasilGriffith",
+    "firstName": "Basil",
+    "lastName": "Griffith",
+    "image_path": "images/male.jpg",
+    "mail": "Basil.Griffith@gmail.com",
+    "Role":"user"
+  },
+  {
+    "_id": "561d5b0726ce61110081d4bd",
+    "password": "SamanthaWilson",
+    "firstName": "Samantha",
+    "lastName": "Wilson",
+    "image_path": "images/female.jpg",
+    "mail": "Samantha.Wilson@gmail.com",
+    "Role":"user"
+  }
+]

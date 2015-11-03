@@ -12,6 +12,7 @@ define(function(require, exports, module){
             'dashboard': 'dashboard',
             'statistic': 'statistic',
             'menu': 'menu',
+            'userlist': 'userlist',
             'dish/add': 'addDish',
             'dish/edit': 'editDish'
         }
