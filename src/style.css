@@ -1,0 +1,10 @@
+@use autoprefixer();
+@use cssnext();
+@use precss();
+@import '_base.css';
+@import '_header.css';
+@import '_dashboard.css';
+@import '_dishes.css';
+@import '_addNewDish.css';
+@import '_login.css';
+@import '_userList.css';

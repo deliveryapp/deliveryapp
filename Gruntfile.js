@@ -85,6 +85,20 @@ module.exports = function(grunt) {
           {expand: true, src: ['node_modules/backbone-virtual-collection/backbone.virtual-collection.js'], dest: 'app/public/lib/vendor/', filter: 'isFile'}
         ]
       }
+    },
+    postcss: {
+      dist: {
+        src: 'src/*.css',
+        dest: 'dest/style.css'
+      },
+      options: {
+        processors: [
+          require('autoprefixer')(),
+          require('cssnext')(),
+          require('precss')(),
+          require('use')()
+        ]
+      }
     }
   });
 
@@ -94,6 +108,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('build', ['copy','sass','concat','watch']);
 };
