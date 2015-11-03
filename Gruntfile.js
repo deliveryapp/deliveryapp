@@ -5,8 +5,8 @@ module.exports = function(grunt) {
 
     watch: {
       css: {
-        files: 'app/public/scss/*.scss',
-        tasks: ['sass'],
+        files: 'app/public/scss/style.css',
+        tasks: ['postcss'],
         options: {
           debounceDelay: 250
         }
@@ -105,8 +105,8 @@ module.exports = function(grunt) {
     },
     postcss: {
       dist: {
-        src: 'src/style.css',
-        dest: 'dest/style.css'
+        src: 'app/public/scss/style.css',
+        dest: 'app/public/css/style.css'
       },
       options: {
         processors: [
