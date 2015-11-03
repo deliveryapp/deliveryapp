@@ -88,15 +88,16 @@ module.exports = function(grunt) {
     },
     postcss: {
       dist: {
-        src: 'src/*.css',
+        src: 'src/style.css',
         dest: 'dest/style.css'
       },
       options: {
         processors: [
-          require('autoprefixer')(),
-          require('cssnext')(),
           require('precss')(),
-          require('use')()
+          require('autoprefixer')(),
+          require('cssnext')()
+
+
         ]
       }
     }

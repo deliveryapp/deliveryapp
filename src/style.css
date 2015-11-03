@@ -1,6 +1,4 @@
-@use autoprefixer();
-@use cssnext();
-@use precss();
+
 @import '_base.css';
 @import '_header.css';
 @import '_dashboard.css';
