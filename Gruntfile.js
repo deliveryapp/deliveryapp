@@ -5,8 +5,8 @@ module.exports = function(grunt) {
 
     watch: {
       css: {
-        files: 'app/public/scss/style.css',
-        tasks: ['postcss'],
+        files: 'app/public/scss/*.css',
+        tasks: ['postcss', 'autoprefixer'],
         options: {
           debounceDelay: 250
         }
@@ -109,11 +109,22 @@ module.exports = function(grunt) {
         dest: 'app/public/css/style.css'
       },
       options: {
+        map: true,
         processors: [
-            require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})
+          require('precss')(),
+          require('lost')(),
+          /*,
+            require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})*/
+
         ]
       }
-    }
+    },
+    autoprefixer: {
+      single_file: {
+        src: 'app/public/css/style.css',
+        dest: 'app/public/css/style.css'
+      }
+    },
   });
 
   grunt.registerTask('default', ['sass', 'uglify', 'cssmin']);
@@ -122,6 +133,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('build', ['copy','sass','concat','watch','postcss']);
