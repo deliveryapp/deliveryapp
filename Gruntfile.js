@@ -111,8 +111,7 @@ module.exports = function(grunt) {
       options: {
         map: true,
         processors: [
-          require('precss')(),
-          require('lost')(),
+          require('postcss-use')({ modules: ['precss', 'lost', 'cssnext']})
           /*,
             require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})*/
 
