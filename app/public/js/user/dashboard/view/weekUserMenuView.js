@@ -8,12 +8,12 @@ define(function(require, exports, module) {
     module.exports = Marionette.CompositeView.extend({
         template:WeekUserMenuView,
         tagName: 'li',
-        className: 'orders',
+        className: 'b-week-orders-list__list-point',
         childViewContainer: '#dish-list',
         childView: DayUserMenuView,
         childViewOptions: function () {
             if (this.collection.first().get('name') === '<EMPTY>'){
-                return { collection: this.collection, tagName: 'div', className: 'empty'};
+                return { collection: this.collection, tagName: 'div', className: 'b-user-day-menu-layer__list_empty'};
             }
             else{return { collection: this.collection };}
         },
