@@ -22,8 +22,8 @@ define(function(require, exports, module){
             'dish:added': 'dishAddedM'
         },
         dishClickedM: function (evt,model) {
-            this.model = model;
-            this.render();
+            //this.model = model;
+            //this.render();
         },
         dishAddedM: function (evt, model) {
             this.trigger('dish:added', model);

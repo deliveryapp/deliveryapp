@@ -1,23 +1,26 @@
-$image_width: 100px;
+$image_width: 50px;
+
 @component dish {
   display: inline-block;
-  border: solid 1px #ffffff;
+  border: solid 1px #000;
   width:100%;
-  min-height:150px;
-  margin: 10px 0 0 10px;
+  min-height:80px;
+  margin: 10px 0 0 0;
   vertical-align: middle;
-  color: #ffffff;
-
-  /*position: relative;*/
-/*  @modifier modifierName {
-    color: yellow;
-  }*/
+  color: #000;
+  background-color: #fff;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  font-family: Roboto;
+  font-weight: 500;
 
   @descendent image {
-
+    lost-column: 1/12;
     display:inline-block;
     /*lost-column: 1/8;*/
     min-height:100%;
+    position: relative;
 
     @modifier padding {
       padding-top: 10px;
@@ -27,32 +30,54 @@ $image_width: 100px;
 
     @modifier picture {
       width: $image_width;
-      border-radius: 100px;
-      -webkit-border-radius: 100px;
-      -moz-border-radius: 100px;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      position: absolute;
+      top: 15px; left: 15px; bottom: 0; right: 0;
     }
   }
 
+
+}
+
+@component dish-info {
+  lost-column: 5/6;
+  display:inline-block;
+  vertical-align: middle;
   @descendent name {
-    display:inline-block;
-    min-height:100px;
-    width: 40%;
+    lost-column: 9/12;
+    /*display:inline-block;*/
+    min-height:80px;
+    font-size:18px;
+    padding-top: 15px;
   }
 
   @descendent weight {
-    display:inline-block;
+    lost-column: 1/12;
+    text-align: center;
+    padding-top: 30px;
+    /*display:inline-block;*/
+
   }
 
   @descendent price {
-    display:inline-block;
+    lost-column: 1/12;
+    text-align: center;
+    padding-top: 30px;
+    /*display:inline-block;*/
   }
 
   @descendent button {
-    display:inline-block;
+    lost-column: 1/12;
+    text-align: center;
+    padding-top: 18px;
+    /*display:inline-block;*/
   }
 
   @descendent description {
-    display:inline-block;
+    font-weight: 400;
+    font-size:14px;
   }
 }
 
