@@ -1,6 +1,15 @@
-@use precss;
+/*@use precss;
+@use postcss-bem {
+    separators: {
+        namespace: "b_",
+        descendent: "__",
+        modifier: "_"
+    }
+};
+@use postcss-nested;
 @use lost;
-@use cssnext;
+@use cssnext;*/
+
 
 @import '_base.css';
 @import '_header.css';

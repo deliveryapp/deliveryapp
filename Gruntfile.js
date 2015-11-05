@@ -111,7 +111,22 @@ module.exports = function(grunt) {
       options: {
         map: true,
         processors: [
-          require('postcss-use')({ modules: ['precss', 'lost', 'cssnext']})
+          require('precss')(),
+          require('lost')(),
+          require('cssnext')(),
+          require('postcss-nested')(),
+          require('postcss-bem')({
+            defaultNamespace: 'b', // default namespace to use, none by default
+            style: 'bem', // suit or bem, suit by default,
+            separators: {
+              namespace: "_",
+              descendent: "__",
+              modifier: "_"
+            }
+          })
+          /*require('postcss-nested')(),
+           require('postcss-use')({ modules: ['precss', 'lost', 'cssnext','postcss-bem','postcss-nested']})*/
+
           /*,
             require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})*/
 
