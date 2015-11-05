@@ -5,7 +5,7 @@ define(function(require, exports, module){
 
     module.exports = Marionette.ItemView.extend({
         tagName: 'div',
-        className: 'selected-dish',
+        className: 'b-dish',
         template: template,
         events: {
             'click':'dishClicked',
