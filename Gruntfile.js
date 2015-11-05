@@ -30,23 +30,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-
-    postcss: {
-
-      options: {
-        processors: [
-          require('precss')(),
-          require('autoprefixer')(),
-          require('cssnext')()
-        ]
-      },
-      dist: {
-        src: 'css/styletest.css',
-        dest: 'css/styletest2.css'
-      }
-
-    },
-
     cssmin: {
       options: {
         shorthandCompacting: false,
@@ -130,7 +113,7 @@ module.exports = function(grunt) {
            require('postcss-use')({ modules: ['precss', 'lost', 'cssnext','postcss-bem','postcss-nested']})*/
 
           /*,
-            require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})*/
+           require('postcss-use')({ modules: ['precss', 'autoprefixer', 'cssnext']})*/
 
         ]
       }
@@ -152,5 +135,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-postcss');
 
-  grunt.registerTask('build', ['copy','sass','concat','watch','postcss']);
+  grunt.registerTask('build', ['copy','sass','concat','watch']);
 };
