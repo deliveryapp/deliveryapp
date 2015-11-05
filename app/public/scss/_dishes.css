@@ -1,32 +1,59 @@
-@component ComponentName {
-  color: cyan;
-
-  @modifier modifierName {
-    color: yellow;
-  }
-
-  @descendent descendentName {
-    color: navy;
-  }
-}
-
-.b-dish {
-  display:inline-block;
+$image_width: 100px;
+@component dish {
+  display: inline-block;
   border: solid 1px #ffffff;
   width:100%;
-  height:150px;
+  min-height:150px;
   margin: 10px 0 0 10px;
   vertical-align: middle;
   color: #ffffff;
+
   /*position: relative;*/
-}
+/*  @modifier modifierName {
+    color: yellow;
+  }*/
 
-.b-dish__image {
+  @descendent image {
 
-}
+    display:inline-block;
+    /*lost-column: 1/8;*/
+    min-height:100%;
 
-.b-dish__image_picture {
+    @modifier padding {
+      padding-top: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
 
+    @modifier picture {
+      width: $image_width;
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+    }
+  }
+
+  @descendent name {
+    display:inline-block;
+    min-height:100px;
+    width: 40%;
+  }
+
+  @descendent weight {
+    display:inline-block;
+  }
+
+  @descendent price {
+    display:inline-block;
+  }
+
+  @descendent button {
+    display:inline-block;
+  }
+
+  @descendent description {
+    display:inline-block;
+  }
 }
 
 .selected-dish {
