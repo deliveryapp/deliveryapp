@@ -4,7 +4,7 @@ define(function(require, exports, module) {
     
     module.exports = Marionette.ItemView.extend({
         tagName: 'li',
-        className: 'userInfo',
+        className: 'b-all-user__one-person',
         template: UserView,
         events: {
             'click .user-remove': 'userRemoved'

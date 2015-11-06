@@ -8,14 +8,6 @@
   background-color: #3f51b5;
 }
 
-/*
-.empty{
-  text-align: center;
-  margin: 70px 0 0 -30px;
-  padding: 0;
-}*/
-
-
 
 @component week-orders-list{
   padding-top: 100px;

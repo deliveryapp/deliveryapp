@@ -1,34 +1,53 @@
-    <div class="row mb0">
-        <div class="col offset-m1 m10 s12">
-            <div class="row s12 card indigo ">
-                <div class="user-list-wrapper">
-                <div class="row">
-                    <div class="col s2">
-                        <img class="user-avatar" src="{{image_path}}" alt=""/>
-                    </div>
-                    <div class="col s4">
-                        <ul>
-                            <li><span class="user-list-color-gold">FirstName:</span> {{firstName}}</li>
-                            <li><span class="user-list-color-gold">LastName:</span> {{lastName}}</li>
-                            <li><span class="user-list-color-gold">Role:</span> {{Role}}</li>
-                        </ul>
-                    </div>
-                    <div class="col s5">
-                        <ul>
-                            <li><span class="user-list-color-gold">id:</span> {{_id}}</li>
-                            <li><span class="user-list-color-gold">Password:</span> {{password}}</li>
-                            <li><span class="user-list-color-gold">Mail:</span> {{mail}}</li>
-                        </ul>
-                    </div>
-                    <div class="col s1">
-                        <a class="btn-floating btn-small red user-btn user-remove"><i class="material-icons">delete</i></a>
-                        <a class="btn-floating btn-small grey user-btn"><i class="material-icons">settings_backup_restore</i></a>
+    <div class="b-personal-info">
+        <div class="b-personal-info__foto">
+            <img class="b-personal-info__foto_size" src="{{image_path}}" alt=""/>
+        </div>
+        <div class="b-personal-info__name">
+            <div class="b-list-info">
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">FirstName:</div>
+                        <div class="b-list-element__text">{{firstName}}</div>
                     </div>
                 </div>
-
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">LastName:</div>
+                        <div class="b-list-element__text">{{lastName}}</div>
+                    </div>
+                </div>
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">Role:</div>
+                        <div class="b-list-element__text">{{Role}}</div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="b-personal-info__mail">
+            <div class="b-list-info">
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">Mail:</div>
+                        <div class="b-list-element__text">{{mail}}</div>
+                    </div>
+                </div>
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">id:</div>
+                        <div class="b-list-element__text">{{_id}}</div>
+                    </div>
+                </div>
+                <div class="b-list-info__element">
+                    <div class="b-list-element">
+                        <div class="b-list-element__title">Password:</div>
+                        <div class="b-list-element__text">{{password}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="b-personal-info__buttons">
+            <a class="btn-floating btn-small red user-btn user-remove"><i class="material-icons">delete</i></a>
+            <a class="btn-floating btn-small grey user-btn"><i class="material-icons">settings_backup_restore</i></a>
+        </div>
     </div>
-</div>
-
-
