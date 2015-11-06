@@ -6,7 +6,7 @@ define(function(require, exports, module){
 
     module.exports = Marionette.CompositeView.extend({
         tagName: 'div',
-        className: 'col s12',
+        className: 'b-card__dishes',
         childView: DishCardView,
         template: template,
         nameFilterValue: '',

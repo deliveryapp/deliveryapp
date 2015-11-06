@@ -4,7 +4,7 @@ define(function (require, exports, module) {
 
     module.exports =  Marionette.ItemView.extend({
         tagName: 'a',
-        className : 'btn-small btn col s2 orange darken-1',
+        className : 'b-button-tab',
         id: function () {
             return this.model.get('day');
         },
@@ -12,12 +12,13 @@ define(function (require, exports, module) {
         template: Tmpl,
 
         events: {
-            "click": "pressDay"
+            'click': 'pressDay'
         },
 
         pressDay: function () {
-            this.model.set("className", "active");
-            this.trigger("choosing", this.model.get('status'));
+            this.model.set('className', 'active');
+            //this.model.set("className", "b-button-tab_selected");
+            this.trigger('choosing', this.model.get('status'));
         }
     });
 });

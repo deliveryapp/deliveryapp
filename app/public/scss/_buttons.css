@@ -101,13 +101,32 @@
     background-color: color(#cccccc lightness(40%));
   }
   &:focus {
-    outline:none;
+    outline: none;
   }
   @descendent icon {
-    padding-top:3px;
+    padding-top: 3px;
 
   }
   @modifier circle {
     border-radius: 40px;
+  }
+}
+
+@component button-tab {
+  lost-column: 1/5 5 0px;
+  background-color: orange;
+  height: 36px;
+  cursor: pointer;
+/*  border: solid 1px color(#cccccc lightness(40%));
+  border-radius: 2px;*/
+
+  @modifier selected {
+    background-color: color(#cccccc lightness(40%));
+  }
+
+  @descendent text {
+    padding-top: 8px;
+    font-size: 16px;
+    font-weight: 500;
   }
 }

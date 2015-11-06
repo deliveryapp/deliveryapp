@@ -2,22 +2,110 @@
   display: inline-block;
   vertical-align: top;
   padding-bottom: 10px;
-  width: 100%;
+  width: 98%;
+  padding-top: 20px;
   @descendent filter {
 
   }
 }
 
-@component filters-filter {
+@component field-text {
   @descendent input {
     display: inline-block;
+    float: left;
+    margin-left: 15px;
     height: 40px;
     width: 338px;
     padding: 0 15px 0 15px;
     border: solid 1px #d4d4d4;
     font-family: Roboto;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
+    color: #636363;
+    &::-moz-placeholder {
+      color: red;
+    }
+
+    &:-ms-input-placeholder {
+      color: red;
+    }
+
+    &:hover {
+      /*background-color: lighten(#fff, 5%);*/
+    }
+
+    &:active {
+      /*   background-color: darken(#0074ad, 5%);*/
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-input-placeholder {
+      color: #636363;
+    }
+
+    &:-moz-placeholder {
+      color: #636363;
+    }
+
+    &::-moz-placeholder {
+      color: #636363;
+    }
+  }
+}
+
+@component field-select {
+  margin-right: 15px;
+  float: right;
+  display: inline-block;
+  height: 40px;
+  width: 338px;
+  overflow: hidden;
+  background: url(../images/dropdown_arrow.png) no-repeat right #fff;
+  background-position: 305px 50%;
+
+  @descendent input {
+    display: block !important;
+    background: transparent;
+    height: 40px;
+    width: 338px;
+    padding: 0 15px 0 15px;
+    border: solid 1px #d4d4d4;
+    font-family: Roboto;
+    font-size: 13px;
+    color: #636363;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    &::-ms-expand {
+      display: none;
+    };
+    &:hover {
+      /*background-color: lighten(#fff, 5%);*/
+    }
+    &:active {
+      /*   background-color: darken(#0074ad, 5%);*/
+    }
+    &:focus {
+      outline:none;
+    }
+  }
+}
+
+@component field-text-area {
+  @descendent input {
+    display: inline-block;
+    float: left;
+    margin-left: 15px;
+    border: solid 1px #d4d4d4;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 14px;
     color: #636363;
     &::-moz-placeholder {
       color: red;
@@ -51,49 +139,5 @@
       color: #636363;
     }
 
-    transition: all .3s;
   }
-  @descendent select {
-    display: block !important;
-    background: transparent;
-    height: 40px;
-    width: 338px;
-    padding: 0 15px 0 15px;
-    border: solid 1px #d4d4d4;
-    font-family: Roboto;
-    font-size: 13px;
-    color: #636363;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    &::-ms-expand {
-      display: none;
-    };
-    &:hover {
-      /*background-color: lighten(#fff, 5%);*/
-    }
-    &:active {
-      /*   background-color: darken(#0074ad, 5%);*/
-    }
-    &:focus {
-      outline:none;
-    }
-  }
-}
-
-.b-filters-filter__select {
-
-}
-
-.b-select_arr {
-  display: inline-block;
-  height: 40px;
-  width: 338px;
-  overflow: hidden;
-  background: url(../images/dropdown_arrow.png) no-repeat right #fff;
-  background-position: 305px 50%;
-  /*  background-position: 40px 338px;*/
 }
