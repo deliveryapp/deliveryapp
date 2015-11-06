@@ -5,7 +5,8 @@ define(function (require, exports, module) {
     module.exports = Marionette.LayoutView.extend({
         regions: {
             tabs: '#tabs',
-            content: '#dishes-list'
+            content: '#dishes-list',
+            dayMenu: '#user-day-menu'
         },
         template: template,
 

@@ -11,8 +11,25 @@
   }
 }
 
-@component card-main {
+@component user-menu-card {
+  width: 30%;
+  background-color: #3f51b5;
+  display: inline-block;
+  float: right;
+  position: fixed;
+  /*border: solid 1px color(#cccccc lightness(40%));*/
+  /*padding-left: 10px;
+  padding-right: 10px;*/
 
+  @descendent dishes {
+    padding-left: 1.5%;
+    padding-bottom: 1.5%;
+  }
+}
+
+@component card-main {
+  float: left;
+  width: 70%;
   background-color: #3f51b5;
   border: solid 1px color(#cccccc lightness(40%));
   /*padding-left: 10px;

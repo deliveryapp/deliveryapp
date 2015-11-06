@@ -12,10 +12,9 @@
 @component field-text {
   @descendent input {
     display: inline-block;
-    float: left;
     margin-left: 15px;
     height: 40px;
-    width: 338px;
+    width: 250px;
     padding: 0 15px 0 15px;
     border: solid 1px #d4d4d4;
     font-family: Roboto;
@@ -53,24 +52,30 @@
     &::-moz-placeholder {
       color: #636363;
     }
+    @modifier left {
+      float: left;
+    }
   }
 }
 
 @component field-select {
   margin-right: 15px;
-  float: right;
   display: inline-block;
   height: 40px;
-  width: 338px;
+  width: 250px;
   overflow: hidden;
   background: url(../images/dropdown_arrow.png) no-repeat right #fff;
-  background-position: 305px 50%;
+  background-position: 220px 50%;
+
+  @modifier right {
+    float: right;
+  }
 
   @descendent input {
     display: block !important;
     background: transparent;
     height: 40px;
-    width: 338px;
+    width: 250px;
     padding: 0 15px 0 15px;
     border: solid 1px #d4d4d4;
     font-family: Roboto;
@@ -94,6 +99,7 @@
     &:focus {
       outline:none;
     }
+
   }
 }
 

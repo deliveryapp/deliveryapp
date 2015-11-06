@@ -45,7 +45,7 @@ $image_width: 50px;
   display:inline-flex;
   align-items: center;
   @descendent name {
-    lost-column: 9/12;
+    lost-column: 8/12;
     display:inline-flex;
     align-items: center;
     min-height:80px;
@@ -68,7 +68,7 @@ $image_width: 50px;
   }
 
   @descendent button {
-    lost-column: 1/12;
+    lost-column: 2/12;
     /*display:inline-block;*/
   }
 
