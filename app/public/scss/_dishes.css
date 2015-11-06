@@ -37,26 +37,26 @@ $image_width: 50px;
       top: 15px; left: 15px; bottom: 0; right: 0;
     }
   }
-
-
 }
 
 @component dish-info {
   lost-column: 5/6;
-  display:inline-block;
-  vertical-align: middle;
+
+  display:inline-flex;
+  align-items: center;
   @descendent name {
     lost-column: 9/12;
-    /*display:inline-block;*/
+    display:inline-flex;
+    align-items: center;
     min-height:80px;
     font-size:18px;
-    padding-top: 15px;
   }
 
   @descendent weight {
     lost-column: 1/12;
+    /*display:inline-flex;
+    align-self: center;*/
     text-align: center;
-    padding-top: 30px;
     /*display:inline-block;*/
 
   }
@@ -64,20 +64,18 @@ $image_width: 50px;
   @descendent price {
     lost-column: 1/12;
     text-align: center;
-    padding-top: 30px;
     /*display:inline-block;*/
   }
 
   @descendent button {
     lost-column: 1/12;
-    text-align: center;
-    padding-top: 18px;
     /*display:inline-block;*/
   }
 
   @descendent description {
     font-weight: 400;
     font-size:14px;
+    display:block;
   }
 }
 

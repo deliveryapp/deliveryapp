@@ -94,9 +94,8 @@ module.exports = function(grunt) {
       options: {
         map: true,
         processors: [
+
           require('precss')(),
-            require('postcss-css-variables')(),
-          require('postcss-nested')(),
           require('postcss-bem')({
             defaultNamespace: 'b', // default namespace to use, none by default
             style: 'bem', // suit or bem, suit by default,
@@ -107,6 +106,11 @@ module.exports = function(grunt) {
             }
           }),
           require('lost')(),
+            require('postcss-css-variables')(),
+          require('postcss-color-function')(),
+          require('postcss-nested')(),
+
+
           require('cssnext')()
 
           /*require('postcss-nested')(),

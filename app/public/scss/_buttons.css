@@ -1,0 +1,113 @@
+@component button {
+  cursor: pointer;
+  height: 34px;
+  width: 100%;
+  border: solid 1px #000;
+  border-radius: 2px;
+  font-family: Roboto;
+  /*font-size: 16px;*/
+  font-weight: 500;
+  color: #000;
+  background-color: #cccccc;
+  &:hover {
+    background-color: color(#cccccc a(-15%));;
+  }
+  &:active {
+    background-color: color(#cccccc lightness(40%));
+  }
+  &:focus {
+    outline:none;
+  }
+  @modifier green {
+    height: 34px;
+    width: 100%;
+    background-color: #8cc248;
+    border: solid 1px #7db23a;
+    &:hover{
+      background-color: color(#8cc248 a(-15%));;
+    }
+    &:active {
+      background-color: color(#8cc248 lightness(40%));
+    }
+    &:focus {
+      outline:none;
+    }
+  }
+  @modifier circle {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+  }
+}
+
+@component button-icon-text {
+  cursor: pointer;
+  height: 36px;
+  position: relative;
+  width: 250px;
+  border: solid 1px #000;
+  border-radius: 2px;
+  font-family: Roboto;
+  padding-left: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #cccccc;
+  &:hover {
+    background-color: color(#cccccc a(-15%));;
+  }
+  &:active {
+    background-color: color(#cccccc lightness(40%));
+  }
+  &:focus {
+    outline:none;
+  }
+  @modifier main-color{
+    background-color: #3f51b5;;
+    &:hover {
+      background-color: color(#3f51b5 a(-15%));;
+    }
+    &:active {
+      background-color: color(#3f51b5 lightness(40%));
+    }
+  }
+  @descendent text {
+    height: 24px;
+  }
+  @descendent icon {
+    position: absolute;
+    @modifier left{
+      left: 25px;
+      top: 5px;
+      color: #fff;
+    }
+  }
+}
+
+@component button-icon {
+  width: 40px;
+  height: 40px;
+  border: solid 1px #000;
+
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #cccccc;
+  &:hover {
+    background-color: color(#cccccc a(-15%));;
+  }
+  &:active {
+    background-color: color(#cccccc lightness(40%));
+  }
+  &:focus {
+    outline:none;
+  }
+  @descendent icon {
+    padding-top:3px;
+
+  }
+  @modifier circle {
+    border-radius: 40px;
+  }
+}
