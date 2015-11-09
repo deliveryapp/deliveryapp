@@ -8,6 +8,10 @@ var constants = require('./config').constants,
 exports.getNearestMonday = function (date) {
     return moment(date, constants.DATE_PARSE_FORMAT).startOf('isoWeek').toDate();
 };
+
+exports.getNextMonday = function (date) {
+    return moment(date, constants.DATE_PARSE_FORMAT).startOf('isoWeek').add(7, 'days').toDate();
+};
 /**
  *
  * @param date
@@ -27,7 +31,7 @@ exports.isLaterThanToday = function (date) {
     var today = moment().valueOf();
     date = moment(date).valueOf();
 
-    return today > date;
+    return date > today;
 };
 
 exports.convertToDate = function (date) {

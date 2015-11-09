@@ -54,15 +54,17 @@
 }
 
 
+
 @component user-list{
   width: 1200px;
-  height: 100%;
   text-align: center;
   background-color: #464646;
   margin: auto;
   margin-top: 60px;
   border-radius:5px;
   padding: 10px 0;
+  border: 1px solid black;
+  margin-bottom: 30px;
 
   @descendent title{
     font-size: 28px;
