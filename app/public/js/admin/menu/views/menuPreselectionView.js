@@ -5,8 +5,8 @@ define(function(require, exports, module) {
     module.exports = Marionette.LayoutView.extend({
         template: template,
         regions: {
-            'selectedUserMenu': '#selected-user-menu',
-            'dayMenu': '#day-menu'
+            //'selectedUserMenu': '#selected-user-menu',
+            'dayMenu': '.js-card-main'
         }
     });
 

@@ -77,13 +77,13 @@ define(function (require, exports, module) {
 
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
-
-
                 this.menuCard = new MenuDaysController({collection: this.daysMenuCollection});
 
-                var menu = this.menuCard.getUserItem(this.userDaysMenu);
+                this.generatedMenu = this.menuCard.getUserItem(this.userDaysMenu);
+                //this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+                this.menuPreselectionView.showChildView('dayMenu', this.generatedMenu);
 
-                this.menuPreselectionView.showChildView('dayMenu', menu);
+                this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
                 this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
                 this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
             }.bind(this));
@@ -117,6 +117,8 @@ define(function (require, exports, module) {
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(model);
+            //this.generatedMenu.render();
+            //this.dayMenuSelectionView.render();
         },
 
         tabChanged: function (date) {

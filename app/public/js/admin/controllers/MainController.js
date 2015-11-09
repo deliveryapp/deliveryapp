@@ -78,6 +78,7 @@ define(function(require, exports, module){
                 var menu = this.menuCard.getAdminItem(this.daysMenuCollection);
 
                 this.menuPreselectionView.showChildView('dayMenu', menu);
+                this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
                 this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
                 this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
             }.bind(this));

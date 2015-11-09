@@ -32,22 +32,30 @@ define(function (require, exports, module) {
 
             });
             var cardView = this.getItem();
+
             this.listenTo(this.cardView, 'days:swap', this.tabsStatus);
             return cardView;
         },
 
         getAdminItem: function (daysMenuCollection) {
+            this.daysMenuCollection = daysMenuCollection;
             this.collection = this.getOption('collection');
+
 
             this.weekDays = daysMenuCollection.filter(function (item) {
                 return item.get('day');
             });
+            this.dayDishesCollection = new DishesCollection(daysMenuCollection.at(0).get('dishes'));
+            this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
             this.dishesCollection = new VirtualCollection(this.collection, {});
+
             var cardView = this.getItem();
             this.listenTo(this.cardView, 'days:swap', this.tabsStatusAdmin);
             return cardView;
         },
+
+
 
         getItem: function () {
             this.tabsView = new TabsView({
@@ -98,6 +106,10 @@ define(function (require, exports, module) {
             }
         },
 
+       /* renderUserMenu: function () {
+            this.dayMenuSelectionView.render();
+        },
+*/
         dishAdded: function (model) {
             this.trigger('dish:added', model);
         },
