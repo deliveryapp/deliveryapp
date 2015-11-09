@@ -1,27 +1,26 @@
+<div class="b-user-list b-user-list_sign-in">
 
-<div class="login-wrapper">
-    <form action="" method="post">
-        <div class="card indigo card-padding login">
-            <span class="input-title login-color-white">Sign in</span>
+    <div class="b-user-list__title">Sign in</div>
+    <form method="post" class="b-user-list__list">
 
-            <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="" id="id-remove" type="text" class="validate" required pattern="^[A-Za-z .]{3,}$" title="ONLY TEXT AND ."><span class="login-mail">@engagepoint.com</span>
-                    <label class="active" for="id-remove">LOGIN:</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-
-                    <input placeholder="" id="id-remove" type="password" class="validate" required pattern="^[A-Za-z 0-9]{3,}$ " title="ONLY TEXT AND NUMBERS">
-
-                    <label class="active" for="id-remove">PASSWORD:</label>
-                </div>
-            </div>
-
-            <input type="submit" class="btn" value="LOGIN" id="submit-remove"/>
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Login" id="login" required pattern="^[A-Za-z .]{3,}$" title="ONLY TEXT AND .">
         </div>
+
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="password" placeholder="Password" id="password" required pattern="^[A-Za-z 0-9]{3,}$ " title="ONLY TEXT AND NUMBERS">
+        </div>
+
+
+        <button type="submit" id="submit-login" class="b-button-icon-text b-button-icon-text_main-color">
+            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">person_pin</i>
+            <span class="b-button-icon-text__text">Login</span>
+        </button>
+
+
     </form>
+
 </div>
+
 
 

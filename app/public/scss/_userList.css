@@ -1,9 +1,3 @@
-.user-btn{
- margin-bottom: 3px;
-
-}
-
-
 @component list-element {
   display:inline-block;
 
@@ -18,7 +12,6 @@
     float:left;
   }
 }
-
 
 
 @component personal-info{
@@ -80,6 +73,10 @@
   @descendent list{
 
     /*@modifier {}*/
+  }
+  @modifier sign-in{
+    width: 400px;
+    margin-top: 235px;
   }
 
 }

@@ -41,7 +41,7 @@
       outline: none;
     }
 
-    &::-webkit-input-placeholder {
+    &:-webkit-input-placeholder {
       color: #636363;
     }
 
@@ -49,11 +49,14 @@
       color: #636363;
     }
 
-    &::-moz-placeholder {
+    &:-moz-placeholder {
       color: #636363;
     }
     @modifier left {
       float: left;
+    }
+    @modifier margin {
+      margin: 10px 0 10px 0;
     }
   }
 }
@@ -106,14 +109,17 @@
 @component field-text-area {
   @descendent input {
     display: inline-block;
-    float: left;
+    width:500px;
+    padding: 10px 0 0 15px;
+    margin: 10px 0 10px 0;
+    height: 200px;
     margin-left: 15px;
     border: solid 1px #d4d4d4;
     font-family: Roboto;
     font-weight: 500;
     font-size: 14px;
     color: #636363;
-    &::-moz-placeholder {
+    &:-moz-placeholder {
       color: red;
     }
 
@@ -133,7 +139,7 @@
       outline: none;
     }
 
-    &::-webkit-input-placeholder {
+    &:-webkit-input-placeholder {
       color: #636363;
     }
 
@@ -141,8 +147,12 @@
       color: #636363;
     }
 
-    &::-moz-placeholder {
+    &:-moz-placeholder {
       color: #636363;
+    }
+
+    @modifier left {
+      float: left;
     }
 
   }

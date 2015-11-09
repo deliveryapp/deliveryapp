@@ -1,97 +1,67 @@
-<div class="b-addDish-wrapper">
+<div class="b-user-list">
 
-    <div class="row">
-        <div class="col offset-m2 m8 s12">
-            <div class="row s10 card indigo ">
+    <div class="b-user-list__title">Add new dish</div>
+    <form method="post" action="1.html" class="b-user-list__list">
 
-                <span class="input-title">Add new dish</span>
-                <div class="forms">
-                    <form action="">
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="" id="name" type="text" class="validate">
-                                <label class="active" for="name">Name:</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <textarea id="description" class="materialize-textarea"></textarea>
-                                        <label for="description" class="label-textarea">Description:</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <input type="submit" class="btn" id="submit"/>
-                    </form>
-
-                </div>
-            </div>
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Dish name" id="name">
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col offset-m2 m8 s12">
-            <div class="row s10 card indigo ">
-
-                <span class="input-title">Edit Dish</span>
-                <div class="forms">
-                    <form action="">
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="" id="id-edit" type="text" class="validate">
-                                <label class="active" for="id-edit">ID:</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="" id="name-edit" type="text" class="validate">
-                                <label class="active" for="name-edit">Name:</label>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <textarea id="description-edit" class="materialize-textarea"></textarea>
-                                        <label for="description-edit" class="label-textarea">Description:</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <input type="submit" class="btn" id="submit-edit"/>
-                    </form>
-
-                </div>
-
-            </div>
+        <div class="b-field-text-area">
+            <textarea class="b-field-text-area__input"   placeholder="Description" id="description"></textarea>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col offset-m2 m8 s12">
-            <div class="row s10 card indigo ">
 
-                <span class="input-title">Delete Dish</span>
+        <button type="submit" id="submit" class="b-button-icon-text b-button-icon-text_main-color">
+            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">games</i>
+            <span class="b-button-icon-text__text">Add</span>
+        </button>
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="" id="id-remove" type="text" class="validate">
-                        <label class="active" for="id-remove">ID:</label>
-                    </div>
-                </div>
-
-                <input type="submit" class="btn red" value="Delete" id="submit-remove"/>
-
-            </div>
-        </div>
-    </div>
+    </form>
 
 </div>
+<div class="b-user-list">
+
+    <div class="b-user-list__title">Edit Dish</div>
+    <form method="post" class="b-user-list__list">
+
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Dish ID" id="id-edit">
+        </div>
+
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Dish name" id="name-edit">
+        </div>
+
+        <div class="b-field-text-area">
+            <textarea class="b-field-text-area__input"  placeholder="Description" id="description-edit"></textarea>
+        </div>
+
+
+        <button type="submit" id="submit-edit" class="b-button-icon-text b-button-icon-text_main-color">
+            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">replay</i>
+            <span class="b-button-icon-text__text">Edit</span>
+        </button>
+
+
+    </form>
+
+</div>
+<div class="b-user-list">
+
+    <div class="b-user-list__title">Delete Dish</div>
+    <form method="post" class="b-user-list__list">
+        <div class="b-field-text">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Dish ID" id="id-remove">
+        </div>
+
+        <button type="submit" id="submit-remove" class="b-button-icon-text b-button-icon_red b-button-icon-text_main-color">
+            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">delete</i>
+            <span class="b-button-icon-text__text">Delete</span>
+        </button>
+
+
+    </form>
+
+</div>
+

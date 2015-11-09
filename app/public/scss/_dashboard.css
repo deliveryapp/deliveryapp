@@ -1,14 +1,3 @@
-.buttons{
-  text-align: center;
-  margin-top: 20px;
-}
-.btn{
-  width: 250px;
-  margin: 5px;
-  background-color: #3f51b5;
-}
-
-
 @component week-orders-list{
   padding-top: 100px;
   display: inline-flex;
@@ -51,3 +40,12 @@
 }
 
 
+@component dashboard-nav {
+  text-align: center;
+  margin-top: 70px;
+
+  @descendent button {
+    display: inline-block;
+    margin: 0 15px 15px 0;
+  }
+}
