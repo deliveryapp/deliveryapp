@@ -1,19 +1,44 @@
 var mongoose = require('mongoose'),
     Weeks = mongoose.model('Weeks'),
     constants = require('../config').constants,
-    utils = require('../util');
+    utils = require('../util'),
+    moment = require('moment'),
+    _ = require('lodash');
 
 exports.getByDate = function (req, res) {
-    Weeks.findOne({'startDate': utils.convertToDate(req.params.startDate)}, function (err, weeks) {
-        if (err) return res.send(err);
+    var predefinedStartDateStrategies = {
+        'current': function () {
+            var currentNearestMonday = utils.getNearestMonday(moment(new Date()).format(constants.DATE_PARSE_FORMAT));
 
-        res.send(weeks);
-    });
+            Weeks.findOne({startDate: currentNearestMonday}, function (err, w) {
+                if (err) return res.status(400).send(err);
+                res.send(w);
+            });
+        },
+        'next': function () {
+            var currentNearestMonday = utils.getNextMonday(moment(new Date()).format(constants.DATE_PARSE_FORMAT));
+
+            Weeks.findOne({startDate: currentNearestMonday}, function (err, w) {
+                if (err) return res.status(400).send(err);
+                res.send(w);
+            });
+        }
+    };
+
+    if (!_.isUndefined(predefinedStartDateStrategies[req.params.startDate])) {
+        predefinedStartDateStrategies[req.params.startDate]();
+    } else {
+        Weeks.findOne({'startDate': utils.convertToDate(req.params.startDate)}, function (err, weeks) {
+            if (err) return res.status(400).send(err);
+
+            res.send(weeks);
+        });
+    }
 };
 
 exports.get = function (req, res) {
     Weeks.find({}, function (err, weeks) {
-        if (err) return res.send(err);
+        if (err) return res.status(400).send(err);
 
         res.send(weeks);
     });
@@ -37,17 +62,10 @@ exports.post = function (req, res) {
         days: utils.getWeekDaysByMonday(monday)
     });
     week.save(function (err) {
-        if (err) return res.send(err);
+        if (err) return res.status(400).send(err);
         Weeks.findById(week, function (err, w) {
-            if (err) return res.status(403).send(err);
+            if (err) return res.status(400).send(err);
             res.send(w);
         });
     });
 };
-
-//exports.put = function (req, res) {
-//    Weeks.findOne({'startDate': utils.convertToDate(req.params.startDate)}, function (err, week) {
-//        if (err) return res.send(err);
-//
-//    });
-//};

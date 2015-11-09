@@ -5,10 +5,36 @@
     <br/>
     <input type="text" id="name"/>
     <br/>
+
+    <label for="img_path">Image path:</label>
+    <br/>
+    <input type="text" id="img_path"/>
+    <br/>
+
+    <label for="price">Price:</label>
+    <br/>
+    <input type="text" id="price"/>
+    <br/>
+
+    <label for="weight">Weight:</label>
+    <br/>
+    <input type="text" id="weight"/>
+    <br/>
+
     <label for="description">Description</label>
     <br/>
     <textarea id="description"></textarea>
     <br/>
+
+    <label for="category">Category</label>
+    <br/>
+    <select id="category">
+        <option value="soup">Soup</option>
+        <option value="shit">Shit</option>
+        <option value="pizza">Pizza</option>
+    </select>
+    <br/>
+
     <input type="submit" id="submit"/>
 </div>
 
@@ -47,7 +73,11 @@
         $('#submit').on('click', function () {
             var model = {
                 name: $('#name').val(),
-                description: $('#description').val()
+                description: $('#description').val(),
+                image_path: $('#img_path').val(),
+                weight: $('#weight').val(),
+                price: $('#price').val(),
+                category: $('#category').val()
             };
             $.ajax({
                 method: 'POST',

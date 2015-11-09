@@ -1,7 +1,9 @@
 var dishes = require('./controllers/dishes'),
     weeks = require('./controllers/weeks'),
     users = require('./controllers/users'),
+    orders = require('./controllers/orders'),
     auth = require('./controllers/auth'),
+    days = require('./controllers/days'),
     passport = require('passport');
 
 module.exports = function (app) {
@@ -53,7 +55,6 @@ module.exports = function (app) {
     app.get('/weeks/', weeks.get);
     app.get('/weeks/:startDate', weeks.getByDate);
     app.post('/weeks/:startDate', weeks.post);
-    //app.put('/weeks/:startDate', weeks.put);
 
     /**
      * Users REST
@@ -63,10 +64,22 @@ module.exports = function (app) {
     app.put('/users/:id', users.put);
     app.get('/users/current', users.current);
     app.post('/users/', users.post);
+    app.delete('/users/:id', users.delete);
 
     /**
      * Days REST
      */
+    app.delete('/days/:day', days.delete);
+    app.get('/days/', days.get);
+    app.post('/days/', days.post);
+    app.put('/days/', days.put);
+
+    /**
+     * Orders REST
+     */
+    app.get('/orders/:userId/', orders.get);
+    app.post('/orders/', orders.post);
+    app.put('/orders/', orders.put);
 
     /**
      * Auth

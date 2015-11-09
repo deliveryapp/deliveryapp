@@ -2,12 +2,14 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var OrdersSchema = new Schema({
+    userId: String,
     day: {
         type: Date,
         index: {
             unique: true
         }
     },
+    paymentStatus: Boolean,
     dishes: [{
         dish: {
             id: String
@@ -20,9 +22,12 @@ var OrdersSchema = new Schema({
     collection: 'orders'
 });
 
-/*OrdersSchema.path('startDate').validate(function (day) {
+OrdersSchema.path('day').validate(function (day) {
     return day.length;
-}, 'Day cannot be blank');*/
+}, 'Day cannot be blank');
 
+OrdersSchema.path('userId').validate(function (day) {
+    return day.length;
+}, 'User id cannot be blank');
 
 mongoose.model('Orders', OrdersSchema);
