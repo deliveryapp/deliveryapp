@@ -4,7 +4,13 @@ define(function(require, exports, module){
         MainController = require("MainController");
 
 
-    application = new Marionette.Application();
+    application = new Marionette.Application(
+    /*{
+        regions: {
+            'main': '#application'
+        }
+    }*/
+    );
 
     application.on('before:start', function(){
         new Router();
