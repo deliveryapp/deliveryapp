@@ -5,18 +5,14 @@ var mongoose = require('mongoose'),
 var UsersSchema = new Schema({
     firstName: String,
     lastName: String,
-    mail: {
-        type: String,
-        index: {
-            unique: true
-        }
-    },
-    role: String
+    mail: String,
+    role: String,
+    password: String
 }, {
     collection: 'users'
 });
 
-UsersSchema.plugin(passportLocalMongoose);
+UsersSchema.plugin(passportLocalMongoose, {usernameField: 'mail'});
 
 UsersSchema.path('mail').validate(function (mail) {
     return mail.length;

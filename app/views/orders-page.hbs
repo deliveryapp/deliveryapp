@@ -1,0 +1,76 @@
+<h1>Orders</h1>
+<h2>Place new order:</h2>
+<div class="form">
+    <label for="user">User Id:</label>
+    <br/>
+    <input type="text" id="user"/>
+    <br/>
+
+    <label for="day">Day</label>
+    <br/>
+    <input type="text" id="day"/>
+    <br/>
+
+    <label for="payment">Payment Status</label>
+    <br/>
+    <input type="checkbox" id="payment"/>
+    <br/>
+
+    <div>
+        <label for="dish1">Dish1</label>
+        <br/>
+        <textarea id="dish1"></textarea>
+        <br/>
+        <label for="quantity1">Quantity1</label>
+        <br/>
+        <input type="number" id="quantity1">
+        <br/>
+        <label for="dish2">Dish2</label>
+        <br/>
+        <textarea id="dish2"></textarea>
+        <br/>
+        <label for="quantity2">Quantity2</label>
+        <br/>
+        <input type="number" id="quantity2">
+        <br/>
+    </div>
+    <br/>
+    <input type="submit" id="submit"/>
+</div>
+
+
+<script>
+    /**
+     * Stub for REST API testing
+     */
+    $(document).ready(function () {
+        $('#submit').on('click', function () {
+            var model = {
+                userId: $('#user').val(),
+                day: $('#day').val(),
+                paymentStatus: ($('#payment').is(':checked')),
+                dishes: [
+                    {
+                        dish: {
+                            id: $('#dish1').val()
+                        },
+                        quantity: $('#quantity1').val()
+                    },
+                    {
+                        dish: {
+                            id: $('#dish2').val()
+                        },
+                        quantity: $('#quantity2').val()
+                    }
+                ]
+            };
+            $.ajax({
+                method: 'POST',
+                url: '/orders/',
+                data: model
+            }).done(function (response) {
+                console.log(response);
+            });
+        });
+    });
+</script>

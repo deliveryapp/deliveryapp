@@ -1,10 +1,9 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
-        MainAddDishView = require('hbs!addDish/view/templates/MainAddDishView');
+        headerTemplateHBS = require('hbs!view/templates/navigationMenuLayoutView');
 
     module.exports = Marionette.LayoutView.extend({
-        template: MainAddDishView
-
+        template: headerTemplateHBS
 
     });
 

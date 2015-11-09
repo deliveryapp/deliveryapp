@@ -21,10 +21,26 @@
 
 <div style="border: 1px solid greenyellow; padding: 20px;">
     <h1>Register account</h1>
-    <label for="register-username">Username</label>
+    <label for="register-firstName">First Name</label>
     <br/>
-    <input type="text" id="register-username"/>
+    <input type="text" id="register-firstName"/>
     <br/>
+
+    <label for="register-lastName">Last Name</label>
+    <br/>
+    <input type="text" id="register-lastName"/>
+    <br/>
+
+    <label for="register-email">Mail</label>
+    <br/>
+    <input type="text" id="register-email"/>
+    <br/>
+
+    <label for="register-role">Role</label>
+    <br/>
+    <input type="text" id="register-role"/>
+    <br/>
+
     <label for="register-password">Password</label>
     <br/>
     <input type="password" id="register-password"/>
@@ -64,16 +80,19 @@
             });
         });
         $('#register-submit').on('click', function () {
-            var user = {};
-            user.username = $('#register-username').val();
-            user.password = $('#register-password').val();
+            var user = {
+                firstName: $('#register-firstName').val(),
+                lastName: $('#register-lastName').val(),
+                mail: $('#register-email').val(),
+                role: $('#register-role').val(),
+                password: $('#register-password').val()
+            };
 
             $.ajax({
                 method: 'POST',
-                url: '/register',
+                url: '/users',
                 data: user
             }).done(function (response) {
-                //redirect
                 console.log(response);
             });
         });
