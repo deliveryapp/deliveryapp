@@ -8,7 +8,7 @@ define(function(require, exports, module){
 
         template: template,
         childView: UserDishCardView,
-        childViewContainer: '#user-day-menu',
+
         childEvents:{
             'dish:removed': 'dishClickedM'
         },

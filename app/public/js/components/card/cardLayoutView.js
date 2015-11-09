@@ -4,9 +4,9 @@ define(function (require, exports, module) {
 
     module.exports = Marionette.LayoutView.extend({
         regions: {
-            tabs: '#tabs',
-            content: '#dishes-list',
-            dayMenu: '#user-day-menu'
+            tabs: '.js-card-main__tabs',
+            content: '.js-card',
+            dayMenu: '.js-user-menu-card__menu'
         },
         template: template,
 
@@ -15,9 +15,9 @@ define(function (require, exports, module) {
 
             this.tabs.show(views.tabs);
             this.content.show(views.days);
+            this.dayMenu.show(views.dayMenu);
 
             this.listenTo(views.tabs, 'all', function (eventName, attr) {
-
                 this.trigger(eventName, attr);
             }.bind(this));
         }

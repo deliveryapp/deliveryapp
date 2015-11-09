@@ -6,7 +6,7 @@ define(function(require, exports, module){
 
     module.exports = DishCardView.extend({
         template: template,
-        className: 'selected-dish-user',
+        className: 'b-selected-dish',
         events: {
             'click .remove-user-dish': 'dishRemoved'
         },

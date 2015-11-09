@@ -19,7 +19,7 @@ define(function(require, exports, module){
         regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
-                'content': '#content'
+                'content': '.js-content'
 
             }
         }),
@@ -69,7 +69,7 @@ define(function(require, exports, module){
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
-                this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+                //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
 
 
@@ -109,7 +109,10 @@ define(function(require, exports, module){
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
-            this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+
+
+            this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
         },
 
         addDish: function(){

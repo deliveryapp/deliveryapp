@@ -4,7 +4,6 @@ define(function (require, exports, module) {
 
     module.exports =  Marionette.CollectionView.extend({
         tagName: 'ul',
-        className: 'center-align ',
         childView: Tab,
         childEvents: {
             'choosing': 'swapping'

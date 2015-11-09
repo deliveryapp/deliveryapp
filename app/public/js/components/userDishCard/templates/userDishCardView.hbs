@@ -1,6 +1,18 @@
-<div style="text-align: left;margin-left: 10px; margin-top: 10px;text-align: center;">10 UAH</div><br />
-<img src="images/oladi.jpg" width="240"><strong>{{name}}</strong><br />
-
+<div class="b-selected-dish__row">
+    <div class="b-selected-dish-row__name">
+        {{name}}
+    </div>
+    <div class="b-selected-dish-row__remove">
+        <button class="b-button-icon b-button-icon_small b-button-icon_circle b-button-icon_red"> <span class="mdi mdi-delete"></span> </button>
+    </div>
+</div>
+<div class="b-selected-dish-row__clear"></div>
+<div class="b-selected-dish-row__info">
+    <span class="b-selected-dish-row-info__price">10 UAH </span>
+    <button class="b-button-icon b-button-icon_small b-button-icon_red"> <span class="mdi mdi-minus"></span> </button>
+    <span class="b-selected-dish-row-info__quantity">1</span>
+    <button class="b-button-icon b-button-icon_small b-button-icon_green"> <span class="mdi mdi-plus"></span> </button>
+</div>
+<hr class="b-selected-dish__delimiter">
 <!--<div class="remove-user-dish"><img src="../images/delete.png"></div>-->
-<div class="remove-user-dish"><button class="small btn red" style="padding-left:10px;width: 30px;height: 30px;"> <span class="small material-icons white-text">delete</span> </button></div>
-<div class="dish-info"><button class="small btn white" style="padding-left:10px;width: 30px;height: 30px;"> <span class="small material-icons black-text">info_outline</span> </button></div>
+<!--<div class="remove-user-dish"><button class="small btn red" style="padding-left:10px;width: 30px;height: 30px;"> <span class="small material-icons white-text">delete</span> </button></div>-->

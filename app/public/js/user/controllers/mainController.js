@@ -20,7 +20,7 @@ define(function (require, exports, module) {
         regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
-                'content': '#content'
+                'content': '.js-content'
             }
         }),
 
@@ -72,17 +72,16 @@ define(function (require, exports, module) {
                 this.regions.get('content').show( this.menuPreselectionView );
 
                 this.dayDishesCollection = new DishesCollection(this.userDaysMenu.at(0).get('dishes'));
-                //console.log(this.dayDishesCollection);
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
-                this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+                //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
 
 
                 this.menuCard = new MenuDaysController({collection: this.daysMenuCollection});
 
-                var menu = this.menuCard.getUserItem();
+                var menu = this.menuCard.getUserItem(this.userDaysMenu);
 
                 this.menuPreselectionView.showChildView('dayMenu', menu);
                 this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
@@ -136,7 +135,8 @@ define(function (require, exports, module) {
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
-            this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+            this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
         },
 
         index: function () {

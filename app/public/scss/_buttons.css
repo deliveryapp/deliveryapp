@@ -73,6 +73,15 @@
       background-color: color(#3f51b5 lightness(40%));
     }
   }
+  @modifier green{
+    background-color: #8cc248;;
+    &:hover {
+      background-color: color(#8cc248 a(-15%));;
+    }
+    &:active {
+      background-color: color(#8cc248 lightness(40%));
+    }
+  }
   @descendent text {
     height: 24px;
   }
@@ -115,6 +124,11 @@
     border-radius: 40px;
   }
 
+  @modifier small {
+    width: 25px;
+    height: 25px;
+  }
+
   @modifier red {
     background-color: #D50505;
   &:hover{
@@ -126,6 +140,18 @@
   &:focus {
      outline:none;
    }
+  }
+  @modifier green {
+    background-color: #8cc248;
+    &:hover{
+      background-color: color(#8cc248 a(-15%));;
+    }
+    &:active {
+      background-color: color(#8cc248 lightness(40%));
+    }
+    &:focus {
+      outline:none;
+    }
   }
 }
 

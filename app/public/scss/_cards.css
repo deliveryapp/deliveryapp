@@ -17,13 +17,30 @@
   display: inline-block;
   float: right;
   position: fixed;
-  /*border: solid 1px color(#cccccc lightness(40%));*/
-  /*padding-left: 10px;
-  padding-right: 10px;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   @descendent dishes {
     padding-left: 1.5%;
     padding-bottom: 1.5%;
+  }
+
+  @descendent menu {
+    max-height: 600px;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  @descendent summary {
+    text-align: center;
+    color: #fff;
+  }
+}
+
+@component user-menu-card-summary {
+  @descendent price {
+    text-align: center;
+    color: #fff;
   }
 }
 
@@ -39,5 +56,13 @@
     padding-top: 8px;
     font-size: 16px;
     font-weight: 500;
+  }
+
+  @descendent clear {
+    clear: both;
+  }
+
+  @descendent tabs {
+    text-align: center;
   }
 }

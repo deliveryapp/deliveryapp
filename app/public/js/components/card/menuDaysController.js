@@ -3,12 +3,21 @@ define(function (require, exports, module) {
         $ = require('jquery'),
         DaysMenuCollection = require('daysMenuCollection'),
         TabsView = require('tabCollectionView'),
+        DishesCollection = require('dishesCollection'),
         VirtualCollection = require('backboneVirtualCollection'),
         CardView = require('cardLayoutView'),
+        UserDaysMenuCollection = require('userDaysMenuCollection'),
+        MenuPreselectionView = require('menuPreselectionView'),
+        DayMenuSelectionView = require('dayMenuSelectionView'),
         DayMenuView = require('dayMenuView');
 
     module.exports = Marionette.Object.extend({
-        getUserItem: function () {
+        getUserItem: function (userDaysMenu) {
+            this.userDaysMenu = userDaysMenu;
+            this.dayDishesCollection = new DishesCollection(this.userDaysMenu.at(0).get('dishes'));
+
+            this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+
             this.collection = this.getOption('collection');
 
             this.weekDays = this.collection.filter(function (item) {
@@ -53,7 +62,8 @@ define(function (require, exports, module) {
                 model: new Backbone.Model(),
                 childViews: {
                     tabs: this.tabsView,
-                    days: this.dayMenuView
+                    days: this.dayMenuView,
+                    dayMenu: this.dayMenuSelectionView
                 }
             });
             this.listenTo(this.dayMenuView, 'dish:added', this.dishAdded);
@@ -63,6 +73,11 @@ define(function (require, exports, module) {
 
         },
 
+        setSelectedMenu: function (dayMenuSelectionView) {
+            this.dayMenuSelectionView = dayMenuSelectionView;
+            this.cardView.showChildView('dayMenu', this.dayMenuSelectionView);
+        },
+
         nameFilterApplied: function (phrase) {
             this.dishesCollection.updateFilter(function (model) {
                 return model.get('name').toLowerCase().indexOf(phrase) > -1;
@@ -70,9 +85,17 @@ define(function (require, exports, module) {
         },
 
         categoryFilterApplied: function (phrase) {
-            this.dishesCollection.updateFilter(function (model) {
-                return model.get('category').toLowerCase().indexOf(phrase) > -1;
-            });
+            if(phrase === '0')
+            {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model;
+                });
+            }
+            else {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model.get('category').toLowerCase().indexOf(phrase) > -1;
+                });
+            }
         },
 
         dishAdded: function (model) {
