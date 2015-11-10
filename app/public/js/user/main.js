@@ -26,6 +26,7 @@ require.config({
         cardLayoutView: '../components/card/card-layout-view',
         weekUserMenuView: 'dashboard/view/week-user-menu-view',
         dayUserMenuView: 'dashboard/view/day-user-menu-view',
+        emptyDayUserMenuView: 'dashboard/view/empty-day-user-menu-view',
         menuPreselectionView: 'menu/views/menu-preselection-view',
 
         mainRegions: 'menu/views/main-regions',

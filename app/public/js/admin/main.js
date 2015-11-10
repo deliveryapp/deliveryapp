@@ -32,6 +32,7 @@ require.config({
         dayMenuView: '../components/day-menu/day-menu-view',
         mainUserListView:'user-list/view/main-user-list-view',
         userView: 'user-list/view/user-view',
+        emptyUserView: 'user-list/view/empty-user-view',
         /*menuDaysController: '../components/card/menuDaysController',
         mainLayoutView: 'view/MainLayoutView',
         navigationMenuLayoutView: 'view/mavigationMenuLayoutView',
