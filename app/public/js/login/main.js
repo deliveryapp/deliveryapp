@@ -7,9 +7,9 @@ require.config({
         hbs: '../../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
-        Router: 'Router',
-        MainController: 'controllers/MainController',
-        MainLayoutView: 'view/MainLayoutView'
+        Router: 'router',
+        MainController: 'controllers/main-controller',
+        MainLayoutView: 'view/main-layout-view'
 
 
        /* materialize : '../../lib/vendor/Materialize/bin/materialize',
