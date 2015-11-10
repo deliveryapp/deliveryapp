@@ -66,6 +66,10 @@
   border: 1px solid black;
   margin-bottom: 30px;
 
+  @modifier empty-list {
+    color: #fff;
+  }
+
   @descendent title{
     font-size: 28px;
     color: #fff;

@@ -109,8 +109,8 @@ define(function (require, exports, module) {
 
                 this.dashboard = new MainDashboardView({collection: this.userDaysMenu});
                 this.regions.get('content').show(this.dashboard);
-                $(".edit").addClass('disabled').removeAttr('href');
-                $(".current-week").addClass('disabled').removeAttr('href');
+                $('.edit').addClass('disabled').removeAttr('href');
+                $('.current-week').addClass('disabled').removeAttr('href');
             }.bind(this));
 
         },

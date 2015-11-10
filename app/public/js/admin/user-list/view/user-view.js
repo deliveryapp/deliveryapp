@@ -7,11 +7,16 @@ define(function(require, exports, module) {
         className: 'b-all-user__one-person',
         template: UserView,
         events: {
-            'click .user-remove': 'userRemoved'
+            'click .user-remove': 'userRemoved',
+            'click .user-edit': 'userEdit'
         },
 
         userRemoved: function () {
             this.trigger('user:removed', this.model);
+        },
+        userEdit: function(){
+
+
         }
     });
 });

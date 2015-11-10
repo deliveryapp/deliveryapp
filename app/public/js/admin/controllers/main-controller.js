@@ -10,13 +10,14 @@ define(function(require, exports, module){
         NavigationMenuLayoutView = require('navigationMenuLayoutView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         MenuDaysController = require('menuDaysController'),
+        VirtualCollection = require('backboneVirtualCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
         MainAddDishView = require('mainAddDishView');
 
 
     module.exports = Marionette.Object.extend({
 
-        regions: new Marionette.RegionManager({
+            regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
                 'content': '.js-content'
@@ -132,10 +133,25 @@ define(function(require, exports, module){
         userlist: function(){
 
             this.getData().done(function () {
-                this.userList = new MainUserListView({collection: this.usersCollection});
+
+                this.virt_coll = new VirtualCollection(this.usersCollection, {});
+                this.userList = new MainUserListView({collection: this.virt_coll});
                 this.regions.get('content').show(this.userList);
+
+                this.listenTo(this.userList, 'filter:users:name:applied', this.userFilter);
+
             }.bind(this));
+        },
+
+        userFilter: function(name){
+
+            name = name.toLowerCase();
+            this.virt_coll.updateFilter(function (model) {
+                return model.get('lastName').toLowerCase().indexOf(name) > -1;
+            });
         }
+
+
 
 
 
