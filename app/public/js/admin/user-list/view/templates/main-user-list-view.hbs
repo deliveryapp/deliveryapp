@@ -1,14 +1,59 @@
 <div class="b-user-list">
 
-    <div class="b-user-list__title">User List</div>
+
+    <div class="b-add-user">
+
+        <div class="b-user-list__title">Add new user</div>
+
+        <div class="add-user__first-name">
+            <div class="b-field-text">
+                <input class="b-field-text__input b-field-text__input_left b-field-text__input_margin" type="text" placeholder="First Name" id="user-first-name">
+            </div>
+        </div>
+        <div class="add-user__last-name">
+            <div class="b-field-text">
+                <input class="b-field-text__input  b-field-text__input_margin" type="text" placeholder="Last Name" id="user-last-name">
+            </div>
+        </div>
+        <div class="add-user__mail">
+            <div class="b-field-text">
+                <input class="b-field-text__input b-field-text__input_left b-field-text__input_margin" type="text" placeholder="Mail" id="user-mail">
+            </div>
+        </div>
+        <div class="add-user__password">
+            <div class="b-field-text">
+                <input class="b-field-text__input  b-field-text__input_margin" type="text" placeholder="Password" id="user-password">
+            </div>
+        </div>
+        <div class="add-user__role">
+            <div class="b-field-text">
+                <input class="b-field-text__input b-field-text__input_left b-field-text__input_margin" type="text" placeholder="Role" id="user-role">
+            </div>
+        </div>
+
+
+        <div class="b-clear-both"></div>
+
+        <button type="submit" id="submit" class="b-button-icon-text b-button-icon-text_green b-button-icon-text_top-margin">
+            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">games</i>
+            <span class="b-button-icon-text__text">Add</span>
+        </button>
+    </div>
+
+    <div class="b-clear-both"></div>
+    <div class="b-user-list__title b-user-list__title_top-padding">User List</div>
 
     <div class="b-field-text">
-        <input class="b-field-text__input  b-field-text__input_margin" type="text" placeholder="Filter by name" id="name">
+        <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Filter by name" id="name">
     </div>
+
+
 
     <div class="b-user-list__list">
         <ul id="userList" class="b-all-user"></ul>
     </div>
 
 </div>
+
+
 
