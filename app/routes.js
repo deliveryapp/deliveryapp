@@ -40,6 +40,9 @@ module.exports = function (app) {
     app.get('/weeks-page', function (req, res) {
         res.render('weeks-page');
     });
+    app.get('/orders-page', function (req, res) {
+        res.render('orders-page');
+    });
 
     /**
      * Dishes REST
@@ -77,6 +80,7 @@ module.exports = function (app) {
     /**
      * Orders REST
      */
+    app.get('/orders/', orders.getAll);
     app.get('/orders/:userId/', orders.get);
     app.post('/orders/', orders.post);
     app.put('/orders/', orders.put);

@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
     utils = require('../util'),
     Dishes = mongoose.model('Dishes'),
     async = require('async'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    passport = require('passport');
 
 exports.post = function (req, res) {
     var user = new Users({
@@ -13,11 +14,10 @@ exports.post = function (req, res) {
         mail: req.body.mail,
         role: req.body.role
     });
-
-    user.save(function (err) {
+    Users.register(user, req.body.password, function (err, user) {
         if (err) return res.status(400).send(err);
-        Users.findById(user, function (err, user) {
-            if (err) return res.status(400).send(err);
+
+        passport.authenticate('local')(req, res, function () {
             res.send(user);
         });
     });
