@@ -20,6 +20,7 @@ require.config({
         navigationMenuLayoutView: 'view/navigation-menu-layout-view',
         mainDashboardView: 'dashboard/view/main-dashboard-view',
         dishCardView: '../components/dish-card/dish-card-view',
+        dishCardEmpty: '../components/dish-card/dish-card-empty',
         dayMenuView: '../components/day-menu/day-menu-view',
         tabItemView: '../components/tabs/tab-item-view',
         tabCollectionView: '../components/tabs/tab-collection-view',
@@ -32,6 +33,7 @@ require.config({
 
         menuDaysController : '../components/card/menu-days-controller',
         userDishCardView : '../components/user-dish-card/user-dish-card-view',
+        userDishCardEmpty: '../components/user-dish-card/user-dish-card-empty',
 
         dayMenuSelectionView: 'menu/views/day-menu-selection-view'
     },

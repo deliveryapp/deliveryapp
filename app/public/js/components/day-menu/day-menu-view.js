@@ -2,12 +2,14 @@ define(function(require, exports, module){
 
     var Marionette = require('marionette'),
         DishCardView = require('dishCardView'),
+        DishCardEmpty = require('dishCardEmpty'),
         template = require('hbs!../components/day-menu/templates/day-menu-view');
 
     module.exports = Marionette.CompositeView.extend({
         tagName: 'div',
         className: 'b-card__dishes',
         childView: DishCardView,
+        emptyView: DishCardEmpty,
         template: template,
         nameFilterValue: '',
 
