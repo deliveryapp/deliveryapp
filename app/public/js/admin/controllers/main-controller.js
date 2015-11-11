@@ -12,7 +12,7 @@ define(function(require, exports, module){
         MenuDaysController = require('menuDaysController'),
         VirtualCollection = require('backboneVirtualCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
-        MainAddDishView = require('mainAddDishView');
+        MainDishListView = require ('mainDishListView');
 
 
     module.exports = Marionette.Object.extend({
@@ -118,9 +118,17 @@ define(function(require, exports, module){
         },
 
         addDish: function(){
-            this.addDishpage = new MainAddDishView();
-            this.regions.get('content').show(this.addDishpage);
-            this.listenTo(this.addDishpage, 'dish:item:added', this.saveDish);
+
+            this.getData().done(function () {
+
+                this.virt_coll = new VirtualCollection(this.dishesCollection, {});
+                this.dishList = new MainDishListView({collection: this.virt_coll});
+                this.regions.get('content').show(this.dishList);
+
+                this.listenTo(this.dishList, 'filter:dishes:name:applied', this.dishFilter);
+               /* this.listenTo(this.addDishpage, 'dish:item:added', this.saveDish);*/
+
+            }.bind(this));
         },
 
         editDish: function(){
@@ -149,6 +157,14 @@ define(function(require, exports, module){
             name = name.toLowerCase();
             this.virt_coll.updateFilter(function (model) {
                 return model.get('lastName').toLowerCase().indexOf(name) > -1;
+            });
+        },
+
+        dishFilter: function(name){
+
+            name = name.toLowerCase();
+            this.virt_coll.updateFilter(function (model) {
+                return model.get('name').toLowerCase().indexOf(name) > -1;
             });
         },
 

@@ -1,0 +1,62 @@
+    <div class="b-personal-info">
+        <div class="b-personal-info__foto">
+            <img class="b-personal-info__foto_size" src="{{image_path}}" alt=""/>
+        </div>
+        <div class="b-personal-info__name">
+            <div class="b-list-info">
+                <div class="b-list-info__element">
+
+                    <div class="b-field-text">
+                        <input class="b-field-text__input b-field-text__input_small" value="{{name}}" type="text" placeholder="Dish Name" id="dish-name">
+                    </div>
+
+                </div>
+                <div class="b-list-info__element">
+
+                    <div class="b-field-text">
+                        <input class="b-field-text__input  b-field-text__input_small" value="{{category}}" type="text" placeholder="Category" id="dish-category">
+                    </div>
+                </div>
+                <div class="b-list-info__element">
+                    <div class="b-field-text">
+                        <input class="b-field-text__input  b-field-text__input_small" value="{{weight}}" type="text" placeholder="Weight" id="dish-weight">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="b-personal-info__mail">
+            <div class="b-list-info">
+                <div class="b-list-info__element">
+                    <div class="b-field-text">
+                        <input class="b-field-text__input  b-field-text__input_small" value="{{description}}" type="text" placeholder="Description" id="dish-description">
+                    </div>
+                </div>
+                <div class="b-list-info__element">
+
+                    <div class="b-field-text">
+                        <input class="b-field-text__input b-field-text__input_small" value="{{price}}" type="text" placeholder="Price" id="dish-price">
+                    </div>
+
+                </div>
+                <div class="b-list-info__element">
+                    <div class="b-field-text">
+                        <input disabled class="b-field-text__input  b-field-text__input_small" value="{{_id}}" type="text" placeholder="ID" id="dish-id">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="b-personal-info__buttons">
+
+            <button class="b-button-icon b-button-icon_circle b-button-icon_red js-dish-not-edit" >
+                <i class="material-icons right b-button-icon__icon">close</i>
+            </button>
+
+            <button class="b-button-icon b-button-icon_circle b-button-icon_green dish-edit" >
+                <i class="material-icons right b-button-icon__icon">done</i>
+            </button>
+
+        </div>
+    </div>
+
