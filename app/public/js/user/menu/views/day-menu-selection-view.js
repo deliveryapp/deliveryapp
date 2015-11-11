@@ -11,10 +11,21 @@ define(function(require, exports, module){
         childView: UserDishCardView,
         emptyView: UserDishCardEmpty,
         childEvents:{
-            'dish:removed': 'dishClickedM'
+            'dish:removed': 'dishRemoved'
         },
-        dishClickedM: function (view, model) {
+        dishRemoved: function (view, model) {
             this.collection.remove(model);
+        },
+        calculateSummary: function () {
+            var dishes = this.get('dishes');
+            var res = dishes.reduce(function(orderSummary, item){
+                return orderSummary + item.get('price');
+            }, 0);
+            return res;
         }
+
+        /*initialize: function () {
+            this.model.set('summary', this.collection.getSu
+        }*/
     });
 });

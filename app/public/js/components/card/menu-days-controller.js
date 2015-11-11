@@ -9,6 +9,7 @@ define(function (require, exports, module) {
         UserDaysMenuCollection = require('userDaysMenuCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
+        UserOrdersCollection = require('userOrdersCollection'),
         DayMenuView = require('dayMenuView');
 
     module.exports = Marionette.Object.extend({
@@ -54,8 +55,6 @@ define(function (require, exports, module) {
             this.listenTo(this.cardView, 'days:swap', this.tabsStatusAdmin);
             return cardView;
         },
-
-
 
         getItem: function () {
             this.tabsView = new TabsView({

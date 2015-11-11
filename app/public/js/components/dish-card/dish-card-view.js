@@ -9,11 +9,7 @@ define(function(require, exports, module){
         template: template,
         events: {
             'click':'dishClicked',
-            'click .btn':'dishAdded'
-        },
-
-        dishClicked: function () {
-            this.trigger('dish:clicked', this.model);
+            'click .js-button-add':'dishAdded'
         },
 
         dishAdded: function () {

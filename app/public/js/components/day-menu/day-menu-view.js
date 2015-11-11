@@ -20,12 +20,7 @@ define(function(require, exports, module){
         },
 
         childEvents:{
-            'dish:clicked': 'dishClickedM',
             'dish:added': 'dishAddedM'
-        },
-        dishClickedM: function (evt,model) {
-            //this.model = model;
-            //this.render();
         },
         dishAddedM: function (evt, model) {
             this.trigger('dish:added', model);
@@ -34,11 +29,9 @@ define(function(require, exports, module){
             this.trigger('dishAdded', this.model);
         },
         changed:function(evt) {
-            console.log(evt.currentTarget.value);
             this.trigger('filter:by:name:applied', evt.currentTarget.value);
         },
         categoryChanged:function(evt) {
-            console.log(evt.currentTarget.value);
             this.trigger('filter:by:category:applied', evt.currentTarget.value);
         },
         initialize: function () {

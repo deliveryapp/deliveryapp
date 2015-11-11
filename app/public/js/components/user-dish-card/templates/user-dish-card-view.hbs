@@ -1,6 +1,6 @@
 <div class="b-selected-dish__row">
     <div class="b-selected-dish-row__name">
-        {{name}}
+        {{dish.name}}
     </div>
     <div class="b-selected-dish-row__remove">
         <button class="b-button-icon b-button-icon_small b-button-icon_circle b-button-icon_red js-button-remove"> <span class="mdi mdi-delete"></span> </button>
@@ -9,9 +9,9 @@
 <div class="b-selected-dish-row__clear"></div>
 <div class="b-selected-dish-row__info">
     <span class="b-selected-dish-row-info__price">10 UAH </span>
-    <button class="b-button-icon b-button-icon_small b-button-icon_red"> <span class="mdi mdi-minus"></span> </button>
-    <span class="b-selected-dish-row-info__quantity">1</span>
-    <button class="b-button-icon b-button-icon_small b-button-icon_green"> <span class="mdi mdi-plus"></span> </button>
+    <button class="b-button-icon b-button-icon_small b-button-icon_red js-button-minus"> <span class="mdi mdi-minus"></span> </button>
+    <span class="b-selected-dish-row-info__quantity">{{quantity}}</span>
+    <button class="b-button-icon b-button-icon_small b-button-icon_green js-button-plus"> <span class="mdi mdi-plus"></span> </button>
 </div>
 <hr class="b-selected-dish__delimiter">
 <!--<div class="remove-user-dish"><img src="../images/delete.png"></div>-->

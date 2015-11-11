@@ -120,6 +120,7 @@ define(function(require, exports, module){
         addDish: function(){
             this.addDishpage = new MainAddDishView();
             this.regions.get('content').show(this.addDishpage);
+            this.listenTo(this.addDishpage, 'dish:item:added', this.saveDish);
         },
 
         editDish: function(){
@@ -149,9 +150,17 @@ define(function(require, exports, module){
             this.virt_coll.updateFilter(function (model) {
                 return model.get('lastName').toLowerCase().indexOf(name) > -1;
             });
+        },
+
+        saveDish: function (data) {
+            $.ajax({
+                url: 'http://stark-eyrie-7510.herokuapp.com/dishes',
+                data: data,//.toJSON()
+                type: 'post',
+                crossDomain: true,
+                success: function(data) { console.log(data); }
+            });
         }
-
-
 
 
 

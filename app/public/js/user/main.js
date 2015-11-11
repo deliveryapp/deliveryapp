@@ -13,9 +13,11 @@ require.config({
         dayMenuModel: 'models/day-menu-model',
         dishModel: 'models/dish-model',
         userDayMenuModel: 'models/user-day-menu-model',
+        userOrderModel: 'models/user-order-model',
         dishesCollection: 'collections/dishes-collection',
         daysMenuCollection: 'collections/days-menu-collection',
         userDaysMenuCollection: 'collections/user-days-menu-collection',
+        userOrdersCollection: 'collections/user-orders-collection',
         mainLayoutView: 'view/main-layout-view',
         navigationMenuLayoutView: 'view/navigation-menu-layout-view',
         mainDashboardView: 'dashboard/view/main-dashboard-view',
@@ -36,7 +38,14 @@ require.config({
         userDishCardView : '../components/user-dish-card/user-dish-card-view',
         userDishCardEmpty: '../components/user-dish-card/user-dish-card-empty',
 
-        dayMenuSelectionView: 'menu/views/day-menu-selection-view'
+        dayMenuSelectionView: 'menu/views/day-menu-selection-view',
+
+        baseUrl: '../url/base-url',
+        daysResource: '../url/days-url',
+        dishesResource: '../url/dishes-url',
+        ordersResource: '../url/orders-url',
+        usersResource: '../url/users-url',
+        weeksResource: '../url/weeks-url'
     },
 
     hbs: { 

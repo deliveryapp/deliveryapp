@@ -2,6 +2,7 @@
      [
       {
         "day": "12.10.2015",
+        "paymentStatus": false,
         "dishes": [
           {
             "dish": {
@@ -19,6 +20,7 @@
       },
       {
         "day": "13.10.2015",
+        "paymentStatus": false,
         "dishes": [
           {
             "dish": {
@@ -30,7 +32,7 @@
               "description": "",
               "category": ""
             },
-            "quantity": 1
+            "quantity": 2
           },
           {
             "dish": {
@@ -60,10 +62,12 @@
       },
       {
         "day": "14.10.2015",
+        "paymentStatus": false,
         "dishes": []
       },
       {
         "day": "15.10.2015",
+        "paymentStatus": false,
         "dishes": [
           {
             "dish": {
@@ -141,6 +145,7 @@
       },
       {
         "day": "16.10.2015",
+        "paymentStatus": false,
         "dishes": [
           {
             "dish": {
