@@ -5,6 +5,7 @@ var fs = require('fs'),
     mongoose = require('mongoose'),
     config = require('./config'),
     app = express(),
+    cors = require('cors'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
@@ -27,6 +28,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 // Bootstrap models
 fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {

@@ -58,6 +58,10 @@
     @modifier margin {
       margin: 10px 0 10px 0;
     }
+    @modifier small{
+      height: 20px;
+      margin-bottom:5px;
+    }
   }
 }
 

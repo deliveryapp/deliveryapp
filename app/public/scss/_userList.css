@@ -54,17 +54,16 @@
 }
 
 
-
 @component user-list{
-  width: 1200px;
-  text-align: center;
+  width: 980px;
   background-color: #464646;
   margin: auto;
   margin-top: 60px;
-  border-radius:5px;
-  padding: 10px 0;
-  border: 1px solid black;
+  border-radius: 5px;
+  padding: 30px 110px;
+  border: 1px solid #000;
   margin-bottom: 30px;
+  text-align:center;
 
   @modifier empty-list {
     color: #fff;
@@ -75,6 +74,9 @@
     color: #fff;
     padding: 10px 0 20px 0;
 
+    @modifier top-padding{
+      padding-top:30px
+    }
   }
   @descendent list{
 
@@ -90,4 +92,25 @@
 
 @component all-user{
   list-style-type:none;
+}
+
+@component add-user{
+  background-color: #275ECA;
+  margin:auto;
+  text-align: center;
+  width: 980px;
+  height: 130px;
+  border-radius: 10px;
+  margin-top:20px;
+  border: 1px solid black;
+  padding: 10px 0 0 0;
+}
+
+@component clear-both{
+  clear:both;
+}
+
+@component add-user-inputs{
+  padding: 10px 0 0 40px;;
+
 }
