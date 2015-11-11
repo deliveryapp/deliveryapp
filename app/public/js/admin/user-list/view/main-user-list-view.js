@@ -1,5 +1,6 @@
 define(function(require, exports, module) {
     var Marionette = require('marionette'),
+        $ = require ('jquery'),
         UserView = require('userView'),
         emptyUserView = require('emptyUserView'),
         MainUserListView = require('hbs!user-list/view/templates/main-user-list-view');
@@ -14,7 +15,8 @@ define(function(require, exports, module) {
         },
 
         events: {
-            'change input' :'changed'
+            'change #filter-name' :'changed',
+            'click .js-add-new-user': 'addNewUser'
         },
 
         getEmptyView: function() {
@@ -31,6 +33,10 @@ define(function(require, exports, module) {
 
         changed: function(evt) {
             this.trigger('filter:users:name:applied', evt.currentTarget.value);
+        },
+
+        addNewUser: function(){
+            $('.js-form-add-new-user').toggle('slow');
         }
 
 
