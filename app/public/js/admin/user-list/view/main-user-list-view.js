@@ -36,7 +36,7 @@ define(function(require, exports, module) {
         },
 
         addNewUser: function(){
-            $('.js-form-add-new-user').toggle('slow');
+            this.collection.unshift({'image_path': 'images/male.jpg'});
         }
 
 

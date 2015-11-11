@@ -9,22 +9,30 @@ define(function(require, exports, module) {
         template: UserView,
         events: {
             'click .user-remove': 'userRemoved',
-            'click .user-edit': 'userEdit'
+            'click .user-edit': 'userEdit',
+            'click .js-user-not-edit': 'notEdit'
         },
 
         ui: {
             firstName: '#user-first-name',
             lastName: '#user-last-name',
             userRole: '#user-role',
-            userMail: '#user-mail'
-
+            userMail: '#user-mail',
+            userPass: '#user-password'
          },
+
+        initialize: function() {
+            if (this.model.get('_id') === undefined){
+                this.model.set('contentEditable','contentEditable');
+                this.template = UserViewEdit;
+            }
+        },
 
         userRemoved: function () {
             this.trigger('user:removed', this.model);
         },
-        userEdit: function(){
 
+        userEdit: function(){
             if (this.model.get('contentEditable') === undefined){
                 this.model.set('contentEditable','contentEditable');
                 this.template = UserViewEdit;
@@ -38,10 +46,15 @@ define(function(require, exports, module) {
                 this.model.set('lastName', this.ui.lastName.val());
                 this.model.set('Role',this.ui.userRole.val());
                 this.model.set('mail',this.ui.userMail.val());
+                this.model.set('password',this.ui.userPass.val());
                 this.render();
             }
+        },
 
-
+        notEdit: function () {
+            this.model.unset('contentEditable','silent');
+            this.template = UserView;
+            this.render();
         }
     });
 });

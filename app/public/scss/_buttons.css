@@ -126,7 +126,7 @@
   @modifier circle {
     border-radius: 40px;
   }
-
+  b-button-icon-text
   @modifier small {
     width: 25px;
     height: 25px;
@@ -143,6 +143,9 @@
   &:focus {
      outline:none;
    }
+  }
+  @modifier right{
+    float: right;
   }
   @modifier green {
     background-color: #8cc248;

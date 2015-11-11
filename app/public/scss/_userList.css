@@ -89,28 +89,30 @@
 
 }
 
+@component user-list-buttons{
+  float: right;
+  padding: 17px 0 0 0;
+  width:545px;
+
+  @descendent save{
+    float: left;
+  }
+  @descendent add-user{
+    float: right;
+  }
+}
+
+
+
 
 @component all-user{
   list-style-type:none;
 }
 
-@component add-user{
-  background-color: #275ECA;
-  margin:auto;
-  text-align: center;
-  width: 980px;
-  height: 130px;
-  border-radius: 10px;
-  margin-top:20px;
-  border: 1px solid black;
-  padding: 10px 0 0 0;
-}
 
-@component clear-both{
-  clear:both;
-}
+/*
 
 @component add-user-inputs{
   padding: 10px 0 0 40px;;
 
-}
+}*/
