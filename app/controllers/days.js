@@ -3,10 +3,10 @@ var mongoose = require('mongoose'),
     _ = require('lodash');
 
 exports.get = function (req, res) {
-    if (!_.isUndefined(req.query.date)) {
+    if (!_.isUndefined(req.query.day)) {
         //find by query param ids
         Days.find({
-            'date': {$in: req.query.date.split(',')}
+            'day': {$in: req.query.day.split(',')}
         }, function (err, days) {
             if (err) return res.status(400).send(err);
 
@@ -25,7 +25,7 @@ exports.get = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-    Days.findById(req.params.date, function (err, day) {
+    Days.findById(req.params.day, function (err, day) {
         if (err) return res.status(400).send(err);
         day.remove(function (err) {
             if (err) return res.status(400).send(err);
@@ -36,7 +36,7 @@ exports.delete = function (req, res) {
 
 exports.post = function (req, res) {
     var day = new Days({
-        date: req.body.date,
+        day: req.body.day,
         dishes: req.body.dishes
     });
     day.save(function (err) {
@@ -50,7 +50,7 @@ exports.post = function (req, res) {
 };
 
 exports.put = function (req, res) {
-    Days.findById(req.params.date, function (err, day) {
+    Days.findById(req.params.day, function (err, day) {
         if (err) return res.status(400).send(err);
 
         day.dishes = req.body.dishes;

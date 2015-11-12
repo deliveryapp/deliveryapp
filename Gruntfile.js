@@ -145,4 +145,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-postcss');
 
     grunt.registerTask('build', ['copy', 'sass', 'concat', 'watch']);
+    grunt.registerTask('deploy', ['copy', 'postcss', 'cssmin']);
 };
