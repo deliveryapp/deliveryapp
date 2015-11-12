@@ -126,7 +126,6 @@
   @modifier circle {
     border-radius: 40px;
   }
-  b-button-icon-text
   @modifier small {
     width: 25px;
     height: 25px;

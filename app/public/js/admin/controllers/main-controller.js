@@ -7,11 +7,12 @@ define(function(require, exports, module){
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         MainLayoutView = require('mainLayoutView'),
-        NavigationMenuLayoutView = require('navigationMenuLayoutView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         MenuDaysController = require('menuDaysController'),
         VirtualCollection = require('backboneVirtualCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
+        MainDashboardView = require('mainDashboardView'),
+        MainStatisticView = require('mainStatisticView'),
         baseUrl = require('baseUrl'),
         usersResource = require('usersResource'),
 
@@ -31,9 +32,6 @@ define(function(require, exports, module){
         initialize: function () {
             this.header = new MainLayoutView();
             this.regions.get('main').show(this.header);
-            this.navigation = new NavigationMenuLayoutView();
-            this.regions.get('content').show(this.navigation);
-
             this.start();
         },
 
@@ -62,8 +60,6 @@ define(function(require, exports, module){
             //console.log('menu');
             this.getData().done(function () {
                 this.userDaysMenu = this.daysMenuCollection;
-
-
                 this.menuPreselectionView = new MenuPreselectionView();
 
                 this.regions.get('content').show( this.menuPreselectionView );
@@ -74,7 +70,6 @@ define(function(require, exports, module){
                 this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
-
 
 
                 this.menuCard = new MenuDaysController({collection: this.dishesCollection});
@@ -89,11 +84,13 @@ define(function(require, exports, module){
         },
 
         dashboard: function(){
-            console.log('dashboard');
+            this.dashboard = new MainDashboardView();
+            this.regions.get('content').show(this.dashboard);
         },
 
         statistic: function(){
-            console.log('statistic');
+            this.statisticPage = new MainStatisticView();
+            this.regions.get('content').show(this.statisticPage);
         },
 
         dishAdded: function (model) {
@@ -111,36 +108,23 @@ define(function(require, exports, module){
                 return userDayMenu.get('day') === date;
             });
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
-
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
-
             //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
-
-
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
         },
 
         addDish: function(){
 
             this.getData().done(function () {
-
                 this.virt_coll = new VirtualCollection(this.dishesCollection, {});
                 this.dishList = new MainDishListView({collection: this.virt_coll});
                 this.regions.get('content').show(this.dishList);
 
                 this.listenTo(this.dishList, 'filter:dishes:name:applied', this.dishFilter);
-                this.listenTo(this.dishList, 'dishes:saved', this.saveDish);
 
             }.bind(this));
         },
 
-        editDish: function(){
-            console.log('editDish');
-        },
-
-        index: function(){
-            console.log('index');
-        },
 
         userlist: function(){
 
@@ -151,7 +135,7 @@ define(function(require, exports, module){
                 this.regions.get('content').show(this.userList);
 
                 this.listenTo(this.userList, 'filter:users:name:applied', this.userFilter);
-                this.listenTo(this.userList, 'save:all:changes', this.syncCollection);
+
             }.bind(this));
         },
 
@@ -169,47 +153,8 @@ define(function(require, exports, module){
             this.virt_coll.updateFilter(function (model) {
                 return model.get('name').toLowerCase().indexOf(name) > -1;
             });
-        },
-
-        syncCollection: function () {
-            //this.usersCollection.url = baseUrl+usersResource;
-            //this.usersCollection.map(function (model) {
-            //    model.save();//sync('update', model);//+'?id='+model.get('_id');
-                //var data = model.toJSON();
-                /*if(data._id === '56434e9f09a4a00f000f90ae')
-                    $.ajax({
-                        url: 'http://stark-eyrie-7510.herokuapp.com/users',
-                        data: data,//.toJSON()
-                        type: 'delete',
-                        crossDomain: true,
-                        success: function(data) { console.log(data); }
-                    });*/
-            //});
-            //this.usersCollection.sync('update', this.usersCollection)
-            //this.usersCollection.sync();
-        },
-
-        saveDish: function (data) {
-            //this.dishesCollection.sync('update',this.dishesCollection);
-            this.dishesCollection.map(function (model) {
-                //Backbone.sync('update', model);//sync("update", model)
-                $.ajax({
-                 url: 'http://stark-eyrie-7510.herokuapp.com/dishes/',//'+model.get('_id')
-                 data: model.toJSON(),
-                 type: 'post',
-                 crossDomain: true,
-                 success: function(data) { console.log(data); }
-                 });
-            });
-
-            /*$.ajax({
-                url: 'http://stark-eyrie-7510.herokuapp.com/dishes',
-                data: data,//.toJSON()
-                type: 'post',
-                crossDomain: true,
-                success: function(data) { console.log(data); }
-            });*/
         }
+
 
 
 
