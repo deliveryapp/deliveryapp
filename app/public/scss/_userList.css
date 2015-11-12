@@ -16,7 +16,7 @@
     color:white;
     float:left;
     width: 675px;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     overflow: hidden;
   }
 
@@ -32,6 +32,7 @@
     background-color: #275ECA;
     margin: 0 0 7px 0;
     border-radius: 20px;
+ 
 
   @modifier dish-size {
     height: 120px;
@@ -62,6 +63,9 @@
   @descendent buttons{
     width: 70px;
     height: 80px;
+  }
+  @descendent dish-list-info{
+    height: 85px;
   }
 
 

@@ -16,8 +16,8 @@ define(function(require, exports, module) {
 
         events: {
             'change #filter-name' :'changed',
-            'click .js-add-new-user': 'addNewUser',
-            'click .js-save-all-changes': 'saveAllChanges'
+            'click .js-add-new-user': 'addNewUser'
+
         },
 
         getEmptyView: function() {
@@ -28,7 +28,6 @@ define(function(require, exports, module) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('firstName')+ ' ' + model.get('lastName') + ' from the system?');
 
             if (confirm_result === true) {
-                console.log(model.url());
                 model.destroy();
             }
         },
@@ -38,11 +37,7 @@ define(function(require, exports, module) {
         },
 
         addNewUser: function(){
-            this.collection.unshift({'image_path': 'images/male.jpg'});
-        },
-
-        saveAllChanges: function (evt) {
-            this.trigger('save:all:changes', evt);
+            this.collection.unshift({'image_path': 'images/male.jpg', 'addPass':'true'});
         }
 
 

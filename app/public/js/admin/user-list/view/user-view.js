@@ -27,35 +27,57 @@ define(function(require, exports, module) {
                 this.template = UserViewEdit;
             }
         },
+        onShow: function(){
+            $('.js-password-input').removeAttr('hidden');
+        },
 
         userRemoved: function () {
             this.trigger('user:removed', this.model);
         },
 
+
         userEdit: function(){
-            if (this.model.get('contentEditable') === undefined){
+            if (this.model.get('contentEditable') === undefined && this.model.get('addPass') === undefined){
+
                 this.model.set('contentEditable','contentEditable');
                 this.template = UserViewEdit;
                 this.render();
 
             }
-            else{
-                this.model.unset('contentEditable','silent');
+            else if (this.model.get('contentEditable') === 'contentEditable' && this.model.get('addPass') === undefined) {
+
+                this.model.unset('contentEditable', 'silent');
                 this.template = UserView;
                 this.model.set('firstName', this.ui.firstName.val());
                 this.model.set('lastName', this.ui.lastName.val());
-                this.model.set('role',this.ui.userRole.val());
-                this.model.set('mail',this.ui.userMail.val());
-                this.model.set('password',this.ui.userPass.val());
-                this.model.url =  function() {
-                    return this.urlRoot;
-                };
-                console.log(this.model.url());
-                Backbone.sync('create',this.model);
-                //this.model.save();
+                this.model.set('role', this.ui.userRole.val());
+                this.model.set('mail', this.ui.userMail.val());
+
+                this.model.setPutUrl();
+                this.model.save();
                 this.render();
             }
+
+            else if (this.model.get('contentEditable') === 'contentEditable' && this.model.get('addPass') === 'true'){
+
+                this.model.unset('contentEditable', 'silent');
+                this.model.unset('addPass', 'silent');
+
+                this.model.set('firstName', this.ui.firstName.val());
+                this.model.set('lastName', this.ui.lastName.val());
+                this.model.set('role', this.ui.userRole.val());
+                this.model.set('mail', this.ui.userMail.val());
+                this.model.set('password',this.ui.userPass.val());
+                this.template = UserView;
+                this.model.setPostUrl();
+                this.model.save();
+                this.render();
+
+            }
+
         },
+
+
 
         notEdit: function () {
             this.model.unset('contentEditable','silent');

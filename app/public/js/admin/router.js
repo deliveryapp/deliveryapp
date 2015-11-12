@@ -8,13 +8,12 @@ define(function(require, exports, module){
         controller: new MainController(),
 
         appRoutes: {
-            '':'index',
+            '':'dashboard',
             'dashboard': 'dashboard',
             'statistic': 'statistic',
             'menu': 'menu',
             'userlist': 'userlist',
-            'dish/add': 'addDish',
-            'dish/edit': 'editDish'
+            'dish/add': 'addDish'
         }
 
 
