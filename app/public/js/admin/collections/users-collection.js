@@ -9,14 +9,7 @@ define(function(require, exports, module){
 
     module.exports = Backbone.Collection.extend({
         model: UserModel,
-        url: baseUrl+usersResource,
-        save: function () {
-            Backbone.sync('create', this, {
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-        }
+        url: baseUrl+usersResource
     });
 
 });

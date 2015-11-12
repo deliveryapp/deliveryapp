@@ -7,8 +7,7 @@ var fs = require('fs'),
     app = express(),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    passport = require('passport');
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: 'app/views/layouts/'}));
 app.set('view engine', '.hbs');
@@ -36,12 +35,13 @@ fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
 });
 var Users = mongoose.model('Users');
 
-passport.use(new LocalStrategy(Users.authenticate()));
+passport.use(Users.createStrategy());
 passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
 
 app.set('views', __dirname + '/views/');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 // Bootstrap routes

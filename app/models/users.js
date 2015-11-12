@@ -7,7 +7,8 @@ var UsersSchema = new Schema({
     lastName: String,
     mail: String,
     role: String,
-    password: String
+    password: String,
+    img_path: String
 }, {
     collection: 'users'
 });

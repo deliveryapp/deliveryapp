@@ -4,6 +4,7 @@
   "description": "Task 1",
   "main": "index.html",
   "dependencies": {
+    "bower": "1.6.5",
     "async": "1.4.2",
     "backbone-virtual-collection": "^0.6.9",
     "body-parser": "1.14.1",
@@ -44,7 +45,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "grunt postcss && grunt cssmin",
+    "postinstall": "grunt postcss && grunt cssmin && bower install",
     "start": "node app/index.js",
     "staging": "PORT=3000 node app/index.js",
     "staging-win": "set PORT=3000 && node app/index.js",

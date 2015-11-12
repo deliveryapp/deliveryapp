@@ -85,13 +85,16 @@
                 lastName: $('#register-lastName').val(),
                 mail: $('#register-email').val(),
                 role: $('#register-role').val(),
-                password: $('#register-password').val()
+                password: $('#register-password').val(),
+                image_path: 'dafdaf'
             };
 
             $.ajax({
                 method: 'POST',
                 url: '/users',
-                data: user
+                data: JSON.stringify(user),
+                contentType: "application/json",
+                dataType: "json"
             }).done(function (response) {
                 console.log(response);
             });
@@ -106,7 +109,7 @@
 
             $.ajax({
                 method: 'PUT',
-                url: '/users/' + encodeURIComponent(userId),
+                url: JSON.stringify('/users/' + encodeURIComponent(userId)),
                 data: model
             }).done(function (response) {
                 console.log(response);
