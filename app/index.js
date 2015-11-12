@@ -7,8 +7,7 @@ var fs = require('fs'),
     app = express(),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    passport = require('passport');
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: 'app/views/layouts/'}));
 app.set('view engine', '.hbs');
