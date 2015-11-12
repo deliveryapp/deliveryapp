@@ -27,7 +27,6 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(cors());
 
 // Bootstrap models
@@ -42,6 +41,7 @@ passport.deserializeUser(Users.deserializeUser());
 
 app.set('views', __dirname + '/views/');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 // Bootstrap routes

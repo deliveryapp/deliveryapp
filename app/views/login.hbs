@@ -92,7 +92,9 @@
             $.ajax({
                 method: 'POST',
                 url: '/users',
-                data: user
+                data: JSON.stringify(user),
+                contentType: "application/json",
+                dataType: "json"
             }).done(function (response) {
                 console.log(response);
             });
@@ -107,7 +109,7 @@
 
             $.ajax({
                 method: 'PUT',
-                url: '/users/' + encodeURIComponent(userId),
+                url: JSON.stringify('/users/' + encodeURIComponent(userId)),
                 data: model
             }).done(function (response) {
                 console.log(response);
