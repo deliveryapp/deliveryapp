@@ -19,7 +19,7 @@ var connect = function () {
 
 var port = process.env.PORT || config.PORT;
 
-/*connect();*/
+connect();
 
 app.use(require('express-session')({
     secret: 'ep enroll ui',
@@ -28,6 +28,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(cors());
 
 // Bootstrap models
@@ -36,7 +37,7 @@ fs.readdirSync(join(__dirname, 'models')).forEach(function (file) {
 });
 var Users = mongoose.model('Users');
 
-passport.use(new LocalStrategy(Users.authenticate()));
+passport.use(Users.createStrategy());
 passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
 
