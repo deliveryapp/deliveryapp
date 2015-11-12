@@ -30,6 +30,7 @@ define(function(require, exports, module) {
 
         dishRemoved: function () {
             this.trigger('dish:removed', this.model);
+            this.model.destroy();
         },
 
         dishEdit: function(){
@@ -48,6 +49,9 @@ define(function(require, exports, module) {
                 this.model.set('description',this.ui.dishDescription.val());
                 this.model.set('price',this.ui.dishPrice.val());
                 this.render();
+
+                this.model.save();
+
             }
         },
 

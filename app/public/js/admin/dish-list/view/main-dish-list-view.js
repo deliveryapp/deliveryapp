@@ -15,7 +15,8 @@ define(function(require, exports, module) {
 
         events: {
             'change #filter-name' :'changed',
-            'click .js-add-new-dish': 'addNewUser'
+            'click .js-add-new-dish': 'addNewUser',
+            'click .js-save-dishes': 'saveDishes'
         },
 
         getEmptyView: function() {
@@ -36,8 +37,12 @@ define(function(require, exports, module) {
 
         addNewUser: function(){
             this.collection.unshift({'image_path': 'images/soup_icon.png'});
-        }
+        },
 
+        saveDishes: function (evt) {
+            //this.collection.sync('update',this.collection);
+            this.trigger('dishes:saved', evt);
+        }
 
     });
 

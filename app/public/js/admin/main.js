@@ -45,7 +45,8 @@ require.config({
         dishesResource: '../url/dishes-url',
         ordersResource: '../url/orders-url',
         usersResource: '../url/users-url',
-        weeksResource: '../url/weeks-url'
+        weeksResource: '../url/weeks-url',
+        mainAddDishView: 'dish-list/view/main-add-dish-view'
         /*menuDaysController: '../components/card/menuDaysController',
         mainLayoutView: 'view/MainLayoutView',
         navigationMenuLayoutView: 'view/mavigationMenuLayoutView',

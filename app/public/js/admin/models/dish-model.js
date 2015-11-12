@@ -1,13 +1,22 @@
 define(function(require, exports, module){
     var $ = require('jquery'),
         _ = require('underscore'),
+        baseUrl = require('baseUrl'),
+        dishesResource = require('dishesResource'),
         Backbone = require('backbone');
 
 
     module.exports  = Backbone.Model.extend({
-        urlRoot: 'http://stark-eyrie-7510.herokuapp.com/dishes',
-        url: function() {
-            return this.urlRoot + '?id=' + this.id;
+        urlRoot: baseUrl+dishesResource,
+        idAttribute: '_id',
+        url: function () {
+            return baseUrl+dishesResource+'/'+this.get('_id');
+        },
+        setPostUrl: function () {
+            this.url = baseUrl+dishesResource;
+        },
+        setPutUrl: function () {
+            this.url = baseUrl+dishesResource+'/'+this.get('_id');
         },
         defaults: {
         }

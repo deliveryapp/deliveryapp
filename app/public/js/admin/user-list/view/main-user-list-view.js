@@ -16,7 +16,8 @@ define(function(require, exports, module) {
 
         events: {
             'change #filter-name' :'changed',
-            'click .js-add-new-user': 'addNewUser'
+            'click .js-add-new-user': 'addNewUser',
+            'click .js-save-all-changes': 'saveAllChanges'
         },
 
         getEmptyView: function() {
@@ -37,6 +38,10 @@ define(function(require, exports, module) {
 
         addNewUser: function(){
             this.collection.unshift({'image_path': 'images/male.jpg'});
+        },
+
+        saveAllChanges: function (evt) {
+            this.trigger('save:all:changes', evt);
         }
 
 
