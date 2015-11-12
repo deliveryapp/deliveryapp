@@ -7,6 +7,16 @@ var mongoose = require('mongoose'),
     passport = require('passport');
 
 exports.post = function (req, res) {
+    if ([
+            req.body,
+            req.body.firstName,
+            req.body.lastName,
+            req.body.image_path,
+            req.body.mail,
+            req.body.role
+        ].some(_.isUndefined)) {
+        return res.status(400).send('Invalid user data');
+    }
     var user = new Users({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -15,7 +25,7 @@ exports.post = function (req, res) {
         role: req.body.role
     });
     Users.register(user, req.body.password, function (err, user) {
-        if (err) return res.status(400).send(err);
+        if (err) return res.status(400).send(err.message);
 
         passport.authenticate('local')(req, res, function () {
             res.send(user);
@@ -25,7 +35,7 @@ exports.post = function (req, res) {
 
 exports.get = function (req, res) {
     Users.find({}, function (err, users) {
-        if (err) return res.status(400).send(err);
+        if (err) return res.status(400).send(err.message);
 
         users = users.map(function (user) {
             return utils.stripUserModel(user);
