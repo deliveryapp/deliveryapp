@@ -44,9 +44,15 @@ define(function(require, exports, module) {
                 this.template = UserView;
                 this.model.set('firstName', this.ui.firstName.val());
                 this.model.set('lastName', this.ui.lastName.val());
-                this.model.set('Role',this.ui.userRole.val());
+                this.model.set('role',this.ui.userRole.val());
                 this.model.set('mail',this.ui.userMail.val());
                 this.model.set('password',this.ui.userPass.val());
+                this.model.url =  function() {
+                    return this.urlRoot;
+                };
+                console.log(this.model.url());
+                Backbone.sync('create',this.model);
+                //this.model.save();
                 this.render();
             }
         },

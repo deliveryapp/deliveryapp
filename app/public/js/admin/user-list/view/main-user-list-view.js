@@ -27,7 +27,8 @@ define(function(require, exports, module) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('firstName')+ ' ' + model.get('lastName') + ' from the system?');
 
             if (confirm_result === true) {
-                this.collection.remove(model);
+                console.log(model.url());
+                model.destroy();
             }
         },
 

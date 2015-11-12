@@ -26,8 +26,12 @@ define(function(require, exports, module) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('name') +  ' from the system?');
 
             if (confirm_result === true) {
-                this.collection.remove(model);
+               /* this.collection.remove(model);*/
+                console.log(model.url());
+                /*model.sync('delete', model);*/
+                model.destroy();
             }
+
         },
 
         changed: function(evt) {
