@@ -9,6 +9,11 @@ define(function (require, exports, module) {
             return this.model.get('day');
         },
 
+        initialize: function () {
+            var date = new Date(this.model.get('day'));
+            this.model.set('day', date.toDateString());
+        },
+
         template: Tmpl,
 
         events: {

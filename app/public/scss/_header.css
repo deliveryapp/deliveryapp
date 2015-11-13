@@ -2,6 +2,21 @@
   width: 100%;
   height:90px;
   background-color: #031539;
+  display: inline-flex;
+  justify-content: center;
+
+  @descendent logo{
+  width: 625px;
+  height: 90px;
+  }
+  @descendent empty{
+    width: 650px;
+    height: 90px;
+  }
+  @descendent user-info{
+    width: 625px;
+    height: 90px;
+  }
 }
 
 @component logo{

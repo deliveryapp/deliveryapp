@@ -10,6 +10,7 @@ define(function (require, exports, module) {
         },
         template: template,
 
+
         onShow: function () {
             var views = this.getOption('childViews');
 

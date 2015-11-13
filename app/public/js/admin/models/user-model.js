@@ -12,7 +12,6 @@ define(function(require, exports, module){
         defaults: {
 
         },
-
         setPostUrl: function () {
             this.url = baseUrl+usersResource;
         },

@@ -1,12 +1,10 @@
 define(function (require, exports, module) {
     var Marionette = require('marionette'),
         $ = require('jquery'),
-        DaysMenuCollection = require('daysMenuCollection'),
         TabsView = require('tabCollectionView'),
         DishesCollection = require('dishesCollection'),
         VirtualCollection = require('backboneVirtualCollection'),
         CardView = require('cardLayoutView'),
-        UserDaysMenuCollection = require('userDaysMenuCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         UserOrdersCollection = require('userOrdersCollection'),
