@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
     Days = mongoose.model('Days'),
+    Dishes = mongoose.model('Dishes'),
+    async = require('async'),
     _ = require('lodash');
 
 exports.get = function (req, res) {
@@ -10,7 +12,7 @@ exports.get = function (req, res) {
         }, function (err, days) {
             if (err) return res.status(400).send(err);
 
-            //TODO: load dishes from id's
+            populateDaysDishes(days, res);
 
             return res.send(days);
         })
@@ -22,6 +24,24 @@ exports.get = function (req, res) {
             res.send(dishes);
         });
     }
+};
+
+var populateDaysDishes = function (days, res) {
+    async.map(days, function (day, callback) {
+        async.map(day.dishes, function (dish, callbackNested) {
+            Dishes.findById(dish.id, function (err, fullDish) {
+                callbackNested(null, fullDish);
+            });
+        }, function (err, fullDishes) {
+            if (err) return res.status(400).send(err);
+            var unlinkedDay = day.toJSON();
+            unlinkedDay.dishes = fullDishes;
+            callback(null, unlinkedDay);
+        });
+    }, function (err, days) {
+        if (err) return res.status(400).send(err);
+        return res.send(days);
+    });
 };
 
 exports.delete = function (req, res) {
