@@ -12,17 +12,30 @@
                     </div>
 
                 </div>
+
+
+
                 <div class="b-list-info__element">
 
-                    <div class="b-field-text">
-                        <input class="b-field-text__input  b-field-text__input_small" value="{{category}}" type="text" placeholder="Category" id="dish-category">
+                    <div class="b-field-select b-field-select_small">
+                        <select class="b-field-select__input b-field-select__input_small" id="dish-category">
+                            <option value="" selected="" disabled="">Select dish category</option>
+                            <option value="1st_dish">1st_dish</option>
+                            <option value="Main_dish">Main_dish</option>
+                            <option value="Salad">Salad</option>
+                            <option value="Dessert">Dessert</option>
+                        </select>
                     </div>
+
                 </div>
+
+
                 <div class="b-list-info__element">
                     <div class="b-field-text">
-                        <input class="b-field-text__input  b-field-text__input_small" value="{{weight}}" type="text" placeholder="Weight" id="dish-weight">
+                        <input class="b-field-text__input  b-field-text__input_small" value="{{description}}" type="text" placeholder="Description" id="dish-description">
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -30,7 +43,7 @@
             <div class="b-list-info">
                 <div class="b-list-info__element">
                     <div class="b-field-text">
-                        <input class="b-field-text__input  b-field-text__input_small" value="{{description}}" type="text" placeholder="Description" id="dish-description">
+                        <input class="b-field-text__input  b-field-text__input_small" value="{{weight}}" type="text" placeholder="Weight" id="dish-weight">
                     </div>
                 </div>
                 <div class="b-list-info__element">
