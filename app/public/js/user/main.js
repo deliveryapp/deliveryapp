@@ -12,12 +12,9 @@ require.config({
         mainController: 'controllers/main-controller',
         dayMenuModel: 'models/day-menu-model',
         dishModel: 'models/dish-model',
-
-        userDayMenuModel: 'models/user-day-menu-model',
         userOrderModel: 'models/user-order-model',
         dishesCollection: 'collections/dishes-collection',
         daysMenuCollection: 'collections/days-menu-collection',
-        userDaysMenuCollection: 'collections/user-days-menu-collection',
         userOrdersCollection: 'collections/user-orders-collection',
         mainLayoutView: 'view/main-layout-view',
         navigationMenuLayoutView: 'view/navigation-menu-layout-view',

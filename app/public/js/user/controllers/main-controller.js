@@ -7,10 +7,8 @@ define(function (require, exports, module) {
 
         MainDashboardView = require('mainDashboardView'),
         NavigationMenuLayoutView = require('navigationMenuLayoutView'),
-        DayMenuView = require('dayMenuView'),
         MenuDaysController = require('menuDaysController'),
 
-        UserDaysMenuCollection = require('userDaysMenuCollection'),
         MenuMainView = require('menuPreselectionView'),
         UserOrdersCollection = require('userOrdersCollection'),
         DayMenuSelectionView = require('dayMenuSelectionView');
@@ -37,17 +35,20 @@ define(function (require, exports, module) {
 
             this.dishesCollection = new DishesCollection();
             this.daysMenuCollection = new DaysMenuCollection();
-            this.userDaysMenuCollection = new UserDaysMenuCollection();
-            this.userNextWeekMenuCollection = new UserDaysMenuCollection();
+            this.userDaysMenuCollection = new UserOrdersCollection();
             this.userOrdersCollection = new UserOrdersCollection();
             $.when(
                 this.dishesCollection.fetch({reset: true}),
                 this.daysMenuCollection.fetch({reset: true}),
+
                 this.userDaysMenuCollection.fetch({reset: true}),
+
                 this.userOrdersCollection.fetch({reset:true}),
+
                 $.getJSON('../db/userNextWeek.json', '', function (result) {
                     this.userNextWeekMenuCollection = result;
                 }.bind(this))
+
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -60,8 +61,6 @@ define(function (require, exports, module) {
 
         menu: function () {
             this.getData().done(function () {
-                var serializedCollection = this.userDaysMenuCollection.toJSON();
-                this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
 
 
                 this.menuMainView = new MenuMainView();
@@ -88,10 +87,8 @@ define(function (require, exports, module) {
 
         nextWeek: function () {
             this.getData().done(function () {
-                var serializedCollection = this.userDaysMenuCollection.toJSON();
-                this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
-                this.userNextWeekMenuCollection = new UserDaysMenuCollection(this.userNextWeekMenuCollection[0].days);
 
+                this.userNextWeekMenuCollection = new UserOrdersCollection(this.userNextWeekMenuCollection);
                 this.dashboard = new MainDashboardView({collection: this.userNextWeekMenuCollection});
                 this.regions.get('content').show(this.dashboard);
                 $('.next-week').addClass('disabled').removeAttr('href');
@@ -100,11 +97,8 @@ define(function (require, exports, module) {
 
         dashboard: function () {
             this.getData().done(function () {
-                var serializedCollection = this.userDaysMenuCollection.toJSON();
-                this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
-                this.userNextWeekMenuCollection = new UserDaysMenuCollection(this.userNextWeekMenuCollection[0].days);
 
-                this.dashboard = new MainDashboardView({collection: this.userDaysMenu});
+                this.dashboard = new MainDashboardView({collection: this.userDaysMenuCollection});
                 this.regions.get('content').show(this.dashboard);
                 $('.edit').addClass('disabled').removeAttr('href');
                 $('.current-week').addClass('disabled').removeAttr('href');
@@ -124,8 +118,6 @@ define(function (require, exports, module) {
         },
 
         selectDay: function (date) {
-            var serializedCollection = this.userDaysMenuCollection.toJSON();
-            this.userDaysMenu = new UserDaysMenuCollection(serializedCollection[0].days);
 
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
                 return userDayMenu.get('day') === date;

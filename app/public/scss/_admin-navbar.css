@@ -2,6 +2,7 @@
   width: 100%;
   height:50px;
   background-color: #464646;
+  margin: -6px 0 0 0;
 }
 
 @component primary-menu{
@@ -16,8 +17,6 @@
     padding: 0 25px 0 25px;
     color: #fff;
   }
-
-
 
   @modifier icon-center{
     position: absolute;
