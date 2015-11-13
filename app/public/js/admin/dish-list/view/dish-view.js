@@ -50,6 +50,8 @@ define(function(require, exports, module) {
                 this.model.set('price',this.ui.dishPrice.val());
                 this.render();
 
+                this.model.setPostUrl();
+
                 this.model.save();
 
             }

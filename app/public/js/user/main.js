@@ -12,6 +12,7 @@ require.config({
         mainController: 'controllers/main-controller',
         dayMenuModel: 'models/day-menu-model',
         dishModel: 'models/dish-model',
+
         userDayMenuModel: 'models/user-day-menu-model',
         userOrderModel: 'models/user-order-model',
         dishesCollection: 'collections/dishes-collection',

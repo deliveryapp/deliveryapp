@@ -14,6 +14,7 @@ require.config({
         dishModel: 'models/dish-model',
         userDayMenuModel: 'models/user-day-menu-model',
         userModel:'models/user-model',
+        weekModel: 'models/week-model',
         userOrderModel: 'models/user-order-model',
         usersCollection:'collections/users-collection',
         dishesCollection: 'collections/dishes-collection',

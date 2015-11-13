@@ -4,6 +4,7 @@ define(function(require, exports, module){
         _ = require('underscore'),
         UsersCollection = require ('usersCollection'),
         MainUserListView=require('mainUserListView'),
+        DayMenuModel = require('dayMenuModel'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         MainLayoutView = require('mainLayoutView'),
@@ -13,6 +14,7 @@ define(function(require, exports, module){
         VirtualCollection = require('backboneVirtualCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
         baseUrl = require('baseUrl'),
+        WeekModel = require('weekModel'),
         usersResource = require('usersResource'),
 
         MainDishListView = require ('mainDishListView');
@@ -45,11 +47,9 @@ define(function(require, exports, module){
             var res = $.Deferred();
 
             this.dishesCollection = new DishesCollection();
-            this.daysMenuCollection = new DaysMenuCollection();
             this.usersCollection = new UsersCollection();
             $.when(
                 this.dishesCollection.fetch({reset: true}),
-                this.daysMenuCollection.fetch({reset: true}),
                 this.usersCollection.fetch({reset: true})
             ).done(function () {
                     res.resolve();
@@ -58,34 +58,164 @@ define(function(require, exports, module){
             return res.promise();
         },
 
-        menu: function(){
-            //console.log('menu');
-            this.getData().done(function () {
-                this.userDaysMenu = this.daysMenuCollection;
+        getNextWeek: function () {
+            var res = $.Deferred();
 
+            this.weekModel = new WeekModel();
+            this.weekModel.setNextWeekUrl();
 
-                this.menuPreselectionView = new MenuPreselectionView();
+            $.when(
+                $.ajax({
+                    url: 'http://stark-eyrie-7510.herokuapp.com/weeks/next',
+                    type: 'get',
+                    crossDomain: true,
+                    success: function(data) {
+                        this.weekModel = new WeekModel(data);
+                    }.bind(this)
+                })
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
 
-                this.regions.get('content').show( this.menuPreselectionView );
+            return res.promise();
+        },
 
-                this.dayDishesCollection = new DishesCollection(this.daysMenuCollection.at(0).get('dishes'));
-                //console.log(this.dayDishesCollection);
+        setNextWeek: function () {
+            var res = $.Deferred();
+            this.weekModel.setNextWeekUrl();
+            console.log(this.weekModel.toJSON());
+            $.when(
+                $.ajax({
+                    url: 'http://stark-eyrie-7510.herokuapp.com/weeks/'+this.weekModel.get('startDate'),
+                    type: 'post',
+                    data: this.weekModel.toJSON(),
+                    crossDomain: true,
+                    success: function(data) {
+                        this.weekModel = new WeekModel(data);
+                    }.bind(this)
+                })
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
 
-                this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+            return res.promise();
+        },
 
-                //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
+        menu: function() {
+            this.getNextWeek().done(function () {
+                if(this.weekModel.get('startDate') === undefined) {
+                    //todo: prompt or whatever
+                    var date = new Date(2015, 12, 1);
+                    var startDate = date.getUTCDate();
+                    this.weekModel.set('startDate', startDate);//new Date(Date.UTC(2015, 11, 19, 0, 0, 0))
+                    this.setNextWeek().done(function () {
+                        this.getNextWeek().done(function () {
+                            this.prepareDayMenu();
+                            console.log(this.weekModel);
+                        }.bind(this));
+                    }.bind(this));
+                }
+                else {
 
+                    this.prepareDayMenu();
 
-
-                this.menuCard = new MenuDaysController({collection: this.dishesCollection});
-
-                var menu = this.menuCard.getAdminItem(this.daysMenuCollection);
-
-                this.menuPreselectionView.showChildView('dayMenu', menu);
-                this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
-                this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
-                this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
+                }
             }.bind(this));
+        },
+
+        getDays: function () {
+            var res = $.Deferred();
+            var url = 'http://stark-eyrie-7510.herokuapp.com/days?day=';
+            this.weekModel.get('days').map(function (day) {
+                url += day + ',';
+            });
+            console.log(url);
+            //debugger;
+
+            $.when(
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    crossDomain: true,
+                    success: function(data) {
+                        this.daysMenuCollection = new DaysMenuCollection(data);
+                        console.log(this.daysMenuCollection);
+                    }.bind(this)
+                })
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
+
+            return res.promise();
+        },
+
+        setDays: function () {
+            var res = $.Deferred();
+            this.daysMenuCollection = new DaysMenuCollection();
+            var index = 0;
+            var days = this.weekModel.get('days');
+            //this.weekModel.add({days:["2015-11-30T00:00:00.000Z","2015-12-01T00:00:00.000Z","2015-12-02T00:00:00.000Z","2015-12-03T00:00:00.000Z","2015-12-04T00:00:00.000Z","2015-12-05T00:00:00.000Z","2015-12-06T00:00:00.000Z"]})
+            for(index = 0; index <5; index++) {
+                this.daysMenuCollection.add(new DayMenuModel({
+                    'day': days[index],
+                    'dishes': []
+                }));
+            }
+            console.log(this.daysMenuCollection);
+            this.daysMenuCollection.map(function (model) {
+                model.setPostUrl();
+                //model.setPutUrl();
+                model.save();
+                //model.destroy();
+            });
+        },
+
+        prepareDayMenu: function () {
+            this.getData().done(function () {
+                console.log(this.weekModel);
+                var days = this.weekModel.get('days');
+                this.getDays().done(function () {
+                    if(this.daysMenuCollection.length>0)
+                        this.startDayMenu();
+                    else
+                    {
+                        this.setDays();
+                        this.startDayMenu();
+                    }
+                }.bind(this));
+
+            }.bind(this));
+        },
+
+        startDayMenu: function() {
+            this.menuPreselectionView = new MenuPreselectionView();
+
+            this.regions.get('content').show( this.menuPreselectionView );
+
+            this.currentDate = this.weekModel.get('days')[0];
+            this.currentDay = this.daysMenuCollection.at(0);
+            this.dayDishesCollection = new DishesCollection(this.daysMenuCollection.at(0).get('dishes'));
+
+            this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+
+            this.menuCard = new MenuDaysController({collection: this.dishesCollection});
+
+            var menu = this.menuCard.getAdminItem(this.daysMenuCollection);
+
+            this.menuPreselectionView.showChildView('dayMenu', menu);
+            this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
+            this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
+        },
+
+        dayMenuSaved: function (collection) {
+            this.currentDay.set('dishes', collection.toJSON());
+            var date = new Date(this.currentDay.get('day'));
+
+            //var dateString = date.getUTCFullYear()+'-'+date.getUTCMonth()+'-'+date.getUTCDay()+'T00:00:00.000Z';
+            //save to rest
+
         },
 
         dashboard: function(){
@@ -110,17 +240,16 @@ define(function(require, exports, module){
             var filtered = this.daysMenuCollection.filter(function (userDayMenu) {
                 return userDayMenu.get('day') === date;
             });
+            this.currentDay = filtered[0];
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
-
-            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
-
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
 
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
         },
 
-        addDish: function(){
+        addDish: function() {
 
             this.getData().done(function () {
 
@@ -143,7 +272,6 @@ define(function(require, exports, module){
         },
 
         userlist: function(){
-
             this.getData().done(function () {
 
                 this.virt_coll = new VirtualCollection(this.usersCollection, {url:baseUrl+usersResource});
@@ -169,49 +297,6 @@ define(function(require, exports, module){
             this.virt_coll.updateFilter(function (model) {
                 return model.get('name').toLowerCase().indexOf(name) > -1;
             });
-        },
-
-        syncCollection: function () {
-            //this.usersCollection.url = baseUrl+usersResource;
-            //this.usersCollection.map(function (model) {
-            //    model.save();//sync('update', model);//+'?id='+model.get('_id');
-                //var data = model.toJSON();
-                /*if(data._id === '56434e9f09a4a00f000f90ae')
-                    $.ajax({
-                        url: 'http://stark-eyrie-7510.herokuapp.com/users',
-                        data: data,//.toJSON()
-                        type: 'delete',
-                        crossDomain: true,
-                        success: function(data) { console.log(data); }
-                    });*/
-            //});
-            //this.usersCollection.sync('update', this.usersCollection)
-            //this.usersCollection.sync();
-        },
-
-        saveDish: function (data) {
-            //this.dishesCollection.sync('update',this.dishesCollection);
-            this.dishesCollection.map(function (model) {
-                //Backbone.sync('update', model);//sync("update", model)
-                $.ajax({
-                 url: 'http://stark-eyrie-7510.herokuapp.com/dishes/',//'+model.get('_id')
-                 data: model.toJSON(),
-                 type: 'post',
-                 crossDomain: true,
-                 success: function(data) { console.log(data); }
-                 });
-            });
-
-            /*$.ajax({
-                url: 'http://stark-eyrie-7510.herokuapp.com/dishes',
-                data: data,//.toJSON()
-                type: 'post',
-                crossDomain: true,
-                success: function(data) { console.log(data); }
-            });*/
         }
-
-
-
     });
 });
