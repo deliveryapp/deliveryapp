@@ -50,8 +50,8 @@ var populateOrderDishes = function (orders, res) {
 exports.getAll = function (req, res) {
     Orders.find({}, function (err, orders) {
         if (err) return res.status(400).send(err);
-
-        return res.send(orders);
+        populateOrderDishes(orders, res);
+        //return res.send(orders);
     });
 };
 
