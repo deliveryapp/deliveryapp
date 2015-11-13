@@ -51,7 +51,7 @@
     "staging": "PORT=3000 node app/index.js",
     "staging-win": "set PORT=3000 && node app/index.js",
     "debug": "PORT=3000 node-debug app/index.js",
-    "debug-remove": "node-debug app/index.js"
+    "debug-remote": "node-debug app/index.js"
   },
   "repository": {
     "type": "git",
