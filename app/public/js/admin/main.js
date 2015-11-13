@@ -22,7 +22,6 @@ require.config({
         userDaysMenuCollection: 'collections/user-days-menu-collection',
         userOrdersCollection: 'collections/user-orders-collection',
         mainLayoutView: 'view/main-layout-view',
-        navigationMenuLayoutView: 'view/navigation-menu-layout-view',
         dayMenuSelectionView: 'menu/views/day-menu-selection-view',
         adminDishCardView : '../components/admin-dish-card/admin-dish-card-view',
         adminDishCardEmpty: '../components/admin-dish-card/admin-dish-card-empty',
@@ -40,6 +39,8 @@ require.config({
         mainDishListView:'dish-list/view/main-dish-list-view',
         dishView:'dish-list/view/dish-view',
         emptyDishView:'dish-list/view/empty-dish-view',
+        mainDashboardView:'dashboard/view/main-dashboard-view',
+        mainStatisticView:'statistic/view/main-statistic-view',
 
         baseUrl: '../url/base-url',
         daysResource: '../url/days-url',

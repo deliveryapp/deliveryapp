@@ -74,6 +74,13 @@
   background: url(../images/dropdown_arrow.png) no-repeat right #fff;
   background-position: 220px 50%;
 
+  @modifier small {
+    height: 22px;
+    width: 282px;
+    margin:0 0 -2px 15px;
+    background: url(../images/dropdown_arrow.png) no-repeat right #fff;
+  }
+
   @modifier right {
     float: right;
   }
@@ -106,7 +113,10 @@
     &:focus {
       outline:none;
     }
-
+    @modifier small {
+      width: 282px;
+      height: 22px;
+    }
   }
 }
 

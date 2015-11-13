@@ -7,9 +7,10 @@ define(function(require, exports, module){
 
 
     module.exports  = Backbone.Model.extend({
+        urlRoot: baseUrl+usersResource,
         idAttribute: '_id',
-        url: function () {
-            return baseUrl+usersResource;//+'/'+this.get('_id');
+        defaults: {
+
         },
         setPostUrl: function () {
             this.url = baseUrl+usersResource;

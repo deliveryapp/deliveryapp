@@ -1,16 +1,17 @@
 @component dish-list-info{
   width: 770px;
-  @descendent dish-name-description{
+  text-align: left;
+
+  @descendent dish-name{
     width: 770px;
-    text-align: left;
   }
-  @descendent dish-category-weight{
-    width: 380px;
-    float: left;
+  @descendent dish-category-weight-price{
+    width: 770px;
+
   }
-  @descendent dish-price-id{
-    width: 380px;
-    float: left;
+  @descendent dish-description{
+    width: 770px;
+
   }
 }
 
@@ -49,6 +50,13 @@
     width: 70px;
     height: 80px;
   }
-
-
 }
+
+@component dish-list-info{
+  @descendent element{
+    width: 250px;
+    float:left;
+  }
+}
+
+

@@ -48,10 +48,14 @@ define(function(require, exports, module) {
                 this.model.set('weight',this.ui.dishWeight.val());
                 this.model.set('description',this.ui.dishDescription.val());
                 this.model.set('price',this.ui.dishPrice.val());
+
+                if (this.model.get('_id') === undefined){
+                    this.model.setPostUrl();
+                }
+                else{
+                    this.model.setPutUrl();
+                }
                 this.render();
-
-                this.model.setPostUrl();
-
                 this.model.save();
 
             }
