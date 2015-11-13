@@ -1,1 +1,1 @@
-web: npm debug-remote
+web: npm start
