@@ -41,8 +41,7 @@
     "grunt-autoprefixer": "^3.0.3",
     "grunt-postcss": "^0.7.0",
     "lost": "^6.6.2",
-    "cors": "2.7.1",
-    "node-inspector": "*"
+    "cors": "2.7.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -50,8 +49,7 @@
     "start": "node app/index.js",
     "staging": "PORT=3000 node app/index.js",
     "staging-win": "set PORT=3000 && node app/index.js",
-    "debug": "PORT=3000 node-debug app/index.js",
-    "debug-remote": "node-debug app/index.js"
+    "debug": "PORT=3000 node-debug app/index.js"
   },
   "repository": {
     "type": "git",

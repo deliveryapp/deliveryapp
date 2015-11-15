@@ -13,15 +13,13 @@ exports.get = function (req, res) {
             if (err) return res.status(400).send(err);
 
             populateDaysDishes(days, res);
-
-            return res.send(days);
         })
     } else {
         //find all
-        Days.find({}, function (err, dishes) {
+        Days.find({}, function (err, days) {
             if (err) return res.status(400).send(err);
 
-            res.send(dishes);
+            populateDaysDishes(days, res);
         });
     }
 };
@@ -29,7 +27,7 @@ exports.get = function (req, res) {
 var populateDaysDishes = function (days, res) {
     async.map(days, function (day, callback) {
         async.map(day.dishes, function (dish, callbackNested) {
-            Dishes.findById(dish.id, function (err, fullDish) {
+            Dishes.findById(dish._id, function (err, fullDish) {
                 callbackNested(null, fullDish);
             });
         }, function (err, fullDishes) {
