@@ -4,6 +4,7 @@ define(function (require, exports, module) {
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         WeekModel = require('weekModel'),
+        UserModel = require ('userModel'),
         MainLayoutView = require('mainLayoutView'),
 
         MainDashboardView = require('mainDashboardView'),
@@ -27,12 +28,38 @@ define(function (require, exports, module) {
             }
         }),
 
-        userId: '5644876700ce930f00fead4b',
 
         initialize: function () {
-            this.mainLayoutView = new MainLayoutView();
+            this.getActiveUser();
+            this.mainLayoutView = new MainLayoutView({model: this.activeUser});
             this.regions.get('main').show(this.mainLayoutView);
 
+        },
+
+        getActiveUser: function(){
+
+            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
+                                             firstName:'Admin',
+                                             lastName:'Admin',
+                                             image_path:'images/male.jpg',
+                                             mail:'Admin@engagepoint.com',
+                                             __v:0,
+                                             role:'admin'});
+
+            this.userId = this.activeUser.get('_id');
+
+           /*
+            var res = $.Deferred();
+            this.activeUser = new UserModel();
+            this.activeUser.setActiveUserUrl();
+            $.when(
+                this.activeUser.fetch()
+            ).done(function () {
+            this.userId = this.activeUser.get('_id');
+                    res.resolve();
+                }.bind(this));
+
+            return res.promise();*/
         },
 
         getCurrentWeek: function () {
@@ -79,8 +106,6 @@ define(function (require, exports, module) {
             return res.promise();
         },
 
-        start: function () {
-        },
 
         preloadCurrentWeekData: function () {
             this.getCurrentWeek().done(function () {
@@ -196,18 +221,26 @@ define(function (require, exports, module) {
             this.preloadNextWeekData();
         },
 
-        nextWeek: function () {
-                this.userNextWeekMenuCollection = new UserOrdersCollection(this.userNextWeekMenuCollection);
-                this.dashboard = new MainDashboardView({collection: this.userNextWeekMenuCollection});
-                this.regions.get('content').show(this.dashboard);
-                $('.next-week').addClass('disabled').removeAttr('href');
+        nextWeekDashboard: function () {
+
+            this.getNextWeek().done(function () {
+                this.getOrders(this.nextWeekModel);
+                this.userOrdersCollection.state = 'next_week';
+                this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
+                this.regions.get('content').show(this.nextMenuDashboard);
+            }.bind(this));
+
+
         },
 
         dashboard: function () {
-                this.dashboard = new MainDashboardView({collection: this.userDaysMenuCollection});
+            this.getCurrentWeek().done(function () {
+                this.getOrders(this.currentWeekModel);
+                this.userOrdersCollection.state = 'current_week';
+                this.dashboard = new MainDashboardView({collection: this.userOrdersCollection});
                 this.regions.get('content').show(this.dashboard);
-                $('.edit').addClass('disabled').removeAttr('href');
-                $('.current-week').addClass('disabled').removeAttr('href');
+            }.bind(this));
+
         },
 
         dishAdded: function (model) {

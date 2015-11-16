@@ -100,7 +100,6 @@
 }
 
 @component button-icon-text-disabled {
-  cursor: pointer;
   height: 36px;
   position: relative;
   width: 250px;

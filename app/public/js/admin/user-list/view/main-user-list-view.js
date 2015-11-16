@@ -38,6 +38,8 @@ define(function(require, exports, module) {
 
         addNewUser: function(){
             this.collection.unshift({'image_path': 'images/male.jpg', 'addPass':'true'});
+            this.trigger('filter:users:name:applied', '');
+           // $('#filter-name').val('');*/
         }
 
 

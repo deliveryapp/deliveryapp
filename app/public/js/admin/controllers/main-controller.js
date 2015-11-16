@@ -5,6 +5,7 @@ define(function(require, exports, module){
         UsersCollection = require ('usersCollection'),
         MainUserListView=require('mainUserListView'),
         DayMenuModel = require('dayMenuModel'),
+        UserModel = require ('userModel'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         MainLayoutView = require('mainLayoutView'),
@@ -33,13 +34,40 @@ define(function(require, exports, module){
         }),
 
         initialize: function () {
-            this.header = new MainLayoutView();
+            this.getActiveUser();
+            this.header = new MainLayoutView({model: this.activeUser});
             this.regions.get('main').show(this.header);
             this.start();
         },
 
         start: function () {
 
+        },
+
+        getActiveUser: function(){
+
+            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
+                firstName:'Admin',
+                lastName:'Admin',
+                image_path:'images/male.jpg',
+                mail:'Admin@engagepoint.com',
+                __v:0,
+                role:'admin'});
+
+            this.userId = this.activeUser.get('_id');
+
+            /*
+             var res = $.Deferred();
+             this.activeUser = new UserModel();
+             this.activeUser.setActiveUserUrl();
+             $.when(
+             this.activeUser.fetch()
+             ).done(function () {
+             this.userId = this.activeUser.get('_id');
+             res.resolve();
+             }.bind(this));
+
+             return res.promise();*/
         },
 
         getData: function () {
