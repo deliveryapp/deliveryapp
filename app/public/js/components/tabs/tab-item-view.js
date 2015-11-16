@@ -10,8 +10,7 @@ define(function (require, exports, module) {
         },
 
         initialize: function () {
-            var date = new Date(this.model.get('day'));
-            this.model.set('day', date.toDateString());
+
         },
 
         template: Tmpl,

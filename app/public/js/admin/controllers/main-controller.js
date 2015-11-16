@@ -17,7 +17,8 @@ define(function(require, exports, module){
         baseUrl = require('baseUrl'),
         WeekModel = require('weekModel'),
         usersResource = require('usersResource'),
-
+        weeksResource = require('weeksResource'),
+        daysResource = require('daysResource'),
         MainDishListView = require ('mainDishListView');
 
 
@@ -64,7 +65,7 @@ define(function(require, exports, module){
 
             $.when(
                 $.ajax({
-                    url: 'http://stark-eyrie-7510.herokuapp.com/weeks/next',
+                    url: baseUrl+weeksResource+'/next',
                     type: 'get',
                     crossDomain: true,
                     success: function(data) {
@@ -84,7 +85,7 @@ define(function(require, exports, module){
             console.log(this.weekModel.toJSON());
             $.when(
                 $.ajax({
-                    url: 'http://stark-eyrie-7510.herokuapp.com/weeks/'+this.weekModel.get('startDate'),
+                    url: baseUrl+weeksResource+'/'+this.weekModel.get('startDate'),
                     type: 'post',
                     data: this.weekModel.toJSON(),
                     crossDomain: true,
@@ -103,8 +104,9 @@ define(function(require, exports, module){
             this.getNextWeek().done(function () {
                 if(this.weekModel.get('startDate') === undefined) {
                     //todo: prompt or whatever
-                    var date = new Date(2015, 12, 1);
-                    var startDate = date.getUTCDate();
+                    var date = new Date(2015, 11, 1);
+                    var startDate = date.toUTCString();
+                    //debugger;
                     this.weekModel.set('startDate', startDate);//new Date(Date.UTC(2015, 11, 19, 0, 0, 0))
                     this.setNextWeek().done(function () {
                         this.getNextWeek().done(function () {
@@ -118,7 +120,9 @@ define(function(require, exports, module){
                     this.prepareDayMenu();
 
                 }
-            }.bind(this));
+            }.bind(this)).fail(function () {
+                alert('Can\'t reach server!');
+            });
         },
 
         getDays: function () {
@@ -205,11 +209,69 @@ define(function(require, exports, module){
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
             this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
+            //this.testOrder();
+        },
+
+        testOrder: function () {
+            var obj = {
+                userId: '564486d300ce930f00fead46',
+                day: '2015-11-20T00:00:00.000Z',
+                paymentStatus: false,
+                dishes: [{
+                    dish: {id: '5644bed76164be0f00634a94'},
+                    quantity: 2
+                },{
+                    dish: {id: '56447473dff2e80f007e4fff'},
+                    quantity: 1
+                }]
+            };
+            var url = 'http://stark-eyrie-7510.herokuapp.com/orders';
+            $.ajax({
+                url: url,
+                type: 'post',
+                crossDomain: true,
+                data: obj,
+                success: function(data) {
+                    console.log('ok');
+                    console.log(data);
+                }.bind(this)
+            });
+
+            /*obj = {
+                day: '2015-11-30T00:00:00.000Z',
+                dishes: [
+                    {_id: '5644bed76164be0f00634a94'},
+                    {_id: '56447473dff2e80f007e4fff'}
+                ]
+            };
+            url = 'http://stark-eyrie-7510.herokuapp.com/days';
+            $.ajax({
+                url: url,
+                type: 'post',
+                crossDomain: true,
+                data: obj,
+                success: function(data) {
+                    console.log('ok');
+                    console.log(data);
+                }.bind(this)
+            });*/
+
         },
 
         dayMenuSaved: function (collection) {
             this.currentDay.set('dishes', collection.toJSON());
             var date = new Date(this.currentDay.get('day'));
+
+            this.currentDay.setRestDate();
+            this.currentDay.setPutUrl();
+
+            console.log(this.currentDay.url);
+            console.log(this.currentDay);
+            debugger;
+            //this.currentDay.save();
+            this.currentDay.setVisibleDate();
+            console.log(this.currentDay);
+
 
             //var dateString = date.getUTCFullYear()+'-'+date.getUTCMonth()+'-'+date.getUTCDay()+'T00:00:00.000Z';
             //save to rest
