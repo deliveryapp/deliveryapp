@@ -8,7 +8,7 @@ define(function(require, exports, module){
         appRoutes: {
             '':'dashboard',
             'dashboard': 'dashboard',
-            'dashboard/NextWeek': 'nextWeek',
+            'dashboard/NextWeek': 'nextWeekDashboard',
             'menu': 'menu'
         }
 
