@@ -18,7 +18,6 @@ require.config({
         daysMenuCollection: 'collections/days-menu-collection',
         userOrdersCollection: 'collections/user-orders-collection',
         mainLayoutView: 'view/main-layout-view',
-        navigationMenuLayoutView: 'view/navigation-menu-layout-view',
         mainDashboardView: 'dashboard/view/main-dashboard-view',
         dishCardView: '../components/dish-card/dish-card-view',
         dishCardEmpty: '../components/dish-card/dish-card-empty',

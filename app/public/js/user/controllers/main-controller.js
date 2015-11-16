@@ -7,7 +7,6 @@ define(function (require, exports, module) {
         MainLayoutView = require('mainLayoutView'),
 
         MainDashboardView = require('mainDashboardView'),
-        NavigationMenuLayoutView = require('navigationMenuLayoutView'),
         MenuDaysController = require('menuDaysController'),
 
         MenuMainView = require('menuPreselectionView'),
@@ -33,8 +32,7 @@ define(function (require, exports, module) {
         initialize: function () {
             this.mainLayoutView = new MainLayoutView();
             this.regions.get('main').show(this.mainLayoutView);
-            this.navigation = new NavigationMenuLayoutView();
-            this.regions.get('content').show(this.navigation);
+
         },
 
         getCurrentWeek: function () {
