@@ -35,24 +35,16 @@ define(function (require, exports, module) {
             this.regions.get('main').show(this.mainLayoutView);
             this.navigation = new NavigationMenuLayoutView();
             this.regions.get('content').show(this.navigation);
-            //this.start();
         },
 
         getCurrentWeek: function () {
             var res = $.Deferred();
 
             this.currentWeekModel = new WeekModel();
-            this.currentWeekModel.setNextWeekUrl();
+            this.currentWeekModel.setCurrentWeekUrl();
 
             $.when(
-                $.ajax({
-                    url: baseUrl+weeksResource+'/next',
-                    type: 'get',
-                    crossDomain: true,
-                    success: function(data) {
-                        this.currentWeekModel = new WeekModel(data);
-                    }.bind(this)
-                })
+                this.currentWeekModel.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -67,14 +59,7 @@ define(function (require, exports, module) {
             this.nextWeekModel.setNextWeekUrl();
 
             $.when(
-                $.ajax({
-                    url: baseUrl+weeksResource+'/next',
-                    type: 'get',
-                    crossDomain: true,
-                    success: function(data) {
-                        this.nextWeekModel = new WeekModel(data);
-                    }.bind(this)
-                })
+                this.nextWeekModel.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -84,39 +69,11 @@ define(function (require, exports, module) {
 
         getDays: function () {
             var res = $.Deferred();
-            var url = baseUrl+daysResource+'?day=';
-            this.nextWeekModel.get('days').map(function (day) {
-                url += day + ',';
-            });
-            console.log(url);
-            //debugger;
+            this.daysMenuCollection = new DaysMenuCollection();
+            this.daysMenuCollection.setUrl(this.nextWeekModel);
 
             $.when(
-                $.ajax({
-                    url: url,
-                    type: 'get',
-                    crossDomain: true,
-                    success: function(data) {
-                        this.daysMenuCollection = new DaysMenuCollection(data);
-                        console.log(this.daysMenuCollection);
-                    }.bind(this)
-                })
-            ).done(function () {
-                    res.resolve();
-                }.bind(this));
-
-            return res.promise();
-        },
-
-        getData: function () {
-            var res = $.Deferred();
-
-            this.dishesCollection = new DishesCollection();
-            $.when(
-                this.dishesCollection.fetch({reset: true}),
-                $.getJSON('../db/userNextWeek.json', '', function (result) {
-                    this.userNextWeekMenuCollection = result;
-                }.bind(this))
+                this.daysMenuCollection.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -127,15 +84,15 @@ define(function (require, exports, module) {
         start: function () {
         },
 
-        preloadData: function () {
-            this.getNextWeek().done(function () {
-                if(this.nextWeekModel.get('startDate') === undefined) {
+        preloadCurrentWeekData: function () {
+            this.getCurrentWeek().done(function () {
+                if(this.currentWeekModel.get('startDate') === undefined) {
                     //todo: error when week doesn't exist
                 }
                 else {
                     this.getDays().done(function () {
                         if(this.daysMenuCollection.length>0)
-                            this.prepareOrders();
+                            this.prepareOrders(this.currentWeekModel);
                         else
                         {
                             //todo: error when days don't exist
@@ -145,25 +102,32 @@ define(function (require, exports, module) {
             }.bind(this));
         },
 
-        getOrders: function () {
+        preloadNextWeekData: function () {
+            this.getNextWeek().done(function () {
+                if(this.nextWeekModel.get('startDate') === undefined) {
+                    //todo: error when week doesn't exist
+                }
+                else {
+                    this.getDays().done(function () {
+                        if(this.daysMenuCollection.length>0)
+                            this.prepareOrders(this.nextWeekModel);
+                        else
+                        {
+                            //todo: error when days don't exist
+                        }
+                    }.bind(this));
+                }
+            }.bind(this));
+        },
+
+        getOrders: function (weekModel) {
             var res = $.Deferred();
-            var url = baseUrl+ordersResource+'/'+this.userId+'?day=';
-            this.nextWeekModel.get('days').map(function (day) {
-                url += day + ',';
-            });
-            console.log(url);
+            this.userOrdersCollection = new UserOrdersCollection();
+            this.userOrdersCollection.setUrl(weekModel, this.userId);
             //debugger;
 
             $.when(
-                $.ajax({
-                    url: url,
-                    type: 'get',
-                    crossDomain: true,
-                    success: function(data) {
-                        this.userOrdersCollection = new UserOrdersCollection(data);
-                        console.log(this.userOrdersCollection);
-                    }.bind(this)
-                })
+                this.userOrdersCollection.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -176,7 +140,6 @@ define(function (require, exports, module) {
             this.userOrdersCollection = new UserOrdersCollection();
             var index = 0;
             var days = this.nextWeekModel.get('days');
-            //this.nextWeekModel.add({days:["2015-11-30T00:00:00.000Z","2015-12-01T00:00:00.000Z","2015-12-02T00:00:00.000Z","2015-12-03T00:00:00.000Z","2015-12-04T00:00:00.000Z","2015-12-05T00:00:00.000Z","2015-12-06T00:00:00.000Z"]})
             for(index = 0; index < 5; index++) {
                 this.userOrdersCollection.add(new UserOrderModel({
                     'userId': this.userId,
@@ -196,8 +159,9 @@ define(function (require, exports, module) {
 
         },
 
-        prepareOrders: function () {
-            this.getOrders().done(function () {
+        prepareOrders: function (weekModel) {
+            this.getOrders(weekModel).done(function () {
+                console.log(this.userOrdersCollection);
                 if(this.userOrdersCollection.length>0) {
                     this.startMenu();
                 }
@@ -209,9 +173,6 @@ define(function (require, exports, module) {
         },
 
         startMenu: function () {
-            this.getData().done(function () {
-
-
                 this.menuMainView = new MenuMainView();
 
                 this.regions.get('content').show( this.menuMainView );
@@ -231,38 +192,29 @@ define(function (require, exports, module) {
                 this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
                 this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
                 this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
-            }.bind(this));
         },
 
         menu: function () {
-            this.preloadData();
+            this.preloadNextWeekData();
         },
 
         nextWeek: function () {
-            this.getData().done(function () {
-
                 this.userNextWeekMenuCollection = new UserOrdersCollection(this.userNextWeekMenuCollection);
                 this.dashboard = new MainDashboardView({collection: this.userNextWeekMenuCollection});
                 this.regions.get('content').show(this.dashboard);
                 $('.next-week').addClass('disabled').removeAttr('href');
-            }.bind(this));
         },
 
         dashboard: function () {
-            this.getData().done(function () {
-
                 this.dashboard = new MainDashboardView({collection: this.userDaysMenuCollection});
                 this.regions.get('content').show(this.dashboard);
                 $('.edit').addClass('disabled').removeAttr('href');
                 $('.current-week').addClass('disabled').removeAttr('href');
-            }.bind(this));
-
         },
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(new Backbone.Model({dish: model.toJSON(), quantity: 1}));
-            //this.generatedMenu.render();
-            //this.dayMenuSelectionView.render();
+
         },
 
         tabChanged: function (date) {
@@ -280,14 +232,11 @@ define(function (require, exports, module) {
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
-            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
         },
 
         index: function () {
             console.log('index route');
-            this.getData().done(function () {
                 console.log(this.userDaysMenuCollection);
-            }.bind(this));
         }
 
     });

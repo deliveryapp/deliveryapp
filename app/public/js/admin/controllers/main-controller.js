@@ -64,14 +64,7 @@ define(function(require, exports, module){
             this.weekModel.setNextWeekUrl();
 
             $.when(
-                $.ajax({
-                    url: baseUrl+weeksResource+'/next',
-                    type: 'get',
-                    crossDomain: true,
-                    success: function(data) {
-                        this.weekModel = new WeekModel(data);
-                    }.bind(this)
-                })
+                this.weekModel.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -265,12 +258,41 @@ define(function(require, exports, module){
             this.currentDay.setRestDate();
             this.currentDay.setPutUrl();
 
-            console.log(this.currentDay.url);
-            console.log(this.currentDay);
+            /*var json = this.currentDay.toJSON();
+
+            var id = json.dishes[0]._id;
+            //json.date = json.day;
+            json.day = '';
             debugger;
+            json.dishes[0] = {};
+            json.dishes[0]._id = id;
+            id = json.dishes[1]._id;
+            json.dishes[1] = {};
+            json.dishes[1]._id = id;
+
+            console.log(json);
+            debugger;*/
+            console.log(this.currentDay.url);
+            $.ajax({
+                url: this.currentDay.url,
+                type: 'post',
+                crossDomain: true,
+                data: json,
+                success: function(data) {
+                    console.log('ok');
+                    console.log(data);
+                }.bind(this)
+            });
+            console.log(this.currentDay);
             //this.currentDay.save();
+            debugger;
+
             this.currentDay.setVisibleDate();
             console.log(this.currentDay);
+
+
+
+            //var url = 'http://stark-eyrie-7510.herokuapp.com/orders';
 
 
             //var dateString = date.getUTCFullYear()+'-'+date.getUTCMonth()+'-'+date.getUTCDay()+'T00:00:00.000Z';

@@ -6,11 +6,21 @@ define(function(require, exports, module){
     module.exports  = Backbone.Model.extend({
         defaults: {
         },
-        postUrl: function () {
-            this.url = baseUrl+ordersResource;
+        setVisibleDate: function () {
+            this.set('day', new Date(this.restDate).toDateString());
         },
-        putUrl: function () {
-            this.url = baseUrl+ordersResource+'';
+        setRestDate: function () {
+            this.set('day', this.restDate);
+        },
+        url: baseUrl+ordersResource,
+        setPostUrl: function () {
+            this.url =  baseUrl+ordersResource;
+        },
+        setPutUrl: function (userId, days) {
+            this.url =  baseUrl+ordersResource+'?day='+ '/' + userId + '?day=';
+            days.map(function (day) {
+                this.url += day + ',';
+            }.bind(this));
         },
         calculateSummary: function() {
             var dishes = this.get('dishes');
