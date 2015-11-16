@@ -96,5 +96,7 @@ module.exports = function (app) {
     /**
      * Auth
      */
-    app.post('/login/', passport.authenticate('local'), handleRole);
+    app.post('/login/', passport.authenticate('local'), function (req, res) {
+        res.status(200).send('OK');
+    });
 };
