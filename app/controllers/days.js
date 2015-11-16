@@ -70,12 +70,14 @@ exports.post = function (req, res) {
 exports.put = function (req, res) {
     Days.findById(req.params.day, function (err, day) {
         if (err) return res.status(400).send(err);
-
-        day.dishes = req.body.dishes;
-
-        day.save(function (err, day) {
-            if (err) return res.status(400).send(err);
-            res.send(day);
-        });
+        if (day) {
+            day.dishes = req.body.dishes;
+            day.save(function (err, day) {
+                if (err) return res.status(400).send(err);
+                res.send(day);
+            });
+        } else {
+            res.status(200).send([]);
+        }
     });
 };
