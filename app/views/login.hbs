@@ -68,7 +68,7 @@
     $(document).ready(function () {
         $('#login-submit').on('click', function () {
             var user = {};
-            user.username = $('#login-username').val();
+            user.mail = $('#login-username').val();
             user.password = $('#login-password').val();
             $.ajax({
                 method: 'POST',

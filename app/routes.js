@@ -2,7 +2,6 @@ var dishes = require('./controllers/dishes'),
     weeks = require('./controllers/weeks'),
     users = require('./controllers/users'),
     orders = require('./controllers/orders'),
-    auth = require('./controllers/auth'),
     days = require('./controllers/days'),
     passport = require('passport'),
     _ = require('lodash');
@@ -75,7 +74,6 @@ module.exports = function (app) {
     app.get('/users/', users.get);
     app.get('/users/:id', users.getById);
     app.put('/users/:id', users.put);
-    app.get('/users/current', users.current);
     app.post('/users/', users.post);
     app.delete('/users/:id', users.delete);
 
@@ -98,6 +96,5 @@ module.exports = function (app) {
     /**
      * Auth
      */
-    app.post('/login/', passport.authenticate('local'), auth.login);
-    app.post('/register/', auth.register);
+    app.post('/login/', passport.authenticate('local'), handleRole);
 };

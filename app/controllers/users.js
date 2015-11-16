@@ -28,7 +28,7 @@ exports.post = function (req, res) {
         if (err) return res.status(400).send(err.message);
 
         passport.authenticate('local')(req, res, function () {
-            res.send(user);
+            return res.send(user);
         });
     });
 };
@@ -46,10 +46,16 @@ exports.get = function (req, res) {
 };
 
 exports.getById = function (req, res) {
+    if (req.params.id === 'current') {
+        if (!req || !req.user) return res.status(400).send('Unauthorized');
+
+        return res.send(utils.stripUserModel(req.user));
+    }
+
     Users.findById(req.params.id, function (err, user) {
         if (err) return res.status(400).send(err);
 
-        return res.send(user);
+        return res.send(utils.stripUserModel(user));
     });
 };
 
@@ -70,12 +76,6 @@ exports.put = function (req, res) {
             res.send(user);
         });
     });
-};
-
-exports.current = function (req, res) {
-    if (!req || !req.user) return res.status(400).send('Unauthorized');
-
-    res.send(utils.stripUserModel(req.user));
 };
 
 exports.delete = function (req, res) {

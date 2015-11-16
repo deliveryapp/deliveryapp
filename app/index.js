@@ -4,10 +4,11 @@ var fs = require('fs'),
     exphbs = require('express-handlebars'),
     mongoose = require('mongoose'),
     config = require('./config'),
-    app = express(),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    passport = require('passport');
+    passport = require('passport'),
+    session = require('cookie-session'),
+    app = express();
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: 'app/views/layouts/'}));
 app.set('view engine', '.hbs');
@@ -20,11 +21,10 @@ var port = process.env.PORT || config.PORT;
 
 connect();
 
-app.use(require('express-session')({
-    secret: 'ep enroll ui',
-    resave: false,
-    saveUninitialized: false
-}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(session({keys: ['ep', 'ui-intern']}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
@@ -40,8 +40,7 @@ passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
 
 app.set('views', __dirname + '/views/');
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+
 app.use(express.static(__dirname + '/public'));
 
 // Bootstrap routes

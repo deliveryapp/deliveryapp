@@ -1,5 +1,5 @@
 module.exports = {
-    db: 'mongodb://j:1@ds041563.mongolab.com:41563/food-delivery',
+    db: 'mongodb://admin:1@localhost:27017/fd',
     PORT: 80,
     constants: {
         DATE_PARSE_FORMAT: 'DD/MM/YYYY',
