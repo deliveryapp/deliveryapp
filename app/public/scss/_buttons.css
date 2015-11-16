@@ -9,29 +9,29 @@
   font-weight: 500;
   color: #000;
   background-color: #cccccc;
-  &:hover {
-    background-color: color(#cccccc a(-15%));;
-  }
-  &:active {
-    background-color: color(#cccccc lightness(40%));
-  }
-  &:focus {
-    outline:none;
-  }
+&:hover {
+   background-color: color(#cccccc a(-15%));;
+ }
+&:active {
+   background-color: color(#cccccc lightness(40%));
+ }
+&:focus {
+   outline:none;
+ }
   @modifier green {
     height: 34px;
     width: 100%;
     background-color: #8cc248;
     border: solid 1px #7db23a;
-    &:hover{
-      background-color: color(#8cc248 a(-15%));;
-    }
-    &:active {
-      background-color: color(#8cc248 lightness(40%));
-    }
-    &:focus {
-      outline:none;
-    }
+  &:hover{
+     background-color: color(#8cc248 a(-15%));;
+   }
+  &:active {
+     background-color: color(#8cc248 lightness(40%));
+   }
+  &:focus {
+     outline:none;
+   }
   }
   @modifier circle {
     border-radius: 50px;
@@ -41,6 +41,7 @@
 
 
 }
+
 
 @component button-icon-text {
   cursor: pointer;
@@ -55,32 +56,32 @@
   font-weight: 500;
   color: #fff;
   background-color: #cccccc;
-  &:hover {
-    background-color: color(#cccccc a(-15%));;
-  }
-  &:active {
-    background-color: color(#cccccc lightness(40%));
-  }
-  &:focus {
-    outline:none;
-  }
+&:hover {
+   background-color: color(#cccccc a(-15%));;
+ }
+&:active {
+   background-color: color(#cccccc lightness(40%));
+ }
+&:focus {
+   outline:none;
+ }
   @modifier main-color{
     background-color: #3f51b5;;
-    &:hover {
-      background-color: color(#3f51b5 a(-15%));;
-    }
-    &:active {
-      background-color: color(#3f51b5 lightness(40%));
-    }
+  &:hover {
+     background-color: color(#3f51b5 a(-15%));;
+   }
+  &:active {
+     background-color: color(#3f51b5 lightness(40%));
+   }
   }
   @modifier green{
     background-color: #8cc248;;
-    &:hover {
-      background-color: color(#8cc248 a(-15%));;
-    }
-    &:active {
-      background-color: color(#8cc248 lightness(40%));
-    }
+  &:hover {
+     background-color: color(#8cc248 a(-15%));;
+   }
+  &:active {
+     background-color: color(#8cc248 lightness(40%));
+   }
   }
   @modifier top-margin {
     margin-top: 10px;
@@ -98,6 +99,25 @@
   }
 }
 
+@component button-icon-text-disabled {
+  cursor: pointer;
+  height: 36px;
+  position: relative;
+  width: 250px;
+  border: solid 1px #000;
+  border-radius: 2px;
+  font-family: Roboto;
+  padding-left: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: grey;
+&:disabled {
+
+ }
+}
+
+
 
 
 @component button-icon {
@@ -110,15 +130,15 @@
   font-weight: 500;
   color: #fff;
   background-color: #cccccc;
-  &:hover {
-    background-color: color(#cccccc a(-15%));;
-  }
-  &:active {
-    background-color: color(#cccccc lightness(40%));
-  }
-  &:focus {
-    outline: none;
-  }
+&:hover {
+   background-color: color(#cccccc a(-15%));;
+ }
+&:active {
+   background-color: color(#cccccc lightness(40%));
+ }
+&:focus {
+   outline: none;
+ }
   @descendent icon {
     padding-top: 3px;
 
@@ -148,15 +168,15 @@
   }
   @modifier green {
     background-color: #8cc248;
-    &:hover{
-      background-color: color(#8cc248 a(-15%));;
-    }
-    &:active {
-      background-color: color(#8cc248 lightness(40%));
-    }
-    &:focus {
-      outline:none;
-    }
+  &:hover{
+     background-color: color(#8cc248 a(-15%));;
+   }
+  &:active {
+     background-color: color(#8cc248 lightness(40%));
+   }
+  &:focus {
+     outline:none;
+   }
   }
 }
 
@@ -165,8 +185,8 @@
   background-color: orange;
   height: 36px;
   cursor: pointer;
-/*  border: solid 1px color(#cccccc lightness(40%));
-  border-radius: 2px;*/
+  /*  border: solid 1px color(#cccccc lightness(40%));
+    border-radius: 2px;*/
 
   @modifier selected {
     background-color: color(#cccccc lightness(40%));
@@ -190,4 +210,5 @@
    }
   }
 }
+
 
