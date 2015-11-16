@@ -4,7 +4,8 @@ var dishes = require('./controllers/dishes'),
     orders = require('./controllers/orders'),
     auth = require('./controllers/auth'),
     days = require('./controllers/days'),
-    passport = require('passport');
+    passport = require('passport'),
+    _ = require('lodash');
 
 module.exports = function (app) {
     //layouts:
@@ -21,19 +22,28 @@ module.exports = function (app) {
         req.logout();
         res.redirect('/');
     });
-    app.get('/user', function (req, res) {
-        /*if (!req || !req.user) {
+    var handleRole = function (req, res) {
+        if (req.isUnauthenticated()) {
             return res.redirect('/login');
-        }*/
-        res.render('user', {layout: false});
-    });
-    app.get('/admin', function (req, res) {
-        /*if (!req || !req.user) {
-            return res.redirect('/login');
-        }*/
-        res.render('admin', {layout: false});
+        }
+        var roleStrategy = {
+            'user': function (res) {
+                return res.render('user', {layout: false});
+            },
+            'admin': function (res) {
+                return res.render('admin', {layout: false});
+            }
+        };
 
-    });
+        if (!_.isUndefined(roleStrategy[req.user.role])) {
+            roleStrategy[req.user.role](res);
+        } else {
+            return res.status(403).send('Unknown role');
+        }
+    };
+
+    app.get('/user', handleRole);
+    app.get('/admin', handleRole);
     app.get('/dishes-page', function (req, res) {
         res.render('dishes-page');
     });
