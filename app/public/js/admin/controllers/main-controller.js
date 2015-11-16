@@ -260,18 +260,12 @@ define(function(require, exports, module){
 
             /*var json = this.currentDay.toJSON();
 
-            var id = json.dishes[0]._id;
             //json.date = json.day;
-            json.day = '';
-            debugger;
-            json.dishes[0] = {};
-            json.dishes[0]._id = id;
-            id = json.dishes[1]._id;
-            json.dishes[1] = {};
-            json.dishes[1]._id = id;
+            json.day = '2015-11-24T00:00:00.000Z';
+
 
             console.log(json);
-            debugger;*/
+            debugger;
             console.log(this.currentDay.url);
             $.ajax({
                 url: this.currentDay.url,
@@ -282,7 +276,7 @@ define(function(require, exports, module){
                     console.log('ok');
                     console.log(data);
                 }.bind(this)
-            });
+            });*/
             console.log(this.currentDay);
             //this.currentDay.save();
             debugger;
