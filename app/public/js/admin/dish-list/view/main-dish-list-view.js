@@ -27,7 +27,6 @@ define(function(require, exports, module) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('name') +  ' from the system?');
 
             if (confirm_result === true) {
-                console.log(model.url());
                 model.destroy();
             }
 

@@ -1,0 +1,110 @@
+@component adminWeekOrderList {
+  padding-top: 100px;
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+
+  @descendent list-point {
+    display: inline-block;
+    margin: 5px;
+  }
+}
+
+@component weekOrder {
+
+  background: rgba(19, 0, 255, 0.21);
+  width: 65%;
+  margin: 0 auto;
+
+  @descendent list {
+    margin-left: 30px;
+    color: white;
+    background: rgba(0, 0, 0, 0.28);
+    padding: 10px;
+    text-align: left;
+
+    @modifier empty {
+      text-align: center;
+      margin: 70px 0 0 -30px;
+      padding: 0;
+      padding: 0;
+    }
+  }
+
+}
+
+
+@component ord {
+
+    @descendent week-day {
+    lost-colum: 12/12;
+    text-align: left;
+    float: left;
+    width: 100%;
+    background: rgba(8, 0, 243, 0.1);
+    border-bottom: solid 1px rgba(101, 94, 106, 0.49);
+    border-top: solid 1px rgba(101, 94, 106, 0.49);
+    padding: 0;
+    /* &:last-child {
+      background: red;
+    }*/
+    }
+    @descendent  row {
+    display: inline-block;
+    min-height:80px;
+    width: 100%;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    font-family: Roboto;
+    font-weight: 500;
+    border-top: solid 1px rgba(101, 94, 106, 0.49);
+
+    }
+
+}
+
+@component ord-dish {
+    @descendent name {
+        text-align: left;
+        lost-column: 6/12;
+    }
+    @descendent id {
+        lost-column: 2/12;
+    }
+    @descendent price {
+        lost-column: 2/12;
+    }
+    @descendent quantity {
+        lost-column: 2/12;
+    }
+    @descendent totalsum {
+       lost-column: 2/12;
+    }
+}
+@component ord-attr {
+    text-align: center;
+}
+@component ord-header {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Roboto;
+    font-weight: 500;
+    width: 100%;
+               vertical-align: middle;
+               display: inline-block;
+    @descendent name {
+       lost-column: 6/12;
+    }
+
+    @descendent price {
+       lost-column: 2/12;
+    }
+   @descendent quantity {
+       lost-column: 2/12;
+   }
+    @descendent totalsum {
+       lost-column: 2/12;
+    }
+}
+
+

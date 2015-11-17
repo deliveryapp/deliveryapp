@@ -14,6 +14,7 @@
 @import '_base.css';
 @import '_header.css';
 @import '_admin-navbar.css';
+@import '_admin-dashboard.css';
 @import '_dashboard.css';
 @import '_dishes.css';
 @import '_addNewDish.css';
@@ -25,3 +26,4 @@
 @import '_cards.css';
 @import '_footer.css';
 @import '_content.css';
+@import '_adminStatistic.css';

@@ -17,16 +17,21 @@ define(function(require, exports, module){
             this.trigger('dish:removed', this.model);
         },
         quantityMinus: function () {
-            //this.trigger('quantity:minus', this.model);
+
             if(this.model.get('quantity')!==1) {
                 this.model.set('quantity', this.model.get('quantity')-1);
-                this.render();
+                this.trigger('quantity:minus', this.model);
+                //this.render();
+
             }
+
         },
         quantityPlus: function () {
             this.model.set('quantity', this.model.get('quantity')+1);
-            this.render();
-            //this.trigger('quantity:plus', this.model);
+            //debugger;
+
+            this.trigger('quantity:plus', this.model);
+            //this.render();
         }
     });
 });

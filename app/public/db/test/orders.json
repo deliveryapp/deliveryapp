@@ -1,5 +1,8 @@
-
-     [
+[
+  {
+    "day": "12.10.2015",
+    "paymentStatus": false,
+    "dishes": [
       {
         "day": "12.10.2015",
         "paymentStatus": false,
@@ -59,13 +62,175 @@
             "quantity": 1
           }
         ]
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 1 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "day": "13.10.2015",
+    "paymentStatus": false,
+    "dishes": [
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 2 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 2
       },
       {
-        "day": "14.10.2015",
-        "paymentStatus": false,
-        "dishes": []
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 3 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
       },
       {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 4 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "day": "14.10.2015",
+    "paymentStatus": false,
+    "dishes": []
+  },
+  {
+    "day": "15.10.2015",
+    "paymentStatus": false,
+    "dishes": [
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 5 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 6 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 7 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 8 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 9 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 10 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "day": "16.10.2015",
+    "paymentStatus": false,
+    "dishes": [
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 11 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+>>>>>>> Stashed changes
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + Картофель тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+<<<<<<< Updated upstream
         "day": "15.10.2015",
         "paymentStatus": false,
         "dishes": [
@@ -196,5 +361,31 @@
             "quantity": 1
           }
         ]
+=======
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 12 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+      },
+      {
+        "dish": {
+          "id": "24",
+          "name": "Суп с фрикадельками Биток «Будапешт» + 13 тушеный Шпротный",
+          "weight": "",
+          "price": "35",
+          "image_path": "",
+          "description": "",
+          "category": ""
+        },
+        "quantity": 1
+>>>>>>> Stashed changes
       }
     ]
+  }
+]

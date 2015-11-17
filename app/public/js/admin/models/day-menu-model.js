@@ -10,13 +10,25 @@ define(function(require, exports, module){
         defaults: {
         },
         idAttribute: '_id',
+        restDate: null,
+        initialize: function () {
+            this.restDate = this.get('day');
+            this.set('day', new Date(this.restDate).toDateString());
+        },
+        setVisibleDate: function () {
+            this.set('day', new Date(this.restDate).toDateString());
+        },
+        setRestDate: function () {
+            this.set('day', this.restDate);
+        },
         url: baseUrl+daysResource,
         setPostUrl: function () {
             this.url =  baseUrl+daysResource;
         },
         setPutUrl: function () {
-            this.url =  baseUrl+daysResource+'?day='+this.get('day');
+            this.url =  'http://localhost/days'+'/'+this.get('_id')+"?day="+this.get('day');//'/'+this.get('_id') delete
         }
+
     });
 
 });

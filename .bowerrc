@@ -1,6 +1,6 @@
 {
     "directory": "app/public/lib/vendor",
-    "proxy": "",
+    "proxy": "http://proxy2.cht:3128",
     "https-proxy": "",
     "registry": {
         "search": [
