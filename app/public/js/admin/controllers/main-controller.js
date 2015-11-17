@@ -4,10 +4,10 @@ define(function(require, exports, module){
         _ = require('underscore'),
         UsersCollection = require ('usersCollection'),
         MainUserListView=require('mainUserListView'),
-        DayMenuModel = require('dayMenuModel'),
-        UserModel = require ('userModel'),
+        AdminOrderListView = require('adminOrderListView'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
+        UserOrdersCollection = require('userOrdersCollection'),
         MainLayoutView = require('mainLayoutView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         MenuDaysController = require('menuDaysController'),
@@ -25,7 +25,7 @@ define(function(require, exports, module){
 
     module.exports = Marionette.Object.extend({
 
-            regions: new Marionette.RegionManager({
+        regions: new Marionette.RegionManager({
             regions: {
                 'main': '#application',
                 'content': '.js-content'
@@ -66,7 +66,6 @@ define(function(require, exports, module){
              this.userId = this.activeUser.get('_id');
              res.resolve();
              }.bind(this));
-
              return res.promise();*/
         },
 
@@ -79,9 +78,11 @@ define(function(require, exports, module){
 
             this.dishesCollection = new DishesCollection();
             this.usersCollection = new UsersCollection();
+            this.userOrdersCollection = new UserOrdersCollection();
             $.when(
                 this.dishesCollection.fetch({reset: true}),
-                this.usersCollection.fetch({reset: true})
+                this.usersCollection.fetch({reset: true}),
+                this.userOrdersCollection.fetch({reset: true})
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -263,23 +264,23 @@ define(function(require, exports, module){
             });
 
             /*obj = {
-                day: '2015-11-30T00:00:00.000Z',
-                dishes: [
-                    {_id: '5644bed76164be0f00634a94'},
-                    {_id: '56447473dff2e80f007e4fff'}
-                ]
-            };
-            url = 'http://stark-eyrie-7510.herokuapp.com/days';
-            $.ajax({
-                url: url,
-                type: 'post',
-                crossDomain: true,
-                data: obj,
-                success: function(data) {
-                    console.log('ok');
-                    console.log(data);
-                }.bind(this)
-            });*/
+             day: '2015-11-30T00:00:00.000Z',
+             dishes: [
+             {_id: '5644bed76164be0f00634a94'},
+             {_id: '56447473dff2e80f007e4fff'}
+             ]
+             };
+             url = 'http://stark-eyrie-7510.herokuapp.com/days';
+             $.ajax({
+             url: url,
+             type: 'post',
+             crossDomain: true,
+             data: obj,
+             success: function(data) {
+             console.log('ok');
+             console.log(data);
+             }.bind(this)
+             });*/
 
         },
 
@@ -332,8 +333,9 @@ define(function(require, exports, module){
         },
 
         dashboard: function(){
-            this.dashboard = new MainDashboardView();
-            this.regions.get('content').show(this.dashboard);
+            this.virt_coll = new VirtualCollection(this.userOrdersCollection);
+            this.orderList = new AdminOrderListView({collection: this.virt_coll});
+            this.regions.get('content').show(this.orderList);
         },
 
         statistic: function(){

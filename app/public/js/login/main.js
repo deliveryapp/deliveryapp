@@ -10,15 +10,9 @@ require.config({
         Router: 'router',
         MainController: 'controllers/main-controller',
         MainLayoutView: 'view/main-layout-view'
-
-
-
-
     },
     'shim' : {
         'jquery': { exports: "$" }
-
-
     },
 
     hbs: { 
