@@ -1,5 +1,6 @@
 define(function(require, exports, module){
-    var Backbone = require('backbone'),
+    var _ = require('underscore'),
+        Backbone = require('backbone'),
         baseUrl = require('baseUrl'),
         ordersResource = require('ordersResource');
 
@@ -27,14 +28,6 @@ define(function(require, exports, module){
             days.map(function (day) {
                 this.url += day + ',';
             }.bind(this));*/
-        },
-        calculateSummary: function() {
-            var dishes = this.get('dishes');
-            debugger;
-            var res = dishes.reduce(function(orderSummary, item){
-                return orderSummary + item.get('price');
-            }, 0);
-            return res;
         }
     });
 

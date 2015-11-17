@@ -29,14 +29,6 @@ define(function(require, exports, module){
                 this.url += day + ',';
             }.bind(this));*/
             debugger;
-        },
-        calculateSummary: function() {
-            var dishes = this.get('dishes');
-            debugger;
-            var res = dishes.reduce(function(orderSummary, item){
-                return orderSummary + item.get('price');
-            }, 0);
-            return res;
         }
     });
 

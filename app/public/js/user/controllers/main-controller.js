@@ -202,7 +202,7 @@ define(function (require, exports, module) {
 
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 
-                this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+                this.dayMenuSelectionView = new DayMenuSelectionView({model:this.getDefaultMenuSelectionModel(), collection: this.dayDishesCollection});
                 this.currentDay = this.dayDishesCollection;
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
@@ -235,7 +235,10 @@ define(function (require, exports, module) {
             this.currentDay.setVisibleDate();
             console.log(this.currentDay);
             //save to rest
+        },
 
+        getDefaultMenuSelectionModel: function () {
+            return new Backbone.Model({summary: 0});
         },
 
         menu: function () {
@@ -265,8 +268,10 @@ define(function (require, exports, module) {
         },
 
         dishAdded: function (model) {
-            this.dayDishesCollection.add(new Backbone.Model({dish: model.toJSON(), quantity: 1}));
-
+            this.dayDishesCollection.add({dish: model.toJSON(), quantity: 1});
+            console.log(this.dayDishesCollection.calculateSummary());
+            this.dayMenuSelectionView.model = new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()});
+            this.dayMenuSelectionView.render();
         },
 
         tabChanged: function (date) {
@@ -281,7 +286,7 @@ define(function (require, exports, module) {
             });
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.currentDay = filtered[0];
-            this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
+            this.dayMenuSelectionView = new DayMenuSelectionView({model: this.getDefaultMenuSelectionModel(), collection: this.dayDishesCollection});
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
