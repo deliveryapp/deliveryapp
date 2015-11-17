@@ -10,8 +10,15 @@ define(function(require, exports, module){
         template: template,
         childView: UserDishCardView,
         emptyView: UserDishCardEmpty,
+        childViewContainer: '.js-selected-day-menu',
         childEvents:{
             'dish:removed': 'dishRemoved'
+        },
+        events: {
+            'click .js-button-icon-save-day-menu': 'saveDayMenu'
+        },
+        saveDayMenu: function () {
+            this.trigger('user:day:menu:saved',this.collection);
         },
         dishRemoved: function (view, model) {
             this.collection.remove(model);

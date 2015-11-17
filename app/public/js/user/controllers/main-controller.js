@@ -203,18 +203,39 @@ define(function (require, exports, module) {
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
-
+                this.currentDay = this.dayDishesCollection;
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
                 this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
 
                 this.generatedMenu = this.tabContainer.getUserItem(this.userOrdersCollection);
+
                 //this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
                 this.menuMainView.showChildView('dayMenu', this.generatedMenu);
 
                 this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
+                //user:day:menu:saved
+                this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
                 this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
                 this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
+        },
+
+        dayMenuSaved: function (collection) {
+            //todo: save user menu
+            //debugger;
+            this.currentDay.set('dishes', collection.toJSON());
+            var date = new Date(this.currentDay.get('day'));
+
+            this.currentDay.setRestDate();
+            this.currentDay.setPutUrl(this.userId, this.nextWeekModel.get('days'));
+            console.log(this.currentDay);
+            console.log(this.currentDay.url);
+            debugger;
+            //this.currentDay.save();
+            this.currentDay.setVisibleDate();
+            console.log(this.currentDay);
+            //save to rest
+
         },
 
         menu: function () {
@@ -259,10 +280,11 @@ define(function (require, exports, module) {
                 return userDayMenu.get('day') === date;
             });
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
-
+            this.currentDay = filtered[0];
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
+            this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
         },
 
         index: function () {

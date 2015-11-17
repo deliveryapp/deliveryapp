@@ -286,28 +286,33 @@ define(function(require, exports, module){
             this.currentDay.setRestDate();
             this.currentDay.setPutUrl();
 
-            /*var json = this.currentDay.toJSON();
+            //this.currentDay.setPostUrl();
+            var json = this.currentDay.toJSON();
 
             //json.date = json.day;
-            json.day = '2015-11-24T00:00:00.000Z';
+            json.date = json.day;
 
 
             console.log(json);
-            debugger;
+            //debugger;
             console.log(this.currentDay.url);
             $.ajax({
                 url: this.currentDay.url,
-                type: 'post',
+                type: 'put',
                 crossDomain: true,
                 data: json,
                 success: function(data) {
                     console.log('ok');
                     console.log(data);
                 }.bind(this)
-            });*/
+            });
+
+
+
             console.log(this.currentDay);
-            //this.currentDay.save();
-            debugger;
+            //debugger;
+            //this.currentDay.destroy();
+            //debugger;
 
             this.currentDay.setVisibleDate();
             console.log(this.currentDay);
