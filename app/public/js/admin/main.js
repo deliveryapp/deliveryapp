@@ -39,6 +39,7 @@ require.config({
         /****-amind-dashboard--********/
         weekOrderView: 'dashboard/view/weekorder-view',
         adminWeekOrderListView:'dashboard/view/admin-weekorder-list-view',
+        ordersCollection : 'collections/order-collection',
         /*****--*****/
         emptyUserView: 'user-list/view/empty-user-view',
         mainDishListView:'dish-list/view/main-dish-list-view',

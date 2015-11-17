@@ -4,7 +4,8 @@ define(function(require, exports, module){
         _ = require('underscore'),
         UsersCollection = require ('usersCollection'),
         MainUserListView=require('mainUserListView'),
-        AdminOrderListView = require('adminOrderListView'),
+        AdminWeekOrderListView = require('adminWeekOrderListView'),
+        OrdersCollection = require('ordersCollection'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         UserOrdersCollection = require('userOrdersCollection'),
@@ -78,11 +79,11 @@ define(function(require, exports, module){
 
             this.dishesCollection = new DishesCollection();
             this.usersCollection = new UsersCollection();
-            this.userOrdersCollection = new UserOrdersCollection();
+            this.ordersCollection = new OrdersCollection();
             $.when(
                 this.dishesCollection.fetch({reset: true}),
                 this.usersCollection.fetch({reset: true}),
-                this.userOrdersCollection.fetch({reset: true})
+                this.ordersCollection.fetch({reset: true})
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -333,9 +334,12 @@ define(function(require, exports, module){
         },
 
         dashboard: function(){
-            this.virt_coll = new VirtualCollection(this.userOrdersCollection);
-            this.orderList = new AdminOrderListView({collection: this.virt_coll});
-            this.regions.get('content').show(this.orderList);
+            this.getData().done(function () {
+                this.virt_coll = new VirtualCollection(this.ordersCollection);
+                this.orderList = new  AdminWeekOrderListView({collection: this.virt_coll});
+                this.regions.get('content').show(this.orderList);
+            }.bind(this));
+
         },
 
         statistic: function(){
