@@ -70,6 +70,10 @@ define(function(require, exports, module){
              return res.promise();*/
         },
 
+        getAllUser: function(){
+
+        },
+
         getData: function () {
             var res = $.Deferred();
 
@@ -333,8 +337,11 @@ define(function(require, exports, module){
         },
 
         statistic: function(){
-            this.statisticPage = new MainStatisticView();
-            this.regions.get('content').show(this.statisticPage);
+            this.getData().done(function () {
+                this.virt_coll = new VirtualCollection(this.usersCollection, {url:baseUrl+usersResource});
+                this.statisticPage = new MainStatisticView({collection: this.virt_coll});
+                this.regions.get('content').show(this.statisticPage);
+            }.bind(this));
         },
 
         dishAdded: function (model) {

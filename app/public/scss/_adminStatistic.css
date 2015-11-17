@@ -1,0 +1,54 @@
+@component statistic-list{
+    display: inline-flex;
+    justify-content: space-around;
+    width: 980px;
+    height: 50px;
+    align-items:center;
+    margin: 0 0 7px 0;
+    border-radius: 10px;
+    background-color:#275ECA;
+
+
+
+  @descendent personal-info{
+    width: 200px;
+    height: 50px;
+    text-align: center;
+
+  }
+  @descendent order-sum{
+    text-align: left;
+    width: 125px;
+    height: 50px;
+    line-height: 50px;
+
+  }
+  @descendent payment-status-button{
+    width: 150px;
+    height: 35px;
+    text-align: left;
+  }
+}
+
+@component statistic-personal-info{
+  color:#C5CAE9;
+  line-height: 50px;
+  font-size: 20px;
+
+    @modifier paid{
+        color:#8cc248;
+    }
+
+  @descendent name{
+    float:left;
+    height: 50px;
+
+
+  }
+  @descendent last-name{
+    float:left;
+    height: 50px;
+
+  }
+}
+

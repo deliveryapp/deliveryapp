@@ -39,6 +39,7 @@ require.config({
         emptyDishView:'dish-list/view/empty-dish-view',
         mainDashboardView:'dashboard/view/main-dashboard-view',
         mainStatisticView:'statistic/view/main-statistic-view',
+        statisticView:'statistic/view/statistic-view',
 
         baseUrl: '../url/base-url',
         daysResource: '../url/days-url',
