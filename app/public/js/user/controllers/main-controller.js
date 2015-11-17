@@ -268,6 +268,7 @@ define(function (require, exports, module) {
         },
 
         dishAdded: function (model) {
+            //this.
             this.dayDishesCollection.add({dish: model.toJSON(), quantity: 1});
             console.log(this.dayDishesCollection.calculateSummary());
             this.dayMenuSelectionView.model = new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()});
