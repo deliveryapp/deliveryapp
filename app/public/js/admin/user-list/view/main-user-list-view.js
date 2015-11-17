@@ -3,7 +3,7 @@ define(function(require, exports, module) {
         $ = require ('jquery'),
         UserView = require('userView'),
         emptyUserView = require('emptyUserView'),
-        MainUserListView = require('hbs!user-list/view/templates/main-user-list-view');
+        MainUserListView = require('hbs!user-list/view/templates/admin-order-list-view');
 
 
     module.exports = Marionette.CompositeView.extend({

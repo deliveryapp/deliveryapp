@@ -1,4 +1,4 @@
-@component week-orders-list{
+@component week-orders-list {
   padding-top: 100px;
   display: inline-flex;
   width: 100%;
@@ -10,7 +10,7 @@
   }
 }
 
-@component user-day-menu-layer{
+@component user-day-menu-layer {
   width: 300px;
   height: 400px;
   background-color: #275ECA;
@@ -23,22 +23,21 @@
     text-align: center;
   }
 
-
-
   @descendent list {
+
     margin-left: 30px;
     color: white;
     padding: 10px;
     text-align: left;
 
-    @modifier empty{
+    @modifier empty {
+
       text-align: center;
       margin: 70px 0 0 -30px;
       padding: 0;
     }
   }
 }
-
 
 @component dashboard-nav {
   text-align: center;
@@ -48,4 +47,18 @@
     display: inline-block;
     margin: 0 15px 15px 0;
   }
+
+  @descendent list {
+    margin-left: 30px;
+    color: white;
+    padding: 10px;
+    text-align: left;
+
+    @modifier empty {
+      text-align: center;
+      margin: 70px 0 0 -30px;
+      padding: 0;
+    }
+  }
+
 }

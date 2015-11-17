@@ -42,10 +42,11 @@
     "grunt-postcss": "^0.7.0",
     "lost": "^6.6.2",
     "cors": "2.7.1"
+
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "grunt postcss && grunt cssmin && grunt copy && bower install",
+    "postinstall": "grunt postcss && grunt cssmin && bower i && grunt copy",
     "start": "node app/index.js",
     "staging": "PORT=3000 node app/index.js",
     "staging-win": "set PORT=3000 && node app/index.js",
@@ -67,6 +68,7 @@
   },
   "engines": {
     "node": "4.x.x",
-    "npm": "2.x.x"
+    "npm": "2.1.x"
   }
+
 }

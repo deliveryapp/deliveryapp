@@ -1,6 +1,7 @@
 require.config({
     paths: {
         jquery: '../../lib/vendor/jquery/dist/jquery',
+        moment: '../../lib/vendor/node_modules/moment/moment',
         underscore: '../../lib/vendor/underscore/underscore',
         backbone: '../../lib/vendor/backbone/backbone',
         handlebars: '../../lib/vendor/require-handlebars-plugin/hbs/handlebars.runtime',
@@ -14,11 +15,13 @@ require.config({
         dishModel: 'models/dish-model',
         userModel:'models/user-model',
         weekModel: 'models/week-model',
+        ordersModel:'models/orders-model',
         userOrderModel: 'models/user-order-model',
         usersCollection:'collections/users-collection',
         dishesCollection: 'collections/dishes-collection',
         daysMenuCollection: 'collections/days-menu-collection',
         userOrdersCollection: 'collections/user-orders-collection',
+        userDaysMenuCollection: 'collections/user-days-menu-collection',
         mainLayoutView: 'view/main-layout-view',
         dayMenuSelectionView: 'menu/views/day-menu-selection-view',
         adminDishCardView : '../components/admin-dish-card/admin-dish-card-view',
@@ -33,14 +36,17 @@ require.config({
         dayMenuView: '../components/day-menu/day-menu-view',
         mainUserListView:'user-list/view/main-user-list-view',
         userView: 'user-list/view/user-view',
+        /****-amind-dashboard--********/
+        weekOrderView: 'dashboard/view/weekorder-view',
+        adminWeekOrderListView:'dashboard/view/admin-weekorder-list-view',
+        ordersCollection : 'collections/order-collection',
+        /*****--*****/
         emptyUserView: 'user-list/view/empty-user-view',
         mainDishListView:'dish-list/view/main-dish-list-view',
         dishView:'dish-list/view/dish-view',
         emptyDishView:'dish-list/view/empty-dish-view',
-        mainDashboardView:'dashboard/view/main-dashboard-view',
         mainStatisticView:'statistic/view/main-statistic-view',
         statisticView:'statistic/view/statistic-view',
-
         baseUrl: '../url/base-url',
         daysResource: '../url/days-url',
         dishesResource: '../url/dishes-url',
@@ -49,16 +55,17 @@ require.config({
         weeksResource: '../url/weeks-url',
         mainAddDishView: 'dish-list/view/main-add-dish-view'
 
+
+
+
     },
     'shim' : {
         'jquery': { exports: '$' }
-
-
     },
 
-    hbs: { 
-        helpers: true,            
-        templateExtension: 'hbs', 
+    hbs: {
+        helpers: true,
+        templateExtension: 'hbs',
         partialsUrl: ''           
     }
 });
