@@ -6,7 +6,8 @@
     align-items:center;
     margin: 0 0 7px 0;
     border-radius: 10px;
-    background-color:#275ECA;
+    /*background-color:#6E6E6E;*/
+    background-color:#FFF;
 
 
 
@@ -31,7 +32,6 @@
 }
 
 @component statistic-personal-info{
-  color:#C5CAE9;
   line-height: 50px;
   font-size: 20px;
 

@@ -122,7 +122,7 @@
 @component button-icon {
   width: 40px;
   height: 40px;
-  border: solid 1px #000;
+  border: solid 1px #8A8888;
 
   font-family: Roboto;
   font-size: 16px;
