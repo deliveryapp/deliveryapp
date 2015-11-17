@@ -268,11 +268,18 @@ define(function (require, exports, module) {
         },
 
         dishAdded: function (model) {
-            //this.
-            this.dayDishesCollection.add({dish: model.toJSON(), quantity: 1});
-            console.log(this.dayDishesCollection.calculateSummary());
-            this.dayMenuSelectionView.model = new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()});
-            this.dayMenuSelectionView.render();
+            var dishInList = false;
+            this.dayDishesCollection.map(function (dish) {
+                if(dish.get('dish')._id === model.get('_id'))
+                    dishInList = true;
+            });
+            if(!dishInList)
+            {
+                this.dayDishesCollection.add({dish: model.toJSON(), quantity: 1});
+                console.log(this.dayDishesCollection.calculateSummary());
+                this.dayMenuSelectionView.model = new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()});
+                this.dayMenuSelectionView.render();
+            }
         },
 
         tabChanged: function (date) {
