@@ -80,9 +80,12 @@ exports.put = function (req, res) {
         if (err) return res.status(400).send(err);
 
         order[0].paymentStatus = req.body.paymentStatus;
+        order[0].dishes = req.body.dishes;
         for(var i=0;i<req.body.dishes.length;i++)
+        {
             order[0].dishes[i].dish.id = req.body.dishes[i].dish._id;
-
+            order[0].dishes[i].quantity = req.body.dishes[i].quantity;
+        }
         console.log(req.body.dishes);
         console.log("\r\n");
         //order[0]._id = req.body._id;
