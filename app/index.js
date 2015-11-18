@@ -7,7 +7,6 @@ var fs = require('fs'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
-    session = require('cookie-session'),
     app = express();
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'home', layoutsDir: 'app/views/layouts/'}));
@@ -24,7 +23,6 @@ connect();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(session({keys: ['ep', 'ui-intern']}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
