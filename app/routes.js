@@ -8,9 +8,6 @@ var dishes = require('./controllers/dishes'),
 
 module.exports = function (app) {
     //layouts:
-    app.get('/lll', function (req, res) {
-        res.render('new_login', {layout: false});
-    });
     app.get('/', function (req, res) {
         res.send('Home');
     });
@@ -22,23 +19,24 @@ module.exports = function (app) {
         res.redirect('/');
     });
     var handleRole = function (req, res) {
-        if (req.isUnauthenticated()) {
+        /*if (req.isUnauthenticated()) {
             return res.redirect('/login');
         }
         var roleStrategy = {
             'user': function (res) {
                 return res.render('user', {layout: false});
             },
-            'admin': function (res) {
+            'admin': function (res) {*/
+        return res.render('user', {layout: false});
                 return res.render('admin', {layout: false});
-            }
-        };
-
+            //}
+        //};
+/*
         if (!_.isUndefined(roleStrategy[req.user.role])) {
             roleStrategy[req.user.role](res);
         } else {
             return res.status(403).send('Unknown role');
-        }
+        }*/
     };
 
     app.get('/user', handleRole);
@@ -84,6 +82,8 @@ module.exports = function (app) {
     app.get('/days/', days.get);
     app.post('/days/', days.post);
     app.put('/days/', days.put);
+    app.put('/days/:id', days.put);
+    //app.delete('/days/:id', days.destroy);
 
     /**
      * Orders REST
@@ -92,6 +92,7 @@ module.exports = function (app) {
     app.get('/orders/:userId/', orders.get);
     app.post('/orders/', orders.post);
     app.put('/orders/', orders.put);
+    app.put('/orders/:userId/:id', orders.put);
 
     /**
      * Auth

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose'),
+var mongoose = require('mongoose').set('debug', true),
     Schema = mongoose.Schema;
 
 var OrdersSchema = new Schema({

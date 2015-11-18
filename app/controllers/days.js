@@ -43,7 +43,7 @@ var populateDaysDishes = function (days, res) {
 };
 
 exports.delete = function (req, res) {
-    Days.findById(req.params.day, function (err, day) {
+    Days.findById(req.params.id, function (err, day) {
         if (err) return res.status(400).send(err);
         day.remove(function (err) {
             if (err) return res.status(400).send(err);
@@ -68,7 +68,7 @@ exports.post = function (req, res) {
 };
 
 exports.put = function (req, res) {
-    Days.findById(req.params.day, function (err, day) {
+    Days.findById(req.params.id, function (err, day) {
         if (err) return res.status(400).send(err);
         if (day) {
             day.dishes = req.body.dishes;

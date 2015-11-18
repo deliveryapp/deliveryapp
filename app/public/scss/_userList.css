@@ -2,18 +2,16 @@
   display:inline-block;
 
   @descendent title {
-    color:gold;
+    font-weight: bold;
     float:left;
     margin: 0 5px 0 0;
   }
 
   @descendent text {
-    color:white;
     float:left;
   }
 
   @descendent dish-text {
-    color:white;
     float:left;
     width: 675px;
     /*white-space: nowrap;*/
@@ -29,7 +27,7 @@
     width: 980px;
     height: 100px;
     align-items:center;
-    background-color: #275ECA;
+    background-color: #fff;
     margin: 0 0 7px 0;
     border-radius: 20px;
  

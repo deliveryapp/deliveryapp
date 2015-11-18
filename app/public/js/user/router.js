@@ -6,9 +6,9 @@ define(function(require, exports, module){
         controller: new MainController(),
 
         appRoutes: {
-            '':'index',
+            '':'dashboard',
             'dashboard': 'dashboard',
-            'dashboard/NextWeek': 'nextWeek',
+            'dashboard/NextWeek': 'nextWeekDashboard',
             'menu': 'menu'
         }
 

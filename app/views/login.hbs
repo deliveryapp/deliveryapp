@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
+    <!--<link rel="stylesheet" href="lib/vendor/Materialize/dist/css/materialize.css">-->
+    <script data-main="js/login/main" type="text/javascript" src="lib/vendor/requirejs/require.js"></script>
+</head>
+<body>
+<div id="application"></div>
+</body>
+</html>
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
@@ -21,26 +41,10 @@
 
 <div style="border: 1px solid greenyellow; padding: 20px;">
     <h1>Register account</h1>
-    <label for="register-firstName">First Name</label>
+    <label for="register-username">Username</label>
     <br/>
-    <input type="text" id="register-firstName"/>
+    <input type="text" id="register-username"/>
     <br/>
-
-    <label for="register-lastName">Last Name</label>
-    <br/>
-    <input type="text" id="register-lastName"/>
-    <br/>
-
-    <label for="register-email">Mail</label>
-    <br/>
-    <input type="text" id="register-email"/>
-    <br/>
-
-    <label for="register-role">Role</label>
-    <br/>
-    <input type="text" id="register-role"/>
-    <br/>
-
     <label for="register-password">Password</label>
     <br/>
     <input type="password" id="register-password"/>
@@ -80,22 +84,16 @@
             });
         });
         $('#register-submit').on('click', function () {
-            var user = {
-                firstName: $('#register-firstName').val(),
-                lastName: $('#register-lastName').val(),
-                mail: $('#register-email').val(),
-                role: $('#register-role').val(),
-                password: $('#register-password').val(),
-                image_path: 'dafdaf'
-            };
+            var user = {};
+            user.username = $('#register-username').val();
+            user.password = $('#register-password').val();
 
             $.ajax({
                 method: 'POST',
-                url: '/users',
-                data: JSON.stringify(user),
-                contentType: "application/json",
-                dataType: "json"
+                url: '/register',
+                data: user
             }).done(function (response) {
+                //redirect
                 console.log(response);
             });
         });
@@ -109,7 +107,7 @@
 
             $.ajax({
                 method: 'PUT',
-                url: JSON.stringify('/users/' + encodeURIComponent(userId)),
+                url: '/users/' + encodeURIComponent(userId),
                 data: model
             }).done(function (response) {
                 console.log(response);
@@ -118,4 +116,4 @@
     });
 </script>
 </body>
-</html>
+</html>-->

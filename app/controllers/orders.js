@@ -79,12 +79,18 @@ exports.put = function (req, res) {
     }, function (err, order) {
         if (err) return res.status(400).send(err);
 
-        order.paymentStatus = req.body.paymentStatus;
-        order.dishes = req.body.dishes;
+        order[0].paymentStatus = req.body.paymentStatus;
+        for(var i=0;i<req.body.dishes.length;i++)
+            order[0].dishes[i].dish.id = req.body.dishes[i].dish._id;
 
-        order.save(function (err, order) {
+        console.log(req.body.dishes);
+        console.log("\r\n");
+        //order[0]._id = req.body._id;
+        //var orderRes = order[0];
+        console.log(order[0]);
+        order[0].save(function (err, orderRes) {
             if (err) return res.status(400).send(err);
-            return res.send(order);
+            return res.send(orderRes);
         });
     });
 };
