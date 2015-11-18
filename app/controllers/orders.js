@@ -48,11 +48,23 @@ var populateOrderDishes = function (orders, res) {
 };
 
 exports.getAll = function (req, res) {
-    Orders.find({}, function (err, orders) {
-        if (err) return res.status(400).send(err);
-        populateOrderDishes(orders, res);
-        //return res.send(orders);
-    });
+    if (!_.isUndefined(req.query.day)) {
+        var day = req.query.day.split(',');
+        Orders.find({
+            'day': {$in: day}
+        }, function (err, orders) {
+            if (err) return res.status(400).send(err);
+
+            populateOrderDishes(orders, res);
+        });
+    } else {
+        Orders.find({}, function (err, orders) {
+            if (err) return res.status(400).send(err);
+            populateOrderDishes(orders, res);
+            //return res.send(orders);
+        });
+    }
+
 };
 
 exports.post = function (req, res) {

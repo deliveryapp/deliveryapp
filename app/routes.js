@@ -90,6 +90,7 @@ module.exports = function (app) {
      */
     app.get('/orders/', orders.getAll);
     app.get('/orders/:userId/', orders.get);
+    //app.get('/orders/:day/', orders.get);
     app.post('/orders/', orders.post);
     app.put('/orders/', orders.put);
     app.put('/orders/:userId/:id', orders.put);

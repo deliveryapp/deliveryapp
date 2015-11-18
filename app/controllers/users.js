@@ -34,15 +34,30 @@ exports.post = function (req, res) {
 };
 
 exports.get = function (req, res) {
-    Users.find({}, function (err, users) {
-        if (err) return res.status(400).send(err.message);
-
-        users = users.map(function (user) {
-            return utils.stripUserModel(user);
+    if (!_.isUndefined(req.query.id)) {
+        var id = req.query.id.split(',');
+        Users.find({
+            '_id': {$in: id}
+        }, function (err, users) {
+            if (err) return res.status(400).send(err);
+            users = users.map(function (user) {
+                return utils.stripUserModel(user);
+            });
+            res.send(users);
         });
+    } else {
+        Users.find({}, function (err, users) {
+            if (err) return res.status(400).send(err.message);
 
-        res.send(users);
-    });
+            users = users.map(function (user) {
+                return utils.stripUserModel(user);
+            });
+
+            res.send(users);
+        });
+    }
+
+
 };
 
 exports.getById = function (req, res) {
