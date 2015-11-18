@@ -202,7 +202,10 @@ define(function (require, exports, module) {
 
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 
-                this.dayMenuSelectionView = new DayMenuSelectionView({model:this.getDefaultMenuSelectionModel(), collection: this.dayDishesCollection});
+                this.dayMenuSelectionView = new DayMenuSelectionView({model:new Backbone.Model({
+                    summary: this.dayDishesCollection.calculateSummary()}),
+                    collection: this.dayDishesCollection
+                });
                 this.currentDay = this.dayDishesCollection;
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
@@ -215,7 +218,7 @@ define(function (require, exports, module) {
             this.daysMenuCollection.map(function (model) {
                 model.setVisibleDate();
             });
-            
+
                 debugger;
                 this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
 
@@ -346,7 +349,9 @@ define(function (require, exports, module) {
             });
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.currentDay = filtered[0];
-            this.dayMenuSelectionView = new DayMenuSelectionView({model: this.getDefaultMenuSelectionModel(), collection: this.dayDishesCollection});
+
+            this.dayMenuSelectionView = new DayMenuSelectionView({model: new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()}),
+                collection: this.dayDishesCollection});
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
