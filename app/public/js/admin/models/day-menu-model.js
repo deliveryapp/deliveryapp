@@ -26,7 +26,7 @@ define(function(require, exports, module){
             this.url =  baseUrl+daysResource;
         },
         setPutUrl: function () {
-            this.url =  baseUrl+daysResource+'?day='+this.get('day');
+            this.url =  baseUrl+daysResource+'/'+this.get('_id')+"?day="+this.get('day');//'/'+this.get('_id') delete
         }
 
     });

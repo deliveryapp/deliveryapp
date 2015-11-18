@@ -9,6 +9,7 @@ define(function(require, exports, module){
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         UserOrdersCollection = require('userOrdersCollection'),
+        DayMenuModel = require('dayMenuModel'),
         MainLayoutView = require('mainLayoutView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         MenuDaysController = require('menuDaysController'),
@@ -128,6 +129,21 @@ define(function(require, exports, module){
         },
 
         menu: function() {
+            //var json = {"_id":"564b7e196a819f0f000dfc8d","day":"2015-11-27T00:00:00.000Z","__v":0,
+            //    "dishes":[{"_id":'56447564dff2e80f007e5003'},{"_id":"56447473dff2e80f007e4fff"}]
+            //};
+            //$.ajax({
+            //    url: 'http://localhost/days/564b7e196a819f0f000dfc8d?day=2015-11-27T00:00:00.000Z',
+            //    type: 'put',
+            //    crossDomain: true,
+            //    data: json,
+            //    success: function(data) {
+            //        console.log('ok');
+            //        console.log(data);
+            //    }.bind(this)
+            //});
+
+
             this.getNextWeek().done(function () {
                 if(this.weekModel.get('startDate') === undefined) {
                     //todo: prompt or whatever
@@ -301,6 +317,20 @@ define(function(require, exports, module){
 
             console.log(json);
             //debugger;
+
+            //var json = {"_id":"564b7e196a819f0f000dfc8d","day":"2015-11-27T00:00:00.000Z","__v":0,
+            //    "dishes":[{"_id":'56447564dff2e80f007e5003'},{"_id":"56447473dff2e80f007e4fff"}]
+            //};
+            /*$.ajax({
+                url: 'http://localhost/days/564b7e196a819f0f000dfc8d?day=2015-11-27T00:00:00.000Z',
+                type: 'put',
+                crossDomain: true,
+                data: json,
+                success: function(data) {
+                    console.log('ok');
+                    console.log(data);
+                }.bind(this)
+            });*/
             console.log(this.currentDay.url);
             $.ajax({
                 url: this.currentDay.url,

@@ -24,7 +24,7 @@ define(function(require, exports, module){
             this.url =  baseUrl+ordersResource;
         },
         setPutUrl: function (userId, days) {
-            this.url =  baseUrl+ordersResource;+ '/' + userId;/* + '?day=';
+            this.url =  'http://localhost/orders/'+ userId + '?day=' + this.get('day');/* + '?day=';
             days.map(function (day) {
                 this.url += day + ',';
             }.bind(this));*/

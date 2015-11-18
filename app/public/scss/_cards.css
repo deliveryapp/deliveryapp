@@ -1,6 +1,6 @@
 @component card {
   width: 100%;
-  background-color: #3f51b5;
+  background-color: #464646;
   /*border: solid 1px color(#cccccc lightness(40%));*/
   /*padding-left: 10px;
   padding-right: 10px;*/
@@ -13,7 +13,7 @@
 
 @component user-menu-card {
   width: 30%;
-  background-color: #3f51b5;
+  background-color: #464646;
   display: inline-block;
   float: right;
   position: fixed;
@@ -47,7 +47,7 @@
 @component card-main {
   float: left;
   width: 70%;
-  background-color: #3f51b5;
+  background-color: #464646;
   border: solid 1px color(#cccccc lightness(40%));
   /*padding-left: 10px;
   padding-right: 10px;*/

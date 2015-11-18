@@ -37,8 +37,8 @@ define(function (require, exports, module) {
         },
 
         getActiveUser: function(){
-
-            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
+            //5644876700ce930f00fead4b
+            this.activeUser = new UserModel({_id:'564486b000ce930f00fead45',
                                              firstName:'Admin',
                                              lastName:'Admin',
                                              image_path:'images/male.jpg',
@@ -226,14 +226,55 @@ define(function (require, exports, module) {
             this.currentDay.set('dishes', collection.toJSON());
             var date = new Date(this.currentDay.get('day'));
 
-            this.currentDay.setRestDate();
-            this.currentDay.setPutUrl(this.userId, this.nextWeekModel.get('days'));
+            //this.currentDay.setRestDate();
+            //this.currentDay.setPutUrl(this.userId, this.currentDay.get('day'));
             console.log(this.currentDay);
             console.log(this.currentDay.url);
-            debugger;
+            //debugger;
             //this.currentDay.save();
+            var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
+                return userDayMenu.get('day') === this.currentDate;
+            }.bind(this));
+
+            filtered[0].setRestDate();
+            filtered[0].setPutUrl(this.userId, this.currentDay.get('day'));
+            filtered[0].set('paymentStatus', true);
+            var json = filtered[0].toJSON();
+            debugger;
+            /*var json = {
+                "_id": filtered[0].get('_id'),
+
+                "day": filtered[0].get('day'),
+                "userId": this.userId,
+                "paymentStatus": true,
+                "dishes": [
+                    {
+                        "dish": {"_id":"5644bed76164be0f00634a94"},
+                        "quantity": 4
+                    },
+                    {
+                        "dish":{"_id":"56447473dff2e80f007e4fff"},
+                        "quantity": 1
+                    }
+                ]
+
+            };*/
+            //debugger;
+            $.ajax({
+                url: this.currentDay.url,
+                type: 'put',
+                crossDomain: true,
+                data: json,
+                success: function(data) {
+                    console.log('ok');
+                    console.log(data);
+                }.bind(this)
+            });
+
             this.currentDay.setVisibleDate();
             console.log(this.currentDay);
+
+
             //save to rest
         },
 
@@ -288,7 +329,7 @@ define(function (require, exports, module) {
         },
 
         selectDay: function (date) {
-
+            this.currentDate = date;
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
                 return userDayMenu.get('day') === date;
             });
