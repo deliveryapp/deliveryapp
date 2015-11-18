@@ -37,8 +37,8 @@ define(function (require, exports, module) {
         },
 
         getActiveUser: function(){
-            //5644876700ce930f00fead4b
-            this.activeUser = new UserModel({_id:'564486b000ce930f00fead45',
+            //5644876700ce930f00fead4b-admin   564486b000ce930f00fead45-user
+            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
                                              firstName:'Admin',
                                              lastName:'Admin',
                                              image_path:'images/male.jpg',
@@ -206,6 +206,17 @@ define(function (require, exports, module) {
                 this.currentDay = this.dayDishesCollection;
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
+                this.daysMenuCollection.comparator = 'day';
+                debugger;
+            this.daysMenuCollection.map(function (model) {
+                model.setRestDate();
+            });
+                this.daysMenuCollection.sort();
+            this.daysMenuCollection.map(function (model) {
+                model.setVisibleDate();
+            });
+            
+                debugger;
                 this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
 
                 this.generatedMenu = this.tabContainer.getUserItem(this.userOrdersCollection);
