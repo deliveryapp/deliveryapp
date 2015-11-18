@@ -374,11 +374,70 @@ define(function(require, exports, module){
 
         statistic: function(){
             this.getData().done(function () {
-                this.virt_coll = new VirtualCollection(this.usersCollection, {url:baseUrl+usersResource});
+
+                var uniqUserArray = this.uniqUserArray(this.ordersCollection); //for fetch uniq userlist, todo: correct fetch
+                var usersCollection = this.checkPaymentStatus(this.ordersCollection,this.usersCollection); //create userColl for statisticPage with all info
+
+                this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
                 this.statisticPage = new MainStatisticView({collection: this.virt_coll});
                 this.regions.get('content').show(this.statisticPage);
             }.bind(this));
         },
+
+        uniqUserArray: function (userCollection){
+            var arr = userCollection.pluck('userId');
+            var uniqUserArray = [];
+            for(var i = 0; i < arr.length; i++) {
+                for(var j = i+1; j < arr.length; j++) {
+                    if (arr[i] === arr[j] || arr[i]===undefined)
+                        j = ++i;
+                }
+                uniqUserArray.push(arr[i]);
+            }
+            return uniqUserArray;
+        },
+
+        checkPaymentStatus: function (ordersCollection, uniqUserCollection){//rewrite with user model
+
+            console.log(ordersCollection);
+
+
+           for(var i = 0; i< uniqUserCollection.length; i++ ){
+               var uniqUserOrders = ordersCollection.where({userId: uniqUserCollection.at(i).get('_id')});
+               var sum =  this.getSum(uniqUserOrders);
+               var paymentStatus = this.getPaymentStatus(uniqUserOrders);
+               uniqUserCollection.at(i).set('paymentStatus',paymentStatus);
+               uniqUserCollection.at(i).set('orderSum',sum);
+           }
+
+           return uniqUserCollection;
+        },
+
+        getSum: function(ordersCollection){
+            var sum = 0;
+            for (var i= 0; i< ordersCollection.length;i++ ){
+               var help = (ordersCollection[i].get('dishes'));
+                help.map(function (model) {
+                    var dish = model.dish;
+                    var quantity = model.quantity;
+                    sum += dish.price * quantity;
+                });
+            }
+            return sum;
+        },
+
+        getPaymentStatus: function(ordersCollection){
+           var status = true;
+           for (var i= 0; i< ordersCollection.length;i++ ){
+               if((ordersCollection[i].get('paymentStatus'))===false){
+                   status = false;
+               }
+           }
+            return status;
+        },
+
+
+
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(model);
