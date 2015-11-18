@@ -16,7 +16,8 @@ define(function(require, exports, module){
             this.url = baseUrl+weeksResource+'/current';
         },
         setPostUrl: function () {
-            this.url = baseUrl+weeksResource;
+            this.url = baseUrl+weeksResource+'?startDate=';
+            //debugger;
         }
     });
 

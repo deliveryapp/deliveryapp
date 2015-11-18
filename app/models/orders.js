@@ -3,7 +3,12 @@ var mongoose = require('mongoose'),
 
 var OrdersSchema = new Schema({
     userId: String,
-    day: Date,
+    day: {
+        type: Date,
+        index: {
+            unique: true
+        }
+    },
     paymentStatus: Boolean,
     dishes: [{
         dish: {
