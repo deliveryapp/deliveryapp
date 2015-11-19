@@ -48,11 +48,11 @@ define(function(require, exports, module){
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
-                firstName:'Admin',
-                lastName:'Admin',
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+                firstName:'admin',
+                lastName:'admin',
                 image_path:'images/male.jpg',
-                mail:'Admin@engagepoint.com',
+                mail:'admin@engagepoint.com',
                 __v:0,
                 role:'admin'});
 
@@ -97,7 +97,7 @@ define(function(require, exports, module){
 
             this.weekModel = new WeekModel();
             this.weekModel.setNextWeekUrl();
-//debugger;
+
             $.when(
                 this.weekModel.fetch()
             ).done(function () {
@@ -129,28 +129,13 @@ define(function(require, exports, module){
         },
 
         menu: function() {
-            //var json = {"_id":"564b7e196a819f0f000dfc8d","day":"2015-11-27T00:00:00.000Z","__v":0,
-            //    "dishes":[{"_id":'56447564dff2e80f007e5003'},{"_id":"56447473dff2e80f007e4fff"}]
-            //};
-            //$.ajax({
-            //    url: 'http://localhost/days/564b7e196a819f0f000dfc8d?day=2015-11-27T00:00:00.000Z',
-            //    type: 'put',
-            //    crossDomain: true,
-            //    data: json,
-            //    success: function(data) {
-            //        console.log('ok');
-            //        console.log(data);
-            //    }.bind(this)
-            //});
-
-
             this.getNextWeek().done(function () {
                 if(this.weekModel.get('startDate') === undefined) {
                     //todo: prompt or whatever
 
                     //var startDate = '26-11-2015';
                     //startDate.toUTCString();
-                    debugger;
+                    //debugger;
                     //var startDate = date.toUTCString();
                     //debugger;
 
@@ -321,20 +306,6 @@ define(function(require, exports, module){
 
             console.log(json);
             //debugger;
-
-            //var json = {"_id":"564b7e196a819f0f000dfc8d","day":"2015-11-27T00:00:00.000Z","__v":0,
-            //    "dishes":[{"_id":'56447564dff2e80f007e5003'},{"_id":"56447473dff2e80f007e4fff"}]
-            //};
-            /*$.ajax({
-                url: 'http://localhost/days/564b7e196a819f0f000dfc8d?day=2015-11-27T00:00:00.000Z',
-                type: 'put',
-                crossDomain: true,
-                data: json,
-                success: function(data) {
-                    console.log('ok');
-                    console.log(data);
-                }.bind(this)
-            });*/
             console.log(this.currentDay.url);
             $.ajax({
                 url: this.currentDay.url,
@@ -377,12 +348,123 @@ define(function(require, exports, module){
         },
 
         statistic: function(){
-            this.getData().done(function () {
-                this.virt_coll = new VirtualCollection(this.usersCollection, {url:baseUrl+usersResource});
-                this.statisticPage = new MainStatisticView({collection: this.virt_coll});
-                this.regions.get('content').show(this.statisticPage);
+            this.getNextWeek().done(function () {
+                this.getUniqOrder().done(function () {
+                    this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
+                    this.getUniqUser().done(function () {
+                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
+                        usersCollection = usersCollection.filter(function(model){
+                            return (model.get('orderSum')) > 0;
+                        });
+                        usersCollection = new OrdersCollection(usersCollection);
+                        this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                        this.statisticPage = new MainStatisticView({collection: this.virt_coll});
+                        this.regions.get('content').show(this.statisticPage);
+                        this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
+                    }.bind(this));
+
+                }.bind(this));
+
             }.bind(this));
         },
+
+        getUniqOrder: function(){
+            var res = $.Deferred();
+
+            this.uniqOrderCollection = new OrdersCollection();
+            this.uniqOrderCollection.setGetUrl(this.weekModel);
+
+            $.when(
+               this.uniqOrderCollection.fetch()
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
+
+            return res.promise();
+        },
+
+        getUniqUser: function(){
+             var res = $.Deferred();
+
+             this.uniqUserCollection = new UsersCollection();
+             this.uniqUserCollection.setGetUrl(this.uniqUsersArray);
+
+             $.when(
+                 this.uniqUserCollection.fetch()
+             ).done(function () {
+                     res.resolve();
+                 }.bind(this));
+
+             return res.promise();
+         },
+
+        uniqUserArray: function (userCollection){
+            var arr = userCollection.pluck('userId');
+            var uniqUserArray = [];
+            for(var i = 0; i < arr.length; i++) {
+                for(var j = i+1; j < arr.length; j++) {
+                    if (arr[i] === arr[j] || arr[i]===undefined)
+                        j = ++i;
+                }
+                uniqUserArray.push(arr[i]);
+            }
+            return uniqUserArray;
+        },
+
+        checkPaymentStatus: function (ordersCollection, uniqUserCollection){
+           for(var i = 0; i< uniqUserCollection.length; i++ ){
+               var uniqUserOrders = ordersCollection.where({userId: uniqUserCollection.at(i).get('_id')});
+               var sum =  this.getSum(uniqUserOrders);
+               var paymentStatus = this.getPaymentStatus(uniqUserOrders);
+               uniqUserCollection.at(i).set('paymentStatus',paymentStatus);
+               uniqUserCollection.at(i).set('orderSum',sum);
+           }
+
+           return uniqUserCollection;
+        },
+
+        getSum: function(ordersCollection){
+            var sum = 0;
+            for (var i= 0; i< ordersCollection.length;i++ ){
+               var help = (ordersCollection[i].get('dishes'));
+                help.map(function (model) {
+                    var dish = model.dish;
+                    var quantity = model.quantity;
+                    sum += dish.price * quantity;
+                });
+            }
+            return sum;
+        },
+
+        getPaymentStatus: function(ordersCollection){
+           var status = true;
+           for (var i= 0; i< ordersCollection.length;i++ ){
+               if((ordersCollection[i].get('paymentStatus'))===false){
+                   status = false;
+               }
+           }
+            return status;
+        },
+
+        changePaymentStatus : function (data){
+
+            var changePaymentStatusColl = this.uniqOrderCollection.where({userId: data});
+            var paymentStatus = true;
+            if (changePaymentStatusColl[0].get('paymentStatus')===true){
+                paymentStatus = false;
+            }
+            changePaymentStatusColl = new OrdersCollection(changePaymentStatusColl);
+            changePaymentStatusColl.map(function(model) {
+                model.set('paymentStatus', paymentStatus);
+
+                model.setPutUrl(data);
+                model.save();
+
+            });
+
+
+        },
+
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(model);

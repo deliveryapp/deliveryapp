@@ -7,7 +7,16 @@ define(function(require, exports, module) {
     module.exports = Marionette.CompositeView.extend({
         template: MainStatisticView,
         childView: StatisticView,
-        childViewContainer: '.js-statistic-list'
+        childViewContainer: '.js-statistic-list',
+        childEvents: {
+            'payment:status:changed': 'triggerPaymentStatus'
+        },
+
+        triggerPaymentStatus: function(data){
+            this.trigger('status:changed',data.model.get('_id'));
+        }
+
+
 
     });
 

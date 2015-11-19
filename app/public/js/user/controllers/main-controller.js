@@ -37,6 +37,14 @@ define(function (require, exports, module) {
         },
 
         getActiveUser: function(){
+
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+                firstName:'admin',
+                lastName:'admin',
+                image_path:'images/male.jpg',
+                mail:'admin@engagepoint.com',
+                __v:0,
+                role:'admin'});
             //564c7c59cd0f210f00887524-admin   564c7cafcd0f210f00887527-user
             this.activeUser = new UserModel({_id:'564c91c3694f9b0f006a66ca',
                                              firstName:'Admin',

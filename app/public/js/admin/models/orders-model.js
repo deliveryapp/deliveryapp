@@ -1,9 +1,12 @@
 define(function(require, exports, module){
     var Backbone = require('backbone'),
-        moment = require('moment')
-        ;
+        moment = require('moment'),
+        baseUrl = require('baseUrl'),
+        ordersResource = require('ordersResource');
 
     module.exports  = Backbone.Model.extend({
+        url: baseUrl+ordersResource,
+        idAttribute: '_id',
         defaults: {
 
         },
@@ -12,5 +15,8 @@ define(function(require, exports, module){
         },
         initialize: function() {
         },
+        setPutUrl: function(userId){
+            this.url = baseUrl+ordersResource+'/'+userId+'/'+this.get('_id');
+        }
     });
 });
