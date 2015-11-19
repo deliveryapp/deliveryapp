@@ -244,7 +244,7 @@ define(function(require, exports, module){
             //this.testOrder();
         },
 
-        testOrder: function () {
+        /*testOrder: function () {
             var obj = {
                 userId: '564486d300ce930f00fead46',
                 day: '2015-11-20T00:00:00.000Z',
@@ -269,7 +269,7 @@ define(function(require, exports, module){
                 }.bind(this)
             });
 
-            /*obj = {
+            /!*obj = {
              day: '2015-11-30T00:00:00.000Z',
              dishes: [
              {_id: '5644bed76164be0f00634a94'},
@@ -286,9 +286,9 @@ define(function(require, exports, module){
              console.log('ok');
              console.log(data);
              }.bind(this)
-             });*/
+             });*!/
 
-        },
+        },*/
 
         dayMenuSaved: function (collection) {
             this.currentDay.set('dishes', collection.toJSON());
@@ -478,7 +478,7 @@ define(function(require, exports, module){
         selectDay: function (date) {
 
             var filtered = this.daysMenuCollection.filter(function (userDayMenu) {
-                return userDayMenu.get('day') === date;
+                return userDayMenu.restDate === date;
             });
             this.currentDay = filtered[0];
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));

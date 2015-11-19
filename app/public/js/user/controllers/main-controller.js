@@ -37,16 +37,7 @@ define(function (require, exports, module) {
         },
 
         getActiveUser: function(){
-
-            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
-                firstName:'admin',
-                lastName:'admin',
-                image_path:'images/male.jpg',
-                mail:'admin@engagepoint.com',
-                __v:0,
-                role:'admin'});
-            //564c7c59cd0f210f00887524-admin   564c7cafcd0f210f00887527-user
-            this.activeUser = new UserModel({_id:'564c91c3694f9b0f006a66ca',
+            this.activeUser = new UserModel({_id:'564dd84250b4270f00566a3a',
                                              firstName:'Admin',
                                              lastName:'Admin',
                                              image_path:'images/male.jpg',
@@ -180,13 +171,11 @@ define(function (require, exports, module) {
                 }));
             }
             console.log(this.userOrdersCollection);
+
             this.userOrdersCollection.map(function (model) {
                 model.setPostUrl();
-
-                //model.setPutUrl();
                 model.save();
-                //model.destroy();
-            });
+            }.bind(this));
 
         },
 
@@ -208,7 +197,6 @@ define(function (require, exports, module) {
 
                 this.regions.get('content').show( this.menuMainView );
                 this.currentDate = this.userOrdersCollection.at(0).restDate;
-            debugger;
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({model:new Backbone.Model({
@@ -219,6 +207,8 @@ define(function (require, exports, module) {
                 this.currentDay = this.userOrdersCollection.at(0);
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
+
+            //todo: check filter above
                 //this.daysMenuCollection.comparator = 'day';
             /*this.daysMenuCollection.map(function (model) {
                 model.setRestDate();
@@ -227,6 +217,7 @@ define(function (require, exports, module) {
             /*this.daysMenuCollection.map(function (model) {
                 model.setVisibleDate();
             });*/
+
                 this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
 
                 this.generatedMenu = this.tabContainer.getUserItem(this.userOrdersCollection);
@@ -245,7 +236,6 @@ define(function (require, exports, module) {
             //todo: save user menu
             //debugger;
             this.currentDay.set('dishes', collection.toJSON());
-            var date = new Date(this.currentDay.get('day'));
             //this.currentDay.setRestDate();
             //this.currentDay.setPutUrl(this.userId, this.currentDay.get('day'));
             console.log(this.currentDay);
@@ -255,32 +245,17 @@ define(function (require, exports, module) {
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
                 return userDayMenu.restDate === this.currentDay.restDate;
             }.bind(this));
-            debugger;
+            //debugger;
             filtered[0].setRestDate();
             filtered[0].setPutUrl(this.userId, this.currentDay.get('day'));
             //filtered[0].set('paymentStatus', true);
             var json = filtered[0].toJSON();
             console.log(json);
-            debugger;
-            /*var json = {
-                "_id": filtered[0].get('_id'),
-
-                "day": filtered[0].get('day'),
-                "userId": this.userId,
-                "paymentStatus": true,
-                "dishes": [
-                    {
-                        "dish": {"_id":"5644bed76164be0f00634a94"},
-                        "quantity": 4
-                    },
-                    {
-                        "dish":{"_id":"56447473dff2e80f007e4fff"},
-                        "quantity": 1
-                    }
-                ]
-
-            };*/
             //debugger;
+
+            //!save erase dish info except id!
+            //filtered[0].save();
+
             $.ajax({
                 url: this.currentDay.url,
                 type: 'put',
@@ -293,10 +268,6 @@ define(function (require, exports, module) {
             });
 
             this.currentDay.setVisibleDate();
-            console.log(this.currentDay);
-
-
-            //save to rest
         },
 
         getDefaultMenuSelectionModel: function () {
@@ -308,15 +279,12 @@ define(function (require, exports, module) {
         },
 
         nextWeekDashboard: function () {
-
             this.getNextWeek().done(function () {
                 this.getOrders(this.nextWeekModel);
                 this.userOrdersCollection.state = 'next_week';
                 this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
                 this.regions.get('content').show(this.nextMenuDashboard);
             }.bind(this));
-
-
         },
 
         dashboard: function () {
@@ -352,7 +320,7 @@ define(function (require, exports, module) {
         selectDay: function (date) {
             this.currentDate = date;
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
-                return userDayMenu.get('day') === date;
+                return userDayMenu.restDate === date;
             });
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.currentDay = filtered[0];

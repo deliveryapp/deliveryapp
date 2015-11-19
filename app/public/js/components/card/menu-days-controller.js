@@ -112,7 +112,7 @@ define(function (require, exports, module) {
         },
 
         tabsStatusAdmin: function (e) {
-            this.trigger('tab:changed', e.model.get('day'));
+            this.trigger('tab:changed', e.model.restDate);
         },
 
         tabsStatus: function (e) {
@@ -121,7 +121,7 @@ define(function (require, exports, module) {
             dayDishes.map(function (model) {
                 this.dishesCollection.add(model);
             }.bind(this));
-            this.trigger('tab:changed', e.model.get('day'));
+            this.trigger('tab:changed', e.model.restDate);
         }
 
     });
