@@ -22,9 +22,11 @@
   width: 980px;
   height: 120px;
   align-items:center;
+  background-color: #FFF;
   /*background-color: #275ECA;*/
   margin: 0 0 7px 0;
   border-radius: 20px;
+
 
   @modifier dish-size {
     height: 120px;

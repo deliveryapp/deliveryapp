@@ -14,13 +14,13 @@ define(function(require, exports, module) {
         },
 
         onShow: function(){
-            console.log(this.model.get('paymentStatus'));
             if (this.model.get('paymentStatus') === true){
                 this.ui.status.addClass('b-statistic-personal-info_paid');
             }
         },
 
         paid: function(){
+            this.trigger('payment:status:changed', this.model.get('_id'));
             if(this.ui.status.hasClass('b-statistic-personal-info_paid')){
                 this.ui.status.removeClass('b-statistic-personal-info_paid');
             }

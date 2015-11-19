@@ -47,11 +47,11 @@ define(function(require, exports, module){
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
-                firstName:'Admin',
-                lastName:'Admin',
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+                firstName:'admin',
+                lastName:'admin',
                 image_path:'images/male.jpg',
-                mail:'Admin@engagepoint.com',
+                mail:'admin@engagepoint.com',
                 __v:0,
                 role:'admin'});
 
@@ -343,16 +343,55 @@ define(function(require, exports, module){
         },
 
         statistic: function(){
-            this.getData().done(function () {
+                this.getNextWeek().done(function () {
+                    this.getUniqOrder().done(function () {
+                        this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
+                        this.getUniqUser().done(function () {
+                            var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
+                            usersCollection = usersCollection.filter(function(model){
+                                return (model.get('orderSum')) > 0;
+                            });
+                            usersCollection = new OrdersCollection(usersCollection);
+                            this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                            this.statisticPage = new MainStatisticView({collection: this.virt_coll});
+                            this.regions.get('content').show(this.statisticPage);
+                            this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
+                        }.bind(this));
 
-                var uniqUserArray = this.uniqUserArray(this.ordersCollection); //for fetch uniq userlist, todo: correct fetch
-                var usersCollection = this.checkPaymentStatus(this.ordersCollection,this.usersCollection); //create userColl for statisticPage with all info
+                    }.bind(this));
 
-                this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
-                this.statisticPage = new MainStatisticView({collection: this.virt_coll});
-                this.regions.get('content').show(this.statisticPage);
-            }.bind(this));
+                }.bind(this));
         },
+
+        getUniqOrder: function(){
+            var res = $.Deferred();
+
+            this.uniqOrderCollection = new OrdersCollection();
+            this.uniqOrderCollection.setGetUrl(this.weekModel);
+
+            $.when(
+               this.uniqOrderCollection.fetch()
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
+
+            return res.promise();
+        },
+
+        getUniqUser: function(){
+             var res = $.Deferred();
+
+             this.uniqUserCollection = new UsersCollection();
+             this.uniqUserCollection.setGetUrl(this.uniqUsersArray);
+
+             $.when(
+                 this.uniqUserCollection.fetch()
+             ).done(function () {
+                     res.resolve();
+                 }.bind(this));
+
+             return res.promise();
+         },
 
         uniqUserArray: function (userCollection){
             var arr = userCollection.pluck('userId');
@@ -367,11 +406,7 @@ define(function(require, exports, module){
             return uniqUserArray;
         },
 
-        checkPaymentStatus: function (ordersCollection, uniqUserCollection){//rewrite with user model
-
-            console.log(ordersCollection);
-
-
+        checkPaymentStatus: function (ordersCollection, uniqUserCollection){
            for(var i = 0; i< uniqUserCollection.length; i++ ){
                var uniqUserOrders = ordersCollection.where({userId: uniqUserCollection.at(i).get('_id')});
                var sum =  this.getSum(uniqUserOrders);
@@ -406,7 +441,24 @@ define(function(require, exports, module){
             return status;
         },
 
+        changePaymentStatus : function (data){
 
+            var changePaymentStatusColl = this.uniqOrderCollection.where({userId: data});
+            var paymentStatus = true;
+            if (changePaymentStatusColl[0].get('paymentStatus')===true){
+                paymentStatus = false;
+            }
+            changePaymentStatusColl = new OrdersCollection(changePaymentStatusColl);
+            changePaymentStatusColl.map(function(model) {
+                model.set('paymentStatus', paymentStatus);
+
+                model.setPutUrl(data);
+                model.save();
+
+            });
+
+
+        },
 
 
         dishAdded: function (model) {

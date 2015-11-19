@@ -38,13 +38,13 @@ define(function (require, exports, module) {
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'5644876700ce930f00fead4b',
-                                             firstName:'Admin',
-                                             lastName:'Admin',
-                                             image_path:'images/male.jpg',
-                                             mail:'Admin@engagepoint.com',
-                                             __v:0,
-                                             role:'admin'});
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+                firstName:'admin',
+                lastName:'admin',
+                image_path:'images/male.jpg',
+                mail:'admin@engagepoint.com',
+                __v:0,
+                role:'admin'});
 
             this.userId = this.activeUser.get('_id');
 

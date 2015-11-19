@@ -9,7 +9,19 @@ define(function(require, exports, module){
 
     module.exports = Backbone.Collection.extend({
         model: ordersModel,
-        url: baseUrl+ordersResource
+        url: baseUrl+ordersResource,
+
+        setGetUrl: function (weekModel) {
+            this.url =  baseUrl+ordersResource+'?day=';
+            weekModel.get('days').map(function (day) {
+                this.url += day + ',';
+            }.bind(this));
+            this.url= this.url.substr(0,this.url.length-1);
+        }
+
+
+
+
     });
 
 
