@@ -207,7 +207,8 @@ define(function (require, exports, module) {
                     summary: this.dayDishesCollection.calculateSummary()}),
                     collection: this.dayDishesCollection
                 });
-                this.currentDay = this.dayDishesCollection;
+
+                this.currentDay = this.userOrdersCollection.at(0);
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
                 //this.daysMenuCollection.comparator = 'day';
@@ -235,7 +236,7 @@ define(function (require, exports, module) {
         dayMenuSaved: function (collection) {
             //todo: save user menu
             //debugger;
-            this.currentDay.models[0].set('dishes', collection.toJSON());
+            this.currentDay.set('dishes', collection.toJSON());
             var date = new Date(this.currentDay.get('day'));
             //this.currentDay.setRestDate();
             //this.currentDay.setPutUrl(this.userId, this.currentDay.get('day'));
@@ -244,13 +245,14 @@ define(function (require, exports, module) {
             //debugger;
             //this.currentDay.save();
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
-                return userDayMenu.restDate === this.currentDate;
+                return userDayMenu.restDate === this.currentDay.restDate;
             }.bind(this));
             debugger;
             filtered[0].setRestDate();
             filtered[0].setPutUrl(this.userId, this.currentDay.get('day'));
             //filtered[0].set('paymentStatus', true);
             var json = filtered[0].toJSON();
+            console.log(json);
             debugger;
             /*var json = {
                 "_id": filtered[0].get('_id'),
