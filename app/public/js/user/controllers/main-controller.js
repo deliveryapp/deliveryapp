@@ -37,7 +37,7 @@ define(function (require, exports, module) {
         },
 
         getActiveUser: function(){
-            this.activeUser = new UserModel({_id:'564dd84250b4270f00566a3a',
+            this.activeUser = new UserModel({_id:'564dabb0892b860f0085be9b',
                                              firstName:'Admin',
                                              lastName:'Admin',
                                              image_path:'images/male.jpg',
@@ -201,7 +201,17 @@ define(function (require, exports, module) {
             //var temp = this.userOrdersCollection.findWhere({restDate: this.nextWeekModel.get('startDate')});
             //debugger;
                 this.currentDate = this.userOrdersCollection.at(0).restDate;
-                this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
+
+            this.userOrdersCollection.map(function (model) {
+                model.setRestDate();
+            });
+
+            var tmp = this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')});
+            this.dayDishesCollection = new DishesCollection(tmp.get('dishes'));
+            this.userOrdersCollection.map(function (model) {
+                model.setVisibleDate();
+            });
+
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({model:new Backbone.Model({
                     summary: this.dayDishesCollection.calculateSummary()}),
@@ -213,12 +223,14 @@ define(function (require, exports, module) {
 
 
             //todo: check filter above
-                //this.daysMenuCollection.comparator = 'day';
-            /*this.daysMenuCollection.map(function (model) {
+                /*this.daysMenuCollection.comparator = 'day';
+            this.daysMenuCollection.map(function (model) {
                 model.setRestDate();
-            });*/
-                //this.daysMenuCollection.sort();
-            /*this.daysMenuCollection.map(function (model) {
+            });
+            debugger;
+                this.daysMenuCollection.sort();
+            debugger;
+            this.daysMenuCollection.map(function (model) {
                 model.setVisibleDate();
             });*/
 
