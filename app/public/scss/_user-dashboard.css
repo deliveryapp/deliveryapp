@@ -1,0 +1,111 @@
+@component dashboard-list{
+  width: 1400px;
+  background-color: #464646;
+  margin: auto;
+  margin-top: 60px;
+  border-radius: 5px;
+  padding: 30px 110px;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+  text-align: center;
+
+  @descendent title{
+    font-size: 28px;
+    color: #fff;
+    padding: 10px 0 20px;
+  }
+
+}
+
+@component week-orders-list {
+  padding-top: 20px;
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+
+  @descendent list-point {
+    display: inline-block;
+    margin: 5px;
+  }
+}
+
+@component user-day-menu-layer {
+  width: 300px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+
+  @descendent date {
+    /*text-decoration: underline;*/
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 0;
+  }
+
+  @descendent list {
+
+    color: black;
+    padding: 10px;
+    text-align: left;
+
+    @modifier empty {
+
+      text-align: center;
+      margin: 170px 0 0 0;
+      padding: 0;
+    }
+  }
+}
+
+@component user-day-menu-list {
+  list-style-type: none;
+  border-bottom: 1px dotted black;
+
+  lost-center: 300px;
+
+  @descendent dish-name {
+    lost-column: 10/12;
+    font-family: cursive;
+    font-size: 20px;
+    padding: 5px 0;
+  }
+
+  @descendent quantity {
+    lost-column: 1/12;
+    font-family: cursive;
+    font-size: 20px;
+    padding: 5px 0;
+  }
+
+}
+
+
+
+
+
+
+@component dashboard-nav {
+  text-align: center;
+  margin-top: 70px;
+
+  @descendent button {
+    display: inline-block;
+    margin: 0 15px 15px 0;
+  }
+
+  @descendent list {
+    margin-left: 30px;
+    color: black;
+    padding: 10px;
+    text-align: left;
+
+    @modifier empty {
+      text-align: center;
+      margin: 70px 0 0 -30px;
+      padding: 0;
+    }
+  }
+
+}

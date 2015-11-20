@@ -4,7 +4,7 @@ define(function(require, exports, module) {
     
     module.exports = Marionette.ItemView.extend({
         tagName: 'li',
-        className: 'ordersList',
+        className: 'b-user-day-menu-list',
         template: DayUserMenuView
     });
 });
