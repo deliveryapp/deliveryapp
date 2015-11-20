@@ -402,7 +402,8 @@ define(function(require, exports, module){
                     this.dashboardOrderCollection.map(function (order) {
                         order.setVisibleDate();
                     });
-                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                    var orderSum = new DayMenuModel ({sum:sum});
+                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model :orderSum });
                      this.regions.get('content').show(this.dashboard);
                 }.bind(this));
             }.bind(this));
@@ -545,7 +546,18 @@ define(function(require, exports, module){
                 model.set('paymentStatus', paymentStatus);
 
                 model.setPutUrl(data);
-                model.save();
+                //model.save();
+
+                $.ajax({
+                    url: model.url,
+                    type: 'put',
+                    crossDomain: true,
+                    data: model.toJSON(),
+                    success: function(data) {
+                        console.log('ok');
+                        console.log(data);
+                    }.bind(this)
+                });
 
             });
 

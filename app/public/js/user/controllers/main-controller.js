@@ -282,12 +282,29 @@ define(function (require, exports, module) {
             this.preloadNextWeekData();
         },
 
+        getSum: function(ordersCollection){
+            var sum = 0;
+            for (var i= 0; i< ordersCollection.length;i++ ){
+                var help = (ordersCollection[i].get('dishes'));
+                help.map(function (model) {
+                    var dish = model.dish;
+                    var quantity = model.quantity;
+                    sum += dish.price * quantity;
+                });
+            }
+            return sum;
+        },
+
         nextWeekDashboard: function () {
             this.getNextWeek().done(function () {
-                this.getOrders(this.nextWeekModel);
+                this.getOrders(this.nextWeekModel).done(function () {
                 this.userOrdersCollection.state = 'next_week';
-                this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
+                var ordersCollection = this.userOrdersCollection.where();
+                var sum = this.getSum(ordersCollection);
+                var orderSum = new UserModel ({sum:sum});
+                this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
                 this.regions.get('content').show(this.nextMenuDashboard);
+                    }.bind(this));
             }.bind(this));
         },
 
@@ -295,7 +312,10 @@ define(function (require, exports, module) {
             this.getCurrentWeek().done(function () {
                 this.getOrders(this.currentWeekModel);
                 this.userOrdersCollection.state = 'current_week';
-                this.dashboard = new MainDashboardView({collection: this.userOrdersCollection});
+                var ordersCollection = this.userOrdersCollection.where();
+                var sum = this.getSum(ordersCollection);
+                var orderSum = new UserModel ({sum:sum});
+                this.dashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
                 this.regions.get('content').show(this.dashboard);
             }.bind(this));
 
