@@ -4,7 +4,6 @@ define(function(require, exports, module){
         _ = require('underscore'),
         UsersCollection = require ('usersCollection'),
         MainUserListView=require('mainUserListView'),
-        AdminWeekOrderListView = require('adminWeekOrderListView'),
         OrdersCollection = require('ordersCollection'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
@@ -19,6 +18,7 @@ define(function(require, exports, module){
         UserModel = require ('userModel'),
         baseUrl = require('baseUrl'),
         WeekModel = require('weekModel'),
+        MainAdminMenuView = require ('mainAdminMenuView'),
         usersResource = require('usersResource'),
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
@@ -48,7 +48,7 @@ define(function(require, exports, module){
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+            this.activeUser = new UserModel({_id:'564dfb0950b4270f00566a77',
                 firstName:'admin',
                 lastName:'admin',
                 image_path:'images/male.jpg',
@@ -339,12 +339,24 @@ define(function(require, exports, module){
         },
 
         dashboard: function(){
-            this.getData().done(function () {
-                this.virt_coll = new VirtualCollection(this.ordersCollection);
-                this.orderList = new  AdminWeekOrderListView({collection: this.virt_coll});
-                this.regions.get('content').show(this.orderList);
-            }.bind(this));
+            this.getNextWeek().done(function () {
+                this.getUniqOrder().done(function () {
 
+                        /*get 5 days array*/
+                        this.weekModel.get('days').pop();
+                        this.weekModel.get('days').pop();
+                        var days = this.weekModel.get('days');
+                        /*get 5 days array*/
+
+                         /*get sum*/
+                        var uniqUserOrders = this.uniqOrderCollection.where();
+                        var sum = this.getSum(uniqUserOrders);
+                        /*get sum*/
+                     //this.dashboardOrderCollection = new OrdersCollection(finalArray);
+                     //this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                    // this.regions.get('content').show(this.dashboard);
+                }.bind(this));
+            }.bind(this));
         },
 
         statistic: function(){
