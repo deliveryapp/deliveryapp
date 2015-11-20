@@ -122,6 +122,31 @@ define(function(require, exports, module){
             return res.promise();
         },
 
+        getCurrentWeek: function () {
+            var res = $.Deferred();
+            this.weekModel = new WeekModel(
+                {
+                    "_id": "564c8b50904f9b0f006a669e",
+                    "startDate": "2015-11-16T00:00:00.000Z",
+                    "__v": 0,
+                    "days": ["2015-11-16T00:00:00.000Z",
+                        "2015-11-17T00:00:00.000Z",
+                        "2015-11-18T00:00:00.000Z",
+                        "2015-11-19T00:00:00.000Z",
+                        "2015-11-20T00:00:00.000Z",
+                        "2015-11-21T00:00:00.000Z",
+                        "2015-11-22T00:00:00.000Z"]
+                }
+            );
+
+            $.when(
+                this.weekModel.fetch()
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
+            return res.promise();
+        },
+
         setNextWeek: function () {
             var res = $.Deferred();
             this.weekModel.setNextWeekUrl();
@@ -343,10 +368,7 @@ define(function(require, exports, module){
             this.currentDay.setVisibleDate();
             console.log(this.currentDay);
 
-
-
             //var url = 'http://stark-eyrie-7510.herokuapp.com/orders';
-
 
             //var dateString = date.getUTCFullYear()+'-'+date.getUTCMonth()+'-'+date.getUTCDay()+'T00:00:00.000Z';
             //save to rest
@@ -354,21 +376,35 @@ define(function(require, exports, module){
         },
 
         dashboard: function(){
-            this.getNextWeek().done(function () {
-                this.getUniqOrder().done(function () {
 
-                        /*get 5 days array*/
-                        this.weekModel.get('days').pop();
-                        this.weekModel.get('days').pop();
-                        var days = this.weekModel.get('days');
-                        /*get 5 days array*/
-                    var finalArray = [];
-                    this.weekModel.get('days').map(function (day) {
-                        finalArray.push({day: day, dishes: []});
-                    });
-                    for (var i = 0; i< days.length; i++ ){
-                        var daysColl = this.uniqOrderCollection.where({day: days[i]});
-                        var finalSelectedDay = _.findWhere(finalArray,{day: daysColl[0].get('day')});
+            this.getNextWeek().done(function () {
+                this.dashboardCore()
+            }.bind(this));
+        },
+
+        dashboardCurrent: function(){
+            this.getCurrentWeek().done(function () {
+                this.dashboardCore()
+            }.bind(this));
+        },
+
+        dashboardCore : function() {
+            this.getUniqOrder().done(function () {
+
+                /*get 5 days array*/
+                this.weekModel.get('days').pop();
+                this.weekModel.get('days').pop();
+                var days = this.weekModel.get('days');
+                /*get 5 days array*/
+                var finalArray = [];
+                this.weekModel.get('days').map(function (day) {
+                    finalArray.push({day: day, dishes: []});
+                });
+                for (var i = 0; i < days.length; i++) {
+                    var daysColl = this.uniqOrderCollection.where({day: days[i]});
+                    if (!_.isEmpty(daysColl)) {
+                        var finalSelectedDay = _.findWhere(finalArray, {day: daysColl[0].get('day')});
+
                         daysColl.map(function (day) {
                             var dayDishes = day.get('dishes');
                             _.map(dayDishes, function (dish) {
@@ -380,10 +416,10 @@ define(function(require, exports, module){
                             var sum = {};
                             var selected;
                             _.map(sumArr, function (dish) {
-                                if(dish.dish._id === data.dish._id)
+                                if (dish.dish._id === data.dish._id)
                                     selected = dish;
                             });
-                            if(selected === undefined) {
+                            if (selected === undefined) {
                                 sum.dish = data.dish;
                                 sum.quantity = data.quantity;
                                 sumArr.push(sum);
@@ -394,23 +430,19 @@ define(function(require, exports, module){
                         });
                         finalSelectedDay.dishes = sumArr;
                     }
-                         /*get sum*/
-                        var uniqUserOrders = this.uniqOrderCollection.where();
-                        var sum = this.getSum(uniqUserOrders);
-                        /*get sum*/
-                     this.dashboardOrderCollection = new OrdersCollection(finalArray);
-                    this.dashboardOrderCollection.map(function (order) {
-                        order.setVisibleDate();
-                    });
-                    var orderSum = new DayMenuModel ({sum:sum});
-                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model :orderSum });
-                     this.regions.get('content').show(this.dashboard);
-                }.bind(this));
+                }
+
+                /*get sum*/
+                var uniqUserOrders = this.uniqOrderCollection.where();
+                var sum = this.getSum(uniqUserOrders);
+                /*get sum*/
+                this.dashboardOrderCollection = new OrdersCollection(finalArray);
+                this.dashboardOrderCollection.map(function (order) {
+                    order.setVisibleDate();
+                });
+                this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                this.regions.get('content').show(this.dashboard);
             }.bind(this));
-        },
-
-        dashboardCurrent: function(){
-
         },
 
         statistic: function(){
