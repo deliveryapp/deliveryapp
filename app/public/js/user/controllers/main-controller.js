@@ -221,7 +221,7 @@ define(function (require, exports, module) {
                 this.currentDay = this.userOrdersCollection.at(0);
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
-
+            this.sortCollectionByDay(this.daysMenuCollection);
             //todo: check filter above
                 /*this.daysMenuCollection.comparator = 'day';
             this.daysMenuCollection.map(function (model) {
@@ -294,21 +294,38 @@ define(function (require, exports, module) {
             this.preloadNextWeekData();
         },
 
+        sortCollectionByDay: function (collection) {
+            collection.comparator = 'day';
+            collection.map(function (model) {
+             model.setRestDate();
+             });
+            collection.sort();
+            collection.map(function (model) {
+             model.setVisibleDate();
+             });
+        },
+
         nextWeekDashboard: function () {
             this.getNextWeek().done(function () {
-                this.getOrders(this.nextWeekModel);
-                this.userOrdersCollection.state = 'next_week';
-                this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
-                this.regions.get('content').show(this.nextMenuDashboard);
+                this.getOrders(this.nextWeekModel).done(function () {
+                    this.sortCollectionByDay(this.userOrdersCollection);
+                    this.userOrdersCollection.state = 'next_week';
+                    this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
+                    this.regions.get('content').show(this.nextMenuDashboard);
+                }.bind(this));
+
             }.bind(this));
         },
 
         dashboard: function () {
             this.getCurrentWeek().done(function () {
-                this.getOrders(this.currentWeekModel);
-                this.userOrdersCollection.state = 'current_week';
-                this.dashboard = new MainDashboardView({collection: this.userOrdersCollection});
-                this.regions.get('content').show(this.dashboard);
+                this.getOrders(this.currentWeekModel).done(function () {
+                    this.sortCollectionByDay(this.userOrdersCollection);
+                    this.userOrdersCollection.state = 'current_week';
+                    this.dashboard = new MainDashboardView({collection: this.userOrdersCollection});
+                    this.regions.get('content').show(this.dashboard);
+                }.bind(this));
+
             }.bind(this));
 
         },
