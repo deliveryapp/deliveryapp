@@ -347,14 +347,48 @@ define(function(require, exports, module){
                         this.weekModel.get('days').pop();
                         var days = this.weekModel.get('days');
                         /*get 5 days array*/
-
+                    var finalArray = [];
+                    this.weekModel.get('days').map(function (day) {
+                        finalArray.push({day: day, dishes: []});
+                    });
+                    for (var i = 0; i< days.length; i++ ){
+                        var daysColl = this.uniqOrderCollection.where({day: days[i]});
+                        var finalSelectedDay = _.findWhere(finalArray,{day: daysColl[0].get('day')});
+                        daysColl.map(function (day) {
+                            var dayDishes = day.get('dishes');
+                            _.map(dayDishes, function (dish) {
+                                finalSelectedDay.dishes.push(dish);
+                            });
+                        });
+                        var sumArr = [];
+                        _.map(finalSelectedDay.dishes, function (data) {
+                            var sum = {};
+                            var selected;
+                            _.map(sumArr, function (dish) {
+                                if(dish.dish._id === data.dish._id)
+                                    selected = dish;
+                            });
+                            if(selected === undefined) {
+                                sum.dish = data.dish;
+                                sum.quantity = data.quantity;
+                                sumArr.push(sum);
+                            }
+                            else {
+                                selected.quantity += data.quantity;
+                            }
+                        });
+                        finalSelectedDay.dishes = sumArr;
+                    }
                          /*get sum*/
                         var uniqUserOrders = this.uniqOrderCollection.where();
                         var sum = this.getSum(uniqUserOrders);
                         /*get sum*/
-                     //this.dashboardOrderCollection = new OrdersCollection(finalArray);
-                     //this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
-                    // this.regions.get('content').show(this.dashboard);
+                     this.dashboardOrderCollection = new OrdersCollection(finalArray);
+                    this.dashboardOrderCollection.map(function (order) {
+                        order.setVisibleDate();
+                    });
+                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                     this.regions.get('content').show(this.dashboard);
                 }.bind(this));
             }.bind(this));
         },
