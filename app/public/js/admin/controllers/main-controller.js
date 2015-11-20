@@ -284,52 +284,6 @@ define(function(require, exports, module){
             //this.testOrder();
         },
 
-        /*testOrder: function () {
-            var obj = {
-                userId: '564486d300ce930f00fead46',
-                day: '2015-11-20T00:00:00.000Z',
-                paymentStatus: false,
-                dishes: [{
-                    dish: {id: '5644bed76164be0f00634a94'},
-                    quantity: 2
-                },{
-                    dish: {id: '56447473dff2e80f007e4fff'},
-                    quantity: 1
-                }]
-            };
-            var url = 'http://stark-eyrie-7510.herokuapp.com/orders';
-            $.ajax({
-                url: url,
-                type: 'post',
-                crossDomain: true,
-                data: obj,
-                success: function(data) {
-                    console.log('ok');
-                    console.log(data);
-                }.bind(this)
-            });
-
-            /!*obj = {
-             day: '2015-11-30T00:00:00.000Z',
-             dishes: [
-             {_id: '5644bed76164be0f00634a94'},
-             {_id: '56447473dff2e80f007e4fff'}
-             ]
-             };
-             url = 'http://stark-eyrie-7510.herokuapp.com/days';
-             $.ajax({
-             url: url,
-             type: 'post',
-             crossDomain: true,
-             data: obj,
-             success: function(data) {
-             console.log('ok');
-             console.log(data);
-             }.bind(this)
-             });*!/
-
-        },*/
-
         dayMenuSaved: function (collection) {
             this.currentDay.set('dishes', collection.toJSON());
             var date = new Date(this.currentDay.get('day'));

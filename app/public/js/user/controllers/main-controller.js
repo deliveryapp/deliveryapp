@@ -205,16 +205,18 @@ define(function (require, exports, module) {
                 });
 
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')}).get('dishes'));
-                this.userOrdersCollection.map(function (model) {
-                    model.setVisibleDate();
-                });
+
 
                 this.dayMenuSelectionView = new DayMenuSelectionView({model:new Backbone.Model({
                     summary: this.dayDishesCollection.calculateSummary()}),
                     collection: this.dayDishesCollection
                 });
 
-                this.currentDay = this.userOrdersCollection.at(0);
+                this.currentDay = this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')});
+            this.userOrdersCollection.map(function (model) {
+                model.setVisibleDate();
+            });
+            
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
                 this.sortCollectionByDay(this.daysMenuCollection);
@@ -233,25 +235,17 @@ define(function (require, exports, module) {
         },
 
         dayMenuSaved: function (collection) {
-            //todo: save user menu
-            //debugger;
             this.currentDay.set('dishes', collection.toJSON());
-            //this.currentDay.setRestDate();
-            //this.currentDay.setPutUrl(this.userId, this.currentDay.get('day'));
             console.log(this.currentDay);
             console.log(this.currentDay.url);
-            //debugger;
-            //this.currentDay.save();
             var filtered = this.userOrdersCollection.filter(function (userDayMenu) {
                 return userDayMenu.restDate === this.currentDay.restDate;
             }.bind(this));
-            //debugger;
             filtered[0].setRestDate();
             filtered[0].setPutUrl(this.userId, this.currentDay.get('day'));
             //filtered[0].set('paymentStatus', true);
             var json = filtered[0].toJSON();
             console.log(json);
-            //debugger;
 
             //!save erase dish info except id!
             //filtered[0].save();
