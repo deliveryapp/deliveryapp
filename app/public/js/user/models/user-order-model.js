@@ -21,10 +21,10 @@ define(function(require, exports, module){
         },
         url: baseUrl+ordersResource,
         setPostUrl: function () {
-            this.url =  baseUrl+ordersResource;
+            this.url = baseUrl+ordersResource;
         },
         setPutUrl: function (userId, days) {
-            this.url =  baseUrl+ordersResource+'/'+userId+'/'+this.get('_id');
+            this.url = baseUrl+ordersResource+'/'+userId+'/'+this.get('_id');
                 //+ userId + '?day=' + this.get('day');
                 /*baseUrl+ordersResource;*//*+ '/' + userId + '?day=';
             days.map(function (day) {

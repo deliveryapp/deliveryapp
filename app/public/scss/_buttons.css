@@ -181,20 +181,27 @@
 
 @component button-tab {
   lost-column: 1/5 5 0px;
-  background-color: orange;
+  background-color: #fff;
   height: 36px;
   cursor: pointer;
+  border: solid 1px #8A8888;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+  border-bottom: none;
   /*  border: solid 1px color(#cccccc lightness(40%));
     border-radius: 2px;*/
 
   @modifier selected {
-    background-color: color(#cccccc lightness(40%));
+    background-color: #464646;
+    color: #fff;
   }
 
   @descendent text {
-    padding-top: 8px;
+    //padding-top: 8px;
     font-size: 16px;
     font-weight: 500;
+    font-family: Roboto;
+
   }
   @modifier red {
     background-color: #D50505;

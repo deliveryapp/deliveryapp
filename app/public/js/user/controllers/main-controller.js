@@ -183,6 +183,8 @@ define(function (require, exports, module) {
             this.getOrders(weekModel).done(function () {
                 console.log(this.userOrdersCollection);
                 if(this.userOrdersCollection.length>0) {
+                    this.userOrdersCollection.comparator = 'day';
+                    this.userOrdersCollection.sort();
                     this.startMenu();
                 }
                 else {
@@ -196,6 +198,8 @@ define(function (require, exports, module) {
                 this.menuMainView = new MenuMainView();
 
                 this.regions.get('content').show( this.menuMainView );
+            //var temp = this.userOrdersCollection.findWhere({restDate: this.nextWeekModel.get('startDate')});
+            //debugger;
                 this.currentDate = this.userOrdersCollection.at(0).restDate;
                 this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 

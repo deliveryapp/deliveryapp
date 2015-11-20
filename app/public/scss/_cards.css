@@ -8,6 +8,10 @@
   @descendent dishes {
     padding-left: 1.5%;
     padding-bottom: 1.5%;
+    border: 1px solid #666;
+    @modifier no-top-border {
+      border-top: none;
+    }
   }
 }
 
@@ -48,7 +52,7 @@
   float: left;
   width: 70%;
   background-color: #464646;
-  border: solid 1px color(#cccccc lightness(40%));
+  //border: solid 1px color(#cccccc lightness(40%));
   /*padding-left: 10px;
   padding-right: 10px;*/
 
@@ -64,5 +68,8 @@
 
   @descendent tabs {
     text-align: center;
+    background-color: #CECCCC;
+    height: 36px;
+
   }
 }
