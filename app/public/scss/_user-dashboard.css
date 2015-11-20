@@ -14,6 +14,17 @@
     color: #fff;
     padding: 10px 0 20px;
   }
+  @descendent order-sum{
+    background-color: #fff;
+    float: right;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000;
+    padding: 10px 30px;
+    border-radius: 20px;
+    margin: 20px -70px 0 0;
+
+  }
 
 }
 
@@ -67,15 +78,13 @@
 
   @descendent dish-name {
     lost-column: 10/12;
-    font-family: cursive;
-    font-size: 20px;
+    font-size: 16px;
     padding: 5px 0;
   }
 
   @descendent quantity {
     lost-column: 1/12;
-    font-family: cursive;
-    font-size: 20px;
+    font-size: 18px;
     padding: 5px 0;
   }
 

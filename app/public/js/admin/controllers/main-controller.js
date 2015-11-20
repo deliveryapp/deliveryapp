@@ -48,7 +48,7 @@ define(function(require, exports, module){
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'564dfb0950b4270f00566a77',
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
                 firstName:'admin',
                 lastName:'admin',
                 image_path:'images/male.jpg',
@@ -85,6 +85,21 @@ define(function(require, exports, module){
                 this.dishesCollection.fetch({reset: true}),
                 this.usersCollection.fetch({reset: true}),
                 this.ordersCollection.fetch({reset: true})
+            ).done(function () {
+                    res.resolve();
+                }.bind(this));
+
+            return res.promise();
+        },
+
+        getCurrentWeek: function () {
+            var res = $.Deferred();
+
+            this.currentWeekModel = new WeekModel();
+            this.currentWeekModel.setCurrentWeekUrl();
+
+            $.when(
+                this.currentWeekModel.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -387,10 +402,15 @@ define(function(require, exports, module){
                     this.dashboardOrderCollection.map(function (order) {
                         order.setVisibleDate();
                     });
-                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                    var orderSum = new DayMenuModel ({sum:sum});
+                     this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model :orderSum });
                      this.regions.get('content').show(this.dashboard);
                 }.bind(this));
             }.bind(this));
+        },
+
+        dashboardCurrent: function(){
+
         },
 
         statistic: function(){
@@ -412,6 +432,28 @@ define(function(require, exports, module){
                 }.bind(this));
 
             }.bind(this));
+        },
+
+        statisticCurrent: function(){
+            /*this.getCurrentWeek().done(function () {
+                this.getUniqOrder().done(function () {
+                    console.log('current statistic');
+                    this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
+                    this.getUniqUser().done(function () {
+                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
+                        usersCollection = usersCollection.filter(function(model){
+                            return (model.get('orderSum')) > 0;
+                        });
+                        usersCollection = new OrdersCollection(usersCollection);
+                        this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                        this.statisticPage = new MainStatisticView({collection: this.virt_coll});
+                        this.regions.get('content').show(this.statisticPage);
+                        this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
+                    }.bind(this));
+
+                }.bind(this));
+
+            }.bind(this));*/
         },
 
         getUniqOrder: function(){
@@ -504,7 +546,18 @@ define(function(require, exports, module){
                 model.set('paymentStatus', paymentStatus);
 
                 model.setPutUrl(data);
-                model.save();
+                //model.save();
+
+                $.ajax({
+                    url: model.url,
+                    type: 'put',
+                    crossDomain: true,
+                    data: model.toJSON(),
+                    success: function(data) {
+                        console.log('ok');
+                        console.log(data);
+                    }.bind(this)
+                });
 
             });
 

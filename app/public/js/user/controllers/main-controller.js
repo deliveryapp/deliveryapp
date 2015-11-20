@@ -41,7 +41,7 @@ define(function (require, exports, module) {
                                              firstName:'Admin',
                                              lastName:'Admin',
                                              image_path:'images/male.jpg',
-                                             mail:'Admin@engagepoint.com',
+                                             mail:'admin@engagepoint.com',
                                              __v:0,
                                              role:'admin'});
 
@@ -294,6 +294,19 @@ define(function (require, exports, module) {
             this.preloadNextWeekData();
         },
 
+        getSum: function(ordersCollection){
+            var sum = 0;
+            for (var i= 0; i< ordersCollection.length;i++ ){
+                var help = (ordersCollection[i].get('dishes'));
+                help.map(function (model) {
+                    var dish = model.dish;
+                    var quantity = model.quantity;
+                    sum += dish.price * quantity;
+                });
+            }
+            return sum;
+        },
+
         sortCollectionByDay: function (collection) {
             collection.comparator = 'day';
             collection.map(function (model) {
@@ -308,24 +321,25 @@ define(function (require, exports, module) {
         nextWeekDashboard: function () {
             this.getNextWeek().done(function () {
                 this.getOrders(this.nextWeekModel).done(function () {
-                    this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'next_week';
-                    this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection});
-                    this.regions.get('content').show(this.nextMenuDashboard);
-                }.bind(this));
-
+                this.userOrdersCollection.state = 'next_week';
+                var ordersCollection = this.userOrdersCollection.where();
+                var sum = this.getSum(ordersCollection);
+                var orderSum = new UserModel ({sum:sum});
+                this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
+                this.regions.get('content').show(this.nextMenuDashboard);
+                    }.bind(this));
             }.bind(this));
         },
 
         dashboard: function () {
             this.getCurrentWeek().done(function () {
-                this.getOrders(this.currentWeekModel).done(function () {
-                    this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'current_week';
-                    this.dashboard = new MainDashboardView({collection: this.userOrdersCollection});
-                    this.regions.get('content').show(this.dashboard);
-                }.bind(this));
-
+                this.getOrders(this.currentWeekModel);
+                this.userOrdersCollection.state = 'current_week';
+                var ordersCollection = this.userOrdersCollection.where();
+                var sum = this.getSum(ordersCollection);
+                var orderSum = new UserModel ({sum:sum});
+                this.dashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
+                this.regions.get('content').show(this.dashboard);
             }.bind(this));
 
         },

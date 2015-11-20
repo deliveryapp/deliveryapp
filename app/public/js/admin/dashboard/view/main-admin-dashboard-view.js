@@ -7,7 +7,12 @@ define(function(require, exports, module) {
         template: MainAdminDashboardView,
         WeekAdminMenuView: [],
         childView: WeekAdminMenuView,
-        childViewContainer: '#week-orders'
+        childViewContainer: '#week-orders',
+
+        initialize: function(){
+        console.log(this.collection);
+            console.log(this.model);
+    }
 
 
     });
