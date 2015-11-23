@@ -410,6 +410,7 @@ define(function(require, exports, module){
                         });
                         usersCollection = new OrdersCollection(usersCollection);
                         this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                        this.virt_coll.status = 'current_week';
                         this.statisticPage = new MainStatisticView({collection: this.virt_coll});
                         this.regions.get('content').show(this.statisticPage);
                         this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
@@ -516,8 +517,6 @@ define(function(require, exports, module){
                     crossDomain: true,
                     data: model.toJSON(),
                     success: function(data) {
-                        console.log('ok');
-                        console.log(data);
                     }.bind(this)
                 });
 
