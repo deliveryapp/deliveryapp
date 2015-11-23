@@ -105,7 +105,6 @@ define(function (require, exports, module) {
             return res.promise();
         },
 
-
         preloadCurrentWeekData: function () {
             this.getCurrentWeek().done(function () {
                 if(this.currentWeekModel.get('startDate') === undefined) {

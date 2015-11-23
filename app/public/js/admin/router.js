@@ -15,7 +15,7 @@ define(function(require, exports, module){
             'statistic/current': 'statisticCurrent',
             'menu': 'menu',
             'userlist': 'userlist',
-            'dish/add': 'addDish'
+            'dishlist': 'dishlist'
         }
 
 

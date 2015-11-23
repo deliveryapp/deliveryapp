@@ -95,11 +95,11 @@ define(function(require, exports, module){
         getCurrentWeek: function () {
             var res = $.Deferred();
 
-            this.currentWeekModel = new WeekModel();
-            this.currentWeekModel.setCurrentWeekUrl();
+            this.weekModel = new WeekModel();
+            this.weekModel.setCurrentWeekUrl();
 
             $.when(
-                this.currentWeekModel.fetch()
+                this.weekModel.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -122,30 +122,6 @@ define(function(require, exports, module){
             return res.promise();
         },
 
-        getCurrentWeek: function () {
-            var res = $.Deferred();
-            this.weekModel = new WeekModel(
-                {
-                    "_id": "564c8b50904f9b0f006a669e",
-                    "startDate": "2015-11-16T00:00:00.000Z",
-                    "__v": 0,
-                    "days": ["2015-11-16T00:00:00.000Z",
-                        "2015-11-17T00:00:00.000Z",
-                        "2015-11-18T00:00:00.000Z",
-                        "2015-11-19T00:00:00.000Z",
-                        "2015-11-20T00:00:00.000Z",
-                        "2015-11-21T00:00:00.000Z",
-                        "2015-11-22T00:00:00.000Z"]
-                }
-            );
-
-            $.when(
-                this.weekModel.fetch()
-            ).done(function () {
-                    res.resolve();
-                }.bind(this));
-            return res.promise();
-        },
 
         setNextWeek: function () {
             var res = $.Deferred();
@@ -394,15 +370,18 @@ define(function(require, exports, module){
                 this.dashboardOrderCollection.map(function (order) {
                     order.setVisibleDate();
                 });
-                this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection});
+                var orderSum = new DayMenuModel ({sum:sum});
+                this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model :orderSum });
                 this.regions.get('content').show(this.dashboard);
             }.bind(this));
         },
 
         statistic: function(){
             this.getNextWeek().done(function () {
+
                 this.getUniqOrder().done(function () {
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
+
                     this.getUniqUser().done(function () {
                         var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
                         usersCollection = usersCollection.filter(function(model){
@@ -421,10 +400,11 @@ define(function(require, exports, module){
         },
 
         statisticCurrent: function(){
-            /*this.getCurrentWeek().done(function () {
+            this.getCurrentWeek().done(function () {
                 this.getUniqOrder().done(function () {
                     console.log('current statistic');
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
+
                     this.getUniqUser().done(function () {
                         var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
                         usersCollection = usersCollection.filter(function(model){
@@ -436,10 +416,8 @@ define(function(require, exports, module){
                         this.regions.get('content').show(this.statisticPage);
                         this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
                     }.bind(this));
-
                 }.bind(this));
-
-            }.bind(this));*/
+            }.bind(this));
         },
 
         getUniqOrder: function(){
@@ -573,7 +551,7 @@ define(function(require, exports, module){
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
         },
 
-        addDish: function() {
+        dishlist: function() {
 
             this.getData().done(function () {
                 this.virt_coll = new VirtualCollection(this.dishesCollection, {});
