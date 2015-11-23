@@ -99,8 +99,7 @@
     /*@modifier {}*/
   }
   @modifier sign-in{
-    width: 400px;
-    margin-top: 235px;
+    width: 295px;
   }
 
 }

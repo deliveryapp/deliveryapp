@@ -86,6 +86,9 @@
   @modifier top-margin {
     margin-top: 10px;
   }
+    @modifier bottom-margin {
+        margin-top: 20px;
+    }
   @descendent text {
     height: 24px;
   }
