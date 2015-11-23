@@ -21,7 +21,7 @@ define(function(require, exports, module){
             this.set('day', this.restDate);
         },
         work : function() {
-           return moment(this.get('day')).format('DD MMMM YYYY')
+           return moment(this.get('day')).format('DD MMMM YYYY');
         },
         setPutUrl: function(userId){
             this.url = baseUrl+ordersResource+'/'+userId+'/'+this.get('_id');

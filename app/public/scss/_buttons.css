@@ -191,12 +191,28 @@
   border-top-left-radius:10px;
   border-top-right-radius:10px;
   border-bottom: none;
+  &:hover{
+    background-color: color(#fff a(-55%));
+  }
+  &:active {
+    background-color: #464646;
+    color: #fff;
+  }
+  &:focus {
+    outline:none;
+  }
   /*  border: solid 1px color(#cccccc lightness(40%));
     border-radius: 2px;*/
 
   @modifier selected {
     background-color: #464646;
     color: #fff;
+    &:hover{
+      background-color: #464646;
+    }
+    &:active {
+      background-color: #464646;
+    }
   }
 
   @descendent text {

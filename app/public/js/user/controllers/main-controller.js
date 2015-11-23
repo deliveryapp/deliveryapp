@@ -4,7 +4,7 @@ define(function (require, exports, module) {
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
         WeekModel = require('weekModel'),
-        UserModel = require ('userModel'),
+        UserModel = require('userModel'),
         MainLayoutView = require('mainLayoutView'),
 
         MainDashboardView = require('mainDashboardView'),
@@ -30,35 +30,40 @@ define(function (require, exports, module) {
 
 
         initialize: function () {
+            //this.getActiveUser().done(function () {
             this.getActiveUser();
-            this.mainLayoutView = new MainLayoutView({model: this.activeUser});
-            this.regions.get('main').show(this.mainLayoutView);
+                this.userId = this.activeUser.get('_id');
+                this.mainLayoutView = new MainLayoutView({model: this.activeUser});
+                this.regions.get('main').show(this.mainLayoutView);
+            //}.bind(this));
+
 
         },
 
-        getActiveUser: function(){
-            this.activeUser = new UserModel({_id:'564dabb0892b860f0085be9b',
-                                             firstName:'Admin',
-                                             lastName:'Admin',
-                                             image_path:'images/male.jpg',
-                                             mail:'admin@engagepoint.com',
-                                             __v:0,
-                                             role:'admin'});
+        getActiveUser: function () {
+            this.activeUser = new UserModel({
+                _id: '564dabb0892b860f0085be9b',
+                firstName: 'Admin',
+                lastName: 'Admin',
+                image_path: 'images/male.jpg',
+                mail: 'admin@engagepoint.com',
+                __v: 0,
+                role: 'admin'
+            });
 
             this.userId = this.activeUser.get('_id');
 
-           /*
-            var res = $.Deferred();
-            this.activeUser = new UserModel();
-            this.activeUser.setActiveUserUrl();
-            $.when(
-                this.activeUser.fetch()
-            ).done(function () {
-            this.userId = this.activeUser.get('_id');
-                    res.resolve();
-                }.bind(this));
+             /*var res = $.Deferred();
+             this.activeUser = new UserModel();
+             this.activeUser.setActiveUserUrl();
+             $.when(
+             this.activeUser.fetch()
+             ).done(function () {
+             //this.userId = this.activeUser.get('_id');
+             res.resolve();
+             }.bind(this));
 
-            return res.promise();*/
+             return res.promise();*/
         },
 
         getCurrentWeek: function () {
@@ -107,15 +112,14 @@ define(function (require, exports, module) {
 
         preloadCurrentWeekData: function () {
             this.getCurrentWeek().done(function () {
-                if(this.currentWeekModel.get('startDate') === undefined) {
+                if (this.currentWeekModel.get('startDate') === undefined) {
                     //todo: error when week doesn't exist
                 }
                 else {
                     this.getDays().done(function () {
-                        if(this.daysMenuCollection.length>0)
+                        if (this.daysMenuCollection.length > 0)
                             this.prepareOrders(this.currentWeekModel);
-                        else
-                        {
+                        else {
                             //todo: error when days don't exist
                         }
                     }.bind(this));
@@ -125,15 +129,14 @@ define(function (require, exports, module) {
 
         preloadNextWeekData: function () {
             this.getNextWeek().done(function () {
-                if(this.nextWeekModel.get('startDate') === undefined) {
+                if (this.nextWeekModel.get('startDate') === undefined) {
                     //todo: error when week doesn't exist
                 }
                 else {
                     this.getDays().done(function () {
-                        if(this.daysMenuCollection.length>0)
+                        if (this.daysMenuCollection.length > 0)
                             this.prepareOrders(this.nextWeekModel);
-                        else
-                        {
+                        else {
                             //todo: error when days don't exist
                         }
                     }.bind(this));
@@ -161,7 +164,7 @@ define(function (require, exports, module) {
             this.userOrdersCollection = new UserOrdersCollection();
             var index = 0;
             var days = this.nextWeekModel.get('days');
-            for(index = 0; index < 5; index++) {
+            for (index = 0; index < 5; index++) {
                 this.userOrdersCollection.add(new UserOrderModel({
                     'userId': this.userId,
                     'paymentStatus': false,
@@ -181,7 +184,7 @@ define(function (require, exports, module) {
         prepareOrders: function (weekModel) {
             this.getOrders(weekModel).done(function () {
                 console.log(this.userOrdersCollection);
-                if(this.userOrdersCollection.length>0) {
+                if (this.userOrdersCollection.length > 0) {
                     this.userOrdersCollection.comparator = 'day';
                     this.userOrdersCollection.sort();
                     this.startMenu();
@@ -193,44 +196,46 @@ define(function (require, exports, module) {
             }.bind(this));
         },
 
-        startMenu: function() {
-                this.menuMainView = new MenuMainView();
+        startMenu: function () {
+            this.menuMainView = new MenuMainView();
 
-                this.regions.get('content').show( this.menuMainView );
-                this.currentDate = this.userOrdersCollection.at(0).restDate;
+            this.regions.get('content').show(this.menuMainView);
+            this.currentDate = this.userOrdersCollection.at(0).restDate;
 
-                this.userOrdersCollection.map(function (model) {
-                    model.setRestDate();
-                });
+            this.userOrdersCollection.map(function (model) {
+                model.setRestDate();
+            });
 
-                this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')}).get('dishes'));
+            this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')}).get('dishes'));
 
 
-                this.dayMenuSelectionView = new DayMenuSelectionView({model:new Backbone.Model({
-                    summary: this.dayDishesCollection.calculateSummary()}),
-                    collection: this.dayDishesCollection
-                });
+            this.dayMenuSelectionView = new DayMenuSelectionView({
+                model: new Backbone.Model({
+                    summary: this.dayDishesCollection.calculateSummary()
+                }),
+                collection: this.dayDishesCollection
+            });
 
-                this.currentDay = this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')});
+            this.currentDay = this.userOrdersCollection.findWhere({day: this.nextWeekModel.get('startDate')});
             this.userOrdersCollection.map(function (model) {
                 model.setVisibleDate();
             });
-            
-                //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
-                this.sortCollectionByDay(this.daysMenuCollection);
-                this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
+            //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
-                this.generatedMenu = this.tabContainer.getUserItem(this.userOrdersCollection);
+            this.sortCollectionByDay(this.daysMenuCollection);
+            this.tabContainer = new MenuDaysController({collection: this.daysMenuCollection});
 
-                //this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
-                this.menuMainView.showChildView('dayMenu', this.generatedMenu);
+            this.generatedMenu = this.tabContainer.getUserItem(this.userOrdersCollection);
 
-                this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
-                //user:day:menu:saved
-                this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
-                this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
-                this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
+            //this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+            this.menuMainView.showChildView('dayMenu', this.generatedMenu);
+
+            this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
+            //user:day:menu:saved
+            this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
+            this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
         },
 
         dayMenuSaved: function (collection) {
@@ -254,7 +259,7 @@ define(function (require, exports, module) {
                 type: 'put',
                 crossDomain: true,
                 data: json,
-                success: function(data) {
+                success: function (data) {
                     console.log('ok');
                     console.log(data);
                 }.bind(this)
@@ -271,9 +276,9 @@ define(function (require, exports, module) {
             this.preloadNextWeekData();
         },
 
-        getSum: function(ordersCollection){
+        getSum: function (ordersCollection) {
             var sum = 0;
-            for (var i= 0; i< ordersCollection.length;i++ ){
+            for (var i = 0; i < ordersCollection.length; i++) {
                 var help = (ordersCollection[i].get('dishes'));
                 help.map(function (model) {
                     var dish = model.dish;
@@ -287,12 +292,12 @@ define(function (require, exports, module) {
         sortCollectionByDay: function (collection) {
             collection.comparator = 'day';
             collection.map(function (model) {
-             model.setRestDate();
-             });
+                model.setRestDate();
+            });
             collection.sort();
             collection.map(function (model) {
-             model.setVisibleDate();
-             });
+                model.setVisibleDate();
+            });
         },
 
         nextWeekDashboard: function () {
@@ -302,8 +307,11 @@ define(function (require, exports, module) {
                     this.userOrdersCollection.state = 'next_week';
                     var ordersCollection = this.userOrdersCollection.where();
                     var sum = this.getSum(ordersCollection);
-                    var orderSum = new UserModel ({sum:sum});
-                    this.nextMenuDashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
+                    var orderSum = new UserModel({sum: sum});
+                    this.nextMenuDashboard = new MainDashboardView({
+                        collection: this.userOrdersCollection,
+                        model: orderSum
+                    });
                     this.regions.get('content').show(this.nextMenuDashboard);
                 }.bind(this));
             }.bind(this));
@@ -311,15 +319,15 @@ define(function (require, exports, module) {
 
         dashboard: function () {
             this.getCurrentWeek().done(function () {
-                    this.getOrders(this.currentWeekModel).done(function () {
-                        this.sortCollectionByDay(this.userOrdersCollection);
-                        this.userOrdersCollection.state = 'current_week';
-                        var ordersCollection = this.userOrdersCollection.where();
-                        var sum = this.getSum(ordersCollection);
-                        var orderSum = new UserModel ({sum:sum});
-                        this.dashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
-                        this.regions.get('content').show(this.dashboard);
-                    }.bind(this));
+                this.getOrders(this.currentWeekModel).done(function () {
+                    this.sortCollectionByDay(this.userOrdersCollection);
+                    this.userOrdersCollection.state = 'current_week';
+                    var ordersCollection = this.userOrdersCollection.where();
+                    var sum = this.getSum(ordersCollection);
+                    var orderSum = new UserModel({sum: sum});
+                    this.dashboard = new MainDashboardView({collection: this.userOrdersCollection, model: orderSum});
+                    this.regions.get('content').show(this.dashboard);
+                }.bind(this));
             }.bind(this));
 
         },
@@ -327,11 +335,10 @@ define(function (require, exports, module) {
         dishAdded: function (model) {
             var dishInList = false;
             this.dayDishesCollection.map(function (dish) {
-                if(dish.get('dish')._id === model.get('_id'))
+                if (dish.get('dish')._id === model.get('_id'))
                     dishInList = true;
             });
-            if(!dishInList)
-            {
+            if (!dishInList) {
                 this.dayDishesCollection.add({dish: model.toJSON(), quantity: 1});
                 console.log(this.dayDishesCollection.calculateSummary());
                 this.dayMenuSelectionView.model = new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()});
@@ -352,8 +359,10 @@ define(function (require, exports, module) {
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.currentDay = filtered[0];
 
-            this.dayMenuSelectionView = new DayMenuSelectionView({model: new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()}),
-                collection: this.dayDishesCollection});
+            this.dayMenuSelectionView = new DayMenuSelectionView({
+                model: new Backbone.Model({summary: this.dayDishesCollection.calculateSummary()}),
+                collection: this.dayDishesCollection
+            });
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
@@ -361,7 +370,7 @@ define(function (require, exports, module) {
 
         index: function () {
             console.log('index route');
-                console.log(this.userDaysMenuCollection);
+            console.log(this.userDaysMenuCollection);
         }
 
     });

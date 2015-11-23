@@ -9,7 +9,14 @@ define(function(require, exports, module){
 
     module.exports = Backbone.Collection.extend({
         model: DayMenuModel,
-        url: baseUrl+daysResource
+        setUrl: function (weekModel) {
+            this.url = baseUrl+daysResource+'?day=';
+            weekModel.get('days').map(function (day) {
+                this.url += day + ',';
+            }.bind(this));
+            this.url = this.url.slice(0, -1);
+            //debugger;
+        }
     });
 
 });
