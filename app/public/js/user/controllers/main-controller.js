@@ -215,7 +215,7 @@ define(function (require, exports, module) {
             this.userOrdersCollection.map(function (model) {
                 model.setVisibleDate();
             });
-            
+
                 //this.menuPreselectionView.showChildView('selectedUserMenu', this.dayMenuSelectionView);
 
                 this.sortCollectionByDay(this.daysMenuCollection);

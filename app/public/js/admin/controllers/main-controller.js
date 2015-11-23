@@ -149,7 +149,7 @@ define(function(require, exports, module){
                 if(this.weekModel.get('startDate') === undefined) {
                     //todo: prompt or whatever
 
-                    //var startDate = '26-11-2015';
+                    //var startDate = '30-11-2015';
                     //startDate.toUTCString();
                     //debugger;
                     //var startDate = date.toUTCString();
@@ -225,6 +225,7 @@ define(function(require, exports, module){
                 console.log(this.weekModel);
                 var days = this.weekModel.get('days');
                 this.getDays().done(function () {
+                    this.sortCollectionByDay(this.daysMenuCollection);
                     if(this.daysMenuCollection.length>0)
                         this.startDayMenu();
                     else
@@ -235,6 +236,17 @@ define(function(require, exports, module){
                 }.bind(this));
 
             }.bind(this));
+        },
+
+        sortCollectionByDay: function (collection) {
+            collection.comparator = 'day';
+            collection.map(function (model) {
+                model.setRestDate();
+            });
+            collection.sort();
+            collection.map(function (model) {
+                model.setVisibleDate();
+            });
         },
 
         startDayMenu: function() {
