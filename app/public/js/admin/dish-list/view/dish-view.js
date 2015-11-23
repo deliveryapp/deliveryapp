@@ -8,8 +8,9 @@ define(function(require, exports, module) {
         className: 'b-all-user__one-person',
         template: DishView,
         events: {
-            'click .dish-remove': 'dishRemoved',
-            'click .dish-edit': 'dishEdit',
+            'click .js-dish-remove': 'dishRemoved',
+            'click .js-dish-edit': 'dishEdit',
+            'click .js-dish-edit-save': 'dishEditSave',
             'click .js-dish-not-edit': 'notEdit'
         },
 
@@ -22,49 +23,57 @@ define(function(require, exports, module) {
          },
 
         initialize: function() {
-            if (this.model.get('_id') === undefined){
-                this.model.set('contentEditable','contentEditable');
+            if (this.model.get('_id') === undefined && this.model.get('category') === undefined){
                 this.template = DishViewEdit;
             }
         },
 
         dishRemoved: function () {
             this.trigger('dish:removed', this.model);
-            this.model.destroy();
         },
 
-        dishEdit: function(){
-            if (this.model.get('contentEditable') === undefined){
-                this.model.set('contentEditable','contentEditable');
-                this.template = DishViewEdit;
-                this.render();
+        dishEdit: function() {
+            this.template = DishViewEdit;
+            this.render();
 
+        },
+
+        dishEditSave: function(){
+            this.model.set('name', this.ui.dishName.val());
+            this.model.set('category', this.ui.dishCategory.val());
+            this.model.set('weight',this.ui.dishWeight.val());
+            this.model.set('description',this.ui.dishDescription.val());
+            this.model.set('price',this.ui.dishPrice.val());
+
+            if (this.model.get('_id') === undefined){
+                this.model.setPostUrl();
             }
             else{
-                this.model.unset('contentEditable','silent');
-                this.template = DishView;
-                this.model.set('name', this.ui.dishName.val());
-                this.model.set('category', this.ui.dishCategory.val());
-                this.model.set('weight',this.ui.dishWeight.val());
-                this.model.set('description',this.ui.dishDescription.val());
-                this.model.set('price',this.ui.dishPrice.val());
-
-                if (this.model.get('_id') === undefined){
-                    this.model.setPostUrl();
-                }
-                else{
-                    this.model.setPutUrl();
-                }
-                this.render();
-                this.model.save();
-
+                this.model.setPutUrl();
             }
+
+
+            this.model.save(null,{success: function(){
+                this.template = DishView;
+                this.render();
+            }.bind(this),
+                error: function(){
+                    alert('Validation error! Please, fill all fields!');
+                }.bind(this)
+            });
+
+
         },
 
         notEdit: function () {
-            this.model.unset('contentEditable','silent');
-            this.template = DishView;
-            this.render();
+            if (this.model.get('_id') === undefined){
+                this.model.destroy();
+            }
+            else{
+                this.template = DishView;
+                this.render();
+            }
+
         }
     });
 });

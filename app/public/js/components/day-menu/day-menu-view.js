@@ -34,8 +34,6 @@ define(function(require, exports, module){
         categoryChanged:function(evt) {
             this.trigger('filter:by:category:applied', evt.currentTarget.value);
         },
-        initialize: function () {
 
-        }
     });
 });

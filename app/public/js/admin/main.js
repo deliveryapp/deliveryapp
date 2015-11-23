@@ -55,7 +55,8 @@ require.config({
         ordersResource: '../url/orders-url',
         usersResource: '../url/users-url',
         weeksResource: '../url/weeks-url',
-        mainAddDishView: 'dish-list/view/main-add-dish-view'
+        mainAddDishView: 'dish-list/view/main-add-dish-view',
+        dishListCategory: '../constants/dish-list-category'
 
 
 

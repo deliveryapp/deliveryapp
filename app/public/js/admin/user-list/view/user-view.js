@@ -8,8 +8,9 @@ define(function(require, exports, module) {
         className: 'b-all-user__one-person',
         template: UserView,
         events: {
-            'click .user-remove': 'userRemoved',
-            'click .user-edit': 'userEdit',
+            'click .js-user-remove': 'userRemoved',
+            'click .js-user-edit': 'userEdit',
+            'click .js-user-edit-save': 'userEditSave',
             'click .js-user-not-edit': 'notEdit'
         },
 
@@ -22,8 +23,7 @@ define(function(require, exports, module) {
          },
 
         initialize: function() {
-            if (this.model.get('_id') === undefined){
-                this.model.set('contentEditable','contentEditable');
+            if (this.model.get('_id') === undefined && this.model.get('role') === undefined){
                 this.template = UserViewEdit;
             }
         },
@@ -37,52 +37,43 @@ define(function(require, exports, module) {
 
 
         userEdit: function(){
-            if (this.model.get('contentEditable') === undefined && this.model.get('addPass') === undefined){
-
-                this.model.set('contentEditable','contentEditable');
                 this.template = UserViewEdit;
                 this.render();
 
-            }
-            else if (this.model.get('contentEditable') === 'contentEditable' && this.model.get('addPass') === undefined) {
+        },
+        userEditSave: function(){
+            this.model.set('firstName', this.ui.firstName.val());
+            this.model.set('lastName', this.ui.lastName.val());
+            this.model.set('role', this.ui.userRole.val());
+            this.model.set('mail', this.ui.userMail.val());
 
-                this.model.unset('contentEditable', 'silent');
-                this.template = UserView;
-                this.model.set('firstName', this.ui.firstName.val());
-                this.model.set('lastName', this.ui.lastName.val());
-                this.model.set('role', this.ui.userRole.val());
-                this.model.set('mail', this.ui.userMail.val());
-
-                this.model.setPutUrl();
-                this.model.save();
-                this.render();
-            }
-
-            else if (this.model.get('contentEditable') === 'contentEditable' && this.model.get('addPass') === 'true'){
-
-                this.model.unset('contentEditable', 'silent');
-                this.model.unset('addPass', 'silent');
-
-                this.model.set('firstName', this.ui.firstName.val());
-                this.model.set('lastName', this.ui.lastName.val());
-                this.model.set('role', this.ui.userRole.val());
-                this.model.set('mail', this.ui.userMail.val());
+            if (this.model.get('_id') === undefined ){
                 this.model.set('password',this.ui.userPass.val());
-                this.template = UserView;
                 this.model.setPostUrl();
-                this.model.save();
-                this.render();
-
             }
+            else{
+                this.model.setPutUrl();
+            }
+
+            this.model.save(null,{success: function(){
+                this.template = UserView;
+                this.render();
+               }.bind(this),
+            error: function(){
+                alert('Validation error! Please, fill all fields!');
+            }.bind(this)
+            });
 
         },
 
-
-
         notEdit: function () {
-            this.model.unset('contentEditable','silent');
-            this.template = UserView;
-            this.render();
+            if (this.model.get('_id') === undefined){
+                this.model.destroy();
+            }
+            else {
+                this.template = UserView;
+                this.render();
+            }
         }
     });
 });

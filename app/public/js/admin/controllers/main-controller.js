@@ -141,7 +141,6 @@ define(function (require, exports, module) {
             return res.promise();
         },
 
-
         setNextWeek: function () {
             var res = $.Deferred();
             this.weekModel.setNextWeekUrl();
@@ -424,7 +423,6 @@ define(function (require, exports, module) {
         statisticCurrent: function () {
             this.getCurrentWeek().done(function () {
                 this.getUniqOrder().done(function () {
-                    console.log('current statistic');
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
 
                     this.getUniqUser().done(function () {
@@ -433,7 +431,8 @@ define(function (require, exports, module) {
                             return (model.get('orderSum')) > 0;
                         });
                         usersCollection = new OrdersCollection(usersCollection);
-                        this.virt_coll = new VirtualCollection(usersCollection, {url: baseUrl + usersResource});
+                        this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                        this.virt_coll.status = 'current_week';
                         this.statisticPage = new MainStatisticView({collection: this.virt_coll});
                         this.regions.get('content').show(this.statisticPage);
                         this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
@@ -539,9 +538,7 @@ define(function (require, exports, module) {
                     type: 'put',
                     crossDomain: true,
                     data: model.toJSON(),
-                    success: function (data) {
-                        console.log('ok');
-                        console.log(data);
+                    success: function(data) {
                     }.bind(this)
                 });
 
@@ -549,7 +546,6 @@ define(function (require, exports, module) {
 
 
         },
-
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(model);

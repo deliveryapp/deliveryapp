@@ -5,6 +5,7 @@ define(function (require, exports, module) {
         DishesCollection = require('dishesCollection'),
         VirtualCollection = require('backboneVirtualCollection'),
         CardView = require('cardLayoutView'),
+        DishModel = require('dishModel'),
         MenuPreselectionView = require('menuPreselectionView'),
         DayMenuSelectionView = require('dayMenuSelectionView'),
         UserOrdersCollection = require('userOrdersCollection'),
@@ -60,6 +61,7 @@ define(function (require, exports, module) {
             });
 
             this.dayMenuView = new DayMenuView({
+                model: new DishModel(),
                 collection: this.dishesCollection
             });
 
@@ -90,23 +92,22 @@ define(function (require, exports, module) {
         },
 
         categoryFilterApplied: function (phrase) {
-            if(phrase === '0')
-            {
+            if (phrase === '0') {
                 this.dishesCollection.updateFilter(function (model) {
                     return model;
                 });
             }
             else {
                 this.dishesCollection.updateFilter(function (model) {
-                    return model.get('category').toLowerCase().indexOf(phrase) > -1;
+                    return model.get('category').indexOf(phrase) > -1;
                 });
             }
         },
 
-       /* renderUserMenu: function () {
-            this.dayMenuSelectionView.render();
-        },
-*/
+        /* renderUserMenu: function () {
+         this.dayMenuSelectionView.render();
+         },
+         */
         dishAdded: function (model) {
             this.trigger('dish:added', model);
         },

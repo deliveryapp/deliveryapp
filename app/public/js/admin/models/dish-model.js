@@ -3,6 +3,7 @@ define(function(require, exports, module){
         _ = require('underscore'),
         baseUrl = require('baseUrl'),
         dishesResource = require('dishesResource'),
+        DishListCategory = require('dishListCategory'),
         Backbone = require('backbone');
 
 
@@ -16,6 +17,7 @@ define(function(require, exports, module){
             this.url = baseUrl+dishesResource+'/'+this.get('_id');
         },
         defaults: {
+            categoryList: DishListCategory()
         }
     });
 
