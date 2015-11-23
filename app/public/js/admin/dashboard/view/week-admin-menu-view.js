@@ -12,6 +12,7 @@ define(function(require, exports, module) {
         className: 'b-week-orders-list__list-point',
         childViewContainer: '#dish-list',
         childView: DayAdminMenuView,
+       
 
         childViewOptions: function () {
             return { collection: this.collection };
@@ -20,6 +21,7 @@ define(function(require, exports, module) {
         getEmptyView: function() {
             return EmptyDayAdminMenuView;
         },
+
 
         initialize: function() {
             this.collection = new DishesCollection(this.model.get('dishes'));
