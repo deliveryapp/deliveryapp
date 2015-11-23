@@ -9,7 +9,7 @@ define(function(require, exports, module){
     module.exports  = Backbone.Model.extend({
         urlRoot: baseUrl+dishesResource,
         idAttribute: '_id',
-                setPostUrl: function () {
+        setPostUrl: function () {
             this.url = baseUrl+dishesResource;
         },
         setPutUrl: function () {

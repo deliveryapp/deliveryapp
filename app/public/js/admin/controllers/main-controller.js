@@ -122,7 +122,6 @@ define(function(require, exports, module){
             return res.promise();
         },
 
-
         setNextWeek: function () {
             var res = $.Deferred();
             this.weekModel.setNextWeekUrl();
@@ -402,7 +401,6 @@ define(function(require, exports, module){
         statisticCurrent: function(){
             this.getCurrentWeek().done(function () {
                 this.getUniqOrder().done(function () {
-                    console.log('current statistic');
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
 
                     this.getUniqUser().done(function () {
@@ -527,7 +525,6 @@ define(function(require, exports, module){
 
 
         },
-
 
         dishAdded: function (model) {
             this.dayDishesCollection.add(model);
