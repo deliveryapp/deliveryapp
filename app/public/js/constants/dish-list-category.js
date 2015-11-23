@@ -33,6 +33,10 @@ define(function(require, exports, module){
             {
                 val: 'meatless meals',
                 name: 'постные блюда'
+            },
+            {
+                val: 'bread',
+                name: 'хлеб'
             }
         ]
     }
