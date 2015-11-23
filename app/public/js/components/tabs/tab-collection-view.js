@@ -19,6 +19,7 @@ define(function (require, exports, module) {
             //this.render();
             this.collection.map(function (model) {
                 model.set('className', '');
+                model.setVisibleDate();
             });
             e.model.set('className', 'b-button-tab_selected');
             this.render();

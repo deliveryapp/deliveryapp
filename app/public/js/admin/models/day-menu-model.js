@@ -27,6 +27,9 @@ define(function(require, exports, module){
         },
         setPutUrl: function () {
             this.url =  baseUrl+daysResource+'/'+this.get('_id')+"?day="+this.get('day');//'/'+this.get('_id') delete
+        },
+        setDeleteUrl: function () {
+            this.url =  baseUrl+daysResource+'/'+this.get('_id');
         }
 
     });
