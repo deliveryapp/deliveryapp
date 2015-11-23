@@ -37,7 +37,11 @@ define(function(require, exports, module){
             {
                 val: 'bread',
                 name: 'хлеб'
-            }
+            },
+            {
+                val: 'complex',
+                name: 'комплекс'
+            },
         ]
     }
 
