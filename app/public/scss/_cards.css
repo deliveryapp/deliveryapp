@@ -1,6 +1,6 @@
 @component card {
   width: 100%;
-  background-color: #3f51b5;
+  background-color: #464646;
   /*border: solid 1px color(#cccccc lightness(40%));*/
   /*padding-left: 10px;
   padding-right: 10px;*/
@@ -8,12 +8,16 @@
   @descendent dishes {
     padding-left: 1.5%;
     padding-bottom: 1.5%;
+    border: 1px solid #666;
+    @modifier no-top-border {
+      border-top: none;
+    }
   }
 }
 
 @component user-menu-card {
   width: 30%;
-  background-color: #3f51b5;
+  background-color: #464646;
   display: inline-block;
   float: right;
   position: fixed;
@@ -26,7 +30,7 @@
   }
 
   @descendent menu {
-    max-height: 600px;
+    max-height: 400px;
     width: 100%;
     overflow-y: auto;
   }
@@ -47,8 +51,8 @@
 @component card-main {
   float: left;
   width: 70%;
-  background-color: #3f51b5;
-  border: solid 1px color(#cccccc lightness(40%));
+  background-color: #464646;
+  //border: solid 1px color(#cccccc lightness(40%));
   /*padding-left: 10px;
   padding-right: 10px;*/
 
@@ -64,5 +68,8 @@
 
   @descendent tabs {
     text-align: center;
+    background-color: #CECCCC;
+    height: 36px;
+
   }
 }

@@ -37,8 +37,10 @@ require.config({
         mainUserListView:'user-list/view/main-user-list-view',
         userView: 'user-list/view/user-view',
         /****-amind-dashboard--********/
-        weekOrderView: 'dashboard/view/weekorder-view',
-        adminWeekOrderListView:'dashboard/view/admin-weekorder-list-view',
+        mainAdminMenuView: 'dashboard/view/main-admin-dashboard-view',
+        weekAdminMenuView: 'dashboard/view/week-admin-menu-view',
+        emptyDayAdminMenuView: 'dashboard/view/empty-day-admin-menu-view',
+        dayAdminMenuView: 'dashboard/view/day-admin-menu-view',
         ordersCollection : 'collections/order-collection',
         /*****--*****/
         emptyUserView: 'user-list/view/empty-user-view',
@@ -53,7 +55,8 @@ require.config({
         ordersResource: '../url/orders-url',
         usersResource: '../url/users-url',
         weeksResource: '../url/weeks-url',
-        mainAddDishView: 'dish-list/view/main-add-dish-view'
+        mainAddDishView: 'dish-list/view/main-add-dish-view',
+        dishListCategory: '../constants/dish-list-category'
 
 
 

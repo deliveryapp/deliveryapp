@@ -25,8 +25,8 @@ define(function(require, exports, module) {
 
         userClickedM: function (view, model) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('name') +  ' from the system?');
-
             if (confirm_result === true) {
+                model.setPutUrl();
                 model.destroy();
             }
 
@@ -37,6 +37,7 @@ define(function(require, exports, module) {
         },
 
         addNewUser: function(){
+
             this.collection.unshift({'image_path': 'images/soup_icon.png', 'name':''});
             this.trigger('filter:dishes:name:applied', '');
             $('#filter-name').val('');

@@ -12,7 +12,6 @@ define(function(require, exports, module){
             weekModel.get('days').map(function (day) {
                 this.url += day + ',';
             }.bind(this));
-            console.log(this.url);
         }
     });
 

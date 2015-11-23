@@ -26,7 +26,10 @@ define(function(require, exports, module){
             this.url =  baseUrl+daysResource;
         },
         setPutUrl: function () {
-            this.url =  'http://localhost/days'+'/'+this.get('_id')+"?day="+this.get('day');//'/'+this.get('_id') delete
+            this.url =  baseUrl+daysResource+'/'+this.get('_id')+"?day="+this.get('day');//'/'+this.get('_id') delete
+        },
+        setDeleteUrl: function () {
+            this.url =  baseUrl+daysResource+'/'+this.get('_id');
         }
 
     });

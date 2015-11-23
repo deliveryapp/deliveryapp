@@ -1,0 +1,133 @@
+@component list-element {
+  display:inline-block;
+
+  @descendent title {
+    font-weight: bold;
+    float:left;
+    margin: 0 5px 0 0;
+  }
+
+  @descendent text {
+    float:left;
+  }
+
+  @descendent dish-text {
+    float:left;
+    width: 675px;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+  }
+
+}
+
+
+@component personal-info{
+    display: inline-flex;
+    justify-content: space-around;
+    width: 980px;
+    height: 100px;
+    align-items:center;
+    background-color: #fff;
+    margin: 0 0 7px 0;
+    border-radius: 20px;
+ 
+
+  @modifier dish-size {
+    height: 120px;
+  }
+
+  @descendent foto{
+    width: 150px;
+    height: 80px;
+
+    @modifier size {
+      width: 75px;
+      height: 75px;
+    }
+  }
+  @descendent name{
+    width: 300px;
+    height: 80px;
+    text-align: left;
+
+  }
+  @descendent mail{
+    width: 350px;
+    height: 80px;
+    text-align: left;
+
+
+  }
+  @descendent buttons{
+    width: 70px;
+    height: 80px;
+  }
+  @descendent dish-list-info{
+    height: 85px;
+  }
+
+
+}
+
+
+@component user-list{
+  width: 980px;
+  background-color: #464646;
+  margin: auto;
+  margin-top: 60px;
+  border-radius: 5px;
+  padding: 30px 110px;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+  text-align:center;
+
+  @modifier empty-list {
+    color: #fff;
+  }
+
+  @descendent title{
+    font-size: 28px;
+    color: #fff;
+    padding: 10px 0 20px 0;
+
+    @modifier top-padding{
+      padding-top:30px
+    }
+  }
+  @descendent list{
+
+    /*@modifier {}*/
+  }
+  @modifier sign-in{
+    width: 295px;
+  }
+
+}
+
+@component user-list-buttons{
+  float: right;
+  padding: 17px 0 0 0;
+  width:545px;
+
+  @descendent save{
+    float: left;
+  }
+  @descendent add-user{
+    float: right;
+  }
+}
+
+
+
+
+@component all-user{
+  list-style-type:none;
+}
+
+
+/*
+
+@component add-user-inputs{
+  padding: 10px 0 0 40px;;
+
+}*/

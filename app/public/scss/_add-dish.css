@@ -1,0 +1,64 @@
+@component dish-list-info{
+  width: 770px;
+  text-align: left;
+
+  @descendent dish-name{
+    width: 770px;
+  }
+  @descendent dish-category-weight-price{
+    width: 770px;
+
+  }
+  @descendent dish-description{
+    width: 770px;
+
+  }
+}
+
+
+@component dish-edit-info{
+  display: inline-flex;
+  justify-content: space-around;
+  width: 980px;
+  height: 120px;
+  align-items:center;
+  background-color: #FFF;
+  /*background-color: #275ECA;*/
+  margin: 0 0 7px 0;
+  border-radius: 20px;
+
+
+  @modifier dish-size {
+    height: 120px;
+  }
+
+  @descendent foto{
+    width: 150px;
+    height: 80px;
+
+    @modifier size {
+      width: 75px;
+      height: 75px;
+    }
+  }
+  @descendent input-block{
+    width: 405px;
+    height: 80px;
+    text-align: left;
+
+  }
+
+  @descendent buttons{
+    width: 70px;
+    height: 80px;
+  }
+}
+
+@component dish-list-info{
+  @descendent element{
+    width: 250px;
+    float:left;
+  }
+}
+
+

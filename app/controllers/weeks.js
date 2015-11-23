@@ -11,8 +11,23 @@ exports.getByDate = function (req, res) {
             var currentNearestMonday = utils.getNearestMonday(moment(new Date()).format(constants.DATE_PARSE_FORMAT));
 
             Weeks.findOne({startDate: currentNearestMonday}, function (err, w) {
-                if (err) return res.status(400).send(err);
-                res.send(w);
+                if(w === null) {
+                    var week = new Weeks({
+                        startDate: currentNearestMonday,
+                        days: utils.getWeekDaysByMonday(currentNearestMonday)
+                    });
+                    week.save(function (err) {
+                        if (err) return res.status(400).send(err);
+                        Weeks.findById(week, function (err, w) {
+                            if (err) return res.status(400).send(err);
+                            res.send(w);
+                        });
+                    });
+                }
+                else{
+                    if (err) return res.status(400).send(err);
+                    res.send(w);
+                }
             });
         },
         'next': function () {

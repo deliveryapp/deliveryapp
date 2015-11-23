@@ -9,7 +9,17 @@ define(function(require, exports, module){
 
     module.exports = Backbone.Collection.extend({
         model: UserModel,
-        url: baseUrl+usersResource
+        url: baseUrl+usersResource,
+
+        setGetUrl: function (users) {
+            this.url =  baseUrl+usersResource+'?id=';
+            users.map(function (users) {
+                this.url += users + ',';
+            }.bind(this));
+            this.url= this.url.substr(0,this.url.length-1);
+        }
+
+
     });
 
 });

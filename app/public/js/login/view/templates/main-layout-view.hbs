@@ -2,20 +2,21 @@
 
     <div class="b-user-list__title">Sign in</div>
     <div class="b-user-list__list">
-
+        <form method="post" action="http://localhost/login">
         <div class="b-field-text">
-            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Login" id="login-username">
+            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Login" name="mail" id="login-username">
         </div>
 
         <div class="b-field-text">
-            <input class="b-field-text__input b-field-text__input_margin" type="password" placeholder="Password" id="login-password" required  >
+            <input class="b-field-text__input b-field-text__input_margin" type="password" placeholder="Password" name="password" id="login-password" required  >
         </div>
 
 
-        <button type="submit" id="submit-login" class="b-button-icon-text b-button-icon-text_main-color">
+        <button type="submit" id="submit-login" class="b-button-icon-text b-button-icon-text_main-color b-button-icon-text_bottom-margin">
             <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">person_pin</i>
             <span class="b-button-icon-text__text">Login</span>
         </button>
+        </form>
     </div>
 </div>
 

@@ -6,7 +6,6 @@ define(function(require, exports, module){
         },
         calculateSummary: function() {
             var dishes = this.get('dishes');
-            debugger;
             var res = dishes.reduce(function(orderSummary, item){
                 return orderSummary + item.get('price');
             }, 0);

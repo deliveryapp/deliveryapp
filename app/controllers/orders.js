@@ -92,7 +92,7 @@ exports.put = function (req, res) {
         if (err) return res.status(400).send(err);
 
         order[0].paymentStatus = req.body.paymentStatus;
-        if(req.body.dishes!==undefined) {
+        if(req.body.dishes!==undefined && req.body.dishes!==null) {
             order[0].dishes = req.body.dishes;
 
             for(var i=0;i<req.body.dishes.length;i++)
@@ -103,6 +103,7 @@ exports.put = function (req, res) {
         }
         else {
             order[0].dishes = [];
+
         }
         console.log(req.body.dishes);
         console.log("\r\n");

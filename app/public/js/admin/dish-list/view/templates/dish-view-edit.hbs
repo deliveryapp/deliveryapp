@@ -17,11 +17,9 @@
 
                     <div class="b-field-select b-field-select_small">
                         <select class="b-field-select__input b-field-select__input_small" id="dish-category">
-                            <option value="" selected="" disabled="">Select dish category</option>
-                            <option value="1st_dish">1st_dish</option>
-                            <option value="Main_dish">Main_dish</option>
-                            <option value="Salad">Salad</option>
-                            <option value="Dessert">Dessert</option>
+                            {{#each categoryList}}
+                                <option value="{{this.val}}">{{this.name}}</option>
+                            {{/each}}
                         </select>
                     </div>
 
@@ -61,7 +59,7 @@
                 <i class="material-icons right b-button-icon__icon">close</i>
             </button>
 
-            <button class="b-button-icon b-button-icon_circle b-button-icon_green dish-edit" >
+            <button class="b-button-icon b-button-icon_circle b-button-icon_green js-dish-edit-save" >
                 <i class="material-icons right b-button-icon__icon">done</i>
             </button>
 

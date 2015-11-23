@@ -19,7 +19,7 @@ define(function(require, exports, module) {
             location.href='user#dashboard';
         },
         next_week: function(){
-            location.href='user#dashboard/NextWeek';
+            location.href='user#dashboard/next';
         },
         edit_week: function(){
             location.href='user#menu';

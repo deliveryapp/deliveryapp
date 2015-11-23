@@ -28,6 +28,7 @@ define(function(require, exports, module) {
             var confirm_result = confirm('Are you sure you want to remove ' + model.get('firstName')+ ' ' + model.get('lastName') + ' from the system?');
 
             if (confirm_result === true) {
+                model.setPutUrl();
                 model.destroy();
             }
         },
@@ -37,10 +38,11 @@ define(function(require, exports, module) {
         },
 
         addNewUser: function(){
-            this.collection.unshift({'image_path': 'images/male.jpg', 'addPass':'true', 'lastName':''});
+            this.collection.unshift({'image_path': 'images/male.jpg', 'lastName':''});
             this.trigger('filter:users:name:applied', '');
             $('#filter-name').val('');
         }
+
 
 
     });
