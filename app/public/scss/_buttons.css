@@ -38,6 +38,21 @@
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
   }
+    @modifier red {
+        height: 34px;
+        width: 100%;
+        background-color: #D50505;
+        border: solid 1px #860505;
+    &:hover{
+         background-color: color(#D50505 a(-15%));;
+     }
+    &:active {
+         background-color: color(#D50505 lightness(40%));
+     }
+    &:focus {
+         outline:none;
+     }
+    }
 
 
 }

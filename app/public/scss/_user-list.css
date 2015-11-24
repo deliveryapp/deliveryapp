@@ -94,13 +94,6 @@
       padding-top:30px
     }
   }
-  @descendent list{
-
-    /*@modifier {}*/
-  }
-  @modifier sign-in{
-    width: 295px;
-  }
 
 }
 

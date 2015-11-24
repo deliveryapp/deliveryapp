@@ -10,23 +10,34 @@ define(function(require, exports, module) {
             'click .js-button-paid-status': 'paid'
         },
         ui:{
-            status: '.js-payment-status'
+            status: '.js-payment-status',
+            button: '.js-button-paid-status'
         },
 
         onShow: function(){
             if (this.model.get('paymentStatus') === true){
                 this.ui.status.addClass('b-statistic-personal-info_paid');
+                this.ui.button.addClass('b-button_red');
+            }
+            else{
+                this.ui.button.addClass('b-button_green');
             }
         },
 
         paid: function(){
             this.trigger('payment:status:changed', this.model.get('_id'));
-            if(this.ui.status.hasClass('b-statistic-personal-info_paid')){
-                this.ui.status.removeClass('b-statistic-personal-info_paid');
-            }
-            else{
+
+            if (this.ui.button.hasClass('b-button_green')){
+                this.ui.button.removeClass('b-button_green');
+                this.ui.button.addClass('b-button_red');
                 this.ui.status.addClass('b-statistic-personal-info_paid');
             }
+            else{
+                this.ui.button.removeClass('b-button_red');
+                this.ui.button.addClass('b-button_green');
+                this.ui.status.removeClass('b-statistic-personal-info_paid');
+            }
+
         }
 
 

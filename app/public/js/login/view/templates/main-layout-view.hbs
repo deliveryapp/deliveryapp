@@ -1,21 +1,29 @@
-<div class="b-user-list b-user-list_sign-in">
+<div class="b-login-form">
 
-    <div class="b-user-list__title">Sign in</div>
-    <div class="b-user-list__list">
-        <form method="post" action="http://localhost/login">
-        <div class="b-field-text">
-            <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Login" name="mail" id="login-username">
-        </div>
+    <div class="b-login-form__title">Sign in</div>
+    <div class="b-login-form__list">
 
-        <div class="b-field-text">
-            <input class="b-field-text__input b-field-text__input_margin" type="password" placeholder="Password" name="password" id="login-password" required  >
-        </div>
+        <form class="b-login-input" method="post" action="http://localhost/login">
+
+            <div class="b-login-input__login">
+                <div class="b-field-text">
+                    <input class="b-field-text__input b-field-text__input_margin" type="text" placeholder="Login" name="mail" id="login-username">
+                </div>
+            </div>
+
+            <div class="b-login-input__password">
+                <div class="b-field-text">
+                    <input class="b-field-text__input b-field-text__input_margin" type="password" placeholder="Password" name="password" id="login-password" required  >
+                </div>
+            </div>
 
 
-        <button type="submit" id="submit-login" class="b-button-icon-text b-button-icon-text_main-color b-button-icon-text_bottom-margin">
-            <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">person_pin</i>
-            <span class="b-button-icon-text__text">Login</span>
-        </button>
+            <div class="b-login-input__submit-button">
+                <button type="submit" id="submit-login" class="b-button-icon-text b-button-icon-text_main-color b-button-icon-text_bottom-margin">
+                    <i class="material-icons right b-button-icon-text__icon b-button-icon-text__icon_left">person_pin</i>
+                    <span class="b-button-icon-text__text">Login</span>
+                </button>
+            </div>
         </form>
     </div>
 </div>
