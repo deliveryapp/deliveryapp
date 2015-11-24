@@ -27,9 +27,7 @@ exports.post = function (req, res) {
     Users.register(user, req.body.password, function (err, user) {
         if (err) return res.status(400).send(err.message);
 
-        passport.authenticate('local')(req, res, function () {
-            return res.send(user);
-        });
+        return res.send(user);
     });
 };
 
