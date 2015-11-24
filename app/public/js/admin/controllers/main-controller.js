@@ -249,13 +249,14 @@ define(function(require, exports, module){
 
             this.menuCard = new MenuDaysController({collection: this.dishesCollection});
 
-            var menu = this.menuCard.getAdminItem(this.daysMenuCollection);
+            this.dishesMenu = this.menuCard.getAdminItem(this.daysMenuCollection);
 
-            this.menuPreselectionView.showChildView('dayMenu', menu);
+            this.menuPreselectionView.showChildView('dayMenu', this.dishesMenu);
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
             this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
             //this.testOrder();
         },
 
@@ -532,6 +533,7 @@ define(function(require, exports, module){
         tabChanged: function (date) {
             console.log(date);
             this.selectDay(date);
+
         },
 
         selectDay: function (date) {
@@ -543,8 +545,13 @@ define(function(require, exports, module){
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
 
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+        },
+
+        dayMenuDishRemoved: function (dish) {
+            this.menuCard.removeDish(dish);
         },
 
         dishlist: function() {

@@ -28,6 +28,7 @@ define(function(require, exports, module){
         dishRemoved: function (view, model) {
             this.collection.remove(model);
             this.updateSummary();
+            this.trigger('day:menu:dish:removed', model);
         },
         quantityUpdated: function (view) {
             //debugger;

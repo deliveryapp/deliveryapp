@@ -236,6 +236,7 @@ define(function (require, exports, module) {
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
             this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
         },
 
         dayMenuSaved: function (collection) {
@@ -366,6 +367,12 @@ define(function (require, exports, module) {
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
+        },
+
+        dayMenuDishRemoved: function (dish) {
+            debugger;
+            this.tabContainer.removeDish(new Backbone.Model(dish.get('dish')));
         },
 
         index: function () {

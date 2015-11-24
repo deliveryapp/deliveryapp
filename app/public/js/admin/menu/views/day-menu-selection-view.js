@@ -12,7 +12,7 @@ define(function(require, exports, module){
         emptyView: AdminDishCardEmpty,
         childViewContainer: '.js-selected-day-menu',
         childEvents:{
-            'dish:removed': 'dishClickedM'
+            'dish:removed': 'dishRemoved'
         },
         events: {
             'click .js-button-icon-save-day-menu': 'saveDayMenu'
@@ -21,8 +21,10 @@ define(function(require, exports, module){
         saveDayMenu: function () {
             this.trigger('day:menu:saved',this.collection);
         },
-        dishClickedM: function (view, model) {
+        dishRemoved: function (view, model) {
             this.collection.remove(model);
+            this.trigger('day:menu:dish:removed', model);
+            //debugger;
         }
     });
 });
