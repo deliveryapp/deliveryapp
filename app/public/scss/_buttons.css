@@ -80,6 +80,9 @@
 &:focus {
    outline:none;
  }
+    @modifier small{
+        width: 170px;
+    }
   @modifier main-color{
     background-color: #3f51b5;;
   &:hover {
@@ -98,6 +101,15 @@
      background-color: color(#8cc248 lightness(40%));
    }
   }
+    @modifier red{
+        background-color: #D50505;
+    &:hover {
+         background-color: color(#D50505 a(-15%));;
+     }
+    &:active {
+         background-color: color(#D50505 lightness(40%));
+     }
+    }
   @modifier top-margin {
     margin-top: 10px;
   }
