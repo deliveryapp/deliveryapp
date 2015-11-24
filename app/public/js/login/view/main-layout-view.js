@@ -25,16 +25,15 @@ define(function(require, exports, module) {
 
             $.ajax({
                 method: 'POST',
-                url: 'http://stark-eyrie-7510.herokuapp.com/login',
-                data: this.user
-            }).done(function () {
+                url: '/login/',
+                data: JSON.stringify(this.user),
+                dataType: 'json',
+                contentType: 'application/json'
+            }).done(function (role) {
+                console.log(role);
                 location.href='user';
             });
         }
-
-
-
-
     });
 
 

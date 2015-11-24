@@ -20,22 +20,21 @@ module.exports = function (app) {
     });
     var handleRole = function (req, res) {
         if (req.isUnauthenticated()) {
-         return res.redirect('/login');
-         }
-         var roleStrategy = {
-         'user': function (res) {
-         return res.render('user', {layout: false});
-         },
-         'admin': function (res) {
-        //return res.render('user', {layout: false});
-        return res.render('admin', {layout: false});
+            return res.redirect('/login');
         }
+        var roleStrategy = {
+            'user': function (res) {
+                return res.render('user', {layout: false});
+            },
+            'admin': function (res) {
+                return res.render('admin', {layout: false});
+            }
         };
-         if (!_.isUndefined(roleStrategy[req.user.role])) {
-         roleStrategy[req.user.role](res);
-         } else {
-         return res.status(403).send('Unknown role');
-         }
+        if (!_.isUndefined(roleStrategy[req.user.role])) {
+            roleStrategy[req.user.role](res);
+        } else {
+            return res.status(403).send('Unknown role');
+        }
     };
 
     app.get('/user', handleRole);
@@ -98,6 +97,6 @@ module.exports = function (app) {
      * Auth
      */
     app.post('/login/', passport.authenticate('local'), function (req, res) {
-        res.redirect('/user');
+        res.status(200).send({role: req.user.role});
     });
 };
