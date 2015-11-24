@@ -44,8 +44,7 @@ require.config({
         dishesResource: '../url/dishes-url',
         ordersResource: '../url/orders-url',
         usersResource: '../url/users-url',
-        weeksResource: '../url/weeks-url',
-        dishListCategory: '../constants/dish-list-category'
+        weeksResource: '../url/weeks-url'
     },
 
     hbs: { 

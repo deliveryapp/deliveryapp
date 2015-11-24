@@ -10,8 +10,8 @@ define(function(require, exports, module) {
         childViewContainer: '#week-orders',
 
         events: {
-            'click .js-admin-dashboard-current-week': 'current_week',
-            'click .js-admin-dashboard-next-week': 'next_week'
+            'click .js-dashboard-current-week': 'current_week',
+            'click .js-dashboard-next-week': 'next_week'
         },
 
         onShow: function() {
