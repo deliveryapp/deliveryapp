@@ -365,7 +365,6 @@ define(function(require, exports, module){
                     /*get sum*/
                     this.dashboardOrderCollection = new OrdersCollection(finalArray);
                     this.dashboardOrderCollection.status = action(type);
-                    console.log(action());
                     this.dashboardOrderCollection.map(function (order) {
                         order.setVisibleDate();
                     });
