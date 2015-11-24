@@ -5,6 +5,8 @@ var fs = require('fs'),
     mongoose = require('mongoose'),
     config = require('./config'),
     cors = require('cors'),
+    cookieParser = require('cookie-parser'),
+    session = require('cookie-session'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     app = express();
@@ -22,6 +24,9 @@ connect();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(cookieParser());
+app.use(session({keys: ['ep', 'enroll', 'ui']}));
 
 app.use(passport.initialize());
 app.use(passport.session());
