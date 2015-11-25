@@ -238,6 +238,7 @@ define(function(require, exports, module){
             this.sortCollectionByDay(this.daysMenuCollection);
             this.currentDate = this.weekModel.get('days')[0];
             this.currentDay = this.daysMenuCollection.at(0);
+
             this.dayDishesCollection = new DishesCollection(this.daysMenuCollection.at(0).get('dishes'));
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
@@ -248,6 +249,7 @@ define(function(require, exports, module){
 
             this.menuPreselectionView.showChildView('dayMenu', this.dishesMenu);
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
             this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);

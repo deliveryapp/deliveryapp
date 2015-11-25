@@ -36,6 +36,9 @@ define(function(require, exports, module){
         },
         categoryChanged:function(evt) {
             this.trigger('filter:by:category:applied', evt.currentTarget.value, this.$('#input-name').val());
+        },
+        resetFilter: function () {
+            this.ui.select[0].value = '0';
         }
     });
 });

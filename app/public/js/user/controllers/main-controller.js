@@ -266,7 +266,7 @@ define(function (require, exports, module) {
                 }.bind(this)
             });
 
-            this.currentDay.setVisibleDate();
+            //this.currentDay.setVisibleDate();
         },
 
         getDefaultMenuSelectionModel: function () {

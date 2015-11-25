@@ -14,31 +14,32 @@ define(function (require, exports, module) {
 
     module.exports = Marionette.Object.extend({
         getUserItem: function (userDaysMenu) {
-            this.userDaysMenu = userDaysMenu;
-            this.dayDishesCollection = new DishesCollection(this.userDaysMenu.at(0).get('dishes'));
+            this.userOrdersCollection = userDaysMenu;
+            this.dayDishesCollection = new DishesCollection(this.userOrdersCollection.at(0).get('dishes'));
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
-            this.collection = this.getOption('collection');
-            this.currentDay = this.collection.at(0);
-            this.userDaysMenu.map(function (model) {
+            this.dayMenuCollection = this.getOption('collection');
+            //debugger;
+            this.currentDay = this.dayMenuCollection.at(0);
+            this.userOrdersCollection.map(function (model) {
                 model.setRestDate();
             });
 
-            this.currentOrderDayMenu = this.userDaysMenu.findWhere({day: this.collection.at(0).restDate});
-            this.currentDayMenu = this.collection.at(0);
-            this.removeUserSelectedDishes(this.currentOrderDayMenu, this.collection.at(0), this.selectedDishes);
+            this.currentOrderDayMenu = this.userOrdersCollection.findWhere({day: this.dayMenuCollection.at(0).restDate});
+            this.currentDayMenu = this.dayMenuCollection.at(0);
+            this.removeUserSelectedDishes(this.currentOrderDayMenu, this.dayMenuCollection.at(0), this.selectedDishes);
 
             //?!!
-            /*this.userDaysMenu.map(function (model) {
+            /*this.userOrdersCollection.map(function (model) {
                 model.setVisibleDate();
             });*/
 
-            this.weekDays = this.collection.filter(function (item) {
+            this.weekDays = this.dayMenuCollection.filter(function (item) {
                 return item.get('day');
             });
 
-            this.dayMenuDishes = this.collection.filter(function (item) {
+            this.dayMenuDishes = this.dayMenuCollection.filter(function (item) {
                 return item.get('dishes');
             });
 
@@ -51,11 +52,12 @@ define(function (require, exports, module) {
 
         getAdminItem: function (daysMenuCollection) {
             this.daysMenuCollection = daysMenuCollection;
-            this.collection = this.getOption('collection');
+            this.baseDishesCollection = this.getOption('collection');
+            this.dishesCollection = this.baseDishesCollection.clone();
             //debugger;
 
             this.currentDayMenu = daysMenuCollection.at(0);
-            this.removeSelectedDishes(this.collection, this.currentDayMenu, this.selectedDishes);
+            this.removeSelectedDishes(this.dishesCollection, this.currentDayMenu, this.selectedDishes);
 
             this.weekDays = daysMenuCollection.filter(function (item) {
                 return item.get('day');
@@ -70,8 +72,9 @@ define(function (require, exports, module) {
         },
 
         removeSelectedDishes: function (currentDayMenu, collection, selectedDishes) {
-            this.selectedDishes = this.collection.clone();
-            this.collection.map(function (dish) {
+            this.selectedDishes = this.dishesCollection.clone();
+            this.currentDayMenu.setRestDate();
+            this.dishesCollection.map(function (dish) {
                 this.currentDayMenu.get('dishes').map(function (dayDish) {
                     if (dish.get('_id') === dayDish._id)
                         this.selectedDishes.remove(dish);
@@ -141,6 +144,7 @@ define(function (require, exports, module) {
         },
 
         categoryFilterApplied: function (category, phrase) {
+            //debugger;
             if (category === '0') {
                 this.dishesCollection.updateFilter(function (model) {
                     return model;
@@ -166,39 +170,58 @@ define(function (require, exports, module) {
 
         removeDish: function (dish) {
             this.dayMenuView.collection.add(dish);
-            //debugger;
         },
 
-        tabsStatusAdmin: function (e) {
-            this.currentDayMenu = e.model;
-            //debugger;
+        resetFilter: function () {
+            this.dishesCollection.updateFilter(function (model) {
+                return model;
+            });
+            this.dayMenuView.resetFilter();
+        },
+
+        tabsStatusAdmin: function (currentDay) {
+            this.currentDayMenu = currentDay.model;
+            this.resetFilter();
+
+            this.dishesCollection.reset();
+            this.baseDishesCollection.map(function (dish) {
+                this.dishesCollection.add(dish);
+            }.bind(this));
+            //this.dishesCollection = this.getOption('collection');
             this.removeSelectedDishes();
-            this.dishesCollection = new VirtualCollection(this.selectedDishes, {});
+            this.dishesCollection.reset();
+            this.selectedDishes.map(function (model) {
+                this.dishesCollection.add(model);
+            }.bind(this));
+            /*this.dishesCollection = new VirtualCollection(this.selectedDishes, {});
             this.dayMenuView.collection.reset();
             this.dishesCollection.map(function (dish) {
                 this.dayMenuView.collection.add(dish);
-            }.bind(this));
-            //this.dayMenuView.render();
-            this.trigger('tab:changed', e.model.restDate);
+            }.bind(this));*/
+            this.trigger('tab:changed', currentDay.model.restDate);
         },
 
-        tabsStatus: function (e) {
-            this.currentDayMenu = e.model;
-            this.currentOrderDayMenu = this.userDaysMenu.findWhere({day: e.model.restDate});
-            //debugger;
+        tabsStatus: function (currentDay) {
+            this.currentDayMenu = currentDay.model;
+            this.currentOrderDayMenu = this.userOrdersCollection.findWhere({day: currentDay.model.restDate});
             this.dishesCollection.reset();
-            var dayDishes = new Backbone.Collection(e.model.get('dishes'));
+            var dayDishes = new Backbone.Collection(currentDay.model.get('dishes'));
             dayDishes.map(function (model) {
                 this.dishesCollection.add(model);
             }.bind(this));
 
             this.removeUserSelectedDishes();
-            this.dishesCollection = new VirtualCollection(this.selectedDishes, {});
+            //this.dishesCollection = new VirtualCollection(this.selectedDishes, {});
+            this.dishesCollection.reset();
+            this.selectedDishes.map(function (model) {
+                this.dishesCollection.add(model);
+            }.bind(this));
+            /*debugger;
             this.dayMenuView.collection.reset();
             this.dishesCollection.map(function (dish) {
                 this.dayMenuView.collection.add(dish);
-            }.bind(this));
-            this.trigger('tab:changed', e.model.restDate);
+            }.bind(this));*/
+            this.trigger('tab:changed', currentDay.model.restDate);
         }
 
     });

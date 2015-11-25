@@ -2,7 +2,7 @@
     <div class="field-text b-field-text__input_left"><input class="b-field-text__input" type="text" placeholder="Filter by name" id="input-name"></div>
     <div class="b-field-select b-field-select_right">
     <select class="b-field-select__input" id="categoryFilter">
-        <option value="" selected >All dishes</option>
+        <option value="0" selected >All dishes</option>
         {{#each categoryList}}
             <option value="{{this.val}}">{{this.name}}</option>
         {{/each}}
