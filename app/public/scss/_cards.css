@@ -16,13 +16,16 @@
 }
 
 @component user-menu-card {
-  width: 30%;
-  background-color: #464646;
+  width: 29.5%;
   display: inline-block;
   float: right;
   position: fixed;
+  background-color: #464646;
   padding-top: 10px;
+  margin-top: 10px;
   padding-bottom: 10px;
+  margin-left: 0.5%;
+  border-radius: 8px;
 
   @descendent dishes {
     padding-left: 1.5%;
@@ -50,8 +53,10 @@
 
 @component card-main {
   float: left;
-  width: 70%;
+  width: 69%;
   background-color: #464646;
+  margin-top: 10px;
+  margin-left: 0.5%;
   //border: solid 1px color(#cccccc lightness(40%));
   /*padding-left: 10px;
   padding-right: 10px;*/
