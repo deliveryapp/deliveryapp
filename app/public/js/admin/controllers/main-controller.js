@@ -22,6 +22,7 @@ define(function(require, exports, module){
         usersResource = require('usersResource'),
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
+        notification = require('notification'),
         MainDishListView = require ('mainDishListView');
 
 
@@ -36,6 +37,7 @@ define(function(require, exports, module){
         }),
 
         initialize: function () {
+            notification();
             this.getActiveUser();
             this.header = new MainLayoutView({model: this.activeUser});
             this.regions.get('main').show(this.header);
@@ -66,9 +68,6 @@ define(function(require, exports, module){
              return res.promise();*/
         },
 
-        getAllUser: function(){
-
-        },
 
         getData: function () {
             var res = $.Deferred();
