@@ -18,6 +18,7 @@ define(function (require, exports, module) {
         daysResource = require('daysResource'),
         ordersResource = require('ordersResource'),
         MethodType = require('methodType'),
+        notification = require('notification'),
 
         DayMenuSelectionView = require('dayMenuSelectionView');
 
@@ -32,6 +33,7 @@ define(function (require, exports, module) {
 
 
         initialize: function () {
+            notification();
             //this.getActiveUser().done(function () {
             this.getActiveUser();
                 this.userId = this.activeUser.get('_id');

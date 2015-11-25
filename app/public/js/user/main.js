@@ -6,6 +6,7 @@ require.config({
         handlebars: '../../lib/vendor/require-handlebars-plugin/hbs/handlebars.runtime',
         hbs: '../../lib/vendor/require-handlebars-plugin/hbs',
         marionette: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
+        backboneRadio: '../../lib/vendor/node_modules/backbone.radio/build/backbone.radio',
         backboneVirtualCollection: '../../lib/vendor/node_modules/backbone-virtual-collection/backbone.virtual-collection',
         //marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         router: 'router',
@@ -47,6 +48,7 @@ require.config({
         weeksResource: '../url/weeks-url',
 
         dishListCategory: '../constants/dish-list-category',
+        notification: '../constants/notification',
         methodType: '../constants/method-type'
     },
 

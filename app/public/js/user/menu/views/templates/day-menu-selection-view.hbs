@@ -1,6 +1,11 @@
 <div class="js-selected-day-menu"></div>
 <div class="b-user-menu-card__summary">
     <div>Сумма: {{summary}} UAH</div>
+    <div style="padding-bottom: 10px;"><!-- class="b-user-list__notification"-->
+        <div class="b-menu-notification js-menu-notification">
+            <div class="b-menu-notification__text">{{type}}{{body}}</div>
+        </div>
+    </div>
     <button class="b-button-icon-text b-button-icon-text_green js-button-icon-save-day-menu">
         <span class="material-icons b-button-icon-text__icon b-button-icon-text__icon_left">done</span>
         <span class="b-button-icon-text__text">Save changes</span>
