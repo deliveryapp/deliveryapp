@@ -84,7 +84,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['node_modules/backbone-virtual-collection/backbone.virtual-collection.js','node_modules/moment/moment.js'],
+                        src: ['node_modules/backbone-virtual-collection/backbone.virtual-collection.js','node_modules/moment/moment.js','node_modules/backbone.radio/build/backbone.radio.js'],
                         dest: 'app/public/lib/vendor/',
                         filter: 'isFile'
                     }
