@@ -17,6 +17,8 @@ define(function (require, exports, module) {
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
         ordersResource = require('ordersResource'),
+        MethodType = require('methodType'),
+
         DayMenuSelectionView = require('dayMenuSelectionView');
 
     module.exports = Marionette.Object.extend({
@@ -301,28 +303,12 @@ define(function (require, exports, module) {
             });
         },
 
-        nextWeekDashboard: function () {
-            this.getNextWeek().done(function () {
-                this.getOrders(this.nextWeekModel).done(function () {
+        dashboard: function (interval) {
+            interval = interval+'mark';
+            this[MethodType(interval)]().done(function () {
+                this.getOrders(this[MethodType(interval+'model')]).done(function () {
                     this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'next_week';
-                    var ordersCollection = this.userOrdersCollection.where();
-                    var sum = this.getSum(ordersCollection);
-                    var orderSum = new UserModel({sum: sum});
-                    this.nextMenuDashboard = new MainDashboardView({
-                        collection: this.userOrdersCollection,
-                        model: orderSum
-                    });
-                    this.regions.get('content').show(this.nextMenuDashboard);
-                }.bind(this));
-            }.bind(this));
-        },
-
-        dashboard: function () {
-            this.getCurrentWeek().done(function () {
-                this.getOrders(this.currentWeekModel).done(function () {
-                    this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'current_week';
+                    this.userOrdersCollection.state = MethodType(interval);
                     var ordersCollection = this.userOrdersCollection.where();
                     var sum = this.getSum(ordersCollection);
                     var orderSum = new UserModel({sum: sum});
@@ -330,7 +316,6 @@ define(function (require, exports, module) {
                     this.regions.get('content').show(this.dashboard);
                 }.bind(this));
             }.bind(this));
-
         },
 
         dishAdded: function (model) {

@@ -22,8 +22,10 @@
 @import '_user-list.css';
 @import '_fonts.css';
 @import '_buttons.css';
+@import '_notify.css';
 @import '_inputs.css';
 @import '_cards.css';
 @import '_footer.css';
 @import '_content.css';
 @import '_admin-statistic.css';
+

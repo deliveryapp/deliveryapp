@@ -1,0 +1,25 @@
+@component user-notification{
+    width: 980px;
+    height: 60px;
+    background-color: #FE5A5A;
+    border-radius: 20px;
+    border: 1px solid #000;
+    display:none;
+
+    @modifier green{
+        background-color: #8CC248;
+    }
+    @modifier fixed{
+        position: fixed;
+        z-index: 99;
+        top:1px;
+    }
+
+    @descendent text{
+        float:left;
+        color:#fff;
+        font-size: 20px;
+        margin: 18px 0 0 25px;
+
+    }
+}

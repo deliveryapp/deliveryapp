@@ -26,7 +26,7 @@ define(function(require, exports, module) {
         },
 
         onShow: function() {
-            if (this.collection.state === 'current_week') {
+            if (this.collection.state === 'getCurrentWeek') {
                 $('.js-current-week').addClass('b-button-icon-text-disabled').removeClass('b-button-icon-text b-button-icon-text_green');
                 $('.js-edit-week').addClass('b-button-icon-text-disabled').removeClass('b-button-icon-text b-button-icon-text_green');
                 $('.js-next-week').removeAttr('disabled');

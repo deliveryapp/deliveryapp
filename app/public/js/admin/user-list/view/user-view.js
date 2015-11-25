@@ -59,8 +59,9 @@ define(function(require, exports, module) {
                 this.template = UserView;
                 this.render();
                }.bind(this),
-            error: function(){
-                alert('Validation error! Please, fill all fields!');
+            error: function(model,xhr ){
+                console.log(xhr);
+                //alert('Validation error! Please, fill all fields!');
             }.bind(this)
             });
 

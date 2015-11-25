@@ -50,7 +50,7 @@
 
   @descendent buttons{
     width: 70px;
-    height: 80px;
+    height: 90px;
   }
 }
 
@@ -60,5 +60,17 @@
     float:left;
   }
 }
+
+@component dish-control-button{
+  @descendent cancel{
+    margin-bottom:11px;
+  }
+  @descendent delete{
+    margin-bottom:11px;
+  }
+}
+
+
+
 
 

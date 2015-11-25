@@ -56,7 +56,10 @@ require.config({
         usersResource: '../url/users-url',
         weeksResource: '../url/weeks-url',
         mainAddDishView: 'dish-list/view/main-add-dish-view',
-        dishListCategory: '../constants/dish-list-category'
+        dishListCategory: '../constants/dish-list-category',
+        notification: '../constants/notification',     
+        methodType: '../constants/method-type'
+
     },
     'shim' : {
         'jquery': { exports: '$' }
