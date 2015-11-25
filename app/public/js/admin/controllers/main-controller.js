@@ -22,6 +22,7 @@ define(function(require, exports, module){
         usersResource = require('usersResource'),
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
+        MethodType = require('methodType'),
         notification = require('notification'),
         MainDishListView = require ('mainDishListView');
 
@@ -298,18 +299,8 @@ define(function(require, exports, module){
 
         },
 
-        dashboard: function(type){
-            function action(t) {
-                if (_.isNull(t)) {
-                    return 'getNextWeek';
-                }
-                if (_.isEqual(t, 'current')) {
-                    return 'getCurrentWeek';
-                }
-            }
-
-
-            this[action(type)]().done(function () {
+        dashboard: function(interval){
+            this[MethodType(interval)]().done(function () {
                 this.getUniqOrder().done(function () {
 
                     /*get 5 days array*/
@@ -358,7 +349,7 @@ define(function(require, exports, module){
                     var sum = this.getSum(uniqUserOrders);
                     /*get sum*/
                     this.dashboardOrderCollection = new OrdersCollection(finalArray);
-                    this.dashboardOrderCollection.status = action(type);
+                    this.dashboardOrderCollection.status = MethodType(interval);
                     this.dashboardOrderCollection.map(function (order) {
                         order.setVisibleDate();
                     });
@@ -369,8 +360,8 @@ define(function(require, exports, module){
             }.bind(this));
         },
 
-        statistic: function(){
-            this.getNextWeek().done(function () {
+        statistic: function(interval){
+            this[MethodType(interval)]().done(function () {
 
                 this.getUniqOrder().done(function () {
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
@@ -389,27 +380,6 @@ define(function(require, exports, module){
 
                 }.bind(this));
 
-            }.bind(this));
-        },
-
-        statisticCurrent: function(){
-            this.getCurrentWeek().done(function () {
-                this.getUniqOrder().done(function () {
-                    this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
-
-                    this.getUniqUser().done(function () {
-                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
-                        usersCollection = usersCollection.filter(function(model){
-                            return (model.get('orderSum')) > 0;
-                        });
-                        usersCollection = new OrdersCollection(usersCollection);
-                        this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
-                        this.virt_coll.status = 'current_week';
-                        this.statisticPage = new MainStatisticView({collection: this.virt_coll});
-                        this.regions.get('content').show(this.statisticPage);
-                        this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
-                    }.bind(this));
-                }.bind(this));
             }.bind(this));
         },
 
