@@ -23,8 +23,9 @@ define(function(require, exports, module) {
          },
 
         initialize: function() {
-            if (this.model.get('_id') === undefined && this.model.get('category') === undefined){
+            if (this.model.get('_id') === undefined && this.model.get('category') === undefined || this.model.get('valid') === 'error'){
                 this.template = DishViewEdit;
+                this.model.set('valid','');
             }
         },
 
@@ -58,7 +59,7 @@ define(function(require, exports, module) {
                 this.render();
             }.bind(this),
                 error: function(){
-                    alert('Validation error! Please, fill all fields!');
+                    this.model.set('valid','error');
                 }.bind(this)
             });
 
