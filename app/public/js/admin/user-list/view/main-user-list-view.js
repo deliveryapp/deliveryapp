@@ -59,23 +59,27 @@ define(function(require, exports, module) {
 
         },
 
+        onDestroy: function(){
+            this.userChannel.reset();
+        },
+
         onShow: function(){
-            var userChannel = BackboneRadio.channel('user');
-            userChannel.on('notification:add', function(notification) {
-                    console.log(notification);
-                    if (notification.type === 'PUT'){
+
+            this.userChannel = BackboneRadio.channel('user');
+            this.userChannel.on('notification:add', function(notification) {
+                    if (notification.type.toLowerCase() === 'put'){
                         notification.type = 'User information successful update!';
                         this.notifyParam(notification);
                     }
-                    else if (notification.type === 'POST'){
+                    else if (notification.type.toLowerCase() === 'post'){
                         notification.type = 'User successfully added!';
                         this.notifyParam(notification);
                     }
-                    else if (notification.type === 'DELETE'){
+                    else if (notification.type.toLowerCase() === 'delete'){
                         notification.type = 'User successfully removed!';
                         this.notifyParam(notification);
                     }
-                    else if (notification.type === 'GET'){}
+                    else if (notification.type.toLowerCase() === 'get'){}
                     else {
                         this.model = new Backbone.Model (notification);
                         this.render();
