@@ -9,6 +9,7 @@ require.config({
         marionette: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         marionette_node: '../../lib/vendor/backbone.marionette/lib/backbone.marionette',
         backboneVirtualCollection: '../../lib/vendor/node_modules/backbone-virtual-collection/backbone.virtual-collection',
+        backboneRadio: '../../lib/vendor/node_modules/backbone.radio/build/backbone.radio',
         Router: 'router',
         mainController: 'controllers/main-controller',
         dayMenuModel: 'models/day-menu-model',
