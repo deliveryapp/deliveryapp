@@ -17,12 +17,9 @@ define(function(require, exports, module) {
         childViewOptions: function () {
             return { collection: this.collection };
         },
-
         getEmptyView: function() {
             return EmptyDayAdminMenuView;
         },
-
-
         initialize: function() {
             this.collection = new DishesCollection(this.model.get('dishes'));
         }
