@@ -371,7 +371,7 @@ define(function (require, exports, module) {
         },
 
         dayMenuDishRemoved: function (dish) {
-            debugger;
+            //debugger;
             this.tabContainer.removeDish(new Backbone.Model(dish.get('dish')));
         },
 

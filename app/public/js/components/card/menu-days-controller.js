@@ -173,7 +173,7 @@ define(function (require, exports, module) {
         tabsStatus: function (e) {
             this.currentDayMenu = e.model;
             this.currentOrderDayMenu = this.userDaysMenu.findWhere({day: e.model.restDate});
-            debugger;
+            //debugger;
             this.dishesCollection.reset();
             var dayDishes = new Backbone.Collection(e.model.get('dishes'));
             dayDishes.map(function (model) {

@@ -240,7 +240,7 @@ define(function(require, exports, module){
             this.menuPreselectionView = new MenuPreselectionView();
 
             this.regions.get('content').show( this.menuPreselectionView );
-
+            this.sortCollectionByDay(this.daysMenuCollection);
             this.currentDate = this.weekModel.get('days')[0];
             this.currentDay = this.daysMenuCollection.at(0);
             this.dayDishesCollection = new DishesCollection(this.daysMenuCollection.at(0).get('dishes'));
@@ -303,6 +303,17 @@ define(function(require, exports, module){
             //var dateString = date.getUTCFullYear()+'-'+date.getUTCMonth()+'-'+date.getUTCDay()+'T00:00:00.000Z';
             //save to rest
 
+        },
+
+        sortCollectionByDay: function (collection) {
+            collection.comparator = 'day';
+            collection.map(function (model) {
+                model.setRestDate();
+            });
+            collection.sort();
+            collection.map(function (model) {
+                model.setVisibleDate();
+            });
         },
 
         dashboard: function(type){
