@@ -39,11 +39,6 @@ define(function(require, exports, module){
             this.getActiveUser();
             this.header = new MainLayoutView({model: this.activeUser});
             this.regions.get('main').show(this.header);
-            this.start();
-        },
-
-        start: function () {
-
         },
 
         getActiveUser: function(){
@@ -463,14 +458,25 @@ define(function(require, exports, module){
 
         uniqUserArray: function (userCollection){
             var arr = userCollection.pluck('userId');
-            var uniqUserArray = [];
-            for(var i = 0; i < arr.length; i++) {
-                for(var j = i+1; j < arr.length; j++) {
-                    if (arr[i] === arr[j] || arr[i]===undefined)
-                        j = ++i;
-                }
-                uniqUserArray.push(arr[i]);
+            var uniqUserArray = unique(arr);
+
+            function unique(arr) {
+                var result = [];
+                nextInput:
+                    for (var i = 0; i < arr.length; i++) {
+                        var str = arr[i];
+                        if (str === undefined) {
+                            continue nextInput;
+                        }
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j] == str) continue nextInput;
+                        }
+                        result.push(str);
+                    }
+
+                return result;
             }
+
             return uniqUserArray;
         },
 
