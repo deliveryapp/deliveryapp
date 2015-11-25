@@ -29,10 +29,10 @@ define(function(require, exports, module) {
         },
 
         current_week: function(){
-            location.href='admin#statistic/current';
+            location.href='admin#statistic';
         },
         next_week: function(){
-            location.href='admin#statistic';
+            location.href='admin#statistic/next';
         },
 
         triggerPaymentStatus: function(data){

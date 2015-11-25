@@ -375,8 +375,8 @@ define(function(require, exports, module){
         },
 
         statistic: function(interval){
+            interval = interval + 'mark';
             this[MethodType(interval)]().done(function () {
-
                 this.getUniqOrder().done(function () {
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
 
@@ -387,13 +387,12 @@ define(function(require, exports, module){
                         });
                         usersCollection = new OrdersCollection(usersCollection);
                         this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
+                        this.virt_coll.status = MethodType(interval);
                         this.statisticPage = new MainStatisticView({collection: this.virt_coll});
                         this.regions.get('content').show(this.statisticPage);
                         this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
                     }.bind(this));
-
                 }.bind(this));
-
             }.bind(this));
         },
 
