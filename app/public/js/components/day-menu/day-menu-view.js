@@ -1,6 +1,7 @@
 define(function(require, exports, module){
 
     var Marionette = require('marionette'),
+
         DishCardView = require('dishCardView'),
         DishCardEmpty = require('dishCardEmpty'),
         template = require('hbs!../components/day-menu/templates/day-menu-view');
@@ -12,7 +13,9 @@ define(function(require, exports, module){
         emptyView: DishCardEmpty,
         template: template,
         nameFilterValue: '',
-
+        ui : {
+           select : '#categoryFilter'
+        },
         events: {
             'click #add-dish': 'dishAdded',
             'change input' :'changed',
@@ -29,11 +32,10 @@ define(function(require, exports, module){
             this.trigger('dishAdded', this.model);
         },
         changed:function(evt) {
-            this.trigger('filter:by:name:applied', evt.currentTarget.value);
+            this.trigger('filter:by:name:applied', evt.currentTarget.value, this.$('#categoryFilter').val() );
         },
         categoryChanged:function(evt) {
-            this.trigger('filter:by:category:applied', evt.currentTarget.value);
-        },
-
+            this.trigger('filter:by:category:applied', evt.currentTarget.value, this.$('#input-name').val());
+        }
     });
 });

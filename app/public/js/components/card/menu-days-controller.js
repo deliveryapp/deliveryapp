@@ -76,6 +76,8 @@ define(function (require, exports, module) {
             this.listenTo(this.dayMenuView, 'dish:added', this.dishAdded);
             this.listenTo(this.dayMenuView, 'filter:by:name:applied', this.nameFilterApplied);
             this.listenTo(this.dayMenuView, 'filter:by:category:applied', this.categoryFilterApplied);
+
+
             return this.cardView;
 
         },
@@ -85,21 +87,31 @@ define(function (require, exports, module) {
             this.cardView.showChildView('dayMenu', this.dayMenuSelectionView);
         },
 
-        nameFilterApplied: function (phrase) {
-            this.dishesCollection.updateFilter(function (model) {
-                return model.get('name').toLowerCase().indexOf(phrase) > -1;
-            });
+        nameFilterApplied: function (phrase, category) {
+            if ( !_.isEmpty(category)) {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model.get('name').toLowerCase().indexOf(phrase) > -1 && model.get('category').toLowerCase().indexOf(category) > -1;
+                });
+            } else {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model.get('name').toLowerCase().indexOf(phrase) > -1;
+                });
+            }
+
         },
 
-        categoryFilterApplied: function (phrase) {
-            if (phrase === '0') {
+        categoryFilterApplied: function (category, phrase) {
+            if (category === '0') {
                 this.dishesCollection.updateFilter(function (model) {
                     return model;
                 });
-            }
-            else {
+            } else if ( !_.isEmpty(phrase)) {
                 this.dishesCollection.updateFilter(function (model) {
-                    return model.get('category').indexOf(phrase) > -1;
+                    return model.get('category').toLowerCase().indexOf(category) > -1 && model.get('name').toLowerCase().indexOf(phrase) > -1;
+                });
+            } else {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model.get('category').toLowerCase().indexOf(category) > -1;
                 });
             }
         },

@@ -18,13 +18,6 @@ define(function(require, exports, module){
                 this.url += day + ',';
             }.bind(this));
             this.url= this.url.substr(0,this.url.length-1);
-
         }
-
-
-
-
     });
-
-
 });
