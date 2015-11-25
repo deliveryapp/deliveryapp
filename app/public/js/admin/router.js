@@ -9,8 +9,8 @@ define(function(require, exports, module){
 
         appRoutes: {
             '':'dashboard',
-            'dashboard(/:current)': 'dashboard',
-            'statistic(/:current)': 'statistic',
+            'dashboard(/:type)': 'dashboard',
+            'statistic(/:type)': 'statistic',
             'menu': 'menu',
             'userlist': 'userlist',
             'dishlist': 'dishlist'
