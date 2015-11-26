@@ -28,7 +28,7 @@ define(function(require, exports, module){
         notifyScroll: function(){
             $(window).scroll(function() {
                 var top = $(document).scrollTop();
-                if (top > 346) {$('.js-menu-notification').addClass('b-menu-notification_fixed');}
+                if (top > 50) {$('.js-menu-notification').addClass('b-menu-notification_fixed');}
                 else {$('.js-menu-notification').removeClass('b-menu-notification_fixed');}
             });
         },
@@ -50,7 +50,7 @@ define(function(require, exports, module){
 
             this.render();
             this.ui.notification.addClass('b-menu-notification_green').css('display','block');
-            if ($(document).scrollTop() > 346) $('.js-menu-notification').addClass('b-menu-notification_fixed');
+            if ($(document).scrollTop() > 50) $('.js-menu-notification').addClass('b-menu-notification_fixed');
             setTimeout(this.animateNotify,5000);
 
         },
