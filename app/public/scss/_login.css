@@ -1,5 +1,25 @@
-.b-sign {
+@component login-page {
   padding-top: 235px;
   background: url("../images/121.jpg") no-repeat center center fixed;
   background-size: 100% 100%;
+}
+
+
+@component login-form {
+  width: 295px;
+  background-color: #464646;
+  margin: auto;
+  margin-top: 60px;
+  border-radius: 5px;
+  padding: 30px 110px;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+  text-align:center;
+  @descendent title {
+    font-size: 28px;
+    color: #fff;
+    padding: 10px 0 20px 0;
+  }
+  @descendent list {
+  }
 }

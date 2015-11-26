@@ -60,7 +60,7 @@
   }
   @descendent buttons{
     width: 70px;
-    height: 80px;
+    height: 90px;
   }
   @descendent dish-list-info{
     height: 85px;
@@ -85,6 +85,13 @@
     color: #fff;
   }
 
+  @descendent filter {
+  height: 65px;
+}
+  @descendent notification {
+    margin-bottom: 7px;
+  }
+
   @descendent title{
     font-size: 28px;
     color: #fff;
@@ -93,13 +100,6 @@
     @modifier top-padding{
       padding-top:30px
     }
-  }
-  @descendent list{
-
-    /*@modifier {}*/
-  }
-  @modifier sign-in{
-    width: 295px;
   }
 
 }
@@ -117,17 +117,16 @@
   }
 }
 
-
-
-
 @component all-user{
   list-style-type:none;
 }
 
+@component user-list-control-button{
+  @descendent cancel{
+    margin-bottom:10px;
+  }
+  @descendent delete{
+    margin-bottom:10px;
+  }
+}
 
-/*
-
-@component add-user-inputs{
-  padding: 10px 0 0 40px;;
-
-}*/

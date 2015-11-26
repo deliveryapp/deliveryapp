@@ -6,15 +6,16 @@
   justify-content: center;
 
   @descendent logo{
-  width: 625px;
+  width: 33%;
   height: 90px;
   }
   @descendent empty{
-    width: 650px;
+    width: 33%;
     height: 90px;
+
   }
   @descendent user-info{
-    width: 625px;
+    width: 33%;
     height: 90px;
   }
 }
