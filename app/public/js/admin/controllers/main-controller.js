@@ -39,14 +39,16 @@ define(function(require, exports, module){
 
         initialize: function () {
             notification();
-            this.getActiveUser();
-            this.header = new MainLayoutView({model: this.activeUser});
-            this.regions.get('main').show(this.header);
+            this.getActiveUser().done(function () {
+                this.userId = this.activeUser.get('_id');
+                this.header = new MainLayoutView({model: this.activeUser});
+                this.regions.get('main').show(this.header);
+            }.bind(this));
         },
 
         getActiveUser: function(){
 
-            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+            /*this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
                 firstName:'admin',
                 lastName:'admin',
                 image_path:'images/male.jpg',
@@ -54,9 +56,8 @@ define(function(require, exports, module){
                 __v:0,
                 role:'admin'});
 
-            this.userId = this.activeUser.get('_id');
+            this.userId = this.activeUser.get('_id');*/
 
-            /*
              var res = $.Deferred();
              this.activeUser = new UserModel();
              this.activeUser.setActiveUserUrl();
@@ -66,7 +67,7 @@ define(function(require, exports, module){
              this.userId = this.activeUser.get('_id');
              res.resolve();
              }.bind(this));
-             return res.promise();*/
+             return res.promise();
         },
 
 

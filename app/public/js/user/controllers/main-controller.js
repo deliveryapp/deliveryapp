@@ -34,18 +34,18 @@ define(function (require, exports, module) {
 
         initialize: function () {
             notification();
-            //this.getActiveUser().done(function () {
-            this.getActiveUser();
+            this.getActiveUser().done(function () {
+            //this.getActiveUser();
                 this.userId = this.activeUser.get('_id');
                 this.mainLayoutView = new MainLayoutView({model: this.activeUser});
                 this.regions.get('main').show(this.mainLayoutView);
-            //}.bind(this));
+            }.bind(this));
 
 
         },
 
         getActiveUser: function () {
-            this.activeUser = new UserModel({
+            /*this.activeUser = new UserModel({
                 _id: '564dabb0892b860f0085be9b',
                 firstName: 'Admin',
                 lastName: 'Admin',
@@ -55,9 +55,9 @@ define(function (require, exports, module) {
                 role: 'admin'
             });
 
-            this.userId = this.activeUser.get('_id');
+            this.userId = this.activeUser.get('_id');*/
 
-             /*var res = $.Deferred();
+             var res = $.Deferred();
              this.activeUser = new UserModel();
              this.activeUser.setActiveUserUrl();
              $.when(
@@ -67,7 +67,7 @@ define(function (require, exports, module) {
              res.resolve();
              }.bind(this));
 
-             return res.promise();*/
+             return res.promise();
         },
 
         getCurrentWeek: function () {
