@@ -17,6 +17,9 @@ define(function (require, exports, module) {
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
         ordersResource = require('ordersResource'),
+        MethodType = require('methodType'),
+        notification = require('notification'),
+
         DayMenuSelectionView = require('dayMenuSelectionView');
 
     module.exports = Marionette.Object.extend({
@@ -30,18 +33,19 @@ define(function (require, exports, module) {
 
 
         initialize: function () {
-            this.getActiveUser().done(function () {
-            //this.getActiveUser();
+            notification();
+            //this.getActiveUser().done(function () {
+            this.getActiveUser();
                 this.userId = this.activeUser.get('_id');
                 this.mainLayoutView = new MainLayoutView({model: this.activeUser});
                 this.regions.get('main').show(this.mainLayoutView);
-            }.bind(this));
+            //}.bind(this));
 
 
         },
 
         getActiveUser: function () {
-           /* this.activeUser = new UserModel({
+            this.activeUser = new UserModel({
                 _id: '564dabb0892b860f0085be9b',
                 firstName: 'Admin',
                 lastName: 'Admin',
@@ -51,9 +55,9 @@ define(function (require, exports, module) {
                 role: 'admin'
             });
 
-            this.userId = this.activeUser.get('_id');*/
+            this.userId = this.activeUser.get('_id');
 
-             var res = $.Deferred();
+             /*var res = $.Deferred();
              this.activeUser = new UserModel();
              this.activeUser.setActiveUserUrl();
              $.when(
@@ -63,7 +67,7 @@ define(function (require, exports, module) {
              res.resolve();
              }.bind(this));
 
-             return res.promise();
+             return res.promise();*/
         },
 
         getCurrentWeek: function () {
@@ -236,6 +240,7 @@ define(function (require, exports, module) {
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.tabContainer, 'dish:added', this.dishAdded);
             this.listenTo(this.tabContainer, 'tab:changed', this.tabChanged);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
         },
 
         dayMenuSaved: function (collection) {
@@ -265,7 +270,7 @@ define(function (require, exports, module) {
                 }.bind(this)
             });
 
-            this.currentDay.setVisibleDate();
+            //this.currentDay.setVisibleDate();
         },
 
         getDefaultMenuSelectionModel: function () {
@@ -300,28 +305,12 @@ define(function (require, exports, module) {
             });
         },
 
-        nextWeekDashboard: function () {
-            this.getNextWeek().done(function () {
-                this.getOrders(this.nextWeekModel).done(function () {
+        dashboard: function (interval) {
+            interval = interval+'mark';
+            this[MethodType(interval)]().done(function () {
+                this.getOrders(this[MethodType(interval+'model')]).done(function () {
                     this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'next_week';
-                    var ordersCollection = this.userOrdersCollection.where();
-                    var sum = this.getSum(ordersCollection);
-                    var orderSum = new UserModel({sum: sum});
-                    this.nextMenuDashboard = new MainDashboardView({
-                        collection: this.userOrdersCollection,
-                        model: orderSum
-                    });
-                    this.regions.get('content').show(this.nextMenuDashboard);
-                }.bind(this));
-            }.bind(this));
-        },
-
-        dashboard: function () {
-            this.getCurrentWeek().done(function () {
-                this.getOrders(this.currentWeekModel).done(function () {
-                    this.sortCollectionByDay(this.userOrdersCollection);
-                    this.userOrdersCollection.state = 'current_week';
+                    this.userOrdersCollection.state = MethodType(interval);
                     var ordersCollection = this.userOrdersCollection.where();
                     var sum = this.getSum(ordersCollection);
                     var orderSum = new UserModel({sum: sum});
@@ -329,7 +318,6 @@ define(function (require, exports, module) {
                     this.regions.get('content').show(this.dashboard);
                 }.bind(this));
             }.bind(this));
-
         },
 
         dishAdded: function (model) {
@@ -366,6 +354,12 @@ define(function (require, exports, module) {
 
             this.tabContainer.setSelectedMenu(this.dayMenuSelectionView);
             this.listenTo(this.dayMenuSelectionView, 'user:day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
+        },
+
+        dayMenuDishRemoved: function (dish) {
+            //debugger;
+            this.tabContainer.removeDish(new Backbone.Model(dish.get('dish')));
         },
 
         index: function () {

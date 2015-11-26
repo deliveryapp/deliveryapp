@@ -18,10 +18,11 @@ define(function (require, exports, module) {
             // nesting elements during re-render.
             this.$el.unwrap();
             this.setElement(this.$el);
+            this.model.setRestDate();
         },
 
         initialize: function () {
-
+            this.model.setVisibleDate();
         },
 
         template: Tmpl,

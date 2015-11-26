@@ -13,16 +13,11 @@ define(function(require, exports, module){
 
         setGetUrl: function (weekModel) {
             this.url =  baseUrl+ordersResource+'?day=';
+
             weekModel.get('days').map(function (day) {
                 this.url += day + ',';
             }.bind(this));
             this.url= this.url.substr(0,this.url.length-1);
         }
-
-
-
-
     });
-
-
 });

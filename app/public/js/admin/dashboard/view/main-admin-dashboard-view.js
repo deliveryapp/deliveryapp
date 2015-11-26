@@ -9,10 +9,28 @@ define(function(require, exports, module) {
         childView: WeekAdminMenuView,
         childViewContainer: '#week-orders',
 
-        initialize: function(){
-        console.log(this.collection);
-            console.log(this.model);
-    }
+        events: {
+            'click .js-dashboard-current-week': 'current_week',
+            'click .js-dashboard-next-week': 'next_week'
+        },
+
+        onShow: function() {
+            if (this.collection.status === 'getCurrentWeek') {
+                $('.js-dashboard-current-week').addClass('b-button-icon-text-disabled').removeClass('b-button-icon-text b-button-icon-text_green');
+                $('.js-dashboard-next-week').removeAttr('disabled');
+            }
+            else{
+                $('.js-dashboard-next-week').addClass('b-button-icon-text-disabled').removeClass('b-button-icon-text b-button-icon-text_green');
+                $('.js-dashboard-current-week').removeAttr('disabled');
+            }
+        },
+        current_week: function(){
+            location.href='admin#dashboard/current';
+        },
+        next_week: function(){
+            location.href='admin#dashboard';
+        },
+
 
 
     });

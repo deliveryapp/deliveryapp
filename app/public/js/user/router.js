@@ -1,4 +1,4 @@
-define(function(require, exports, module){
+define(function (require, exports, module) {
     var Marionette = require('marionette'),
         MainController = require('mainController');
 
@@ -6,9 +6,8 @@ define(function(require, exports, module){
         controller: new MainController(),
 
         appRoutes: {
-            '':'dashboard',
-            'dashboard': 'dashboard',
-            'dashboard/next': 'nextWeekDashboard',
+            '': 'dashboard',
+            'dashboard(/:type)': 'dashboard',
             'menu': 'menu'
         }
 

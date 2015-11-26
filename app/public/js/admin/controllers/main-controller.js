@@ -1,9 +1,9 @@
-define(function (require, exports, module) {
+define(function(require, exports, module){
     var Marionette = require('marionette'),
         $ = require('jquery'),
         _ = require('underscore'),
-        UsersCollection = require('usersCollection'),
-        MainUserListView = require('mainUserListView'),
+        UsersCollection = require ('usersCollection'),
+        MainUserListView=require('mainUserListView'),
         OrdersCollection = require('ordersCollection'),
         DishesCollection = require('dishesCollection'),
         DaysMenuCollection = require('daysMenuCollection'),
@@ -15,14 +15,16 @@ define(function (require, exports, module) {
         VirtualCollection = require('backboneVirtualCollection'),
         MenuPreselectionView = require('menuPreselectionView'),
         MainStatisticView = require('mainStatisticView'),
-        UserModel = require('userModel'),
+        UserModel = require ('userModel'),
         baseUrl = require('baseUrl'),
         WeekModel = require('weekModel'),
-        MainAdminMenuView = require('mainAdminMenuView'),
+        MainAdminMenuView = require ('mainAdminMenuView'),
         usersResource = require('usersResource'),
         weeksResource = require('weeksResource'),
         daysResource = require('daysResource'),
-        MainDishListView = require('mainDishListView');
+        MethodType = require('methodType'),
+        notification = require('notification'),
+        MainDishListView = require ('mainDishListView');
 
 
     module.exports = Marionette.Object.extend({
@@ -36,45 +38,23 @@ define(function (require, exports, module) {
         }),
 
         initialize: function () {
-            this.getActiveUser().done(function () {
-                this.userId = this.activeUser.get('_id');
-                this.header = new MainLayoutView({model: this.activeUser});
-                this.regions.get('main').show(this.header);
-                this.start();
-            }.bind(this));
+            notification();
+            this.getActiveUser();
+            this.header = new MainLayoutView({model: this.activeUser});
+            this.regions.get('main').show(this.header);
         },
 
-        start: function () {
+        getActiveUser: function(){
 
-        },
+            this.activeUser = new UserModel({_id:'564c7c59cd0f210f00887524',
+                firstName:'admin',
+                lastName:'admin',
+                image_path:'images/male.jpg',
+                mail:'admin@engagepoint.com',
+                __v:0,
+                role:'admin'});
 
-        getActiveUser: function () {
-
-            /*this.activeUser = new UserModel({
-                _id: '564c7c59cd0f210f00887524',
-                firstName: 'admin',
-                lastName: 'admin',
-                image_path: 'images/male.jpg',
-                mail: 'admin@engagepoint.com',
-                __v: 0,
-                role: 'admin'
-            });
-
-            this.userId = this.activeUser.get('_id');*/
-
-
-            var res = $.Deferred();
-            this.activeUser = new UserModel();
-            this.activeUser.setActiveUserUrl();
-            $.when(
-                this.activeUser.fetch()
-            ).done(function () {
-                    //this.userId = this.activeUser.get('_id');
-                    res.resolve();
-                }.bind(this));
-
-            return res.promise();
-
+            this.userId = this.activeUser.get('_id');
 
             /*
              var res = $.Deferred();
@@ -89,9 +69,6 @@ define(function (require, exports, module) {
              return res.promise();*/
         },
 
-        getAllUser: function () {
-
-        },
 
         getData: function () {
             var res = $.Deferred();
@@ -146,11 +123,11 @@ define(function (require, exports, module) {
             console.log(this.weekModel.toJSON());
             $.when(
                 $.ajax({
-                    url: baseUrl + weeksResource + '/' + this.weekModel.get('startDate'),
+                    url: baseUrl+weeksResource+'/'+this.weekModel.get('startDate'),
                     type: 'post',
                     data: this.weekModel.toJSON(),
                     crossDomain: true,
-                    success: function (data) {
+                    success: function(data) {
                         this.weekModel = new WeekModel(data);
                     }.bind(this)
                 })
@@ -161,12 +138,12 @@ define(function (require, exports, module) {
             return res.promise();
         },
 
-        menu: function () {
+        menu: function() {
             this.getNextWeek().done(function () {
-                if (this.weekModel.get('startDate') === undefined) {
+                if(this.weekModel.get('startDate') === undefined) {
                     //todo: prompt or whatever
 
-                    //var startDate = '30-11-2015';
+                    //var startDate = '26-11-2015';
                     //startDate.toUTCString();
                     //debugger;
                     //var startDate = date.toUTCString();
@@ -192,16 +169,23 @@ define(function (require, exports, module) {
 
         getDays: function () {
             var res = $.Deferred();
-            /*var url = 'http://stark-eyrie-7510.herokuapp.com/days?day=';
+            var url = 'http://stark-eyrie-7510.herokuapp.com/days?day=';
             this.weekModel.get('days').map(function (day) {
                 url += day + ',';
             });
-            console.log(url);*/
+            console.log(url);
             //debugger;
-            this.daysMenuCollection = new DaysMenuCollection();
-            this.daysMenuCollection.setUrl(this.weekModel);
+
             $.when(
-                    this.daysMenuCollection.fetch()
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    crossDomain: true,
+                    success: function(data) {
+                        this.daysMenuCollection = new DaysMenuCollection(data);
+                        console.log(this.daysMenuCollection);
+                    }.bind(this)
+                })
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -215,7 +199,7 @@ define(function (require, exports, module) {
             var index = 0;
             var days = this.weekModel.get('days');
             //this.weekModel.add({days:["2015-11-30T00:00:00.000Z","2015-12-01T00:00:00.000Z","2015-12-02T00:00:00.000Z","2015-12-03T00:00:00.000Z","2015-12-04T00:00:00.000Z","2015-12-05T00:00:00.000Z","2015-12-06T00:00:00.000Z"]})
-            for (index = 0; index < 5; index++) {
+            for(index = 0; index <5; index++) {
                 this.daysMenuCollection.add(new DayMenuModel({
                     'day': days[index],
                     'dishes': []
@@ -235,10 +219,10 @@ define(function (require, exports, module) {
                 console.log(this.weekModel);
                 var days = this.weekModel.get('days');
                 this.getDays().done(function () {
-                    this.sortCollectionByDay(this.daysMenuCollection);
-                    if (this.daysMenuCollection.length > 0)
+                    if(this.daysMenuCollection.length>0)
                         this.startDayMenu();
-                    else {
+                    else
+                    {
                         this.setDays();
                         this.startDayMenu();
                     }
@@ -247,37 +231,29 @@ define(function (require, exports, module) {
             }.bind(this));
         },
 
-        sortCollectionByDay: function (collection) {
-            collection.comparator = 'day';
-            collection.map(function (model) {
-                model.setRestDate();
-            });
-            collection.sort();
-            collection.map(function (model) {
-                model.setVisibleDate();
-            });
-        },
-
-        startDayMenu: function () {
+        startDayMenu: function() {
             this.menuPreselectionView = new MenuPreselectionView();
 
-            this.regions.get('content').show(this.menuPreselectionView);
-
+            this.regions.get('content').show( this.menuPreselectionView );
+            this.sortCollectionByDay(this.daysMenuCollection);
             this.currentDate = this.weekModel.get('days')[0];
             this.currentDay = this.daysMenuCollection.at(0);
+
             this.dayDishesCollection = new DishesCollection(this.daysMenuCollection.at(0).get('dishes'));
 
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
 
             this.menuCard = new MenuDaysController({collection: this.dishesCollection});
 
-            var menu = this.menuCard.getAdminItem(this.daysMenuCollection);
+            this.dishesMenu = this.menuCard.getAdminItem(this.daysMenuCollection);
 
-            this.menuPreselectionView.showChildView('dayMenu', menu);
+            this.menuPreselectionView.showChildView('dayMenu', this.dishesMenu);
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
+
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
             this.listenTo(this.menuCard, 'dish:added', this.dishAdded);
             this.listenTo(this.menuCard, 'tab:changed', this.tabChanged);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
             //this.testOrder();
         },
 
@@ -286,8 +262,8 @@ define(function (require, exports, module) {
             var date = new Date(this.currentDay.get('day'));
 
             this.currentDay.setRestDate();
-            //this.currentDay.setPutUrl();
-            this.currentDay.setDeleteUrl();
+            this.currentDay.setPutUrl();
+
             //this.currentDay.setPostUrl();
             var json = this.currentDay.toJSON();
 
@@ -303,11 +279,12 @@ define(function (require, exports, module) {
                 type: 'put',
                 crossDomain: true,
                 data: json,
-                success: function (data) {
+                success: function(data) {
                     console.log('ok');
                     console.log(data);
                 }.bind(this)
             });
+
 
 
             console.log(this.currentDay);
@@ -325,113 +302,92 @@ define(function (require, exports, module) {
 
         },
 
-        dashboard: function () {
-
-            this.getNextWeek().done(function () {
-                this.dashboardCore()
-            }.bind(this));
+        sortCollectionByDay: function (collection) {
+            collection.comparator = 'day';
+            collection.map(function (model) {
+                model.setRestDate();
+            });
+            collection.sort();
+            collection.map(function (model) {
+                model.setVisibleDate();
+            });
         },
 
-        dashboardCurrent: function () {
-            this.getCurrentWeek().done(function () {
-                this.dashboardCore()
-            }.bind(this));
-        },
+        dashboard: function(interval){
+            this[MethodType(interval)]().done(function () {
+                this.getUniqOrder().done(function () {
 
-        dashboardCore: function () {
-            this.getUniqOrder().done(function () {
+                    /*get 5 days array*/
+                    this.weekModel.get('days').pop();
+                    this.weekModel.get('days').pop();
+                    var days = this.weekModel.get('days');
+                    /*get 5 days array*/
+                    var finalArray = [];
+                    this.weekModel.get('days').map(function (day) {
+                        finalArray.push({day: day, dishes: []});
+                    });
+                    for (var i = 0; i < days.length; i++) {
+                        var daysColl = this.uniqOrderCollection.where({day: days[i]});
+                        if (!_.isEmpty(daysColl)) {
+                            var finalSelectedDay = _.findWhere(finalArray, {day: daysColl[0].get('day')});
 
-                /*get 5 days array*/
-                this.weekModel.get('days').pop();
-                this.weekModel.get('days').pop();
-                var days = this.weekModel.get('days');
-                /*get 5 days array*/
-                var finalArray = [];
-                this.weekModel.get('days').map(function (day) {
-                    finalArray.push({day: day, dishes: []});
-                });
-                for (var i = 0; i < days.length; i++) {
-                    var daysColl = this.uniqOrderCollection.where({day: days[i]});
-                    if (!_.isEmpty(daysColl)) {
-                        var finalSelectedDay = _.findWhere(finalArray, {day: daysColl[0].get('day')});
-
-                        daysColl.map(function (day) {
-                            var dayDishes = day.get('dishes');
-                            _.map(dayDishes, function (dish) {
-                                finalSelectedDay.dishes.push(dish);
+                            daysColl.map(function (day) {
+                                var dayDishes = day.get('dishes');
+                                _.map(dayDishes, function (dish) {
+                                    finalSelectedDay.dishes.push(dish);
+                                });
                             });
-                        });
-                        var sumArr = [];
-                        _.map(finalSelectedDay.dishes, function (data) {
-                            var sum = {};
-                            var selected;
-                            _.map(sumArr, function (dish) {
-                                if (dish.dish._id === data.dish._id)
-                                    selected = dish;
+                            var sumArr = [];
+                            _.map(finalSelectedDay.dishes, function (data) {
+                                var sum = {};
+                                var selected;
+                                _.map(sumArr, function (dish) {
+                                    if (dish.dish._id === data.dish._id)
+                                        selected = dish;
+                                });
+                                if (selected === undefined) {
+                                    sum.dish = data.dish;
+                                    sum.quantity = data.quantity;
+                                    sumArr.push(sum);
+                                }
+                                else {
+                                    selected.quantity += data.quantity;
+                                }
                             });
-                            if (selected === undefined) {
-                                sum.dish = data.dish;
-                                sum.quantity = data.quantity;
-                                sumArr.push(sum);
-                            }
-                            else {
-                                selected.quantity += data.quantity;
-                            }
-                        });
-                        finalSelectedDay.dishes = sumArr;
+                            finalSelectedDay.dishes = sumArr;
+                        }
                     }
-                }
 
-                /*get sum*/
-                var uniqUserOrders = this.uniqOrderCollection.where();
-                var sum = this.getSum(uniqUserOrders);
-                /*get sum*/
-                this.dashboardOrderCollection = new OrdersCollection(finalArray);
-                this.dashboardOrderCollection.map(function (order) {
-                    order.setVisibleDate();
-                });
-                var orderSum = new DayMenuModel({sum: sum});
-                this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model: orderSum});
-                this.regions.get('content').show(this.dashboard);
-            }.bind(this));
-        },
-
-        statistic: function () {
-            this.getNextWeek().done(function () {
-
-                this.getUniqOrder().done(function () {
-                    this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
-
-                    this.getUniqUser().done(function () {
-                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection, this.uniqUserCollection);
-                        usersCollection = usersCollection.filter(function (model) {
-                            return (model.get('orderSum')) > 0;
-                        });
-                        usersCollection = new OrdersCollection(usersCollection);
-                        this.virt_coll = new VirtualCollection(usersCollection, {url: baseUrl + usersResource});
-                        this.statisticPage = new MainStatisticView({collection: this.virt_coll});
-                        this.regions.get('content').show(this.statisticPage);
-                        this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
-                    }.bind(this));
-
+                    /*get sum*/
+                    var uniqUserOrders = this.uniqOrderCollection.where();
+                    var sum = this.getSum(uniqUserOrders);
+                    /*get sum*/
+                    this.dashboardOrderCollection = new OrdersCollection(finalArray);
+                    this.dashboardOrderCollection.status = MethodType(interval);
+                    this.dashboardOrderCollection.map(function (order) {
+                        order.setVisibleDate();
+                    });
+                    var orderSum = new DayMenuModel ({sum:sum});
+                    this.dashboard = new MainAdminMenuView({collection: this.dashboardOrderCollection, model :orderSum });
+                    this.regions.get('content').show(this.dashboard);
                 }.bind(this));
-
             }.bind(this));
         },
 
-        statisticCurrent: function () {
-            this.getCurrentWeek().done(function () {
+        statistic: function(interval){
+            interval = interval + 'mark';
+            this[MethodType(interval)]().done(function () {
                 this.getUniqOrder().done(function () {
                     this.uniqUsersArray = this.uniqUserArray(this.uniqOrderCollection);
 
                     this.getUniqUser().done(function () {
-                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection, this.uniqUserCollection);
-                        usersCollection = usersCollection.filter(function (model) {
+                        var usersCollection = this.checkPaymentStatus(this.uniqOrderCollection,this.uniqUserCollection);
+                        usersCollection = usersCollection.filter(function(model){
                             return (model.get('orderSum')) > 0;
                         });
                         usersCollection = new OrdersCollection(usersCollection);
                         this.virt_coll = new VirtualCollection(usersCollection, {url:baseUrl+usersResource});
-                        this.virt_coll.status = 'current_week';
+                        this.virt_coll.status = MethodType(interval);
                         this.statisticPage = new MainStatisticView({collection: this.virt_coll});
                         this.regions.get('content').show(this.statisticPage);
                         this.listenTo(this.statisticPage, 'status:changed', this.changePaymentStatus);
@@ -440,14 +396,14 @@ define(function (require, exports, module) {
             }.bind(this));
         },
 
-        getUniqOrder: function () {
+        getUniqOrder: function(){
             var res = $.Deferred();
 
             this.uniqOrderCollection = new OrdersCollection();
             this.uniqOrderCollection.setGetUrl(this.weekModel);
 
             $.when(
-                this.uniqOrderCollection.fetch()
+               this.uniqOrderCollection.fetch()
             ).done(function () {
                     res.resolve();
                 }.bind(this));
@@ -455,50 +411,61 @@ define(function (require, exports, module) {
             return res.promise();
         },
 
-        getUniqUser: function () {
-            var res = $.Deferred();
+        getUniqUser: function(){
+             var res = $.Deferred();
 
-            this.uniqUserCollection = new UsersCollection();
-            this.uniqUserCollection.setGetUrl(this.uniqUsersArray);
+             this.uniqUserCollection = new UsersCollection();
+             this.uniqUserCollection.setGetUrl(this.uniqUsersArray);
 
-            $.when(
-                this.uniqUserCollection.fetch()
-            ).done(function () {
-                    res.resolve();
-                }.bind(this));
+             $.when(
+                 this.uniqUserCollection.fetch()
+             ).done(function () {
+                     res.resolve();
+                 }.bind(this));
 
-            return res.promise();
-        },
+             return res.promise();
+         },
 
-        uniqUserArray: function (userCollection) {
+        uniqUserArray: function (userCollection){
             var arr = userCollection.pluck('userId');
-            var uniqUserArray = [];
-            for (var i = 0; i < arr.length; i++) {
-                for (var j = i + 1; j < arr.length; j++) {
-                    if (arr[i] === arr[j] || arr[i] === undefined)
-                        j = ++i;
-                }
-                uniqUserArray.push(arr[i]);
+            var uniqUserArray = unique(arr);
+
+            function unique(arr) {
+                var result = [];
+                nextInput:
+                    for (var i = 0; i < arr.length; i++) {
+                        var str = arr[i];
+                        if (str === undefined) {
+                            continue nextInput;
+                        }
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j] == str) continue nextInput;
+                        }
+                        result.push(str);
+                    }
+
+                return result;
             }
+
             return uniqUserArray;
         },
 
-        checkPaymentStatus: function (ordersCollection, uniqUserCollection) {
-            for (var i = 0; i < uniqUserCollection.length; i++) {
-                var uniqUserOrders = ordersCollection.where({userId: uniqUserCollection.at(i).get('_id')});
-                var sum = this.getSum(uniqUserOrders);
-                var paymentStatus = this.getPaymentStatus(uniqUserOrders);
-                uniqUserCollection.at(i).set('paymentStatus', paymentStatus);
-                uniqUserCollection.at(i).set('orderSum', sum);
-            }
+        checkPaymentStatus: function (ordersCollection, uniqUserCollection){
+           for(var i = 0; i< uniqUserCollection.length; i++ ){
+               var uniqUserOrders = ordersCollection.where({userId: uniqUserCollection.at(i).get('_id')});
+               var sum =  this.getSum(uniqUserOrders);
+               var paymentStatus = this.getPaymentStatus(uniqUserOrders);
+               uniqUserCollection.at(i).set('paymentStatus',paymentStatus);
+               uniqUserCollection.at(i).set('orderSum',sum);
+           }
 
-            return uniqUserCollection;
+           return uniqUserCollection;
         },
 
-        getSum: function (ordersCollection) {
+        getSum: function(ordersCollection){
             var sum = 0;
-            for (var i = 0; i < ordersCollection.length; i++) {
-                var help = (ordersCollection[i].get('dishes'));
+            for (var i= 0; i< ordersCollection.length;i++ ){
+               var help = (ordersCollection[i].get('dishes'));
                 help.map(function (model) {
                     var dish = model.dish;
                     var quantity = model.quantity;
@@ -508,25 +475,25 @@ define(function (require, exports, module) {
             return sum;
         },
 
-        getPaymentStatus: function (ordersCollection) {
-            var status = true;
-            for (var i = 0; i < ordersCollection.length; i++) {
-                if ((ordersCollection[i].get('paymentStatus')) === false) {
-                    status = false;
-                }
-            }
+        getPaymentStatus: function(ordersCollection){
+           var status = true;
+           for (var i= 0; i< ordersCollection.length;i++ ){
+               if((ordersCollection[i].get('paymentStatus'))===false){
+                   status = false;
+               }
+           }
             return status;
         },
 
-        changePaymentStatus: function (data) {
+        changePaymentStatus : function (data){
 
             var changePaymentStatusColl = this.uniqOrderCollection.where({userId: data});
             var paymentStatus = true;
-            if (changePaymentStatusColl[0].get('paymentStatus') === true) {
+            if (changePaymentStatusColl[0].get('paymentStatus')===true){
                 paymentStatus = false;
             }
             changePaymentStatusColl = new OrdersCollection(changePaymentStatusColl);
-            changePaymentStatusColl.map(function (model) {
+            changePaymentStatusColl.map(function(model) {
                 model.set('paymentStatus', paymentStatus);
 
                 model.setPutUrl(data);
@@ -553,6 +520,7 @@ define(function (require, exports, module) {
         tabChanged: function (date) {
             console.log(date);
             this.selectDay(date);
+
         },
 
         selectDay: function (date) {
@@ -564,11 +532,16 @@ define(function (require, exports, module) {
             this.dayDishesCollection = new DishesCollection(filtered[0].get('dishes'));
             this.dayMenuSelectionView = new DayMenuSelectionView({collection: this.dayDishesCollection});
             this.listenTo(this.dayMenuSelectionView, 'day:menu:saved', this.dayMenuSaved);
+            this.listenTo(this.dayMenuSelectionView, 'day:menu:dish:removed', this.dayMenuDishRemoved);
 
             this.menuCard.setSelectedMenu(this.dayMenuSelectionView);
         },
 
-        dishlist: function () {
+        dayMenuDishRemoved: function (dish) {
+            this.menuCard.removeDish(dish);
+        },
+
+        dishlist: function() {
 
             this.getData().done(function () {
                 this.virt_coll = new VirtualCollection(this.dishesCollection, {});
@@ -581,10 +554,10 @@ define(function (require, exports, module) {
         },
 
 
-        userlist: function () {
+        userlist: function(){
             this.getData().done(function () {
 
-                this.virt_coll = new VirtualCollection(this.usersCollection, {url: baseUrl + usersResource});
+                this.virt_coll = new VirtualCollection(this.usersCollection, {url:baseUrl+usersResource});
                 this.userList = new MainUserListView({collection: this.virt_coll});
                 this.regions.get('content').show(this.userList);
 
@@ -593,7 +566,7 @@ define(function (require, exports, module) {
             }.bind(this));
         },
 
-        userFilter: function (name) {
+        userFilter: function(name){
 
             name = name.toLowerCase();
             this.virt_coll.updateFilter(function (model) {
@@ -601,7 +574,7 @@ define(function (require, exports, module) {
             });
         },
 
-        dishFilter: function (name) {
+        dishFilter: function(name){
 
             name = name.toLowerCase();
             this.virt_coll.updateFilter(function (model) {

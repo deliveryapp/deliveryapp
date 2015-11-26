@@ -23,8 +23,9 @@ define(function(require, exports, module) {
          },
 
         initialize: function() {
-            if (this.model.get('_id') === undefined && this.model.get('role') === undefined){
+            if (this.model.get('_id') === undefined && this.model.get('role') === undefined || this.model.get('valid') === 'error'){
                 this.template = UserViewEdit;
+                this.model.set('valid','');
             }
         },
         onShow: function(){
@@ -59,8 +60,8 @@ define(function(require, exports, module) {
                 this.template = UserView;
                 this.render();
                }.bind(this),
-            error: function(){
-                alert('Validation error! Please, fill all fields!');
+            error: function(model,xhr ){
+               this.model.set('valid','error');
             }.bind(this)
             });
 

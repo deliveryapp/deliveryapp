@@ -18,7 +18,7 @@ define(function(require, exports, module) {
 
 
         onShow: function() {
-            if (this.collection.status === 'current_week') {
+            if (this.collection.status === 'getCurrentWeek') {
                 $('.js-statistic-current-week').addClass('b-button-icon-text-disabled').removeClass('b-button-icon-text b-button-icon-text_green');
                 $('.js-statistic-next-week').removeAttr('disabled');
             }
@@ -29,10 +29,10 @@ define(function(require, exports, module) {
         },
 
         current_week: function(){
-            location.href='admin#statistic/current';
+            location.href='admin#statistic';
         },
         next_week: function(){
-            location.href='admin#statistic';
+            location.href='admin#statistic/next';
         },
 
         triggerPaymentStatus: function(data){
