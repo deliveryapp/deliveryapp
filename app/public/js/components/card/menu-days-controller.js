@@ -131,7 +131,11 @@ define(function (require, exports, module) {
         },
 
         nameFilterApplied: function (phrase, category) {
-            if ( !_.isEmpty(category)) {
+            if (category === '0') {
+                this.dishesCollection.updateFilter(function (model) {
+                    return model.get('name').toLowerCase().indexOf(phrase) > -1;
+                });
+            } else if ( !_.isEmpty(category)) {
                 this.dishesCollection.updateFilter(function (model) {
                     return model.get('name').toLowerCase().indexOf(phrase) > -1 && model.get('category').toLowerCase().indexOf(category) > -1;
                 });
