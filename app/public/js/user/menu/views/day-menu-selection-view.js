@@ -49,7 +49,7 @@ define(function(require, exports, module){
         },
         notifyParam: function(notification){
             this.model = new Backbone.Model (notification);
-
+            this.updateSummary();
             this.render();
             this.ui.notification.addClass('b-menu-notification_green').css('display','block');
             if ($(document).scrollTop() > 50) $('.js-menu-notification').addClass('b-user-menu-notification_fixed');
