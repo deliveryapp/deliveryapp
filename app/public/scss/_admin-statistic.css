@@ -34,7 +34,11 @@
 @component statistic-personal-info{
   line-height: 50px;
   font-size: 20px;
-    color: #F00;
+    color: #000;
+
+    @modifier left{
+        text-align: left;
+    }
 
     @modifier paid{
         color:#8cc248;
@@ -43,13 +47,13 @@
   @descendent name{
     float:left;
     height: 50px;
-
+      font-size: 16px;
 
   }
   @descendent last-name{
     float:left;
     height: 50px;
-
+      font-size: 16px;
   }
 }
 

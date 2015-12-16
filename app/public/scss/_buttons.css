@@ -83,6 +83,9 @@
     @modifier small{
         width: 170px;
     }
+    @modifier black{
+        color: #000;
+    }
   @modifier main-color{
     background-color: #3f51b5;;
   &:hover {
@@ -121,6 +124,9 @@
   }
   @descendent icon {
     position: absolute;
+      @modifier black{
+          color: #000 !important;
+      }
     @modifier left{
       left: 25px;
       top: 5px;

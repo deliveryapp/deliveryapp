@@ -13,34 +13,47 @@ define(function(require, exports, module) {
             status: '.js-payment-status',
             button: '.js-button-paid-status',
             icon: '.js-button-icon'
+            //buttonText: 'js-button-icon-text'
         },
 
         onShow: function(){
             if (this.model.get('paymentStatus') === true){
-                this.ui.status.addClass('b-statistic-personal-info_paid');
-                this.ui.button.addClass('b-button-icon-text_red');
-                this.ui.icon.html('close');
-            }
-            else{
+                this.model.set('buttonLabel', 'Paid');
+                this.render();
+                //this.ui.status.addClass('b-statistic-personal-info_paid');
                 this.ui.button.addClass('b-button-icon-text_green');
                 this.ui.icon.html('done');
+
+            }
+            else{
+                this.model.set('buttonLabel', 'No payment');
+                this.render();
+                //this.ui.button.addClass('b-button-icon-text_green');
+                this.ui.icon.html('close');
+
             }
         },
 
         paid: function(){
             this.trigger('payment:status:changed', this.model.get('_id'));
 
-            if (this.ui.button.hasClass('b-button-icon-text_green')){
-                this.ui.button.removeClass('b-button-icon-text_green');
-                this.ui.button.addClass('b-button-icon-text_red');
-                this.ui.icon.html('close');
-                this.ui.status.addClass('b-statistic-personal-info_paid');
+            if (!this.ui.button.hasClass('b-button-icon-text_green')){
+                this.model.set('buttonLabel', 'Paid');
+                this.render();
+                //this.ui.button.removeClass('b-button-icon-text_green');
+                this.ui.button.addClass('b-button-icon-text_green');
+                //this.ui.button.addClass('b-button-icon-text_red');
+                this.ui.icon.html('done');
+                //this.ui.status.removeClass('b-statistic-personal-info_paid');
             }
             else{
-                this.ui.button.removeClass('b-button-icon-text_red');
-                this.ui.button.addClass('b-button-icon-text_green');
-                this.ui.icon.html('done');
-                this.ui.status.removeClass('b-statistic-personal-info_paid');
+                this.model.set('buttonLabel', 'No payment');
+                this.render();
+                this.ui.button.removeClass('b-button-icon-text_green');
+                //this.ui.button.removeClass('b-button-icon-text_red');
+                //this.ui.button.addClass('b-button-icon-text_green');
+                this.ui.icon.html('close');
+                //this.ui.status.addClass('b-statistic-personal-info_paid');
             }
 
         }

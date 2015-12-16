@@ -40,6 +40,7 @@ define(function(require, exports, module){
         initialize: function () {
             notification();
             this.getActiveUser();
+            this.activeUser.set('logoutPath', baseUrl+'/logout');
             this.header = new MainLayoutView({model: this.activeUser});
             this.regions.get('main').show(this.header);
         },
