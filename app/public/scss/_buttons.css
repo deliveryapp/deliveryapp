@@ -1,57 +1,57 @@
 @component button {
-  cursor: pointer;
-  height: 34px;
-  width: 100%;
-  border: solid 1px #000;
-  border-radius: 2px;
-  font-family: Roboto;
-  /*font-size: 16px;*/
-  font-weight: 500;
-  color: #000;
-  background-color: #cccccc;
-&:hover {
-   background-color: color(#cccccc a(-15%));;
- }
-&:active {
-   background-color: color(#cccccc lightness(40%));
- }
-&:focus {
-   outline:none;
- }
-  @modifier green {
+    cursor: pointer;
     height: 34px;
     width: 100%;
-    background-color: #8cc248;
-    border: solid 1px #7db23a;
-  &:hover{
-     background-color: color(#8cc248 a(-15%));;
-   }
-  &:active {
-     background-color: color(#8cc248 lightness(40%));
-   }
-  &:focus {
-     outline:none;
-   }
-  }
-  @modifier circle {
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-  }
+    border: solid 1px #000;
+    border-radius: 2px;
+    font-family: Roboto;
+    /*font-size: 16px;*/
+    font-weight: 500;
+    color: #000;
+    background-color: #cccccc;
+    &:hover {
+        background-color: color(#cccccc a(-15%));;
+    }
+    &:active {
+        background-color: color(#cccccc lightness(40%));
+    }
+    &:focus {
+        outline:none;
+    }
+    @modifier green {
+        height: 34px;
+        width: 100%;
+        background-color: #8cc248;
+        border: solid 1px #7db23a;
+        &:hover{
+            background-color: color(#8cc248 a(-15%));;
+        }
+        &:active {
+            background-color: color(#8cc248 lightness(40%));
+        }
+        &:focus {
+            outline:none;
+        }
+    }
+    @modifier circle {
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+    }
     @modifier red {
         height: 34px;
         width: 100%;
         background-color: #D50505;
         border: solid 1px #860505;
-    &:hover{
-         background-color: color(#D50505 a(-15%));;
-     }
-    &:active {
-         background-color: color(#D50505 lightness(40%));
-     }
-    &:focus {
-         outline:none;
-     }
+        &:hover{
+            background-color: color(#D50505 a(-15%));;
+        }
+        &:active {
+            background-color: color(#D50505 lightness(40%));
+        }
+        &:focus {
+            outline:none;
+        }
     }
 
 
@@ -59,208 +59,212 @@
 
 
 @component button-icon-text {
-  cursor: pointer;
-  height: 36px;
-  position: relative;
-  width: 250px;
-  border: solid 1px #000;
-  border-radius: 2px;
-  font-family: Roboto;
-  padding-left: 30px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  background-color: #cccccc;
-&:hover {
-   background-color: color(#cccccc a(-15%));;
- }
-&:active {
-   background-color: color(#cccccc lightness(40%));
- }
-&:focus {
-   outline:none;
- }
+    cursor: pointer;
+    height: 36px;
+    position: relative;
+    width: 250px;
+    border: solid 1px #000;
+    border-radius: 2px;
+    font-family: Roboto;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #cccccc;
+    &:hover {
+        background-color: color(#cccccc a(-15%));;
+    }
+    &:active {
+        background-color: color(#cccccc lightness(40%));
+    }
+    &:focus {
+        outline:none;
+    }
     @modifier small{
         width: 170px;
     }
-  @modifier main-color{
-    background-color: #3f51b5;;
-  &:hover {
-     background-color: color(#3f51b5 a(-15%));;
-   }
-  &:active {
-     background-color: color(#3f51b5 lightness(40%));
-   }
-  }
-  @modifier green{
-    background-color: #8cc248;;
-  &:hover {
-     background-color: color(#8cc248 a(-15%));;
-   }
-  &:active {
-     background-color: color(#8cc248 lightness(40%));
-   }
-  }
+    @modifier black{
+        color: #000;
+    }
+    @modifier main-color{
+        background-color: #3f51b5;;
+        &:hover {
+            background-color: color(#3f51b5 a(-15%));;
+        }
+        &:active {
+            background-color: color(#3f51b5 lightness(40%));
+        }
+    }
+    @modifier green{
+        background-color: #8cc248;;
+        &:hover {
+            background-color: color(#8cc248 a(-15%));;
+        }
+        &:active {
+            background-color: color(#8cc248 lightness(40%));
+        }
+    }
     @modifier red{
         background-color: #D50505;
-    &:hover {
-         background-color: color(#D50505 a(-15%));;
-     }
-    &:active {
-         background-color: color(#D50505 lightness(40%));
-     }
+        &:hover {
+            background-color: color(#D50505 a(-15%));;
+        }
+        &:active {
+            background-color: color(#D50505 lightness(40%));
+        }
     }
-  @modifier top-margin {
-    margin-top: 10px;
-  }
+    @modifier top-margin {
+        margin-top: 10px;
+    }
     @modifier bottom-margin {
         margin-top: 20px;
     }
-  @descendent text {
-    height: 24px;
-  }
-  @descendent icon {
-    position: absolute;
-    @modifier left{
-      left: 25px;
-      top: 5px;
-      color: #fff;
+    @descendent text {
+        height: 24px;
     }
-  }
+    @descendent icon {
+        position: absolute;
+        @modifier black{
+            color: #000 !important;
+        }
+        @modifier left{
+            left: 25px;
+            top: 5px;
+            color: #fff;
+        }
+    }
 }
 
 @component button-icon-text-disabled {
-  height: 36px;
-  position: relative;
-  width: 250px;
-  border: solid 1px #000;
-  border-radius: 2px;
-  font-family: Roboto;
-  padding-left: 30px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  background-color: grey;
-&:disabled {
+    height: 36px;
+    position: relative;
+    width: 250px;
+    border: solid 1px #000;
+    border-radius: 2px;
+    font-family: Roboto;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: grey;
+    &:disabled {
 
- }
+    }
 }
 
 
 
 
 @component button-icon {
-  width: 40px;
-  height: 40px;
-  border: solid 1px #8A8888;
+    width: 40px;
+    height: 40px;
+    border: solid 1px #8A8888;
 
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  background-color: #cccccc;
-&:hover {
-   background-color: color(#cccccc a(-15%));;
- }
-&:active {
-   background-color: color(#cccccc lightness(40%));
- }
-&:focus {
-   outline: none;
- }
-  @descendent icon {
-    padding-top: 3px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #cccccc;
+    &:hover {
+        background-color: color(#cccccc a(-15%));;
+    }
+    &:active {
+        background-color: color(#cccccc lightness(40%));
+    }
+    &:focus {
+        outline: none;
+    }
+    @descendent icon {
+        padding-top: 3px;
 
-  }
-  @modifier circle {
-    border-radius: 40px;
-  }
-  @modifier small {
-    width: 25px;
-    height: 25px;
-  }
+    }
+    @modifier circle {
+        border-radius: 40px;
+    }
+    @modifier small {
+        width: 25px;
+        height: 25px;
+    }
 
-  @modifier red {
-    background-color: #D50505;
-  &:hover{
-     background-color: color(#D50505 a(-15%));;
-   }
-  &:active {
-     background-color: color(#D50505 lightness(40%));
-   }
-  &:focus {
-     outline:none;
-   }
-  }
-  @modifier right{
-    float: right;
-  }
-  @modifier green {
-    background-color: #8cc248;
-  &:hover{
-     background-color: color(#8cc248 a(-15%));;
-   }
-  &:active {
-     background-color: color(#8cc248 lightness(40%));
-   }
-  &:focus {
-     outline:none;
-   }
-  }
+    @modifier red {
+        background-color: #D50505;
+        &:hover{
+            background-color: color(#D50505 a(-15%));;
+        }
+        &:active {
+            background-color: color(#D50505 lightness(40%));
+        }
+        &:focus {
+            outline:none;
+        }
+    }
+    @modifier right{
+        float: right;
+    }
+    @modifier green {
+        background-color: #8cc248;
+        &:hover{
+            background-color: color(#8cc248 a(-15%));;
+        }
+        &:active {
+            background-color: color(#8cc248 lightness(40%));
+        }
+        &:focus {
+            outline:none;
+        }
+    }
 }
 
 @component button-tab {
-  lost-column: 1/5 5 0px;
-  background-color: #fff;
-  height: 36px;
-  cursor: pointer;
-  border: solid 1px #8A8888;
-  border-top-left-radius:10px;
-  border-top-right-radius:10px;
-  border-bottom: none;
-  &:hover{
-    background-color: color(#fff a(-55%));
-  }
-  &:active {
-    background-color: #464646;
-    color: #fff;
-  }
-  &:focus {
-    outline:none;
-  }
-  /*  border: solid 1px color(#cccccc lightness(40%));
-    border-radius: 2px;*/
-
-  @modifier selected {
-    background-color: #464646;
-    color: #fff;
+    lost-column: 1/5 5 0px;
+    background-color: #fff;
+    height: 36px;
+    cursor: pointer;
+    border: solid 1px #8A8888;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    border-bottom: none;
     &:hover{
-      background-color: #464646;
+        background-color: color(#fff a(-55%));
     }
     &:active {
-      background-color: #464646;
+        background-color: #464646;
+        color: #fff;
     }
-  }
+    &:focus {
+        outline:none;
+    }
+    /*  border: solid 1px color(#cccccc lightness(40%));
+      border-radius: 2px;*/
 
-  @descendent text {
-    //padding-top: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: Roboto;
+    @modifier selected {
+        background-color: #464646;
+        color: #fff;
+        &:hover{
+            background-color: #464646;
+        }
+        &:active {
+            background-color: #464646;
+        }
+    }
 
-  }
-  @modifier red {
-    background-color: #D50505;
-  &:hover{
-     background-color: color(#D50505 a(-15%));;
-   }
-  &:active {
-     background-color: color(#D50505 lightness(40%));
-   }
-  &:focus {
-     outline:none;
-   }
-  }
+    @descendent text {
+        //padding-top: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: Roboto;
+
+    }
+    @modifier red {
+        background-color: #D50505;
+        &:hover{
+            background-color: color(#D50505 a(-15%));;
+        }
+        &:active {
+            background-color: color(#D50505 lightness(40%));
+        }
+        &:focus {
+            outline:none;
+        }
+    }
 }
-
-

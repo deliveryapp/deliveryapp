@@ -41,6 +41,7 @@ define(function(require, exports, module){
             notification();
             this.getActiveUser().done(function () {
                 this.userId = this.activeUser.get('_id');
+                this.activeUser.set('logoutPath', baseUrl+'/logout');
                 this.header = new MainLayoutView({model: this.activeUser});
                 this.regions.get('main').show(this.header);
             }.bind(this));
